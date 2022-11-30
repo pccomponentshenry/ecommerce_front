@@ -2,12 +2,12 @@ PALETA DE COLORES:
 
 LIGHT MODE
 Verde agua: #62AAA1
-Violeta: #541388 (en divs muy anchos, preferible con degradé)
-Magenta: #B5179E
+Violeta: #310C3F (en divs muy anchos, preferible con degradé: #310C3F > #8A2E7E)
+Magenta: #8A2E7E
 "Casi blanco": #E6E6E9
 
 
 DARK MODE
 Gris: #272727 (En divs anchos, con degradé. Si dos grises se tocan, dar contraste con degradé (Ver mockups))
-Violeta: #541388 (en divs muy anchos, preferible con degradé)
-Magenta: #B5179E
+Violeta: #310C3F  (en divs muy anchos, preferible con degradé)
+Magenta: #8A2E7E
