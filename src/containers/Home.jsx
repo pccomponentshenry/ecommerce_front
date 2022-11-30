@@ -8,7 +8,6 @@ export default function Home() {
       <div className={H.carouselContainer}>
         <Carousel />
       </div>
-      ;
     </>
   );
 }

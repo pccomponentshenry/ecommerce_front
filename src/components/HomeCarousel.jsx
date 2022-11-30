@@ -1,6 +1,7 @@
 import Carousel from "react-bootstrap/Carousel";
 import VR from "../Images/VR.jpg";
 import HC from "../styles/HomeCarousel.module.css";
+import headphones from "../Images/headphones.jpg";
 
 function HomeCarousel() {
   return (
@@ -18,7 +19,7 @@ function HomeCarousel() {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className={HC.image} src={VR} alt="Second slide" />
+          <img className={HC.image} src={headphones} alt="Second slide" />
 
           <Carousel.Caption>
             <div className={HC.caption}>
