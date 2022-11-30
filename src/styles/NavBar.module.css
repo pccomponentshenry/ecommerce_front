@@ -1,0 +1,91 @@
+.navbarCont{
+    position: fixed;
+    top: 0;
+    background-color: transparent;
+    display: flex;
+}
+
+.navbarCont h1{ 
+    color: #fff;
+    margin-left: 50px;
+    text-transform: uppercase;
+    font-size: 30px;
+    position: relative;
+    top: 5px;
+}
+
+.navList{
+    display: flex;
+    justify-content: center;
+    width: 400px;
+}
+
+.navList li{
+    list-style: none;
+    color:#B5179E;
+    margin-top: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+hr{
+    position: relative;
+    top: 50px;
+    width: 93%;
+    border: none;
+    border-top: solid 1px #B5179E;
+}
+
+.searchBarCont{
+    position:absolute;
+    right: 200px;
+    top: 15px;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    height: 25px;
+}
+
+.searchBarCont input{
+    background-color: transparent;
+    border: none;
+    height:20px;
+    position: relative;
+    bottom: 7px;
+}
+
+.searchBarCont input::placeholder{
+    position: relative;
+    left: 5px;
+    color: #fff;
+    font-weight: 200;
+}
+
+.searchIcon{
+    height: 25px;
+    position: relative;
+    border-left: solid 1px #fff;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.cart{
+    height: 25px;
+    position: absolute;
+    right:50px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.loginText{
+    color: #fff;
+    position: absolute;
+    right: 100px;
+    margin-top: 25px;
+    font-weight: 200;
+    font-size: 12px;
+    cursor: pointer;
+}
