@@ -4,6 +4,13 @@
     justify-content: center;
     position: fixed;
     z-index: 900;
+  
+}
+.container.active{
+    background-color: #310C3F;
+    z-index: 900;
+    transition: 0.15s ease-in-out;
+ 
 }
 .logoAndMenu{
     display: flex;
@@ -91,6 +98,7 @@ switch{
 .line{
     width: 100%;
     position: absolute;
+    margin-top: 3px;
 }
 hr{
    position: relative;
