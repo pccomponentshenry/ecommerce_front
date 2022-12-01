@@ -34,6 +34,7 @@ export default function Detail() {
       <div className={D.imageContainer}>
         <Carousel img={products[0].img} />
       </div>
+      {/* reviews.length > 0 &&  ---- Depende de lo que llegue del back */}
       <Reviews />
       <div className={D.dataContainer}>
         <span className={D.category}>{products[0].category}</span>
