@@ -23,6 +23,9 @@ export default function Nav() {
             <Link to="/sell" style={{ textDecoration: "none" }}>
               <li>Sell</li>
             </Link>
+            <Link to="/favorites" style={{ textDecoration: "none" }}>
+              <li>Favorites</li>
+            </Link>
           </ul>
         </div>
 
@@ -32,7 +35,9 @@ export default function Nav() {
             <img src={search} alt="search icon" className={N.searchIcon} />
           </div>
           <h6 className={N.loginText}>Login/Register</h6>
-          <img src={cart} className={N.cart} alt="cart icon" />
+          <Link to="/cart">
+            <img src={cart} className={N.cart} alt="cart icon" />
+          </Link>
           <img
             src={mode}
             alt=""

@@ -1,0 +1,35 @@
+.ProfilePicCont{
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50px;
+
+}
+.profilePic{
+    width: fit-content;
+    height: 70px;
+}
+.Container{
+   padding: 10px;
+   border: solid 1px #272727;
+   border-radius: 10px;
+   display: flex;
+   width: 260px;
+   position: relative;
+   top: 10px;
+}
+.reviewCont{
+    width: 150px;
+}
+.name{
+    color: #fff;
+    font-size: 14px;
+}
+.review{
+    color: #fff;
+    font-size: 12px;
+    font-weight: 200;
+}

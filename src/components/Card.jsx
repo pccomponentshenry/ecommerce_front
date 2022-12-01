@@ -15,7 +15,10 @@ function Card(props) {
           <h6 className={C.brand}>{props.brand}</h6>
           <div className={C.bottomCont}>
             <h6 className={C.price}>{props.price}</h6>
-            <button className={C.cardBtn}>Add to cart</button>
+            <div className={C.btnAndFav}>
+              <button className={C.cardBtn}>Add to cart</button>
+              <span className={C.fav}>♡</span>
+            </div>
           </div>
         </div>
       </div>
