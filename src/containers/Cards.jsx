@@ -3,6 +3,7 @@ import CardComponent from "../components/Card";
 import C from "../styles/Cards.module.css";
 import Pagination from "../components/Pagination";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 export default function Cards() {
   const products = [
     {
@@ -247,14 +248,19 @@ export default function Cards() {
     <div className={C.cardContainer}>
       {currentItems.length > 0 &&
         currentItems.map((el, i) => (
-          <CardComponent
-            products={products}
-            key={i}
-            img={el.img}
-            name={el.name}
-            price={el.price}
-            brand={el.brand}
-          />
+          <Link
+            to="/detail/1"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <CardComponent
+              products={products}
+              key={i}
+              img={el.img}
+              name={el.name}
+              price={el.price}
+              brand={el.brand}
+            />
+          </Link>
         ))}
       <div className={C.pagination}>
         <Pagination

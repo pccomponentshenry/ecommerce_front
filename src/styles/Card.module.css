@@ -71,7 +71,10 @@
     color: #fff;
     transition: 0.15s ease-in-out;
 }
-
+.btnAndFav{
+    display: flex;
+    height: 25px;
+}
 
 
 
@@ -80,4 +83,13 @@
    display: flex;
    flex-direction: column;
     align-items: center;
+}
+.fav{
+    font-size: 25px;
+    margin-left: 10px;
+    color: #62AAA1;
+}
+.fav:hover{
+    color: #fff;
+    transition: 0.15s ease-in-out;
 }

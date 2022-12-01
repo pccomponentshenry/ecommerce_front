@@ -1,0 +1,16 @@
+.reviews{
+    position: absolute;
+    right: 30px;
+    margin-top: 100px;
+    width: 22%;
+}
+.container{
+    height: 75vh;
+    border: solid 1px  #272727;
+    border-radius: 20px;
+    overflow-y: scroll;
+}
+.reviews h6{
+    color: #fff;
+    margin-left: 20px;
+}

@@ -4,11 +4,22 @@ import search from "../Images/Search.png";
 import cart from "../Images/cart.png";
 import mode from "../Images/mode.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 export default function Nav() {
-  function switchMode() {}
+  const [nav, setNav] = useState(false);
+
+  function switchMode() {
+    if (window.scrollY >= 800) {
+      setNav(true);
+    } else {
+      setNav(false);
+    }
+  }
+
+  window.addEventListener("scroll", switchMode);
   return (
     <>
-      <div className={N.container}>
+      <div className={`${N.container} ${nav ? N.active : N.container}`}>
         <div className={N.logoAndMenu}>
           <Link to="/" style={{ textDecoration: "none" }}>
             <h1>Logo</h1>
@@ -23,6 +34,9 @@ export default function Nav() {
             <Link to="/sell" style={{ textDecoration: "none" }}>
               <li>Sell</li>
             </Link>
+            <Link to="/favorites" style={{ textDecoration: "none" }}>
+              <li>Favorites</li>
+            </Link>
           </ul>
         </div>
 
@@ -32,7 +46,9 @@ export default function Nav() {
             <img src={search} alt="search icon" className={N.searchIcon} />
           </div>
           <h6 className={N.loginText}>Login/Register</h6>
-          <img src={cart} className={N.cart} alt="cart icon" />
+          <Link to="/cart">
+            <img src={cart} className={N.cart} alt="cart icon" />
+          </Link>
           <img
             src={mode}
             alt=""
