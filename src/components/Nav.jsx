@@ -2,8 +2,10 @@ import React from "react";
 import N from "../styles/NavBar.module.css";
 import search from "../Images/Search.png";
 import cart from "../Images/cart.png";
+import mode from "../Images/mode.png";
 import { Link } from "react-router-dom";
 export default function Nav() {
+  function switchMode() {}
   return (
     <>
       <div className={N.container}>
@@ -31,6 +33,12 @@ export default function Nav() {
           </div>
           <h6 className={N.loginText}>Login/Register</h6>
           <img src={cart} className={N.cart} alt="cart icon" />
+          <img
+            src={mode}
+            alt=""
+            className={N.mode}
+            onClick={() => switchMode()}
+          />
         </div>
         <div className={N.line}>
           <hr />
