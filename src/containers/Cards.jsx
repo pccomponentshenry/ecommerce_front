@@ -251,6 +251,7 @@ export default function Cards() {
           <Link
             to="/detail/1"
             style={{ textDecoration: "none", color: "white" }}
+            key={i}
           >
             <CardComponent
               products={products}

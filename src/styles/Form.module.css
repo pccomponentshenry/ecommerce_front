@@ -1,0 +1,242 @@
+.container {
+  position: relative;
+  top: 100px;
+  left: 150px;
+  display: flex;
+  flex-direction: column;
+  float: left;
+}
+.container h6 {
+  color: #fff;
+  font-size: 14px;
+  position: relative;
+  right: 10px;
+}
+.container span {
+  font-size: 12px;
+  font-weight: 200;
+  color: #fff;
+  position: relative;
+  top: 5px;
+}
+.inputCont {
+  cursor: pointer;
+  border: dashed 1px #62aaa1;
+  width: 120%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  color: #62aaa1;
+  font-size: 100px;
+  font-weight: 200;
+  text-align: center;
+}
+.titleCont {
+  color: #fff;
+  position: relative;
+  top: 100px;
+  left: 150px;
+}
+.titleCont h5 {
+  font-weight: 600;
+}
+
+.formContainer {
+  width: 40%;
+  float: right;
+  padding: 10px;
+  border: solid 1px #272727;
+  border-radius: 10px;
+  position: relative;
+  right: 100px;
+  top: 100px;
+}
+.fullWidth {
+  width: 100%;
+  height: 80px;
+}
+.fullWidthText {
+  width: 100%;
+  height: 300px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.name input,
+.brand input,
+.stock input,
+.price input {
+  border: solid 1px #62aaa1;
+  background-color: transparent;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 200;
+}
+.name input::placeholder,
+.brand input::placeholder {
+  color: #797979;
+  font-size: 14px;
+  position: relative;
+  left: 5px;
+}
+.stock label,
+.price label {
+  color: #fff;
+}
+
+/* DESCRIPTION */
+
+.description {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 40px;
+}
+.description textarea {
+  width: 87%;
+  height: 100px;
+  margin-left: 10px;
+  background-color: transparent;
+  border: solid 1px #62aaa1;
+  border-radius: 10px;
+}
+
+.descriptionCont span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+  margin-left: 10px;
+  position: relative;
+  top: 40px;
+}
+.descriptionCont {
+  margin-top: 20px;
+}
+.descriptionCont label {
+  margin-left: 10px;
+  color: #fff;
+}
+/* DESCRIPTION */
+
+/* STOCK */
+
+.stock {
+  width: 230px;
+  position: absolute;
+  left: 20px;
+}
+.stock input {
+  width: 20%;
+  height: 20px;
+  margin-left: 10px;
+}
+.stock span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+  position: relative;
+  bottom: 5px;
+}
+/* STOCK */
+/* PRICE */
+
+.price {
+  width: 230px;
+  position: absolute;
+  right: 25px;
+}
+.price input {
+  width: 20%;
+  height: 20px;
+  margin-left: 10px;
+}
+.price span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+  position: relative;
+  bottom: 5px;
+}
+
+/* PRICE */
+/* NAME */
+.name {
+  width: 190px;
+  position: absolute;
+  left: 20px;
+}
+.name label {
+  float: left;
+  color: #fff;
+  font-size: 14px;
+}
+.name span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+}
+/* NAME */
+
+/* BRAND */
+.brand {
+  width: 190px;
+  position: absolute;
+  right: 65px;
+}
+.brand label {
+  float: left;
+  color: #fff;
+}
+.brand span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+  float: left;
+}
+/* BRAND */
+/* BUTTON */
+
+.activeBtn {
+  background: transparent;
+  border: solid 1px #62aaa1;
+  border-radius: 10px;
+  color: #62aaa1;
+  font-size: 14px;
+  padding-top: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+  width: 135px;
+  height: 25px;
+}
+
+.disabledBtn {
+  background: #272727;
+  border: solid 1px #555;
+  border-radius: 10px;
+  color: #555;
+  font-size: 14px;
+  padding-top: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-top: 50px;
+  width: 135px;
+  height: 25px;
+}
+
+.activeBtn:hover {
+  background-color: #62aaa1;
+  color: #272727;
+  transition: 0.15s ease-in-out;
+}
+
+/* BUTTON */
