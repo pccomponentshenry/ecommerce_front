@@ -11,6 +11,8 @@ function rootReducer(state = initialState, action) {
         ...state,
         getProducts: action.payload,
       };
+    default:
+      return state;
   }
 }
 

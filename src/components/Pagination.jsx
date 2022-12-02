@@ -1,4 +1,3 @@
-import Pagination from "react-bootstrap/Pagination";
 import P from "../styles/Pagination.module.css";
 
 function AdvancedExample(props) {

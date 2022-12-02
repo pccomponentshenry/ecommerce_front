@@ -1,5 +1,4 @@
 import C from "../styles/Card.module.css";
-import Pagination from "../components/Pagination";
 
 function Card(props) {
   return (

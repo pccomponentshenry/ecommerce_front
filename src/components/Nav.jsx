@@ -60,6 +60,7 @@ export default function Nav() {
           <hr />
         </div>
       </div>
+      <div className={N.bg}></div>
     </>
   );
 }

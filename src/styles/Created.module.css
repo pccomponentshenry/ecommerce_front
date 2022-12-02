@@ -1,0 +1,51 @@
+.headerCont {
+  position: relative;
+  width: 68%;
+  top: 90px;
+  left: 150px;
+}
+.btnCont {
+  display: flex;
+  position: absolute;
+  right: 0px;
+}
+.btnCont img {
+  width: 25px;
+  margin-right: 10px;
+}
+
+.btnCont span {
+  color: #62aaa1;
+  text-transform: uppercase;
+}
+.btnCont span:hover {
+  color: #fff;
+  transition: 0.15s ease-in-out;
+}
+
+.inactive {
+  background-color: transparent;
+  border: solid 1px #62aaa1;
+  border-radius: 5px;
+  color: #62aaa1;
+  margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+.inactive:hover {
+  transition: 0.15s ease-in-out;
+  background-color: #62aaa1;
+  color: #272727;
+}
+.active {
+  transition: 0.15s ease-in-out;
+  background-color: #62aaa1;
+  border: solid 1px #62aaa1;
+  border-radius: 5px;
+  color: #272727;
+  margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}

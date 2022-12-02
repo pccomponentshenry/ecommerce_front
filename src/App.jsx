@@ -5,6 +5,7 @@ import Categories from "./containers/Categories";
 import Latest from "./containers/Latest";
 import Form from "./components/Form";
 import Detail from "./containers/Detail";
+import Created from "./containers/Created";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/latest" element={<Latest />} />
           <Route exact path="/sell" element={<Form />} />
           <Route exact path="/detail/1" element={<Detail />} />
+          <Route exact path="/created" element={<Created />} />
         </Routes>
       </BrowserRouter>
     </div>
