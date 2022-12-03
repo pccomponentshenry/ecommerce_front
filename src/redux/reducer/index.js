@@ -28,8 +28,7 @@ function rootReducer(state = initialState, action) {
     case GET_BRAND:
       return{
         ...state,
-        brand:action.payload,
-        allBrand:action.payload
+        brand:action.payload
       }  
     case ORDER_BY_NAME:
       let sortedArr =
@@ -46,7 +45,7 @@ function rootReducer(state = initialState, action) {
           : state.product.sort(function (a, b) {
               if (a.name > b.name) {
                 return -1;
-              }
+              } 
               if (a.name > b.name) {
                 return 1;
               }

@@ -1,5 +1,5 @@
 //const url = "http://localhost:3001";
-//import axios from "axios";
+import axios from "axios";
 import {
 //   GET_PRODUCT,
 //   SEARCH_PRODUCT,
@@ -10,7 +10,9 @@ import {
 export function getBrand() {
   return async (dispatch) => {
     const res = await axios.get("http://localhost:3001/brand");
-    //console.log(res);
-    dispatch({ type: GET_BRAND, payload: res.data });
+    console.log(res.data);
+
+    
+    return dispatch({ type: GET_BRAND, payload: res.data });
   };
 }
