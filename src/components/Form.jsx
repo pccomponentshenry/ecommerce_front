@@ -100,24 +100,26 @@ export default function Form() {
     e.preventDefault();
     const data = new FormData();
     data.append("file", image);
-    data.append("upload_preset", "cqws5x8n");
-    data.append("cloud_name", "dbtekd33p");
-    data.append("api_key", "226142111813437");
+    data.append("upload_preset", "cqws5x8n"); // presets de cloudinary. Si querés entrar a ver la web, se accede desde el gmail del PF, con google.
+    data.append("cloud_name", "dbtekd33p"); // presets de Cloudinary
+    data.append("api_key", "226142111813437"); // idem
     fetch("  https://api.cloudinary.com/v1_1/cqws5x8n/image/upload", {
+      //post a la ruta de cloud. cqws5x8n es el nombre de la nube de la cuenta nuestra
       method: "post",
       body: data,
     })
       .then(resp => resp.json())
       .then(data => {
-        setUrl(data.url);
-        console.log(data);
+        setUrl(data.url); //Revisar por qué no se agregan más de una. En algúna llamada de función Onchange en el html habré puesto (e.target.files[0] y por ahí es eso)
+        setInput({ ...input, img: data.url }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
+        console.log(input); //Todos los estados locales, entre ellos img. Hay delay para que aparezca, haciendo onchange en cualquier otro input se consologuea y aparece. Medio rebuscado,perdón!
       })
       .catch(err => console.log(err));
   };
 
   const handleChange = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(input.img);
+    console.log(input); // console auxiliar para ver la imagen en el input, porque hay delay. Sacar si molesta.
   };
 
   const handleSubmit = () => {};
@@ -138,11 +140,13 @@ export default function Form() {
             id="img"
             style={{ display: "none" }}
             onChange={e => {
-              setImage(e.target.files[0]);
-              // errorImgSetting(e);
+              setImage(e.target.files[0]); // acá puede estar la razón por la que se carga una sola imagen. Pero no llego con el tiempo y capaz rompo algo. Es un useState que después utiliza handleChangeImg.
+
+              errorImgSetting(e); //no tiene nada que ver con cloudinary. Es para validar que se cargue una imagen.
             }}
           />
           <button onClick={e => handleChangeImg(e)}>click</button>
+          {/* //Carga la imagen en Cloudinary. No se carga si no es clickeando después de seleccionar la imagen. Estaría bueno mejorar la UI para que no quede tan raro. */}
 
           <label className={F.inputCont} htmlFor="img">
             +
