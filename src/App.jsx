@@ -6,17 +6,11 @@ import Latest from "./containers/Latest";
 import Sell from "./containers/Sell";
 import Detail from "./containers/Detail";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getProducts } from "./redux/actions";
-import { useEffect } from "react";
+import { populateDB } from "./redux/actions";
 
 function App() {
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+  populateDB();
 
   return (
     <div>
