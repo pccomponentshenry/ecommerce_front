@@ -16,7 +16,7 @@ export default function Detail() {
   const products = [
     {
       category: "Headphones",
-      name: "Headphones XAS-305>",
+      title: "Headphones XAS-305>",
       brand: "Nisuta",
       stock: 2,
       price: "$185.02",
