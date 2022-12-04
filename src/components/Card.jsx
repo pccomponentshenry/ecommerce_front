@@ -10,7 +10,7 @@ function Card(props) {
         </div>
         <div className={C.square}>
           <div className={C.nameCont}>
-            <h6 className={C.name}>{props.name}</h6>
+            <h6 className={C.name}>{props.title}</h6>
           </div>
           <h6 className={C.brand}>{props.brand}</h6>
           <div className={C.bottomCont}>

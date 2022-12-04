@@ -1,9 +1,13 @@
+
+import { ALL_PRODUCTS} from "../actions/index"; //Para las action creators
+
 import {
   GET_PRODUCT,
   SEARCH_PRODUCT,
   ORDER_BY_NAME,
   GET_BRAND,
-  GET_PRODUCTS
+  GET_PRODUCTS,
+  ALL_PRODUCTS
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
@@ -11,10 +15,21 @@ const initialState = {
   product: [],
   brand: [],
   allBrand: []
+
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+    case ALL_PRODUCTS:
+            return {
+                ...state,
+                products: action.payload
+            };
+            
+            default:
+              return state
+
     case GET_PRODUCT:
       return {
         ...state,
@@ -57,6 +72,7 @@ function rootReducer(state = initialState, action) {
             }
             return 0;
           });
+
   }
 }
 

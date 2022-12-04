@@ -99,6 +99,7 @@ switch{
     width: 100%;
     position: absolute;
     margin-top: 3px;
+    z-index:-999;
 }
 hr{
    position: relative;
