@@ -2,14 +2,15 @@ import {
   GET_PRODUCT,
   SEARCH_PRODUCT,
   ORDER_BY_NAME,
-  GET_BRAND
+  GET_BRAND,
+  GET_PRODUCTS
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
+  allProducts: [],
   product: [],
-  allProduct: [],
-  brand:[],
-  allBrand:[]
+  brand: [],
+  allBrand: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -20,37 +21,42 @@ function rootReducer(state = initialState, action) {
         product: action.payload,
         allProduct: action.payload,
       };
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        allProducts: action.payload,
+      };
     case SEARCH_PRODUCT:
       return {
         ...state,
         product: action.payload,
       };
     case GET_BRAND:
-      return{
+      return {
         ...state,
-        brand:action.payload
-      }  
+        brand: action.payload
+      }
     case ORDER_BY_NAME:
       let sortedArr =
         action.payload === "asc"
           ? state.product.sort(function (a, b) {
-              if (a.name > b.name) {
-                return 1;
-              }
-              if (b.name > a.name) {
-                return -1;
-              }
-              return 0;
-            })
+            if (a.name > b.name) {
+              return 1;
+            }
+            if (b.name > a.name) {
+              return -1;
+            }
+            return 0;
+          })
           : state.product.sort(function (a, b) {
-              if (a.name > b.name) {
-                return -1;
-              } 
-              if (a.name > b.name) {
-                return 1;
-              }
-              return 0;
-            });
+            if (a.name > b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          });
   }
 }
 
