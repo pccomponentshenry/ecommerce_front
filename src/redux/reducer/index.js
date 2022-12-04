@@ -4,13 +4,15 @@ import {
   SEARCH_PRODUCT,
   ORDER_BY_NAME,
   ALL_PRODUCTS,
-  GET_BRANDS
+  GET_BRANDS,
+  GET_CATEGORIES
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
   products: [],
   product: [],
   brands: [],
+  categories: [],
   brand: []
 };
 
@@ -38,6 +40,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         brands: action.payload
+      }
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload
       }
 
     case ORDER_BY_NAME:
