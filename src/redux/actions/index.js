@@ -9,7 +9,7 @@ import {
 
 export function getBrand() {
   return async (dispatch) => {
-    const res = await axios.get("http://localhost:3001/brand");
+    const res = await axios.get("http://localhost:3001/brands");
     console.log(res.data);
 
     
