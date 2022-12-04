@@ -1,56 +1,45 @@
 
-import { ALL_PRODUCTS} from "../actions/index"; //Para las action creators
-
 import {
   GET_PRODUCT,
   SEARCH_PRODUCT,
   ORDER_BY_NAME,
-  GET_BRAND,
-  GET_PRODUCTS,
-  ALL_PRODUCTS
+  ALL_PRODUCTS,
+  GET_BRANDS
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
-  allProducts: [],
+  products: [],
   product: [],
-  brand: [],
-  allBrand: []
-
+  brands: [],
+  brand: []
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
 
     case ALL_PRODUCTS:
-            return {
-                ...state,
-                products: action.payload
-            };
-            
-            default:
-              return state
+      return {
+        ...state,
+        products: action.payload
+      };
 
     case GET_PRODUCT:
       return {
         ...state,
-        product: action.payload,
-        allProduct: action.payload,
+        product: action.payload
       };
-    case GET_PRODUCTS:
-      return {
-        ...state,
-        allProducts: action.payload,
-      };
+
     case SEARCH_PRODUCT:
       return {
         ...state,
         product: action.payload,
       };
-    case GET_BRAND:
+    case GET_BRANDS:
       return {
         ...state,
-        brand: action.payload
+        brands: action.payload
       }
+
     case ORDER_BY_NAME:
       let sortedArr =
         action.payload === "asc"
@@ -72,6 +61,8 @@ function rootReducer(state = initialState, action) {
             }
             return 0;
           });
+    default:
+      return state
 
   }
 }

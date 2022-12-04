@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import S from "../styles/SideMenu.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getBrand } from "../redux/actions/index";
+import { useDispatch } from "react-redux";
+import { getBrands } from "../redux/actions/index";
 
 export default function SideMenu() {
   const dispatch = useDispatch();
   //const brand = useSelector((state) => state.brand);
   //console.log(brand);
   useEffect(() => {
-    dispatch(getBrand());
+    dispatch(getBrands());
   }, []);
 
   const category = [
