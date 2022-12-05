@@ -1,18 +1,18 @@
-.cardContainer{
-    display: flex;
-    width: 60vw;
-    float: right;
-    position: relative;
-    top: 30px;
-    right: 5%;
-    flex-wrap: wrap;
+.cardContainer {
+  display: flex;
+  width: 70vw;
+  float: right;
+  position: relative;
+  top: 30px;
+  right: 5%;
+  flex-wrap: wrap;
 }
 
-.pagination{
-    position: relative;
-    top: 15px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.pagination {
+  position: relative;
+  top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

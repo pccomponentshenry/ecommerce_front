@@ -8,10 +8,8 @@ import {
   GET_CATEGORIES,
   POST_PRODUCT,
   SET_ERROR,
-  GET_CATEGORIES,
-  FILTER_CATEGORIES,
-  FILTER_BRANDS,
-  GET_PRODUCTS_BY_NAME,
+  GET_FILTERED,
+  CLEAR_STATE,
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
@@ -21,7 +19,7 @@ const initialState = {
   categories: [],
   brand: [],
   error: [],
-  filter: [],
+  filtered: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -30,7 +28,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
-        filter: action.payload,
       };
 
     case GET_PRODUCT:
@@ -44,6 +41,18 @@ function rootReducer(state = initialState, action) {
         product: [...state.showDogs, action.payload],
       };
     }
+    case CLEAR_STATE: {
+      return {
+        ...state,
+        filtered: [],
+      };
+    }
+    case GET_FILTERED:
+      return {
+        ...state,
+        filtered: action.payload,
+      };
+
     case SEARCH_PRODUCT:
       return {
         ...state,
@@ -53,12 +62,10 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         brands: action.payload,
-        brands: action.payload,
       };
     case GET_CATEGORIES:
       return {
         ...state,
-        categories: action.payload,
         categories: action.payload,
       };
 
@@ -83,30 +90,6 @@ function rootReducer(state = initialState, action) {
               }
               return 0;
             });
-
-    case FILTER_CATEGORIES:
-      let FilterCat = [...state.filter];
-      let AllType =
-        action.payload === "ALLCAT"
-          ? FilterCat
-          : FilterCat?.filter(e => e.category.name == action.payload);
-
-      return {
-        ...state,
-        products: AllType,
-      };
-
-    case FILTER_BRANDS:
-      let FilterBrand = [...state.filter];
-      let AllBrands =
-        action.payload === "ALLBRAND"
-          ? FilterBrand
-          : FilterBrand?.filter(e => e.brand.name == action.payload);
-
-      return {
-        ...state,
-        products: AllBrands,
-      };
 
     case GET_PRODUCTS_BY_NAME:
       return {
