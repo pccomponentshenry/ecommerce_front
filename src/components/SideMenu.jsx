@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import S from "../styles/SideMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands, getCategories } from "../redux/actions/index";
+import {
+  getBrands,
+  getCategories,
+  filterCategories,
+  filterBrands,
+} from "../redux/actions/index";
 
 export default function SideMenu() {
   const dispatch = useDispatch();
@@ -14,14 +19,16 @@ export default function SideMenu() {
     dispatch(getCategories());
   }, []);
 
-  // const category = [
-  //   "Keyboards",
-  //   "Mouse",
-  //   "Switches",
-  //   "Mouse Pads",
-  //   "Batteries",
-  //   "Chargers",
-  // ];
+  function handleOnChangeCat(e) {
+    e.preventDefault();
+    dispatch(filterCategories(e.target.value));
+  }
+
+  function handleOnChangeBrand(e) {
+    e.preventDefault();
+    dispatch(filterBrands(e.target.value));
+  }
+
   return (
     <div className={S.Container}>
       <div className={S.subContainer}>
@@ -41,18 +48,30 @@ export default function SideMenu() {
             <hr />
             <h6>Filter by:</h6>
             <div className={S.select}>
-              <select name="Filter" defaultValue={"DEFAULT"}>
-                <option defaultValue={"DEFAULT"}>Category</option>
-                {cat.map((el, i) => (
-                  <option key={i}>{el.name}</option>
+              <select
+                name="Filter"
+                type="option"
+                onChange={e => handleOnChangeCat(e)}
+              >
+                <option value="ALLCAT">Category</option>
+                {cat?.map((el, i) => (
+                  <option key={i} value={el.name}>
+                    {el.name}
+                  </option>
                 ))}
               </select>
             </div>
             <div className={S.select}>
-              <select name="Filter" defaultValue={"DEFAULT"}>
-                <option defaultValue={"DEFAULT"}>Brand</option>
+              <select
+                name="Filter"
+                type="option"
+                onChange={e => handleOnChangeBrand(e)}
+              >
+                <option value="ALLBRAND">Brands</option>
                 {brand.map((el, i) => (
-                  <option key={i}>{el.name}</option>
+                  <option key={i} value={el.name}>
+                    {el.name}
+                  </option>
                 ))}
               </select>
             </div>
