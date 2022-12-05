@@ -25,17 +25,17 @@ export default function Cards() {
     dispatch(getFiltered(products));
   }, [dispatch]);
 
-  // React.useEffect(() => {
-  //   dispatch(getFiltered(filtered));
-  // }, [dispatch]);
+  React.useEffect(() => {
+    dispatch(getFiltered(filtered));
+  }, [dispatch]);
 
 
-  const currentItems =
-    filtered.length > 0
-      ? Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem)
-      : products.length > 2
-      ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
-      : products;
+  const currentItems = Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem);
+  // filtered.length > 0
+  //   ? Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem)
+  //   : products.length > 2
+  //     ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
+  //     : products;
   const data = products.length;
   return (
     <div className={C.cardContainer}>
