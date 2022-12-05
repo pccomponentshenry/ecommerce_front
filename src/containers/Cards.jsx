@@ -20,9 +20,15 @@ export default function Cards() {
   let products = useSelector(state => state.products);
   let filtered = useSelector(state => state.filtered);
 
+
   React.useEffect(() => {
     dispatch(getFiltered(products));
   }, [dispatch]);
+
+  // React.useEffect(() => {
+  //   dispatch(getFiltered(filtered));
+  // }, [dispatch]);
+
 
   const currentItems =
     filtered.length > 0

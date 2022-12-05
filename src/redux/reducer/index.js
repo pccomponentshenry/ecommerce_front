@@ -4,20 +4,14 @@ import {
   ORDER_BY_NAME,
   ALL_PRODUCTS,
   GET_BRANDS,
-
   GET_PRODUCTS_BY_NAME,
   GET_CATEGORIES,
   POST_PRODUCT,
   SET_ERROR,
   GET_FILTERED,
   CLEAR_STATE,
-
-
   FILTER_CATEGORIES,
   FILTER_BRANDS,
-
-
-
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
@@ -26,10 +20,8 @@ const initialState = {
   brands: [],
   categories: [],
   brand: [],
-
   error: [],
   filtered: [],
-
 };
 
 function rootReducer(state = initialState, action) {
@@ -38,7 +30,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
-
       };
 
     case GET_PRODUCT:
@@ -101,20 +92,17 @@ function rootReducer(state = initialState, action) {
               }
               return 0;
             });
-
+            
     case FILTER_CATEGORIES:
       let FilterCat= [...state.filter]
       let AllType = action.payload === 'ALLCAT' ? FilterCat : FilterCat?.filter(e => e.category.name == action.payload)
 
+    case GET_PRODUCTS_BY_NAME:
       return {
         ...state,
-        products: AllType
+        products: action.payload,
       };
-
-      case FILTER_BRANDS:
-      let FilterBrand= [...state.filter]
-      let AllBrands = action.payload === 'ALLBRAND' ? FilterBrand : FilterBrand?.filter(e => e.brand.name == action.payload)
-
+    case SET_ERROR:
       return {
         ...state,
         products: AllBrands

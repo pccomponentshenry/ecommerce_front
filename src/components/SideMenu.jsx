@@ -11,7 +11,6 @@ import {
   filterBrands
 } from "../redux/actions/index";
 
-
 export default function SideMenu(props) {
   const dispatch = useDispatch();
   const brand = useSelector(state => state.brands);
@@ -22,9 +21,6 @@ export default function SideMenu(props) {
     dispatch(getBrands());
     dispatch(getCategories());
   }, []);
-
-
-
 
   return (
     <div className={S.Container}>
@@ -58,8 +54,11 @@ export default function SideMenu(props) {
                 <option defaultValue={"DEFAULT"}>Category</option>
                 {cat.map((el, i) => (
                   <option key={i}>{el.name}</option>
+            </div>
+            <div className={S.select}>
 
-             
+                ))}
+              </select>
             </div>
             <div className={S.select}>
 
@@ -75,7 +74,7 @@ export default function SideMenu(props) {
                 <option defaultValue={"DEFAULT"}>Brand</option>
 
                 {brand.map((el, i) => (
-                  <option key={i} value={el.name}>{el.name}</option>
+                  <option key={i}>{el.name}</option>
                 ))}
               </select>
             </div>
