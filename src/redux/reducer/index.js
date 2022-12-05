@@ -54,7 +54,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         filtered: action.payload,
       };
-
     case SEARCH_PRODUCT:
       return {
         ...state,
@@ -70,19 +69,18 @@ function rootReducer(state = initialState, action) {
         ...state,
         categories: action.payload,
       };
-
     case ORDER_BY_NAME:
       let sortedArr =
         action.payload === "asc"
           ? state.product.sort(function (a, b) {
-              if (a.name > b.name) {
-                return 1;
-              }
-              if (b.name > a.name) {
-                return -1;
-              }
-              return 0;
-            })
+            if (a.name > b.name) {
+              return 1;
+            }
+            if (b.name > a.name) {
+              return -1;
+            }
+            return 0;
+          })
           : state.product.sort(function (a, b) {
               if (a.name > b.name) {
                 return -1;
@@ -93,24 +91,16 @@ function rootReducer(state = initialState, action) {
               return 0;
             });
 
-    case FILTER_CATEGORIES:
-      let FilterCat = [...state.filter];
-      let AllType =
-        action.payload === "ALLCAT"
-          ? FilterCat
-          : FilterCat?.filter(e => e.category.name == action.payload);
-
     case GET_PRODUCTS_BY_NAME:
       return {
         ...state,
-        products: action.payload,
+        filtered: action.payload,
       };
     case SET_ERROR:
       return {
         ...state,
         products: AllBrands,
       };
-
     case GET_PRODUCTS_BY_NAME:
       return {
         ...state,
@@ -121,7 +111,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         error: action.payload,
       };
-
     default:
       return state;
   }
