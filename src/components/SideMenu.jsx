@@ -4,11 +4,7 @@ import S from "../styles/SideMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getBrands,
-  getCategories,
-  getFiltered,
-  clearState,
-  filterCategories,
-  filterBrands
+  getCategories
 } from "../redux/actions/index";
 
 export default function SideMenu(props) {
@@ -54,14 +50,11 @@ export default function SideMenu(props) {
                 <option defaultValue={"DEFAULT"}>Category</option>
                 {cat.map((el, i) => (
                   <option key={i}>{el.name}</option>
-            </div>
-            <div className={S.select}>
-
                 ))}
               </select>
             </div>
-            <div className={S.select}>
 
+            <div className={S.select}>
               <select
                 name="Filter"
                 defaultValue={"DEFAULT"}
@@ -72,23 +65,25 @@ export default function SideMenu(props) {
                 }}
               >
                 <option defaultValue={"DEFAULT"}>Brand</option>
-
                 {brand.map((el, i) => (
                   <option key={i}>{el.name}</option>
                 ))}
               </select>
             </div>
-            <div className={S.order}>
-              <hr />
-              <h6>Order by price</h6>
-              <button id="asc" onClick={e => props.handleSort(e)}>
-                Higher to lower
-              </button>
-              <button id="desc" onClick={e => props.handleSort(e)}>
-                Lower to higher
-              </button>
-            </div>
+
           </div>
+
+          <div className={S.order}>
+            <hr />
+            <h6>Order by price</h6>
+            <button id="asc" onClick={e => props.handleSort(e)}>
+              Higher to lower
+            </button>
+            <button id="desc" onClick={e => props.handleSort(e)}>
+              Lower to higher
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
