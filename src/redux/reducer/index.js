@@ -4,13 +4,17 @@ import {
   SEARCH_PRODUCT,
   ORDER_BY_NAME,
   ALL_PRODUCTS,
-  GET_BRANDS
+  GET_BRANDS,
+  GET_PRODUCTS_BY_NAME,
+  GET_CATEGORIES
+
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
   products: [],
-  product: [],
+  product: '',
   brands: [],
+  categories: [],
   brand: []
 };
 
@@ -39,6 +43,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         brands: action.payload
       }
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload
+      }
 
     case ORDER_BY_NAME:
       let sortedArr =
@@ -61,6 +70,13 @@ function rootReducer(state = initialState, action) {
             }
             return 0;
           });
+
+    case GET_PRODUCTS_BY_NAME:
+      return{
+          ...state,
+          products: action.payload,
+            };
+
     default:
       return state
 
