@@ -4,9 +4,13 @@ import search from "../Images/Search.png";
 import cart from "../Images/cart.png";
 import mode from "../Images/mode.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {getProductsByName} from "../redux/actions"
 export default function Nav() {
   const [nav, setNav] = useState(false);
+  const dispatch = useDispatch();
+  const [name, setName] = useState("")
 
   function switchMode() {
     if (window.scrollY >= 800) {
@@ -15,6 +19,19 @@ export default function Nav() {
       setNav(false);
     }
   }
+  useEffect(() => {
+    dispatch(getProductsByName)
+}, [dispatch])
+  function handleInputChange(e){
+    e.preventDefault();
+    setName(e.target.value);
+}
+  function handleSubmit(e){
+    e.preventDefault();
+    dispatch(getProductsByName(name));
+    //dispatch(clear());
+    setName("");
+}
 
   window.addEventListener("scroll", switchMode);
   return (
@@ -42,8 +59,16 @@ export default function Nav() {
 
         <div className={N.searchAndCart}>
           <div className={N.searchBar}>
-            <input type="text" placeholder="Search" />
-            <img src={search} alt="search icon" className={N.searchIcon} />
+            <input 
+            type="text" 
+            placeholder="Search" 
+            id="name"
+            autoComplete="off"
+            value={name}
+            onChange={(e) => handleInputChange(e)}
+            />
+            <button  onClick ={(e)=> handleSubmit(e)}><img className={N.searchIcon} src={search}/> </button>
+            {/* <img src={search} alt="search icon" className={N.searchIcon} /> */}
           </div>
           <h6 className={N.loginText}>Login/Register</h6>
           <Link to="/cart">
