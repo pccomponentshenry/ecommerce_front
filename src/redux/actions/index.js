@@ -11,6 +11,8 @@ import {
   GET_FILTERED,
   SET_ERROR,
   CLEAR_STATE,
+   FILTER_CATEGORIES,
+
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -73,6 +75,8 @@ export function getProductsByName(name) {
     } catch (error) {
       console.log(error.message);
       return alert("Sorry, product not found, try again.");
+
+
     }
   };
 }

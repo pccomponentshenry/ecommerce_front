@@ -10,3 +10,6 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const SET_ERROR = "  SET_ERROR";
 export const GET_FILTERED = "GET_FILTERED";
 export const CLEAR_STATE = "CLEAR_STATE";
+
+export const FILTER_CATEGORIES = "FILTER_CATEGORIES";
+export const FILTER_BRANDS = "FILTER_BRANDS";

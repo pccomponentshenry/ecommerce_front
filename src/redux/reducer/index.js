@@ -10,6 +10,8 @@ import {
   SET_ERROR,
   GET_FILTERED,
   CLEAR_STATE,
+  FILTER_CATEGORIES,
+  FILTER_BRANDS,
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
@@ -90,6 +92,21 @@ function rootReducer(state = initialState, action) {
               }
               return 0;
             });
+            
+    case FILTER_CATEGORIES:
+      let FilterCat= [...state.filter]
+      let AllType = action.payload === 'ALLCAT' ? FilterCat : FilterCat?.filter(e => e.category.name == action.payload)
+
+    case GET_PRODUCTS_BY_NAME:
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        products: AllBrands
+      }
 
     case GET_PRODUCTS_BY_NAME:
       return {
