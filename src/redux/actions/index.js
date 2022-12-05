@@ -4,7 +4,8 @@ import {
   //   GET_PRODUCT,
   //   SEARCH_PRODUCT,
   //   ORDER_BY_NAME,
-  GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES
+  GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES,
+  FILTER_CATEGORIES, FILTER_BRANDS
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -40,4 +41,18 @@ export function getCategories() {
 
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
+}
+
+export function filterCategories(filter) {
+  return {
+      type: FILTER_CATEGORIES,
+      payload: filter
+  }
+}
+
+export function filterBrands(filter) {
+  return {
+      type: FILTER_BRANDS,
+      payload: filter
+  }
 }
