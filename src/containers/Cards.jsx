@@ -24,7 +24,7 @@ export default function Cards() {
 
   useEffect(() => {
     dispatch(allProducts())
-       },[])
+       },[dispatch])
 
   const currentItems =
   products.length > 2

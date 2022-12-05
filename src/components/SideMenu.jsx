@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import S from "../styles/SideMenu.module.css";
 import { useDispatch } from "react-redux";
-import { getBrands } from "../redux/actions/index";
+import { getBrands,allProducts,orderByPriceHL,orderByPriceLH } from "../redux/actions/index";
 
 export default function SideMenu() {
   const dispatch = useDispatch();
@@ -9,7 +9,8 @@ export default function SideMenu() {
   //console.log(brand);
   useEffect(() => {
     dispatch(getBrands());
-  }, []);
+    dispatch(allProducts())
+  }, [dispatch]);
 
   const category = [
     "Keyboards",
@@ -56,8 +57,8 @@ export default function SideMenu() {
             <div className={S.order}>
               <hr />
               <h6>Order by price</h6>
-              <button>Higher to lower</button>
-              <button>Lower to higher</button>
+              <button onClick={()=>dispatch(orderByPriceHL())}>Higher to lower</button>
+              <button onClick={()=>dispatch(orderByPriceLH())}>Lower to higher</button>
             </div>
           </div>
         </div>

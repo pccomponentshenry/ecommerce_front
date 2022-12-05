@@ -4,7 +4,9 @@ import {
   //   GET_PRODUCT,
   //   SEARCH_PRODUCT,
   //   ORDER_BY_NAME,
-  GET_BRANDS, ALL_PRODUCTS
+  GET_BRANDS, ALL_PRODUCTS,
+  ORDER_BY_PRICE_HL,
+  ORDER_BY_PRICE_LH
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -33,4 +35,15 @@ export function getBrands() {
 
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
+}
+
+export function orderByPriceHL(){
+  return{
+    type:ORDER_BY_PRICE_HL
+  }
+}
+export function orderByPriceLH(){
+  return{
+    type:ORDER_BY_PRICE_LH
+  }
 }
