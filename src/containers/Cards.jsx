@@ -2,9 +2,9 @@ import React from "react";
 import CardComponent from "../components/Card";
 import C from "../styles/Cards.module.css";
 import Pagination from "../components/Pagination";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allProducts } from "../redux/actions/index.js";
+import { allProducts, getFiltered } from "../redux/actions/index.js";
 import { Link } from "react-router-dom";
 
 export default function Cards() {
@@ -18,13 +18,16 @@ export default function Cards() {
 
   let dispatch = useDispatch();
   let products = useSelector(state => state.products);
+  let filtered = useSelector(state => state.filtered);
 
-  useEffect(() => {
-    dispatch(allProducts());
-  }, []);
+  React.useEffect(() => {
+    dispatch(getFiltered(products));
+  }, [dispatch]);
 
   const currentItems =
-    products.length > 2
+    filtered.length > 0
+      ? Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem)
+      : products.length > 2
       ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
       : products;
   const data = products.length;

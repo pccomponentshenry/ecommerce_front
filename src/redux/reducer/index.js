@@ -8,6 +8,8 @@ import {
   GET_CATEGORIES,
   POST_PRODUCT,
   SET_ERROR,
+  GET_FILTERED,
+  CLEAR_STATE,
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   categories: [],
   brand: [],
   error: [],
+  filtered: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -38,6 +41,18 @@ function rootReducer(state = initialState, action) {
         product: [...state.showDogs, action.payload],
       };
     }
+    case CLEAR_STATE: {
+      return {
+        ...state,
+        filtered: [],
+      };
+    }
+    case GET_FILTERED:
+      return {
+        ...state,
+        filtered: action.payload,
+      };
+
     case SEARCH_PRODUCT:
       return {
         ...state,

@@ -8,7 +8,9 @@ import {
   ALL_PRODUCTS,
   GET_CATEGORIES,
   POST_PRODUCT,
+  GET_FILTERED,
   SET_ERROR,
+  CLEAR_STATE,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -42,6 +44,12 @@ export function getCategories() {
     return dispatch({ type: GET_CATEGORIES, payload: res.data });
   };
 }
+export function clearState() {
+  return { type: CLEAR_STATE };
+}
+export const getFiltered = payload => {
+  return { type: GET_FILTERED, payload };
+};
 
 export function getProductDetail(id) {
   return async dispatch => {

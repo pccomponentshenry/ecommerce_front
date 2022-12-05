@@ -8,3 +8,5 @@ export const ALL_PRODUCTS = "ALL_PRODUCTS";
 export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const SET_ERROR = "  SET_ERROR";
+export const GET_FILTERED = "GET_FILTERED";
+export const CLEAR_STATE = "CLEAR_STATE";
