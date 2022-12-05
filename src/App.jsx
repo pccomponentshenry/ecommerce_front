@@ -5,6 +5,7 @@ import Categories from "./containers/Categories";
 import Latest from "./containers/Latest";
 import Form from "./components/Form";
 import Detail from "./containers/Detail";
+import NotFound from "./alerts/NotFound";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { populateDB } from "./redux/actions";
 
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/detail/1" element={<Detail />} />
           <Route exact path="/sell" element={<Form />} />
           <Route exact path="/:id" element={<Detail />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

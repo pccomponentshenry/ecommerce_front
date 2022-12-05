@@ -9,7 +9,7 @@ import {
   getFiltered
 } from "../redux/actions/index";
 
-export default function SideMenu(props) {
+export default function SideMenu() {
   const dispatch = useDispatch();
   const brands = useSelector(state => state.brands);
   const categories = useSelector(state => state.categories);
@@ -35,15 +35,12 @@ export default function SideMenu(props) {
       else if (a.price === b.price) return 0;
       return ascDesc === 'asc' ? (a.price > b.price ? 1 : -1) : (a.price < b.price ? 1 : -1);
     });
-
     dispatch(getFiltered(sorted));
   }
 
   const clearFilters = () => {
     dispatch(getFiltered(products));
     document.querySelector('input[type=text]').value = '';
-    console.log(document.querySelectorAll('select'));
-
     document.querySelectorAll('select')[0].selectedIndex = 0;
     document.querySelectorAll('select')[1].selectedIndex = 0;
   }
