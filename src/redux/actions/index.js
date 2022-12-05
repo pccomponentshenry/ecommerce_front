@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   //   SEARCH_PRODUCT,
   //   ORDER_BY_NAME,
+
   GET_PRODUCT,
   GET_BRANDS,
   ALL_PRODUCTS,
@@ -11,6 +12,12 @@ import {
   GET_FILTERED,
   SET_ERROR,
   CLEAR_STATE,
+   ALL_PRODUCTS,
+   FILTER_CATEGORIES,
+
+
+
+
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -62,6 +69,7 @@ export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
 }
 
+
 export function getProductsByName(name) {
   return async function (dispatch) {
     try {
@@ -73,6 +81,7 @@ export function getProductsByName(name) {
     } catch (error) {
       console.log(error.message);
       return alert("Sorry, product not found, try again.");
+
     }
   };
 }
@@ -85,3 +94,7 @@ export const postProduct = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+
+
+}
+
