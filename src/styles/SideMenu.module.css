@@ -1,34 +1,42 @@
-.Container{
-    background: rgb(0,0,0);
-    background: linear-gradient(28deg, rgba(0,0,0,1) 0%, rgba(39,39,39,1) 100%);
+.Container {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(28deg, rgba(0, 0, 0, 1) 0%, rgba(39, 39, 39, 1) 100%);
     width: 300px;
     height: 110vh;
     float: left;
 }
-.categoryContainer{
+
+.categoryContainer {
     width: 150px;
     height: 100vh;
     margin-top: 40px;
 }
-.Container h6{
+
+.clearFilters {
+    width: 150px;
+    /* height: 100vh; */
+    margin-top: 40px;
+}
+
+.Container h6 {
     color: #62AAA1;
     text-transform: uppercase;
     font-weight: 600;
 }
 
-.Container span{
+.Container span {
     color: #fff;
     cursor: pointer;
 }
 
-.Container span:hover{
+.Container span:hover {
     color: #62AAA1;
     transition: 0.15s ease-in-out;
 }
 
 
 
-select{
+select {
     background-color: transparent;
     color: #fff;
     border: solid 1px #272727;
@@ -37,15 +45,16 @@ select{
     cursor: pointer;
     margin-top: 5px;
 }
-option{
+
+option {
     color: #000;
 }
 
-.select{
+.select {
     margin-top: 10px;
 }
 
-.subContainer{
+.subContainer {
     position: sticky;
     top: 80px;
     left: 100px;
@@ -53,7 +62,7 @@ option{
 }
 
 
-.order button{
+.order button {
     background-color: transparent;
     border: solid 1px #272727;
     border-radius: 10px;
@@ -63,7 +72,7 @@ option{
     margin-top: 10px;
 }
 
-.order button:hover{
+.order button:hover {
     transition: 0.15s ease-in-out;
     border: solid 1px #62AAA1;
     background-color: #62AAA1;
