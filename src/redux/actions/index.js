@@ -5,9 +5,8 @@ import {
   //   ORDER_BY_NAME,
 
   GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES,
-  FILTER_CATEGORIES, FILTER_BRANDS
-
-  GET_PRODUCT, GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES
+  FILTER_CATEGORIES, FILTER_BRANDS,
+  GET_PRODUCT
 
 } from "../actions/actionNames";
 
@@ -65,7 +64,7 @@ export function filterBrands(filter) {
   return {
       type: FILTER_BRANDS,
       payload: filter
-  }
+  }}
 
 export function getProductsByName(name){
   return async function (dispatch){

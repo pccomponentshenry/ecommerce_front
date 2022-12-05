@@ -8,8 +8,7 @@ import {
   GET_CATEGORIES,
   FILTER_CATEGORIES,
   FILTER_BRANDS,
-  GET_PRODUCTS_BY_NAME,
-  GET_CATEGORIES
+  GET_PRODUCTS_BY_NAME
 
 } from "../actions/actionNames"; //Para las action creators
 
