@@ -5,6 +5,9 @@ import {
   ORDER_BY_NAME,
   ALL_PRODUCTS,
   GET_BRANDS,
+  GET_CATEGORIES,
+  FILTER_CATEGORIES,
+  FILTER_BRANDS,
   GET_PRODUCTS_BY_NAME,
   GET_CATEGORIES
 
@@ -15,7 +18,8 @@ const initialState = {
   product: '',
   brands: [],
   categories: [],
-  brand: []
+  brand: [],
+  filter:[]
 };
 
 function rootReducer(state = initialState, action) {
@@ -24,7 +28,8 @@ function rootReducer(state = initialState, action) {
     case ALL_PRODUCTS:
       return {
         ...state,
-        products: action.payload
+        products: action.payload,
+        filter: action.payload
       };
 
     case GET_PRODUCT:
@@ -42,12 +47,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         brands: action.payload
-      }
+      };
     case GET_CATEGORIES:
       return {
         ...state,
         categories: action.payload
-      }
+      };
 
     case ORDER_BY_NAME:
       let sortedArr =
@@ -70,6 +75,24 @@ function rootReducer(state = initialState, action) {
             }
             return 0;
           });
+
+    case FILTER_CATEGORIES:
+      let FilterCat= [...state.filter]
+      let AllType = action.payload === 'ALLCAT' ? FilterCat : FilterCat?.filter(e => e.category.name == action.payload)
+
+      return {
+        ...state,
+        products: AllType
+      };
+
+      case FILTER_BRANDS:
+      let FilterBrand= [...state.filter]
+      let AllBrands = action.payload === 'ALLBRAND' ? FilterBrand : FilterBrand?.filter(e => e.brand.name == action.payload)
+
+      return {
+        ...state,
+        products: AllBrands
+      }
 
     case GET_PRODUCTS_BY_NAME:
       return{

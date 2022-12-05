@@ -3,7 +3,12 @@ import axios from "axios";
 import {
   //   SEARCH_PRODUCT,
   //   ORDER_BY_NAME,
+
+  GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES,
+  FILTER_CATEGORIES, FILTER_BRANDS
+
   GET_PRODUCT, GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES
+
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -48,6 +53,20 @@ export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
 }
 
+
+export function filterCategories(filter) {
+  return {
+      type: FILTER_CATEGORIES,
+      payload: filter
+  }
+}
+
+export function filterBrands(filter) {
+  return {
+      type: FILTER_BRANDS,
+      payload: filter
+  }
+
 export function getProductsByName(name){
   return async function (dispatch){
     try{
@@ -61,4 +80,5 @@ export function getProductsByName(name){
         return alert('Sorry, product not found, try again.')
     }
 };
+
 }
