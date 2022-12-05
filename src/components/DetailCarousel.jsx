@@ -2,6 +2,7 @@ import Carousel from "react-bootstrap/Carousel";
 import D from "../styles/DetailCarousel.module.css";
 
 function UncontrolledExample(props) {
+
   return (
     <Carousel variant="dark">
       {props.img.length > 0 &&
