@@ -19,10 +19,6 @@ export default function SideMenu(props) {
     dispatch(getCategories());
   }, []);
 
-  const handleFilter = e => {
-    dispatch(getFiltered(products));
-  };
-
   return (
     <div className={S.Container}>
       <div className={S.subContainer}>
@@ -47,7 +43,8 @@ export default function SideMenu(props) {
                 id="cat"
                 defaultValue={"DEFAULT"}
                 onChange={e => {
-                  handleFilter(e);
+                  props.handleFilter(e);
+                  props.setCat(e.target.value);
                 }}
               >
                 <option defaultValue={"DEFAULT"}>Category</option>
@@ -57,7 +54,15 @@ export default function SideMenu(props) {
               </select>
             </div>
             <div className={S.select}>
-              <select name="Filter" defaultValue={"DEFAULT"}>
+              <select
+                name="Filter"
+                defaultValue={"DEFAULT"}
+                id="brand"
+                onChange={e => {
+                  props.handleFilter(e);
+                  props.setBrand(e.target.value);
+                }}
+              >
                 <option defaultValue={"DEFAULT"}>Brand</option>
                 {brand.map((el, i) => (
                   <option key={i}>{el.name}</option>
