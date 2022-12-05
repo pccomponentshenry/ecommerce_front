@@ -36,6 +36,9 @@ function CardComponent(props) {
           <Card.Text style={{ color: "black", fontWeight: 400 }}>
             {props.brand}
           </Card.Text>
+          <Card.Text style={{ color: "black", fontWeight: 400 }}>
+            {props.price}
+          </Card.Text>
           <Button variant="dark">Add to cart</Button>
         </Card.Body>
       </Card>

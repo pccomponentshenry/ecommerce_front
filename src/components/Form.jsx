@@ -3,15 +3,17 @@ import F from "../styles/Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands, getCategories, postProduct } from "../redux/actions/index";
+import { Link } from "react-router-dom";
 
 export default function Form() {
   const initialState = {
     name: "",
     brand: "",
-    stock: null,
-    price: null,
+    stock: "",
+    price: "",
     description: "",
     img: [],
+    category: "",
   };
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,6 +25,7 @@ export default function Form() {
   const cat = useSelector(state => state.categories);
   const [image, setImage] = useState([]);
   const [url, setUrl] = useState("");
+  const [active, setActive] = useState(false);
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState({});
   const [input, setInput] = useState({
@@ -80,7 +83,8 @@ export default function Form() {
       !error.img &&
       !error.category &&
       !error.brand &&
-      input.description.length > 0
+      input.description.length > 0 &&
+      input.image.name
     ) {
       setDisable(false);
     }
@@ -125,23 +129,58 @@ export default function Form() {
         setInput({ ...input, img: data.url }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
       })
       .catch(err => console.log(err));
-    console.log(input);
   };
 
   const handleChange = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(input);
+  };
+  const loadImage = e => {
+    e.preventDefault(e);
+    if (image.name) {
+      handleChangeImg(e);
+      errorImgSetting(e);
+    }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
+    setActive(true);
     dispatch(postProduct(input));
+    setDisable(true);
     clearForm();
     setError({});
   };
 
   return (
     <>
+      {active && (
+        <>
+          <div className={F.successPic}>
+            <span onClick={() => setActive(false)}>X</span>
+            <img
+              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670260244/cqws5x8n/published_smvv8j.jpg"
+              alt=""
+            />
+            <div className={F.btnCont}>
+              <Link to="/">
+                {" "}
+                <button className={F.btn}>Back to Home</button>{" "}
+              </Link>
+              <button
+                className={F.btn}
+                onClick={() => {
+                  clearForm();
+                  setActive(false);
+                }}
+              >
+                Load another product
+              </button>
+            </div>
+          </div>
+          <div className={F.darkBg}></div>
+        </>
+      )}
+
       <form onSubmit={e => handleSubmit(e)} autoComplete="off">
         <div className={F.titleCont}>
           <h5>New product</h5>
@@ -152,6 +191,7 @@ export default function Form() {
 
           <input
             type="file"
+            //HAY QUE ASIGNAR UN VALUE VÁLIDO PARA BORRAR EL ESTADO? O SE PISA CON EL PRÓXIMO ARCHIVO.
             name="uploadfile"
             multiple="multiple"
             id="img"
@@ -161,10 +201,10 @@ export default function Form() {
             }}
           />
           <button
-            className={F.loadBtn}
+            disabled={!image.name}
+            className={image.name ? F.loadBtn : F.disabled}
             onClick={e => {
-              handleChangeImg(e);
-              errorImgSetting(e);
+              loadImage(e);
             }}
           >
             Load image
@@ -186,6 +226,7 @@ export default function Form() {
             <div className={F.name}>
               <label>Name of the product: </label>
               <input
+                value={input.name}
                 type="text"
                 name="name"
                 placeholder="Name"
@@ -201,6 +242,7 @@ export default function Form() {
               <select
                 name="brand"
                 defaultValue={"DEFAULT"}
+                value={input.brand}
                 id="Brand"
                 onBlur={e => {
                   handleChange(e);
@@ -225,6 +267,7 @@ export default function Form() {
               name="category"
               defaultValue={"DEFAULT"}
               id="Category"
+              value={input.category}
               onBlur={e => {
                 handleChange(e);
                 errorSetting(e);
@@ -247,6 +290,7 @@ export default function Form() {
           <div className={F.category}>
             <label>Stock: </label>
             <input
+              value={input.stock}
               type="number"
               name="stock"
               min="0"
@@ -258,6 +302,7 @@ export default function Form() {
           <div className={F.price}>
             <label>Price: </label>
             <input
+              value={input.price}
               type="number"
               name="price"
               min="0"
@@ -274,6 +319,7 @@ export default function Form() {
               <label>Description: </label>
               <textarea
                 name="description"
+                value={input.description}
                 id="description"
                 cols="30"
                 rows="10"
@@ -290,9 +336,13 @@ export default function Form() {
             {error.brand && <span>{error.description}</span>}
           </div>
           <div className={F.formBtn}>
-            <div className={disable ? F.disabledBtn : F.activeBtn}>
+            <button
+              type="submit"
+              disabled={!image.name || !input.description || !input.stock}
+              className={disable ? F.disabledBtn : F.activeBtn}
+            >
               Publish product
-            </div>
+            </button>
           </div>
         </div>
       </form>
