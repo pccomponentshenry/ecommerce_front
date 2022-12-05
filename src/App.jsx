@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/categories" element={<Categories />} />
           <Route exact path="/latest" element={<Latest />} />
           <Route exact path="/sell" element={<Sell />} />
-          <Route exact path="/detail/1" element={<Detail />} />
+          <Route exact path="/:id" element={<Detail />} />
         </Routes>
       </BrowserRouter>
     </div>

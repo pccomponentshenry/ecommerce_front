@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 
 
 export default function Cards() {
- 
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setitemsPerPage] = useState(8);
@@ -24,10 +23,10 @@ export default function Cards() {
 
   useEffect(() => {
     dispatch(allProducts())
-       },[])
+  }, [])
 
   const currentItems =
-  products.length > 2
+    products.length > 2
       ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
       : products;
   const data = products.length;
@@ -36,11 +35,11 @@ export default function Cards() {
       {currentItems.length > 0 &&
         currentItems.map((el) => (
           <Link
-            to="/detail/1"
+            to={`/${el.id}`}
             style={{ textDecoration: "none", color: "white" }}
           >
             <CardComponent
-             
+
               key={el.id}
               img={el.img}
               title={el.title}

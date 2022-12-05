@@ -2,9 +2,22 @@ import React from "react";
 import D from "../styles/Detail.module.css";
 import Carousel from "../components/DetailCarousel";
 import Reviews from "../components/Reviews";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetail } from "../redux/actions";
+import { useEffect } from "react";
 
 export default function Detail() {
+
+  const params = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector(state => state.product);
+
+  useEffect(() => {
+    dispatch(getProductDetail(params.id));
+  }, [dispatch]);
+
+  //TODO: change hardcoded data
   const owner = [
     {
       name: "Ricardo Fort",
@@ -13,38 +26,27 @@ export default function Detail() {
       ],
     },
   ];
-  const products = [
-    {
-      category: "Headphones",
-      title: "Headphones XAS-305>",
-      brand: "Nisuta",
-      stock: 2,
-      price: "$185.02",
-      description:
-        "Fabuloso teclado con muchos colores y lleno de teclas. Sirve para programar un montón.",
-      img: [
-        "https://d2r9epyceweg5n.cloudfront.net/stores/001/130/715/products/teclado-xk7001-b9f340ca1d65e4e69d16038383176727-1024-1024.jpg",
-        "https://d2r9epyceweg5n.cloudfront.net/stores/001/130/715/products/teclado-xk700-31-f87dac24f328c065b516038383173232-1024-1024.jpg",
-        "https://d2r9epyceweg5n.cloudfront.net/stores/650/868/products/sfdgasg1-f63a1338a32a894eab16038914603768-1024-1024.jpg",
-      ],
-    },
-  ];
+  const imgs = [];
+  imgs.push(product.img);
+  imgs.push(product.img);
+
   return (
     <div className={D.Container}>
       <div className={D.imageContainer}>
-        <Carousel img={products[0].img} />
+        <Carousel img={imgs} />
       </div>
       {/* reviews.length > 0 &&  ---- Depende de lo que llegue del back */}
       <Reviews />
       <div className={D.dataContainer}>
-        <span className={D.category}>{products[0].category}</span>
-        <div className={D.nameCont}>
-          <h1 className={D.name}>{products[0].name}</h1>
-        </div>
-        <h3 className={D.brand}>Brand: {products[0].brand}</h3>
-        <p className={D.description}>{products[0].description}</p>
-        <span className={D.stock}>{products[0].stock} units</span>
-        <h3 className={D.price}>Price: {products[0].price}</h3>
+        <span className={D.category}>{product.category}</span>
+        <h3 className={D.name}>{product.title}</h3>
+        {/* <div className={D.nameCont}>
+          <h1 className={D.name}>{product.title}</h1>
+        </div> */}
+        <h3 className={D.brand}>Brand: {product.brand}</h3>
+        <p className={D.description}>{product.description}</p>
+        <span className={D.stock}>{product.stock} units</span>
+        <h3 className={D.price}>Price: {product.price}</h3>
       </div>
       <div className={D.btnCont}>
         <button>Add to cart</button>

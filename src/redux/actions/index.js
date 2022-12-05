@@ -1,12 +1,9 @@
 import axios from "axios";
 
 import {
-  //   GET_PRODUCT,
   //   SEARCH_PRODUCT,
   //   ORDER_BY_NAME,
-
-  GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES
-
+  GET_PRODUCT, GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -37,6 +34,13 @@ export function getCategories() {
   return async (dispatch) => {
     const res = await axios.get(`${URL}/categories`);
     return dispatch({ type: GET_CATEGORIES, payload: res.data });
+  };
+}
+
+export function getProductDetail(id) {
+  return async (dispatch) => {
+    const res = await axios.get(`${URL}/products/${id}`);
+    return dispatch({ type: GET_PRODUCT, payload: res.data });
   };
 }
 

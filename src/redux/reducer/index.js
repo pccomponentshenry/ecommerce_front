@@ -12,7 +12,7 @@ import {
 
 const initialState = {
   products: [],
-  product: [],
+  product: '',
   brands: [],
   categories: [],
   brand: []
