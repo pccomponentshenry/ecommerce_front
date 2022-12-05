@@ -1,16 +1,18 @@
 .container {
   position: relative;
   top: 100px;
-  left: 150px;
+  left: 100px;
   display: flex;
   flex-direction: column;
   float: left;
+  width: 17%;
 }
 .container h6 {
   color: #fff;
   font-size: 14px;
   position: relative;
-  right: 10px;
+  left: 5px;
+  font-weight: 200;
 }
 .container span {
   font-size: 12px;
@@ -22,7 +24,6 @@
 .inputCont {
   cursor: pointer;
   border: dashed 1px #62aaa1;
-  width: 120%;
   height: 200px;
   display: flex;
   justify-content: center;
@@ -32,11 +33,11 @@
   font-size: 100px;
   font-weight: 200;
   text-align: center;
+  width: 120%;
 }
 
 .imgCont img {
   cursor: pointer;
-  width: 120%;
   height: 200px;
   display: flex;
   justify-content: center;
@@ -48,12 +49,17 @@
   color: #fff;
   position: relative;
   top: 100px;
-  left: 150px;
+  left: 105px;
 }
 .titleCont h5 {
   font-weight: 600;
 }
 
+.titleCont h6 {
+  font-weight: 200;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
 .formContainer {
   width: 40%;
   float: right;
@@ -61,8 +67,8 @@
   border: solid 1px #272727;
   border-radius: 10px;
   position: relative;
-  right: 100px;
-  top: 100px;
+  right: 200px;
+  top: 50px;
 }
 .fullWidth {
   width: 100%;
@@ -119,6 +125,10 @@ input::-webkit-inner-spin-button {
   background-color: transparent;
   border: solid 1px #62aaa1;
   border-radius: 10px;
+  color: #fff;
+  padding: 10px;
+  padding-top: 5px;
+  font-weight: 200;
 }
 
 .descriptionCont span {
@@ -164,7 +174,7 @@ input::-webkit-inner-spin-button {
 .category {
   width: 230px;
   position: absolute;
-  margin-top: 100px;
+  margin-top: 60px;
   left: 20px;
 }
 .category input {
@@ -225,15 +235,18 @@ input::-webkit-inner-spin-button {
   position: absolute;
   right: 65px;
 }
-.brand label {
-  float: left;
-  color: #fff;
-}
+
 .brand span {
   color: #fff;
   font-size: 12px;
   font-weight: 200;
   float: left;
+  position: relative;
+  top: 20px;
+}
+.brand select {
+  position: relative;
+  top: 15px;
 }
 /* BRAND */
 /* BUTTON */
@@ -264,7 +277,7 @@ input::-webkit-inner-spin-button {
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 10px;
-  margin-top: 250px;
+  margin-top: 200px;
   width: 135px;
   height: 25px;
 }

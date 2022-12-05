@@ -8,7 +8,7 @@ import {
   getFiltered,
   clearState,
   filterCategories,
-  filterBrands
+  filterBrands,
 } from "../redux/actions/index";
 
 export default function SideMenu(props) {
@@ -30,7 +30,7 @@ export default function SideMenu(props) {
           <h6>Categories</h6>
           {cat.map((el, i) => (
             <>
-              <div key={i}>
+              <div className={S.catCont} key={i}>
                 <span>{el.name}</span>
                 <br />
               </div>
@@ -41,7 +41,6 @@ export default function SideMenu(props) {
             <hr />
             <h6>Filter by:</h6>
             <div className={S.select}>
-
               <select
                 name="Filter"
                 id="cat"
@@ -54,14 +53,12 @@ export default function SideMenu(props) {
                 <option defaultValue={"DEFAULT"}>Category</option>
                 {cat.map((el, i) => (
                   <option key={i}>{el.name}</option>
-            </div>
-            <div className={S.select}>
-
                 ))}
               </select>
             </div>
-            <div className={S.select}>
+            <div className={S.select}></div>
 
+            <div className={S.select}>
               <select
                 name="Filter"
                 defaultValue={"DEFAULT"}

@@ -40,7 +40,7 @@ function rootReducer(state = initialState, action) {
     case POST_PRODUCT: {
       return {
         ...state,
-        product: [...state.showDogs, action.payload],
+        products: [...state.products, action.payload],
       };
     }
     case CLEAR_STATE: {
@@ -92,10 +92,13 @@ function rootReducer(state = initialState, action) {
               }
               return 0;
             });
-            
+
     case FILTER_CATEGORIES:
-      let FilterCat= [...state.filter]
-      let AllType = action.payload === 'ALLCAT' ? FilterCat : FilterCat?.filter(e => e.category.name == action.payload)
+      let FilterCat = [...state.filter];
+      let AllType =
+        action.payload === "ALLCAT"
+          ? FilterCat
+          : FilterCat?.filter(e => e.category.name == action.payload);
 
     case GET_PRODUCTS_BY_NAME:
       return {
@@ -105,8 +108,8 @@ function rootReducer(state = initialState, action) {
     case SET_ERROR:
       return {
         ...state,
-        products: AllBrands
-      }
+        products: AllBrands,
+      };
 
     case GET_PRODUCTS_BY_NAME:
       return {

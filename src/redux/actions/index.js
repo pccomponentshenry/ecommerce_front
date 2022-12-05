@@ -11,8 +11,9 @@ import {
   GET_FILTERED,
   SET_ERROR,
   CLEAR_STATE,
-   FILTER_CATEGORIES,
-
+  GET_PRODUCTS_BY_NAME,
+  FILTER_CATEGORIES,
+  FILTER_BRANDS,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -63,6 +64,9 @@ export function getProductDetail(id) {
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
 }
+export async function filterBrands() {}
+
+export async function filterCategories() {}
 
 export function getProductsByName(name) {
   return async function (dispatch) {
@@ -75,14 +79,13 @@ export function getProductsByName(name) {
     } catch (error) {
       console.log(error.message);
       return alert("Sorry, product not found, try again.");
-
-
     }
   };
 }
 
 export const postProduct = payload => async dispatch => {
   try {
+    console.log("ENTRÉ");
     const res = await axios.post(`${URL}/products`, payload);
     return dispatch({ type: POST_PRODUCT, payload: res.data });
   } catch (e) {

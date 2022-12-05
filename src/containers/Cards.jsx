@@ -20,15 +20,16 @@ export default function Cards() {
   let products = useSelector(state => state.products);
   let filtered = useSelector(state => state.filtered);
 
-
   React.useEffect(() => {
     dispatch(getFiltered(products));
   }, [dispatch]);
 
-  // React.useEffect(() => {
-  //   dispatch(getFiltered(filtered));
-  // }, [dispatch]);
-
+  React.useEffect(() => {
+    dispatch(getFiltered(filtered));
+  }, [dispatch]);
+  React.useEffect(() => {
+    dispatch(getFiltered(filtered));
+  }, [dispatch]);
 
   const currentItems =
     filtered.length > 0
@@ -36,7 +37,7 @@ export default function Cards() {
       : products.length > 2
       ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
       : products;
-  const data = products.length;
+  const data = filtered.length;
   return (
     <div className={C.cardContainer}>
       {currentItems.length > 0 &&
