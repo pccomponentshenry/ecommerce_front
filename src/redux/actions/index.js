@@ -11,7 +11,8 @@ import {
   GET_FILTERED,
   SET_ERROR,
   CLEAR_STATE,
-   FILTER_CATEGORIES,
+  FILTER_CATEGORIES,
+  GET_PRODUCTS_BY_NAME
 
 } from "../actions/actionNames";
 
@@ -49,6 +50,7 @@ export function getCategories() {
 export function clearState() {
   return { type: CLEAR_STATE };
 }
+
 export const getFiltered = payload => {
   return { type: GET_FILTERED, payload };
 };
@@ -75,8 +77,6 @@ export function getProductsByName(name) {
     } catch (error) {
       console.log(error.message);
       return alert("Sorry, product not found, try again.");
-
-
     }
   };
 }
