@@ -33,6 +33,17 @@
   font-weight: 200;
   text-align: center;
 }
+
+.imgCont img {
+  cursor: pointer;
+  width: 120%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
 .titleCont {
   color: #fff;
   position: relative;
@@ -71,7 +82,8 @@ input::-webkit-inner-spin-button {
 .name input,
 .brand input,
 .stock input,
-.price input {
+.price input,
+.category input {
   border: solid 1px #62aaa1;
   background-color: transparent;
   border-radius: 5px;
@@ -86,7 +98,8 @@ input::-webkit-inner-spin-button {
   left: 5px;
 }
 .stock label,
-.price label {
+.price label,
+.category label {
   color: #fff;
 }
 
@@ -95,11 +108,12 @@ input::-webkit-inner-spin-button {
 .description {
   display: flex;
   flex-direction: column;
-  position: relative;
-  top: 40px;
+  position: absolute;
+  margin-top: 40px;
+  right: 0px;
 }
 .description textarea {
-  width: 87%;
+  width: 70%;
   height: 100px;
   margin-left: 10px;
   background-color: transparent;
@@ -111,9 +125,9 @@ input::-webkit-inner-spin-button {
   color: #fff;
   font-size: 12px;
   font-weight: 200;
-  margin-left: 10px;
-  position: relative;
-  top: 40px;
+  position: absolute;
+  margin-top: 170px;
+  right: 110px;
 }
 .descriptionCont {
   margin-top: 20px;
@@ -144,6 +158,28 @@ input::-webkit-inner-spin-button {
   bottom: 5px;
 }
 /* STOCK */
+
+/* CATEGORY */
+
+.category {
+  width: 230px;
+  position: absolute;
+  margin-top: 100px;
+  left: 20px;
+}
+.category input {
+  width: 20%;
+  height: 20px;
+  margin-left: 10px;
+}
+.category span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+  position: relative;
+  bottom: 5px;
+}
+/* CATEGORY */
 /* PRICE */
 
 .price {
@@ -212,7 +248,7 @@ input::-webkit-inner-spin-button {
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 10px;
-  margin-top: 50px;
+  margin-top: 250px;
   cursor: pointer;
   width: 135px;
   height: 25px;
@@ -228,7 +264,7 @@ input::-webkit-inner-spin-button {
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 10px;
-  margin-top: 50px;
+  margin-top: 250px;
   width: 135px;
   height: 25px;
 }
@@ -238,5 +274,19 @@ input::-webkit-inner-spin-button {
   color: #272727;
   transition: 0.15s ease-in-out;
 }
-
+.loadBtn {
+  position: absolute;
+  margin-top: 250px;
+  background-color: transparent;
+  color: #62aaa1;
+  border-radius: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: solid 1px #62aaa1;
+}
+.loadBtn:hover {
+  background-color: #62aaa1;
+  color: #111111;
+  transition: 0.15s ease-in-out;
+}
 /* BUTTON */

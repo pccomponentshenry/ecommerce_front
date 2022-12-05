@@ -5,4 +5,6 @@ export const GET_BRANDS = "GET_BRANDS";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
-export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME"
+export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
+export const POST_PRODUCT = "POST_PRODUCT";
+export const SET_ERROR = "  SET_ERROR";

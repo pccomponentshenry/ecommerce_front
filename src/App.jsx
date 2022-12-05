@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/latest" element={<Latest />} />
           <Route exact path="/sell" element={<Form />} />
           <Route exact path="/detail/1" element={<Detail />} />
-          <Route exact path="/sell" element={<Sell />} />
+          <Route exact path="/sell" element={<Form />} />
           <Route exact path="/:id" element={<Detail />} />
         </Routes>
       </BrowserRouter>

@@ -1,17 +1,27 @@
 import React from "react";
 import F from "../styles/Form.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getBrands, getCategories, postProduct } from "../redux/actions/index";
 
 export default function Form() {
-  // const initialState = {
-  //   name: "",
-  //   brand: "",
-  //   stock: null,
-  //   price: null,
-  //   description: "",
-  //   img: [],
-  // };
-  const [image, setImage] = useState({});
+  const initialState = {
+    name: "",
+    brand: "",
+    stock: null,
+    price: null,
+    description: "",
+    img: [],
+  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+  }, []);
+
+  const brands = useSelector(state => state.brands);
+  const cat = useSelector(state => state.categories);
+  const [image, setImage] = useState([]);
   const [url, setUrl] = useState("");
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState({});
@@ -22,8 +32,12 @@ export default function Form() {
     price: null,
     description: "",
     img: [],
+    category: "",
   });
 
+  function clearForm() {
+    setInput({ ...initialState });
+  }
   const handleValidate = input => {
     const errors = {};
     if (!input.name) {
@@ -45,8 +59,13 @@ export default function Form() {
     } else if (Number(input.price) < 0) {
       errors.price = "*Price must be a positive number";
     }
-
-    if (!input.description) {
+    if (!input.category || input.category === "Category") {
+      errors.category = "*Choose a category";
+    }
+    if (!input.brand || input.brand === "Brand") {
+      errors.brand = "*Choose a brand";
+    }
+    if (!input.description || input.description === "") {
       errors.description = "*A description is required";
     }
     if (!input.img[0]) {
@@ -59,6 +78,8 @@ export default function Form() {
       !error.stock &&
       !error.description &&
       !error.img &&
+      !error.category &&
+      !error.brand &&
       input.description.length > 0
     ) {
       setDisable(false);
@@ -88,38 +109,40 @@ export default function Form() {
   const handleChangeImg = e => {
     e.preventDefault();
     const data = new FormData();
-    let img = [];
-    console.log(image);
-    image.forEach(el => {
-      data.append("file", el);
+    data.append("file", image);
 
-      data.append("upload_preset", "cqws5x8n"); // presets de cloudinary. Si querés entrar a ver la web, se accede desde el gmail del PF, con google.
-      data.append("cloud_name", "dbtekd33p"); // presets de Cloudinary
-      data.append("api_key", "226142111813437"); // idem
-      fetch("  https://api.cloudinary.com/v1_1/cqws5x8n/image/upload", {
-        //post a la ruta de cloud. cqws5x8n es el nombre de la nube de la cuenta nuestra
-        method: "post",
-        body: data,
+    data.append("upload_preset", "cqws5x8n"); // presets de cloudinary. Si querés entrar a ver la web, se accede desde el gmail del PF, con google.
+    data.append("cloud_name", "dbtekd33p"); // presets de Cloudinary
+    data.append("api_key", "226142111813437"); // idem
+    fetch("  https://api.cloudinary.com/v1_1/cqws5x8n/image/upload", {
+      //post a la ruta de cloud. cqws5x8n es el nombre de la nube de la cuenta nuestra
+      method: "post",
+      body: data,
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        setUrl(data.url); //Revisar por qué no se agregan más de una. En algúna llamada de función Onchange en el html habré puesto (e.target.files[0] y por ahí es eso)
+        setInput({ ...input, img: data.url }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
       })
-        .then(resp => resp.json())
-        .then(data => {
-          setUrl(data.url); //Revisar por qué no se agregan más de una. En algúna llamada de función Onchange en el html habré puesto (e.target.files[0] y por ahí es eso)
-          setInput({ ...input, img: input.img.push(data.url) }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
-          //Todos los estados locales, entre ellos img. Hay delay para que aparezca, haciendo onchange en cualquier otro input se consologuea y aparece. Medio rebuscado,perdón!
-          console.log(input);
-        })
-        .catch(err => console.log(err));
-    });
+      .catch(err => console.log(err));
+    console.log(input);
   };
+
   const handleChange = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(input); // console auxiliar para ver la imagen en el input, porque hay delay. Sacar si molesta.
+    console.log(input);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = e => {
+    e.preventDefault();
+    dispatch(postProduct(input));
+    clearForm();
+    setError({});
+  };
+
   return (
     <>
-      <form onSubmit={() => handleSubmit()}>
+      <form onSubmit={e => handleSubmit(e)} autoComplete="off">
         <div className={F.titleCont}>
           <h5>New product</h5>
         </div>
@@ -134,24 +157,27 @@ export default function Form() {
             id="img"
             style={{ display: "none" }}
             onChange={e => {
-              setImage({ ...e.target.files });
-
-              // acá puede estar la razón por la que se carga una sola imagen. Pero no llego con el tiempo y capaz rompo algo. Es un useState que después utiliza handleChangeImg.
-              errorImgSetting(e); //no tiene nada que ver con cloudinary. Es para validar que se cargue una imagen.
+              setImage(e.target.files[0]);
             }}
           />
           <button
+            className={F.loadBtn}
             onClick={e => {
               handleChangeImg(e);
+              errorImgSetting(e);
             }}
           >
-            click
+            Load image
           </button>
-          {/* //Carga la imagen en Cloudinary. No se carga si no es clickeando después de seleccionar la imagen. Estaría bueno mejorar la UI para que no quede tan raro. */}
-
-          <label className={F.inputCont} htmlFor="img">
-            +
-          </label>
+          {!input.img.length ? (
+            <label className={F.inputCont} htmlFor="img">
+              +
+            </label>
+          ) : (
+            <div className={F.imgCont}>
+              <img src={input.img} alt="" />
+            </div>
+          )}
           {error.img && <span>{error.img}</span>}
         </div>
 
@@ -172,19 +198,53 @@ export default function Form() {
 
           <div className={F.fullWidth}>
             <div className={F.brand}>
-              <label>Brand: </label>
-              <input
-                type="text"
+              <select
                 name="brand"
-                placeholder="Brand"
-                onBlur={e => errorSetting(e)}
-                onChange={e => handleChange(e)}
-              />
+                defaultValue={"DEFAULT"}
+                id="Brand"
+                onBlur={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
+                onChange={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
+              >
+                <option defaultValue={"DEFAULT"}>Brand</option>
+                {brands.map((el, i) => (
+                  <option key={i}>{el.name}</option>
+                ))}
+              </select>
               {error.brand && <span>{error.brand}</span>}
             </div>
           </div>
 
           <div className={F.stock}>
+            <select
+              name="category"
+              defaultValue={"DEFAULT"}
+              id="Category"
+              onBlur={e => {
+                handleChange(e);
+                errorSetting(e);
+              }}
+              onChange={e => {
+                handleChange(e);
+                errorSetting(e);
+              }}
+            >
+              <option defaultValue={"DEFAULT"}>Category</option>
+              {cat.map((el, i) => (
+                <option key={i}>{el.name}</option>
+              ))}
+            </select>
+            <div className={F.errorStock}>
+              {error.category && <span>{error.category}</span>}
+            </div>
+          </div>
+
+          <div className={F.category}>
             <label>Stock: </label>
             <input
               type="number"
@@ -193,9 +253,7 @@ export default function Form() {
               onBlur={e => errorSetting(e)}
               onChange={e => handleChange(e)}
             />
-            <div className={F.errorStock}>
-              {error.stock && <span>{error.stock}</span>}
-            </div>
+            <div>{error.stock && <span>{error.stock}</span>}</div>
           </div>
           <div className={F.price}>
             <label>Price: </label>
@@ -219,7 +277,10 @@ export default function Form() {
                 id="description"
                 cols="30"
                 rows="10"
-                // onBlur={e => errorSetting(e)}
+                onBlur={e => {
+                  errorSetting(e);
+                  console.log(error);
+                }}
                 onChange={e => {
                   handleChange(e);
                   errorSetting(e);

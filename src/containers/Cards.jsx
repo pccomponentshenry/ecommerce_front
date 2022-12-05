@@ -2,14 +2,12 @@ import React from "react";
 import CardComponent from "../components/Card";
 import C from "../styles/Cards.module.css";
 import Pagination from "../components/Pagination";
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { allProducts } from "../redux/actions/index.js"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { allProducts } from "../redux/actions/index.js";
 import { Link } from "react-router-dom";
 
-
 export default function Cards() {
-
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setitemsPerPage] = useState(8);
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(6);
@@ -18,12 +16,12 @@ export default function Cards() {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  let dispatch = useDispatch()
-  let products = useSelector((state) => state.products)
+  let dispatch = useDispatch();
+  let products = useSelector(state => state.products);
 
   useEffect(() => {
-    dispatch(allProducts())
-  }, [])
+    dispatch(allProducts());
+  }, []);
 
   const currentItems =
     products.length > 2
@@ -33,13 +31,12 @@ export default function Cards() {
   return (
     <div className={C.cardContainer}>
       {currentItems.length > 0 &&
-        currentItems.map((el) => (
+        currentItems.map(el => (
           <Link
             to={`/${el.id}`}
             style={{ textDecoration: "none", color: "white" }}
           >
             <CardComponent
-
               key={el.id}
               img={el.img}
               title={el.title}
