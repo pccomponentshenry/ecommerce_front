@@ -4,7 +4,8 @@ import {
   //   GET_PRODUCT,
   //   SEARCH_PRODUCT,
   //   ORDER_BY_NAME,
-  GET_BRANDS, ALL_PRODUCTS
+  GET_BRANDS, ALL_PRODUCTS,
+  GET_PRODUCTS_BY_NAME
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -33,4 +34,19 @@ export function getBrands() {
 
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
+}
+
+export function getProductsByName(name){
+  return async function (dispatch){
+    try{
+        var json = await axios.get (`http://localhost:3001/products?name=${name}`);
+        return dispatch({
+            type: GET_PRODUCTS_BY_NAME,
+            payload: json.data,  
+        })
+    } catch (error){
+        console.log (error.message)
+        return alert('Sorry, product not found, try again.')
+    }
+};
 }
