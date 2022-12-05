@@ -58,6 +58,9 @@
     padding: 3px;
     border-radius: 5px;
 }
+.searchBar input{
+    color: #fff;
+}
 .loginText{
     color: #fff;
     font-weight: 200;

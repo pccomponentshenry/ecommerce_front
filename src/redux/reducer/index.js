@@ -5,7 +5,9 @@ import {
   ORDER_BY_NAME,
   ALL_PRODUCTS,
   GET_BRANDS,
+  GET_PRODUCTS_BY_NAME,
   GET_CATEGORIES
+
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
@@ -68,6 +70,13 @@ function rootReducer(state = initialState, action) {
             }
             return 0;
           });
+
+    case GET_PRODUCTS_BY_NAME:
+      return{
+          ...state,
+          products: action.payload,
+            };
+
     default:
       return state
 
