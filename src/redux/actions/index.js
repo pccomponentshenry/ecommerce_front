@@ -4,8 +4,9 @@ import {
   //   GET_PRODUCT,
   //   SEARCH_PRODUCT,
   //   ORDER_BY_NAME,
-  GET_BRANDS, ALL_PRODUCTS,
-  GET_PRODUCTS_BY_NAME
+
+  GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES
+
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -29,6 +30,13 @@ export function getBrands() {
   return async (dispatch) => {
     const res = await axios.get(`${URL}/brands`);
     return dispatch({ type: GET_BRANDS, payload: res.data });
+  };
+}
+
+export function getCategories() {
+  return async (dispatch) => {
+    const res = await axios.get(`${URL}/categories`);
+    return dispatch({ type: GET_CATEGORIES, payload: res.data });
   };
 }
 

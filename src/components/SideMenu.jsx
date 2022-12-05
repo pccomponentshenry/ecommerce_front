@@ -1,34 +1,37 @@
 import React, { useEffect } from "react";
 import S from "../styles/SideMenu.module.css";
-import { useDispatch } from "react-redux";
-import { getBrands } from "../redux/actions/index";
+import { useDispatch, useSelector } from "react-redux"
+import { getBrands, getCategories } from "../redux/actions/index";
 
 export default function SideMenu() {
   const dispatch = useDispatch();
-  //const brand = useSelector((state) => state.brand);
+  const brand = useSelector((state) => state.brands);
+  const cat = useSelector((state) => state.categories);
+
   //console.log(brand);
   useEffect(() => {
     dispatch(getBrands());
+    dispatch(getCategories());
   }, []);
 
-  const category = [
-    "Keyboards",
-    "Mouse",
-    "Switches",
-    "Mouse Pads",
-    "Batteries",
-    "Chargers",
-  ];
+  // const category = [
+  //   "Keyboards",
+  //   "Mouse",
+  //   "Switches",
+  //   "Mouse Pads",
+  //   "Batteries",
+  //   "Chargers",
+  // ];
   return (
     <div className={S.Container}>
       <div className={S.subContainer}>
         <div className={S.categoryContainer}>
           <hr />
           <h6>Categories</h6>
-          {category.map((el, i) => (
+          {cat.map((el, i) => (
             <>
               <div key={i}>
-                <span>{el}</span>
+                <span>{el.name}</span>
                 <br />
               </div>
             </>
@@ -40,16 +43,16 @@ export default function SideMenu() {
             <div className={S.select}>
               <select name="Filter" defaultValue={"DEFAULT"}>
                 <option defaultValue={"DEFAULT"}>Category</option>
-                {category.map((el, i) => (
-                  <option key={i}>{el}</option>
+                {cat.map((el, i) => (
+                  <option key={i}>{el.name}</option>
                 ))}
               </select>
             </div>
             <div className={S.select}>
               <select name="Filter" defaultValue={"DEFAULT"}>
                 <option defaultValue={"DEFAULT"}>Brand</option>
-                {category.map((el, i) => (
-                  <option key={i}>{el}</option>
+                {brand.map((el, i) => (
+                  <option key={i}>{el.name}</option>
                 ))}
               </select>
             </div>
