@@ -5,6 +5,7 @@ import Cards from "../containers/Cards";
 import SideMenu from "../components/SideMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { allProducts, getFiltered, clearState } from "../redux/actions";
+import NotFound from "../alerts/NotFound";
 
 export default function Home() {
 
@@ -27,7 +28,9 @@ export default function Home() {
         <div className={H.CardsAndMenuContainer}>
           <SideMenu />
           <Cards />
+          
         </div>
+        
       </div>
     </>
   );
