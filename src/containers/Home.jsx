@@ -12,6 +12,7 @@ import {
 } from "../redux/actions";
 import { useState } from "react";
 import search from "../Images/Search.png";
+import NotFound from "../alerts/NotFound";
 
 export default function Home() {
   const [cat, setCat] = useState("");

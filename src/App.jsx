@@ -20,9 +20,8 @@ function App() {
           <Route exact path="/categories" element={<Categories />} />
           <Route exact path="/latest" element={<Latest />} />
           <Route exact path="/sell" element={<Form />} />
-          <Route exact path="/detail/1" element={<Detail />} />
-          <Route exact path="/sell" element={<Form />} />
-          <Route exact path="/:id" element={<Detail />} />
+          <Route exact path="/detail/:id" element={<Detail />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
