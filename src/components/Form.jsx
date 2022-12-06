@@ -184,11 +184,10 @@ export default function Form() {
       <form onSubmit={e => handleSubmit(e)} autoComplete="off">
         <div className={F.titleCont}>
           <h5>New product</h5>
+          <h6>Add images of your product</h6>
         </div>
 
         <div className={F.container}>
-          <h6>Add images of your product</h6>
-
           <input
             type="file"
             //HAY QUE ASIGNAR UN VALUE VÁLIDO PARA BORRAR EL ESTADO? O SE PISA CON EL PRÓXIMO ARCHIVO.
@@ -262,7 +261,7 @@ export default function Form() {
             </div>
           </div>
 
-          <div className={F.stock}>
+          <div className={F.category}>
             <select
               name="category"
               defaultValue={"DEFAULT"}
@@ -286,19 +285,6 @@ export default function Form() {
               {error.category && <span>{error.category}</span>}
             </div>
           </div>
-
-          <div className={F.category}>
-            <label>Stock: </label>
-            <input
-              value={input.stock}
-              type="number"
-              name="stock"
-              min="0"
-              onBlur={e => errorSetting(e)}
-              onChange={e => handleChange(e)}
-            />
-            <div>{error.stock && <span>{error.stock}</span>}</div>
-          </div>
           <div className={F.price}>
             <label>Price: </label>
             <input
@@ -312,6 +298,19 @@ export default function Form() {
             <div className={F.errorPrice}>
               {error.price && <span>{error.price}</span>}
             </div>
+          </div>
+
+          <div className={F.stock}>
+            <label>Stock: </label>
+            <input
+              value={input.stock}
+              type="number"
+              name="stock"
+              min="0"
+              onBlur={e => errorSetting(e)}
+              onChange={e => handleChange(e)}
+            />
+            <div>{error.stock && <span>{error.stock}</span>}</div>
           </div>
 
           <div className={F.descriptionCont}>
@@ -335,6 +334,7 @@ export default function Form() {
             </div>
             {error.brand && <span>{error.description}</span>}
           </div>
+
           <div className={F.formBtn}>
             <button
               type="submit"

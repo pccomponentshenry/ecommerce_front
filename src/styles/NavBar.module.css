@@ -1,112 +1,119 @@
-.container{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    position: fixed;
-    z-index: 900;
-  
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: fixed;
+  z-index: 900;
 }
-.container.active{
-    background-color: #310C3F;
-    z-index: 900;
-    transition: 0.15s ease-in-out;
- 
+.container.active {
+  background-color: #310c3f;
+  z-index: 900;
+  transition: 0.15s ease-in-out;
 }
-.logoAndMenu{
-    display: flex;
-    height: 60px;
-    width: 400px;
-    position: relative;
-    right: 80px;
-    top: 10px;
-  
+.logoAndMenu {
+  display: flex;
+  height: 60px;
+  width: 400px;
+  position: relative;
+  right: 80px;
+  top: 10px;
 }
-.logoAndMenu h1{
-    color: #fff;
-    font-size: 30px;
-    text-transform: uppercase;
-    cursor: pointer;
+.logoAndMenu h1 {
+  color: #fff;
+  font-size: 30px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
-.navList{
-    display: flex;
-    align-items: center;
+.navList {
+  display: flex;
+  align-items: center;
 }
 
-.navList li{
-    list-style: none;
-    margin-left: 10px;
-    margin-right: 10px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    cursor: pointer;
+.navList li {
+  list-style: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
 }
-.navList li:hover{
-    color:#62AAA1;
-    transition: 0.15s ease-in-out;
-}
-
-.searchAndCart{
-    display: flex;
-    align-items: center;
-    position: relative;
-    left: 60px;
-}
-.searchBar{
-    border: solid 1px gray;
-    padding: 3px;
-    border-radius: 5px;
-}
-.searchBar input{
-    color: #fff;
-}
-.loginText{
-    color: #fff;
-    font-weight: 200;
-    font-size: 12px;
-    margin-left: 15px;
-    margin-top: 20px;
-}
-.cart{
-    margin-left: 15px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-.mode{
-    height: 15px;
-    position: relative;
-    top: 7px;
-    left: 20px;
-    cursor: pointer;
-}
-switch{
-    rotate: 180deg;
+.navList li:hover {
+  color: #62aaa1;
+  transition: 0.15s ease-in-out;
 }
 
-.searchIcon, .cart{
-    width: 25px;
-    padding-left: 5px;
-    position: relative;
-    bottom: 3px;
+.searchAndCart {
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 60px;
 }
-.searchIcon{
-    border-left: solid 1px gray;
+.searchBar {
+  border: solid 1px gray;
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 5px;
+  border-radius: 5px;
 }
-.searchAndCart input{
-    background-color: transparent;
-    border: none;
-    height: 15px;
+.searchBar input {
+  color: #fff;
+  outline: none;
 }
-.line{
-    width: 100%;
-    position: absolute;
-    margin-top: 3px;
-    z-index:-999;
+.loginText {
+  color: #fff;
+  font-weight: 200;
+  font-size: 12px;
+  margin-left: 15px;
+  margin-top: 20px;
+  cursor: pointer;
 }
-hr{
-   position: relative;
-   top: 40px;
-   border: none;
-   border: solid 1px #fff;
+.cart {
+  margin-left: 15px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.mode {
+  height: 15px;
+  position: relative;
+  top: 7px;
+  left: 20px;
+  cursor: pointer;
+}
+switch {
+  rotate: 180deg;
+}
+
+.searchIcon,
+.cart {
+  width: 25px;
+  padding-left: 5px;
+  position: relative;
+  bottom: 3px;
+}
+.searchIcon {
+  border-left: solid 1px gray;
+  bottom: 0px;
+}
+.searchBar button {
+  background-color: transparent;
+  border: none;
+}
+.searchAndCart input {
+  background-color: transparent;
+  border: none;
+  height: 15px;
+}
+.line {
+  width: 100%;
+  position: absolute;
+  margin-top: 3px;
+  z-index: -999;
+}
+hr {
+  position: relative;
+  top: 40px;
+  border: none;
+  border: solid 1px #fff;
 }

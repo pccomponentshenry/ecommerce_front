@@ -35,6 +35,7 @@ export default function Cards() {
   //   : products.length > 2
   //     ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
   //     : products;
+
   const data = filtered.length;
   return (
     <div className={C.cardContainer}>

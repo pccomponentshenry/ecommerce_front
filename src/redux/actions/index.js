@@ -11,9 +11,9 @@ import {
   GET_FILTERED,
   SET_ERROR,
   CLEAR_STATE,
+  GET_PRODUCTS_BY_NAME,
   FILTER_CATEGORIES,
-  GET_PRODUCTS_BY_NAME
-
+  FILTER_BRANDS,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -65,6 +65,9 @@ export function getProductDetail(id) {
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
 }
+export async function filterBrands() {}
+
+export async function filterCategories() {}
 
 export function getProductsByName(name) {
   return async function (dispatch) {
@@ -95,7 +98,7 @@ export function filterProducts(category, brand) {
 
   return async function (dispatch) {
     try {
-      var json = await axios.get(`${URL}/products/filter/${urlFilter}`);
+      const json = await axios.get(`${URL}/products/filter/${urlFilter}`);
       return dispatch({ type: GET_FILTERED, payload: json.data });
     } catch (e) {
       return dispatch({ type: SET_ERROR, payload: e });
