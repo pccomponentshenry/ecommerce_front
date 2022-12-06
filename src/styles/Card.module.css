@@ -4,22 +4,29 @@
     padding: 20px ;
 }
 
-
+.imgContainer{
+    background-color: white;
+    width: 230px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 .image{
     height: fit-content;
-    width: 150px;
+    width: 180px;
+    height: 180px;
     cursor:pointer;
     border-radius:10px 10px 0px 0px ;
 }
 .square{
-    
     border-radius: 0px 0px 10px 10px;
     border: solid 1px #62AAA1;
     padding: 5px;
     display: flex;
     flex-direction: column;
-    width: 150px;
-    height: 140px;
+    width: 230px;
+    justify-content: center;
+    height: 180px;
     cursor: pointer;
 }
 
@@ -29,7 +36,7 @@
     border: solid 1px transparent;
 }
 .nameCont{
-    width: 100px;
+    width: 90%;
     float: left;
     display: flex;
 }

@@ -9,7 +9,6 @@ import {
   FILTER_CATEGORIES,
   FILTER_BRANDS,
   GET_PRODUCTS_BY_NAME,
-  GET_CATEGORIES
 
 } from "../actions/actionNames"; //Para las action creators
 

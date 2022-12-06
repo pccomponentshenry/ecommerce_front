@@ -2,11 +2,8 @@ import axios from "axios";
 
 import {
   //   SEARCH_PRODUCT,
-  //   ORDER_BY_NAME,
-
-  GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES,
-  FILTER_CATEGORIES, FILTER_BRANDS
-
+  //   
+  FILTER_CATEGORIES, FILTER_BRANDS,
   GET_PRODUCT, GET_BRANDS, ALL_PRODUCTS, GET_CATEGORIES
 
 } from "../actions/actionNames";
@@ -66,6 +63,7 @@ export function filterBrands(filter) {
       type: FILTER_BRANDS,
       payload: filter
   }
+}
 
 export function getProductsByName(name){
   return async function (dispatch){
@@ -80,5 +78,4 @@ export function getProductsByName(name){
         return alert('Sorry, product not found, try again.')
     }
 };
-
 }

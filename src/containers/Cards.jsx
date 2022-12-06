@@ -42,7 +42,7 @@ export default function Cards() {
 
               key={el.id}
               img={el.img}
-              title={el.title}
+              title={el.title.substr(0,20)+'...'}
               price={el.price}
               brand={el.brand.name}
             />
