@@ -2,7 +2,6 @@ import axios from "axios";
 
 import {
   //   SEARCH_PRODUCT,
-
   //   ORDER_BY_NAME,
   GET_PRODUCT,
   GET_BRANDS,
@@ -15,7 +14,6 @@ import {
   GET_PRODUCTS_BY_NAME,
   FILTER_CATEGORIES,
   FILTER_BRANDS,
-
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -67,9 +65,9 @@ export function getProductDetail(id) {
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
 }
-export async function filterBrands() {}
+export async function filterBrands() { }
 
-export async function filterCategories() {}
+export async function filterCategories() { }
 
 export function getProductsByName(name) {
   return async function (dispatch) {
@@ -86,18 +84,9 @@ export function getProductsByName(name) {
   };
 }
 
-export function filterProducts(category, brand) {
-  let urlFilter = '?'
-  if (category && brand) {
-    urlFilter += `category=${category}&brand=${brand}`;
-  }
-  else if (!category && brand) {
-    urlFilter += `brand=${brand}`;
-  }
-  else if (!brand && category) {
-    urlFilter += `category=${category}`;
-  }
-}
+export function filterProducts(category, brand, price) {
+
+  let urlFilter = `?category=${category}&brand=${brand}&min_price=${price.min}&max_price=${price.max}`;
 
   return async function (dispatch) {
     try {
@@ -106,7 +95,6 @@ export function filterProducts(category, brand) {
     } catch (e) {
       return dispatch({ type: SET_ERROR, payload: e });
     }
-
   };
 }
 
