@@ -12,7 +12,7 @@ import {
   CLEAR_STATE,
   FILTER_CATEGORIES,
   FILTER_BRANDS,
-
+  SEARCH_BAR_FILTER,
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {
@@ -23,6 +23,7 @@ const initialState = {
   brand: [],
   error: [],
   filtered: [],
+  searchBar: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -55,6 +56,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         filtered: action.payload,
       };
+    case SEARCH_BAR_FILTER:
+      return {
+        ...state,
+        searchBar: action.payload,
+      };
     case SEARCH_PRODUCT:
       return {
         ...state,
@@ -74,14 +80,14 @@ function rootReducer(state = initialState, action) {
       let sortedArr =
         action.payload === "asc"
           ? state.product.sort(function (a, b) {
-            if (a.name > b.name) {
-              return 1;
-            }
-            if (b.name > a.name) {
-              return -1;
-            }
-            return 0;
-          })
+              if (a.name > b.name) {
+                return 1;
+              }
+              if (b.name > a.name) {
+                return -1;
+              }
+              return 0;
+            })
           : state.product.sort(function (a, b) {
               if (a.name > b.name) {
                 return -1;

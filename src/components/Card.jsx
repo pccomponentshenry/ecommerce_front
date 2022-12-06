@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 function CardComponent(props) {
   return (
     <>
-      {/* <div className={C.cardContainer}>
+      <div className={C.cardContainer}>
         <div className={C.imgContainer}>
           <img src={props.img} alt="" className={C.image} />
         </div>
@@ -23,9 +23,9 @@ function CardComponent(props) {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
-      <Card style={{ width: "12rem" }}>
+      {/* <Card style={{ width: "12rem" }}>
         <Card.Img variant="top" src={props.img} />
         <Card.Body>
           <Card.Title
@@ -41,7 +41,7 @@ function CardComponent(props) {
           </Card.Text>
           <Button variant="dark">Add to cart</Button>
         </Card.Body>
-      </Card>
+      </Card> */}
     </>
   );
 }

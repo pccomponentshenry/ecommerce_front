@@ -6,7 +6,7 @@ import mode from "../Images/mode.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getProductsByName, allProducts } from "../redux/actions";
+import { getProductsByName } from "../redux/actions";
 export default function Nav() {
   const [nav, setNav] = useState(false);
   const dispatch = useDispatch();
@@ -58,20 +58,6 @@ export default function Nav() {
         </div>
 
         <div className={N.searchAndCart}>
-          <div className={N.searchBar}>
-            <input
-              type="text"
-              placeholder="Search"
-              id="name"
-              autoComplete="off"
-              value={name}
-              onChange={e => handleInputChange(e)}
-            />
-            <button onClick={e => handleSubmit(e)}>
-              <img className={N.searchIcon} src={search} />{" "}
-            </button>
-            {/* <img src={search} alt="search icon" className={N.searchIcon} /> */}
-          </div>
           <h6 className={N.loginText}>Login/Register</h6>
           <Link to="/cart">
             <img src={cart} className={N.cart} alt="cart icon" />

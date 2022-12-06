@@ -2,48 +2,45 @@
   border-radius: 10px;
   padding: 10px;
   width: 30%;
-  border: solid 1px #62aaa1;
+  /* border: solid 1px #62aaa1; */
   display: flex;
   flex-direction: column;
 }
 
-
-.imgContainer{
-    background-color: white;
-    width: 230px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
+.imgContainer {
+  background-color: white;
+  width: 230px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
-.image{
-    height: fit-content;
-    width: 180px;
-    height: 180px;
-    cursor:pointer;
-    border-radius:10px 10px 0px 0px ;
+.image {
+  height: fit-content;
+  width: 180px;
+  height: 180px;
+  cursor: pointer;
+  border-radius: 10px 10px 0px 0px;
 }
-.square{
-    border-radius: 0px 0px 10px 10px;
-    border: solid 1px #62AAA1;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    width: 230px;
-    justify-content: center;
-    height: 180px;
-    cursor: pointer;
-
+.square {
+  border-radius: 0px 0px 10px 10px;
+  border: solid 1px #62aaa1;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 230px;
+  justify-content: center;
+  height: 180px;
+  cursor: pointer;
 }
 .nameCont {
   float: left;
   display: flex;
 }
 
-.nameCont{
-    width: 90%;
-    float: left;
-    display: flex;
-
+.nameCont {
+  width: 90%;
+  float: left;
+  display: flex;
 }
 .brand {
   color: #fff;

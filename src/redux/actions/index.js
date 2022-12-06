@@ -14,6 +14,7 @@ import {
   GET_PRODUCTS_BY_NAME,
   FILTER_CATEGORIES,
   FILTER_BRANDS,
+  SEARCH_BAR_FILTER,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -65,9 +66,9 @@ export function getProductDetail(id) {
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
 }
-export async function filterBrands() { }
+export async function filterBrands() {}
 
-export async function filterCategories() { }
+export async function filterCategories() {}
 
 export function getProductsByName(name) {
   return async function (dispatch) {
@@ -83,9 +84,10 @@ export function getProductsByName(name) {
     }
   };
 }
-
+export const searchBarFilter = payload => {
+  return { type: SEARCH_BAR_FILTER, payload };
+};
 export function filterProducts(category, brand, price) {
-
   let urlFilter = `?category=${category}&brand=${brand}&min_price=${price.min}&max_price=${price.max}`;
 
   return async function (dispatch) {
