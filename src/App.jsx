@@ -17,13 +17,12 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          
           <Route exact path="/" element={<Home />} />
           <Route exact path="/categories" element={<Categories />} />
-          <Route exact path="/latest" element={<Latest />} />          
+          <Route exact path="/latest" element={<Latest />} />
           <Route exact path="/sell" element={<Form />} />
-          <Route exact path="/detail/:id" element={<Detail />} />
-          <Route path="*" element={<NotFound />} />
+          <Route exact path="/:id" element={<Detail />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

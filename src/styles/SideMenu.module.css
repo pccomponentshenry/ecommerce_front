@@ -1,21 +1,20 @@
 .Container {
   background: rgb(0, 0, 0);
-  background: linear-gradient(
-    28deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(39, 39, 39, 1) 100%
-  );
+  background: linear-gradient(28deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(39, 39, 39, 1) 100%);
   width: 250px;
   height: 170vh;
   float: left;
-
   top: 378px;
 }
+
 .categoryContainer {
   width: 150px;
   height: 100vh;
   margin-top: 40px;
 }
+
 .Container h6 {
   color: #62aaa1;
   text-transform: uppercase;
@@ -28,6 +27,7 @@
   font-weight: 200;
   font-size: 14px;
 }
+
 .catCont {
   height: 20px;
 }
@@ -48,6 +48,7 @@ select {
   font-size: 14px;
   width: 150px;
 }
+
 option {
   color: #000;
 }
@@ -72,7 +73,47 @@ option {
   background-color: #62aaa1;
   color: #111;
 }
+
 hr {
   border: none;
   border-bottom: 1px solid #fff;
+}
+
+.clearFilters {
+  width: 150px;
+  /* height: 100vh; */
+  margin-top: 40px;
+}
+
+.sharedInput {
+  /* margin-top: 30px; */
+  color: #62aaa1;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.sharedInput span {
+  color: #fff;
+  text-transform: none;
+  font-size: 10px;
+  font-weight: 200;
+  position: relative;
+  bottom: 5px;
+  text-decoration: none;
+}
+
+.inputSmall {
+  margin-top: 10px;
+  display: inline;
+  width: 30%;
+  height: 25px;
+  margin-bottom: 1px;
+}
+
+.inputRight {
+  margin-left: 10%;
+}
+
+.sharedInput button {
+  margin-left: 15px;
 }
