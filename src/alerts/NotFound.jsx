@@ -7,8 +7,7 @@ const NotFound = () => {
     <>
       <div className={S.imageBackground}></div>
     </>
-
-  )
-}
+  );
+};
 
 export default NotFound;

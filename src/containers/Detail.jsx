@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../redux/actions";
 import { useEffect } from "react";
+import NotFound from "../alerts/NotFound";
 
 export default function Detail() {
   const params = useParams();

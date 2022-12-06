@@ -45,7 +45,7 @@ export default function Cards() {
         <>
           {currentItems.map(el => (
             <Link
-              to={`/${el.id}`}
+              to={`/detail/${el.id}`}
               style={{ textDecoration: "none", color: "white" }}
             >
               <CardComponent
