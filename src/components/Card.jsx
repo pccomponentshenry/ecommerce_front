@@ -13,8 +13,9 @@ function CardComponent(props) {
         <div className={C.square}>
           <div className={C.nameCont}>
             <h6 className={C.name}>{props.title}</h6>
+            <h6 className={C.brand}>{props.brand}</h6>
           </div>
-          <h6 className={C.brand}>{props.brand}</h6>
+
           <div className={C.bottomCont}>
             <h6 className={C.price}>$ {props.price}</h6>
             <div className={C.btnAndFav}>

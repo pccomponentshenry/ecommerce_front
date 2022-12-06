@@ -29,19 +29,15 @@
   flex-direction: column;
   width: 230px;
   justify-content: center;
-  height: 180px;
+  height: 130px;
   cursor: pointer;
-}
-.nameCont {
-  float: left;
-  display: flex;
 }
 
 .nameCont {
   width: 90%;
   float: left;
-  display: flex;
 }
+
 .brand {
   color: #fff;
   font-weight: 200;
@@ -80,7 +76,7 @@
 }
 
 .bottomCont {
-  width: 140px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;

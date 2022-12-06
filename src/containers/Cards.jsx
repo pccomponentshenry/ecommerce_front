@@ -10,7 +10,7 @@ import NoProducts from "../alerts/NoProducts";
 
 export default function Cards(props) {
   // const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setitemsPerPage] = useState(8);
+  const [itemsPerPage, setitemsPerPage] = useState(6);
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(6);
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
   const [pageNumberLimit, setpageNumberLimit] = useState(6);

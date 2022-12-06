@@ -62,12 +62,13 @@ export default function SideMenu(props) {
   };
 
   const handlePriceSubmit = () => {
-    console.log(price);
     dispatch(filterProducts(cat, brand, price));
   };
 
   const clearFilters = () => {
     dispatch(getFiltered(products));
+    props.setBrand("");
+    props.setCat("");
     document.querySelectorAll("input[type=text]").forEach(element => {
       element.value = "";
     });
