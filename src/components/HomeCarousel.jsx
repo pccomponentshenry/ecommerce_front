@@ -31,7 +31,11 @@ function HomeCarousel() {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className={HC.image} src={VR} alt="Third slide" />
+          <img
+            className={HC.image}
+            src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670274363/cqws5x8n/gamer_ppmlxi.jpg"
+            alt="Third slide"
+          />
 
           <Carousel.Caption>
             <div className={HC.caption}>

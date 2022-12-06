@@ -6,9 +6,9 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../redux/actions";
 import { useEffect } from "react";
+import NotFound from "../alerts/NotFound";
 
 export default function Detail() {
-
   const params = useParams();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
@@ -20,9 +20,9 @@ export default function Detail() {
   //TODO: change hardcoded data
   const owner = [
     {
-      name: "Ricardo Fort",
+      name: "Usuario 1",
       profilePic: [
-        "https://elcordillerano1.cdn.net.ar/252/elcordillerano/images/01/02/09/1020965_365fc4b732ec9f9283a8eddbadc8115e92650b2e92217715fe312e6fa7b90d82/sm.webp",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
       ],
     },
   ];

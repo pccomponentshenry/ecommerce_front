@@ -6,63 +6,45 @@ export default function Reviews() {
   const reviews = [
     {
       profilePic: [
-        "https://www.cronica.com.ar/__export/1653704488065/sites/cronica/img/2022/05/27/ricardo_fort_3_crop1653704384472.jpg_530079780.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
       ],
-      name: "Mariano Martinez",
-      review: "Llegó todo bien, el producto es muy bueno",
+      name: "Usuario 1",
+      review: "A really good product!",
     },
     {
       profilePic: [
-        "https://previews.123rf.com/images/leventegyori/leventegyori1506/leventegyori150600386/41665163-sonriendo-feliz-retrato-se%C3%B1ora-mayor.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
       ],
-      name: "Pepita Josefa",
-      review:
-        "El producto dejó mucho que desear porque adpPODSKP jdoij iaojd ijaojsdoj aosjidoij asjojsa oisjodjasjd ojosjdoa oijsoasjdo ",
+      name: "Usuario 2",
+      review: "Can't wait to try it out!",
     },
     {
       profilePic: [
-        "https://www.cronica.com.ar/__export/1653704488065/sites/cronica/img/2022/05/27/ricardo_fort_3_crop1653704384472.jpg_530079780.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
       ],
-      name: "Mariano Martinez",
-      review: "Llegó todo bien, el producto es muy bueno",
+      name: "Usuario 3",
+      review: "A really good product!",
     },
     {
       profilePic: [
-        "https://previews.123rf.com/images/leventegyori/leventegyori1506/leventegyori150600386/41665163-sonriendo-feliz-retrato-se%C3%B1ora-mayor.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
       ],
-      name: "Pepita Josefa",
-      review:
-        "El producto dejó mucho que desear porque adpPODSKP jdoij iaojd ijaojsdoj aosjidoij asjojsa oisjodjasjd ojosjdoa oijsoasjdo ",
+      name: "Usuario 4",
+      review: "Can't wait to try it out!",
     },
     {
       profilePic: [
-        "https://www.cronica.com.ar/__export/1653704488065/sites/cronica/img/2022/05/27/ricardo_fort_3_crop1653704384472.jpg_530079780.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
       ],
-      name: "Mariano Martinez",
-      review: "Llegó todo bien, el producto es muy bueno",
+      name: "Usuario 5",
+      review: "A really good product!",
     },
     {
       profilePic: [
-        "https://previews.123rf.com/images/leventegyori/leventegyori1506/leventegyori150600386/41665163-sonriendo-feliz-retrato-se%C3%B1ora-mayor.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
       ],
-      name: "Pepita Josefa",
-      review:
-        "El producto dejó mucho que desear porque adpPODSKP jdoij iaojd ijaojsdoj aosjidoij asjojsa oisjodjasjd ojosjdoa oijsoasjdo ",
-    },
-    {
-      profilePic: [
-        "https://www.cronica.com.ar/__export/1653704488065/sites/cronica/img/2022/05/27/ricardo_fort_3_crop1653704384472.jpg_530079780.jpg",
-      ],
-      name: "Mariano Martinez",
-      review: "Llegó todo bien, el producto es muy bueno",
-    },
-    {
-      profilePic: [
-        "https://previews.123rf.com/images/leventegyori/leventegyori1506/leventegyori150600386/41665163-sonriendo-feliz-retrato-se%C3%B1ora-mayor.jpg",
-      ],
-      name: "Pepita Josefa",
-      review:
-        "El producto dejó mucho que desear porque adpPODSKP jdoij iaojd ijaojsdoj aosjidoij asjojsa oisjodjasjd ojosjdoa oijsoasjdo ",
+      name: "Usuario 6",
+      review: "Can't wait to try it out!",
     },
   ];
   return (
