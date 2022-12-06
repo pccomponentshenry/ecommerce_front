@@ -66,9 +66,9 @@ export function getProductDetail(id) {
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
 }
-export async function filterBrands() {}
+export async function filterBrands() { }
 
-export async function filterCategories() {}
+export async function filterCategories() { }
 
 export function getProductsByName(name) {
   return async function (dispatch) {

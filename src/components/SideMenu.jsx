@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import S from "../styles/SideMenu.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,8 @@ import {
   getFiltered,
 } from "../redux/actions/index";
 
-export default function SideMenu(props) {
+export default function SideMenu() {
+
   const dispatch = useDispatch();
   const brands = useSelector(state => state.brands);
   const categories = useSelector(state => state.categories);
@@ -23,32 +24,12 @@ export default function SideMenu(props) {
 
   const handleSort = event => {
     const ascDesc = event.target.id;
-    const sorted =
-      !filtered.length > 0
-        ? [...products].sort((a, b) => {
-            if (a.price === null) return 1;
-            else if (b.price === null) return -1;
-            else if (a.price === b.price) return 0;
-            return ascDesc === "asc"
-              ? a.price > b.price
-                ? 1
-                : -1
-              : a.price < b.price
-              ? 1
-              : -1;
-          })
-        : [...filtered].sort((a, b) => {
-            if (a.price === null) return 1;
-            else if (b.price === null) return -1;
-            else if (a.price === b.price) return 0;
-            return ascDesc === "asc"
-              ? a.price > b.price
-                ? 1
-                : -1
-              : a.price < b.price
-              ? 1
-              : -1;
-          });
+    const sorted = [...filtered].sort((a, b) => {
+      if (a.price === null) return 1;
+      else if (b.price === null) return -1;
+      else if (a.price === b.price) return 0;
+      return ascDesc === 'asc' ? (a.price > b.price ? 1 : -1) : (a.price < b.price ? 1 : -1);
+    });
     dispatch(getFiltered(sorted));
   };
 
@@ -62,7 +43,6 @@ export default function SideMenu(props) {
   };
 
   const handlePriceSubmit = () => {
-    console.log(price);
     dispatch(filterProducts(cat, brand, price));
   };
 
@@ -71,6 +51,8 @@ export default function SideMenu(props) {
     document.querySelectorAll("input[type=text]").forEach(element => {
       element.value = "";
     });
+    setBrand("");
+    setCat("");
     setPrice(prev => ({ ...prev, min: 0, max: 100000000 }));
     document.querySelectorAll("select")[0].selectedIndex = 0;
     document.querySelectorAll("select")[1].selectedIndex = 0;
@@ -107,15 +89,14 @@ export default function SideMenu(props) {
               <select
                 name="Filter"
                 id="cat"
-                defaultValue={"DEFAULT"}
+                defaultValue={"default"}
                 onChange={e => {
-                  props.handleFilter(e);
-                  props.setCat(e.target.value);
+                  setCat(e.target.value);
                 }}
               >
-                <option defaultValue={"DEFAULT"}>Category</option>
+                <option defaultValue={"default"} disabled>Category</option>
                 {categories.map((el, i) => (
-                  <option key={i}>{el.name}</option>
+                  <option key={i} value={el.id}>{el.name}</option>
                 ))}
               </select>
             </div>
@@ -124,17 +105,15 @@ export default function SideMenu(props) {
             <div className={S.select}>
               <select
                 name="Filter"
-                defaultValue={"DEFAULT"}
+                defaultValue={"default"}
                 id="brand"
                 onChange={e => {
-                  props.handleFilter(e);
-                  props.setBrand(e.target.value);
+                  setBrand(e.target.value);
                 }}
               >
-                <option defaultValue={"DEFAULT"}>Brand</option>
-
+                <option defaultValue={"default"} disabled>Brand</option>
                 {brands.map((el, i) => (
-                  <option key={i}>{el.name}</option>
+                  <option key={i} value={el.id}>{el.name}</option>
                 ))}
               </select>
             </div>

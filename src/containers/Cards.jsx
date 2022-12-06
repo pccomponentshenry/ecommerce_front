@@ -33,11 +33,20 @@ export default function Cards(props) {
   const currentItems =
     filtered.length > 0
       ? Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem)
-      : searchBar.length > 0
-      ? Array.from(searchBar).slice(indexOfFirstItem, indexOfLastItem)
-      : products.length > 2
-      ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
-      : products;
+      : Array.from(searchBar).slice(indexOfFirstItem, indexOfLastItem)
+  //     : products.length > 2
+  //     ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
+  //     : products;
+
+  // const currentItems =
+  //   filtered.length > 0
+  //     ? Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem)
+  //     : searchBar.length > 0
+  //     ? Array.from(searchBar).slice(indexOfFirstItem, indexOfLastItem)
+  //     : products.length > 2
+  //     ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
+  //     : products;
+
   // filtered.length > 0
   //   ? Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem)
   //   : products.length > 2
@@ -48,8 +57,8 @@ export default function Cards(props) {
     filtered.length > 0
       ? filtered.length
       : searchBar.length > 0
-      ? searchBar.length
-      : products.length;
+        ? searchBar.length
+        : products.length;
   return (
     <div className={C.cardContainer}>
       {currentItems.length === 0 ? (
