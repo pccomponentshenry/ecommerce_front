@@ -39,6 +39,7 @@ export default function Cards() {
   const data = filtered.length;
   return (
     <div className={C.cardContainer}>
+
       {currentItems.length === 0
         ? <NoProducts />
         :
@@ -74,6 +75,7 @@ export default function Cards() {
               setmaxPageNumberLimit={setmaxPageNumberLimit}
               pageNumberLimit={pageNumberLimit}
               setpageNumberLimit={setpageNumberLimit}
+
             />
           </div>
         </>

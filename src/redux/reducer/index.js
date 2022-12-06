@@ -12,6 +12,7 @@ import {
   CLEAR_STATE,
   FILTER_CATEGORIES,
   FILTER_BRANDS,
+
 } from "../actions/actionNames"; //Para las action creators
 
 const initialState = {

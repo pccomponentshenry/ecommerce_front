@@ -6,25 +6,44 @@
   display: flex;
   flex-direction: column;
 }
-.imgContainer {
-  width: 100%;
-  overflow: hidden;
+
+
+.imgContainer{
+    background-color: white;
+    width: 230px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
-.image {
-  max-height: 150px;
-  max-width: 150px;
-  cursor: pointer;
-  border-radius: 10px 10px 0px 0px;
+.image{
+    height: fit-content;
+    width: 180px;
+    height: 180px;
+    cursor:pointer;
+    border-radius:10px 10px 0px 0px ;
+}
+.square{
+    border-radius: 0px 0px 10px 10px;
+    border: solid 1px #62AAA1;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    justify-content: center;
+    height: 180px;
+    cursor: pointer;
+
 }
 .nameCont {
   float: left;
   display: flex;
 }
-.name {
-  color: #fff;
-  font-weight: 400;
-  text-align: left;
-  font-size: 14px;
+
+.nameCont{
+    width: 90%;
+    float: left;
+    display: flex;
+
 }
 .brand {
   color: #fff;

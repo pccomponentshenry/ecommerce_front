@@ -2,6 +2,7 @@ import axios from "axios";
 
 import {
   //   SEARCH_PRODUCT,
+
   //   ORDER_BY_NAME,
   GET_PRODUCT,
   GET_BRANDS,
@@ -14,6 +15,7 @@ import {
   GET_PRODUCTS_BY_NAME,
   FILTER_CATEGORIES,
   FILTER_BRANDS,
+
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -95,6 +97,7 @@ export function filterProducts(category, brand) {
   else if (!brand && category) {
     urlFilter += `category=${category}`;
   }
+}
 
   return async function (dispatch) {
     try {
@@ -103,6 +106,7 @@ export function filterProducts(category, brand) {
     } catch (e) {
       return dispatch({ type: SET_ERROR, payload: e });
     }
+
   };
 }
 
