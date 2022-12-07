@@ -8,6 +8,7 @@ import Detail from "./containers/Detail";
 import NotFound from "./alerts/NotFound";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { populateDB } from "./redux/actions";
+import ShoppingCart from "./containers/ShoppingCart";
 
 function App() {
   populateDB();
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/latest" element={<Latest />} />
           <Route exact path="/sell" element={<Form />} />
           <Route exact path="/detail/:id" element={<Detail />} />
+          <Route exact path="/cart" element={<ShoppingCart />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>

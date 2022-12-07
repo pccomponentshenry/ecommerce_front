@@ -4,7 +4,7 @@ import C from "../styles/Cards.module.css";
 import Pagination from "../components/Pagination";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allProducts, getFiltered } from "../redux/actions/index.js";
+import { allProducts, getFiltered,addToCartAction } from "../redux/actions/index.js";
 import { Link } from "react-router-dom";
 import NoProducts from "../alerts/NoProducts";
 
@@ -37,6 +37,13 @@ export default function Cards() {
   //     : products;
 
   const data = filtered.length;
+
+
+  //agreggo funcion para agregar a carrito
+  const addToCart=(id)=>{
+    console.log(id);
+    dispatch(addToCartAction(id))
+  }
   return (
     <div className={C.cardContainer}>
 
@@ -45,18 +52,20 @@ export default function Cards() {
         :
         <>
           {currentItems.map(el => (
-            <Link
-              to={`/detail/${el.id}`}
-              style={{ textDecoration: "none", color: "white" }}
-            >
+            // <Link
+            //   to={`/detail/${el.id}`}
+            //   style={{ textDecoration: "none", color: "white" }}
+            // >
               <CardComponent
                 key={el.id}
                 img={el.img}
                 title={el.title}
                 price={el.price}
                 brand={el.brand.name}
+                id={el.id}
+                addToCart={addToCart}
               />
-            </Link>
+            // </Link>
           ))}
           <div className={C.pagination}>
             <Pagination
