@@ -14,6 +14,11 @@ import {
   GET_PRODUCTS_BY_NAME,
   FILTER_CATEGORIES,
   FILTER_BRANDS,
+  SEARCH_BAR_FILTER,
+  ADD_TO_CART,
+  REMOVE_ONE_FROM_CART,
+  REMOVE_ALL_FROM_CART,
+  CLEAR_CART
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -83,9 +88,10 @@ export function getProductsByName(name) {
     }
   };
 }
-
+export const searchBarFilter = payload => {
+  return { type: SEARCH_BAR_FILTER, payload };
+};
 export function filterProducts(category, brand, price) {
-
   let urlFilter = `?category=${category}&brand=${brand}&min_price=${price.min}&max_price=${price.max}`;
 
   return async function (dispatch) {
@@ -106,3 +112,30 @@ export const postProduct = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+
+export const addToCartAction=(payload)=>{
+  return{
+    type:ADD_TO_CART,
+    payload
+  }
+}
+
+export const remove_one_from_cart=(payload)=>{
+  return{
+    type:REMOVE_ONE_FROM_CART,
+    payload
+  }
+}
+
+export const remove_all_from_cart=(payload)=>{
+  return{
+    type:REMOVE_ALL_FROM_CART,
+    payload
+  }
+}
+
+export const clear_cart=()=>{
+  return{
+    type:CLEAR_CART,
+  }
+}

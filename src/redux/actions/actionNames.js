@@ -10,6 +10,12 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const SET_ERROR = "  SET_ERROR";
 export const GET_FILTERED = "GET_FILTERED";
 export const CLEAR_STATE = "CLEAR_STATE";
-
+export const SEARCH_BAR_FILTER = "  SEARCH_BAR_FILTER,";
 export const FILTER_CATEGORIES = "FILTER_CATEGORIES";
 export const FILTER_BRANDS = "FILTER_BRANDS";
+
+//actions Cart
+export const ADD_TO_CART="ADD_TO_CART";
+export const REMOVE_ONE_FROM_CART='REMOVE_ONE_FROM_CART';
+export const REMOVE_ALL_FROM_CART='REMOVE_ALL_FROM_CART';
+export const CLEAR_CART='CLEAR_CART';

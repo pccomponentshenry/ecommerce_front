@@ -12,6 +12,11 @@ import {
   CLEAR_STATE,
   FILTER_CATEGORIES,
   FILTER_BRANDS,
+  SEARCH_BAR_FILTER,
+  ADD_TO_CART,
+  REMOVE_ONE_FROM_CART,
+  REMOVE_ALL_FROM_CART,
+  CLEAR_CART
 
 } from "../actions/actionNames"; //Para las action creators
 
@@ -23,6 +28,8 @@ const initialState = {
   brand: [],
   error: [],
   filtered: [],
+  searchBar:[],
+  cart:[]
 };
 
 function rootReducer(state = initialState, action) {
@@ -55,6 +62,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         filtered: action.payload,
       };
+    case SEARCH_BAR_FILTER:
+      return {
+        ...state,
+        searchBar: action.payload,
+      };
     case SEARCH_PRODUCT:
       return {
         ...state,
@@ -74,14 +86,14 @@ function rootReducer(state = initialState, action) {
       let sortedArr =
         action.payload === "asc"
           ? state.product.sort(function (a, b) {
-            if (a.name > b.name) {
-              return 1;
-            }
-            if (b.name > a.name) {
-              return -1;
-            }
-            return 0;
-          })
+              if (a.name > b.name) {
+                return 1;
+              }
+              if (b.name > a.name) {
+                return -1;
+              }
+              return 0;
+            })
           : state.product.sort(function (a, b) {
               if (a.name > b.name) {
                 return -1;
@@ -112,6 +124,42 @@ function rootReducer(state = initialState, action) {
         ...state,
         error: action.payload,
       };
+      //logica carrito
+    case ADD_TO_CART:
+      let newItem=state.products.find(el=>el.id===action.payload)
+      let itemInCart=state.cart.find(item=>item.id===newItem.id)
+      return itemInCart?
+      {
+        ...state,
+        cart:state.cart.map(item=>item.id===newItem.id
+          ?{...item,quantity:item.quantity+1}
+          :item)
+      }
+      :{
+        ...state,
+        cart:[...state.cart,{...newItem,quantity:1}]
+      }
+    case CLEAR_CART:
+      return{
+        ...state,
+        cart:[]
+      }
+    case REMOVE_ALL_FROM_CART:
+      return{
+        ...state,
+        cart:state.cart.filter(item=>item.id!==action.payload)
+      }
+    case REMOVE_ONE_FROM_CART:
+      const itemToDelete=state.cart.find(item=>item.id===action.payload);
+      return itemToDelete.quantity>1?{
+        ...state,
+        cart:state.cart.map(item=>item.id===action.payload?{...item,quantity:item.quantity-1}:item)
+      }
+      :{
+        ...state,
+        cart:state.cart.filter(item=>item.id!==action.payload)
+      }
+      ///
     default:
       return state;
   }
