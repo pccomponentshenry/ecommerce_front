@@ -14,6 +14,7 @@ import {
   GET_PRODUCTS_BY_NAME,
   FILTER_CATEGORIES,
   FILTER_BRANDS,
+  SEARCH_BAR_FILTER,
   ADD_TO_CART,
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
@@ -87,9 +88,10 @@ export function getProductsByName(name) {
     }
   };
 }
-
+export const searchBarFilter = payload => {
+  return { type: SEARCH_BAR_FILTER, payload };
+};
 export function filterProducts(category, brand, price) {
-
   let urlFilter = `?category=${category}&brand=${brand}&min_price=${price.min}&max_price=${price.max}`;
 
   return async function (dispatch) {

@@ -10,7 +10,7 @@ function CardComponent(props) {
 
   return (
     <>
-      {/* <div className={C.cardContainer}>
+      <div className={C.cardContainer}>
         <div className={C.imgContainer}>
           <img src={props.img} alt="" className={C.image} />
         </div>
@@ -22,14 +22,14 @@ function CardComponent(props) {
           <div className={C.bottomCont}>
             <h6 className={C.price}>$ {props.price}</h6>
             <div className={C.btnAndFav}>
-              <button className={C.cardBtn}>Add to cart</button>
+              <button className={C.cardBtn} onClick={()=>props.addToCart(props.id)}>Add to cart</button>
               <span className={C.fav}>♡</span>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
-      <Card style={{ width: "12rem" }}>
+      {/* <Card style={{ width: "12rem" }}>
         <Card.Img variant="top" src={props.img} />
         <Card.Body>
           <Card.Title
@@ -47,7 +47,7 @@ function CardComponent(props) {
           </Card.Text>
           <Button variant="dark" onClick={()=>props.addToCart(props.id)}>Add to cart</Button>
         </Card.Body>
-      </Card>
+      </Card> */}
     </>
   );
 }
