@@ -2,8 +2,12 @@ import C from "../styles/Card.module.css";
 // export default Card;
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 function CardComponent(props) {
+
+  
+
   return (
     <>
       <div className={C.cardContainer}>
@@ -18,7 +22,7 @@ function CardComponent(props) {
           <div className={C.bottomCont}>
             <h6 className={C.price}>$ {props.price}</h6>
             <div className={C.btnAndFav}>
-              <button className={C.cardBtn}>Add to cart</button>
+              <button className={C.cardBtn} onClick={()=>props.addToCart(props.id)}>Add to cart</button>
               <span className={C.fav}>♡</span>
             </div>
           </div>
@@ -31,7 +35,9 @@ function CardComponent(props) {
           <Card.Title
             style={{ color: "#272727", fontWeight: 600, fontSize: "16px" }}
           >
-            {props.title}
+            <Link to={`/detail/${props.id}`} >
+              {props.title}
+            </Link>
           </Card.Title>
           <Card.Text style={{ color: "black", fontWeight: 400 }}>
             {props.brand}
@@ -39,7 +45,7 @@ function CardComponent(props) {
           <Card.Text style={{ color: "black", fontWeight: 400 }}>
             {props.price}
           </Card.Text>
-          <Button variant="dark">Add to cart</Button>
+          <Button variant="dark" onClick={()=>props.addToCart(props.id)}>Add to cart</Button>
         </Card.Body>
       </Card> */}
     </>
