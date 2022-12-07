@@ -10,7 +10,6 @@ import {
 } from "../redux/actions/index";
 
 export default function SideMenu() {
-
   const dispatch = useDispatch();
   const brands = useSelector(state => state.brands);
   const categories = useSelector(state => state.categories);
@@ -28,7 +27,13 @@ export default function SideMenu() {
       if (a.price === null) return 1;
       else if (b.price === null) return -1;
       else if (a.price === b.price) return 0;
-      return ascDesc === 'asc' ? (a.price > b.price ? 1 : -1) : (a.price < b.price ? 1 : -1);
+      return ascDesc === "asc"
+        ? a.price > b.price
+          ? 1
+          : -1
+        : a.price < b.price
+        ? 1
+        : -1;
     });
     dispatch(getFiltered(sorted));
   };
@@ -94,9 +99,13 @@ export default function SideMenu() {
                   setCat(e.target.value);
                 }}
               >
-                <option defaultValue={"default"} disabled>Category</option>
+                <option defaultValue={"default"} disabled>
+                  Category
+                </option>
                 {categories.map((el, i) => (
-                  <option key={i} value={el.id}>{el.name}</option>
+                  <option key={i} value={el.id}>
+                    {el.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -111,9 +120,13 @@ export default function SideMenu() {
                   setBrand(e.target.value);
                 }}
               >
-                <option defaultValue={"default"} disabled>Brand</option>
+                <option defaultValue={"default"} disabled>
+                  Brand
+                </option>
                 {brands.map((el, i) => (
-                  <option key={i} value={el.id}>{el.name}</option>
+                  <option key={i} value={el.id}>
+                    {el.name}
+                  </option>
                 ))}
               </select>
             </div>
@@ -128,13 +141,10 @@ export default function SideMenu() {
                 Lower to higher
               </button>
             </div>
-            <div className={S.clearFilters}>
-              <button onClick={clearFilters}>Clear Filters</button>
-            </div>
 
             <div className={S.sharedInput}>
               <hr />
-              <div className={S.label}>Price</div>
+              <div className={S.label}>Price range</div>
               <input
                 key="min_price"
                 id="min"
@@ -157,6 +167,9 @@ export default function SideMenu() {
                 &#8680;
               </button>
               {priceError && <span>{priceError}</span>}
+            </div>
+            <div className={S.clearFilters}>
+              <button onClick={clearFilters}>Clear Filters</button>
             </div>
           </div>
         </div>
