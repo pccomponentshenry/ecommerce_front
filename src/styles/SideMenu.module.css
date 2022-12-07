@@ -1,10 +1,12 @@
 .Container {
   background: rgb(0, 0, 0);
-  background: linear-gradient(28deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(39, 39, 39, 1) 100%);
+  background: linear-gradient(
+    28deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(39, 39, 39, 1) 100%
+  );
   width: 250px;
-  height: 170vh;
+  height: 100vh;
   float: left;
   top: 378px;
 }
@@ -82,9 +84,20 @@ hr {
 .clearFilters {
   width: 150px;
   /* height: 100vh; */
-  margin-top: 40px;
+  margin-top: 20px;
 }
-
+.clearFilters button {
+  background-color: transparent;
+  border: solid 1px #62aaa1;
+  color: #62aaa1;
+  border-radius: 10px;
+  width: 150px;
+}
+.clearFilters button:hover {
+  transition: 0.15s ease-in-out;
+  background-color: #62aaa1;
+  color: #272727;
+}
 .sharedInput {
   /* margin-top: 30px; */
   color: #62aaa1;
@@ -116,4 +129,24 @@ hr {
 
 .sharedInput button {
   margin-left: 15px;
+  background-color: transparent;
+  color: #62aaa1;
+  border: solid 1px #62aaa1;
+}
+.sharedInput input {
+  background-color: transparent;
+  color: #62aaa1;
+  border: solid 1px #62aaa1;
+  outline: none;
+  font-size: 14px;
+}
+.sharedInput input:hover,
+.sharedInput button:hover {
+  border: solid 1px #fff;
+  transition: 0.15s ease-in-out;
+  color: #fff;
+}
+.sharedInput input::placeholder {
+  position: relative;
+  left: 5px;
 }

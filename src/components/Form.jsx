@@ -83,10 +83,10 @@ export default function Form() {
       !error.img &&
       !error.category &&
       !error.brand &&
-      input.description.length > 0 &&
-      input.image.name
+      input.description.length > 0
     ) {
       setDisable(false);
+      console.log(disable);
     }
 
     return errors;
@@ -261,6 +261,34 @@ export default function Form() {
             </div>
           </div>
 
+          <div className={F.stock}>
+            <label>Stock: </label>
+            <input
+              value={input.stock}
+              type="number"
+              name="stock"
+              min="0"
+              onBlur={e => errorSetting(e)}
+              onChange={e => handleChange(e)}
+            />
+            <div>{error.stock && <span>{error.stock}</span>}</div>
+          </div>
+
+          <div className={F.price}>
+            <label>Price: </label>
+            <input
+              value={input.price}
+              type="number"
+              name="price"
+              min="0"
+              onBlur={e => errorSetting(e)}
+              onChange={e => handleChange(e)}
+            />
+            <div className={F.errorPrice}>
+              {error.price && <span>{error.price}</span>}
+            </div>
+          </div>
+
           <div className={F.category}>
             <select
               name="category"
@@ -285,33 +313,6 @@ export default function Form() {
               {error.category && <span>{error.category}</span>}
             </div>
           </div>
-          <div className={F.price}>
-            <label>Price: </label>
-            <input
-              value={input.price}
-              type="number"
-              name="price"
-              min="0"
-              onBlur={e => errorSetting(e)}
-              onChange={e => handleChange(e)}
-            />
-            <div className={F.errorPrice}>
-              {error.price && <span>{error.price}</span>}
-            </div>
-          </div>
-
-          <div className={F.stock}>
-            <label>Stock: </label>
-            <input
-              value={input.stock}
-              type="number"
-              name="stock"
-              min="0"
-              onBlur={e => errorSetting(e)}
-              onChange={e => handleChange(e)}
-            />
-            <div>{error.stock && <span>{error.stock}</span>}</div>
-          </div>
 
           <div className={F.descriptionCont}>
             <div className={F.description}>
@@ -324,7 +325,6 @@ export default function Form() {
                 rows="10"
                 onBlur={e => {
                   errorSetting(e);
-                  console.log(error);
                 }}
                 onChange={e => {
                   handleChange(e);
@@ -338,7 +338,7 @@ export default function Form() {
           <div className={F.formBtn}>
             <button
               type="submit"
-              disabled={!image.name || !input.description || !input.stock}
+              // disabled={!image.name || !input.description || !input.stock}
               className={disable ? F.disabledBtn : F.activeBtn}
             >
               Publish product

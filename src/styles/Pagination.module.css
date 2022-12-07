@@ -1,44 +1,46 @@
-.pageBtn{
-    background-color: transparent;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    position: relative;
-    bottom: 2px;
-    cursor: pointer;
+.pageBtn {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  position: relative;
+  bottom: 2px;
+  cursor: pointer;
 }
 
-.numberList{
-    list-style: none;
-    display: flex;
-    width: 350px;
-    top: 15px;
-    height: 20px;
-    align-items: center;
+.numberList {
+  list-style: none;
+  display: flex;
+  width: 350px;
+  top: 15px;
+  height: 20px;
+  align-items: center;
 }
-.numberList li{
-    font-weight: 400;
-    cursor: pointer;
-    border: solid 1px #272727;
-    padding-bottom: 15px;
-    padding-top:3px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 30px;
-    height: 30px;
-}
-
-.hellip{
-    color: white;
+.numberList li {
+  font-weight: 400;
+  cursor: pointer;
+  border: solid 1px #272727;
+  padding-bottom: 15px;
+  padding-top: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 30px;
+  height: 30px;
+  margin-right: 2px;
+  margin-left: 2px;
 }
 
-.active{
-    color:  #111 ;
-    background-color: #62AAA1;
-    border: solid 1px #62AAA1;
+.hellip {
+  color: white;
 }
-.off{
-    font-weight: 400;
-    color: #fff ;
-    cursor: pointer
+
+.active {
+  color: #111;
+  background-color: #62aaa1;
+  border: solid 1px #62aaa1;
+}
+.off {
+  font-weight: 400;
+  color: #fff;
+  cursor: pointer;
 }
