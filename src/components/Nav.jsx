@@ -55,8 +55,13 @@ export default function Nav() {
             <Link to="/latest" style={{ textDecoration: "none" }}>
               <li>Latest</li>
             </Link>
-            <Link to="/sell" style={{ textDecoration: "none" }}>
-              <li>Sell</li>
+            
+             <Link to="/sell" style={{ textDecoration: "none" }}>
+              {
+                isAuthenticated?
+                <li>Sell</li> :
+                <></>
+              }
             </Link>
             <Link to="/favorites" style={{ textDecoration: "none" }}>
               <li>Favorites</li>
