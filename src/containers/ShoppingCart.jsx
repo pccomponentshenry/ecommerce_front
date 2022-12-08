@@ -8,6 +8,7 @@ import { clear_cart,remove_all_from_cart,remove_one_from_cart } from "../redux/a
 
 export default function ShoppingCart(){
     const cart=useSelector(state=>state.cart);
+    localStorage.setItem('cart',JSON.stringify(cart))
     const dispatch=useDispatch();
 
     const clearCart=()=>{
@@ -25,7 +26,7 @@ export default function ShoppingCart(){
         }
 
     }
-    
+    console.log(cart);
    return(
     // estilos solo para ver resultado
     <div style={{display:"flex",flexWrap:"wrap",position:"absolute", top:"50%"}}> 

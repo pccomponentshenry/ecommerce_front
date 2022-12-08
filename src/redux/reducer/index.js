@@ -140,6 +140,7 @@ function rootReducer(state = initialState, action) {
         cart:[...state.cart,{...newItem,quantity:1}]
       }
     case CLEAR_CART:
+      localStorage.clear()
       return{
         ...state,
         cart:[]

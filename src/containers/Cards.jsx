@@ -21,6 +21,8 @@ export default function Cards(props) {
   let products = useSelector(state => state.products);
   let filtered = useSelector(state => state.filtered);
   let searchBar = useSelector(state => state.searchBar);
+  let cart=useSelector(state=>state.cart);
+  localStorage.setItem('cart',JSON.stringify(cart))
 
   React.useEffect(() => {
     dispatch(getFiltered(products));
