@@ -20,6 +20,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [name, setName] = useState("");
   const dispatch = useDispatch();
+
   React.useEffect(() => {
     dispatch(allProducts());
   }, [dispatch]);
