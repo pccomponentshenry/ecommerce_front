@@ -7,10 +7,17 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getProductsByName } from "../redux/actions";
+import { LoginButton } from "./Login";
+import { LogoutButton } from "./Logout";
+import { Profile } from "./Profile";
+import { useAuth0 } from "@auth0/auth0-react";
+
 export default function Nav() {
   const [nav, setNav] = useState(false);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
+
+  const { isAuthenticated } = useAuth0();
 
   function switchMode() {
     if (window.scrollY >= 800) {
@@ -58,7 +65,16 @@ export default function Nav() {
         </div>
 
         <div className={N.searchAndCart}>
-          <h6 className={N.loginText}>Login/Register</h6>
+          <h6 className={N.loginText}>
+            {isAuthenticated ? (
+              <>
+                <Profile />
+                <LogoutButton />
+              </>
+            ) : (
+              <LoginButton />
+            )}
+          </h6>
           <Link to="/cart">
             <img src={cart} className={N.cart} alt="cart icon" />
           </Link>
