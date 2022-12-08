@@ -4,7 +4,7 @@ import C from "../styles/Cards.module.css";
 import Pagination from "../components/Pagination";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allProducts, getFiltered } from "../redux/actions/index.js";
+import { allProducts, getFiltered,addToCartAction } from "../redux/actions/index.js";
 import { Link } from "react-router-dom";
 import NoProducts from "../alerts/NoProducts";
 
@@ -30,6 +30,7 @@ export default function Cards(props) {
     dispatch(getFiltered(filtered));
   }, [dispatch]);
 
+  console.log(searchBar);
   const currentItems =
     filtered.length > 0
       ? Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem)
@@ -53,6 +54,12 @@ export default function Cards(props) {
   //     ? Array.from(products).slice(indexOfFirstItem, indexOfLastItem)
   //     : products;
 
+
+  //agreggo funcion para agregar a carrito
+  const addToCart=(id)=>{
+    console.log(id);
+    dispatch(addToCartAction(id))
+  }
   const data =
     filtered.length > 0
       ? filtered.length
@@ -66,18 +73,20 @@ export default function Cards(props) {
       ) : (
         <>
           {currentItems.map(el => (
-            <Link
-              to={`/detail/${el.id}`}
-              style={{ textDecoration: "none", color: "white" }}
-            >
+            // <Link
+            //   to={`/detail/${el.id}`}
+            //   style={{ textDecoration: "none", color: "white" }}
+            // >
               <CardComponent
                 key={el.id}
                 img={el.img}
                 title={el.title.substr(0, 20) + "..."}
                 price={el.price}
                 brand={el.brand.name}
+                id={el.id}
+                addToCart={addToCart}
               />
-            </Link>
+            // </Link>
           ))}
           <div className={C.pagination}>
             <Pagination

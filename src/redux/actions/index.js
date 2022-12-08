@@ -15,6 +15,10 @@ import {
   FILTER_CATEGORIES,
   FILTER_BRANDS,
   SEARCH_BAR_FILTER,
+  ADD_TO_CART,
+  REMOVE_ONE_FROM_CART,
+  REMOVE_ALL_FROM_CART,
+  CLEAR_CART
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -108,3 +112,30 @@ export const postProduct = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+
+export const addToCartAction=(payload)=>{
+  return{
+    type:ADD_TO_CART,
+    payload
+  }
+}
+
+export const remove_one_from_cart=(payload)=>{
+  return{
+    type:REMOVE_ONE_FROM_CART,
+    payload
+  }
+}
+
+export const remove_all_from_cart=(payload)=>{
+  return{
+    type:REMOVE_ALL_FROM_CART,
+    payload
+  }
+}
+
+export const clear_cart=()=>{
+  return{
+    type:CLEAR_CART,
+  }
+}
