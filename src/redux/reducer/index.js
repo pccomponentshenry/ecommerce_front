@@ -167,7 +167,7 @@ function rootReducer(state = initialState, action) {
     //       ...state,
     //       cart: state.cart.filter(item => item.id !== action.payload),
     //     };
-    ///
+
     default:
       return state;
   }
