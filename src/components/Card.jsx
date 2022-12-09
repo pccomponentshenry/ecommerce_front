@@ -1,13 +1,7 @@
 import C from "../styles/Card.module.css";
-// export default Card;
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
+import React from "react";
 
 function CardComponent(props) {
-
-  
-
   return (
     <>
       <div className={C.cardContainer}>
@@ -22,32 +16,17 @@ function CardComponent(props) {
           <div className={C.bottomCont}>
             <h6 className={C.price}>$ {props.price}</h6>
             <div className={C.btnAndFav}>
-              <button className={C.cardBtn} onClick={()=>props.addToCart(props.id)}>Add to cart</button>
+              <button
+                className={C.cardBtn}
+                onClick={() => props.addToCart(props.product)}
+              >
+                Add to cart
+              </button>
               <span className={C.fav}>♡</span>
             </div>
           </div>
         </div>
       </div>
-
-      {/* <Card style={{ width: "12rem" }}>
-        <Card.Img variant="top" src={props.img} />
-        <Card.Body>
-          <Card.Title
-            style={{ color: "#272727", fontWeight: 600, fontSize: "16px" }}
-          >
-            <Link to={`/detail/${props.id}`} >
-              {props.title}
-            </Link>
-          </Card.Title>
-          <Card.Text style={{ color: "black", fontWeight: 400 }}>
-            {props.brand}
-          </Card.Text>
-          <Card.Text style={{ color: "black", fontWeight: 400 }}>
-            {props.price}
-          </Card.Text>
-          <Button variant="dark" onClick={()=>props.addToCart(props.id)}>Add to cart</Button>
-        </Card.Body>
-      </Card> */}
     </>
   );
 }

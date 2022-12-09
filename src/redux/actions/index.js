@@ -18,7 +18,7 @@ import {
   ADD_TO_CART,
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
-  CLEAR_CART
+  CLEAR_CART,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -70,9 +70,9 @@ export function getProductDetail(id) {
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
 }
-export async function filterBrands() { }
+export async function filterBrands() {}
 
-export async function filterCategories() { }
+export async function filterCategories() {}
 
 export function getProductsByName(name) {
   return async function (dispatch) {
@@ -113,29 +113,35 @@ export const postProduct = payload => async dispatch => {
   }
 };
 
-export const addToCartAction=(payload)=>{
-  return{
-    type:ADD_TO_CART,
-    payload
-  }
-}
+export const addToCartAction = payload => async dispatch => {
+  const cart = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [];
+  const duplicates = cart.filter(c => c.id === payload.id);
 
-export const remove_one_from_cart=(payload)=>{
-  return{
-    type:REMOVE_ONE_FROM_CART,
-    payload
+  if (duplicates.length === 0) {
+    const productToAdd = {
+      ...payload,
+      count: 1,
+    };
+    cart.push(payload);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    dispatch({
+      type: ADD_TO_CART,
+      payload,
+    });
   }
-}
+};
 
-export const remove_all_from_cart=(payload)=>{
-  return{
-    type:REMOVE_ALL_FROM_CART,
-    payload
-  }
-}
+export const remove_one_from_cart = payload => {
+  return {
+    type: REMOVE_ONE_FROM_CART,
+    payload,
+  };
+};
 
-export const clear_cart=()=>{
-  return{
-    type:CLEAR_CART,
-  }
-}
+export const clear_cart = () => {
+  return {
+    type: CLEAR_CART,
+  };
+};
