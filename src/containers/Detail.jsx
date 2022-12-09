@@ -7,17 +7,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../redux/actions";
 import { useEffect } from "react";
 import NotFound from "../alerts/NotFound";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Detail() {
   const params = useParams();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
+  const { user} = useAuth0();
+  const creator= product.creator;
+  var guess = "default"
+  {user ?  guess = user.nickname : guess = "default"}
+  
+   /*  const guess = user.nickname */
+  
+    
+ /*  console.log(creator, guess) */
 
   useEffect(() => {
     dispatch(getProductDetail(params.id));
   }, [dispatch]);
 
   //TODO: change hardcoded data
+  //console.log(product)
   const owner = [
     {
       name: "Usuario 1",
@@ -58,11 +69,22 @@ export default function Detail() {
         </div>
         <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
           <div className={D.ownerText}>
-            <h3>{owner[0].name}</h3>
+            <h3>{product.creator}</h3>
             <p>See the seller's rating</p>
           </div>
         </Link>
       </div>
+      {
+        creator === guess? 
+       
+        <button>update</button> 
+        
+        : <></>
+      }
+      {
+        creator === guess? <button>delete</button> : <></>
+      }
+     
     </div>
   );
 }

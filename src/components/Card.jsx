@@ -1,12 +1,16 @@
 import C from "../styles/Card.module.css";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function CardComponent(props) {
   return (
     <>
       <div className={C.cardContainer}>
         <div className={C.imgContainer}>
+          <Link
+          to={`/detail/${props.id}`}>
           <img src={props.img} alt="" className={C.image} />
+          </Link>
         </div>
         <div className={C.square}>
           <div className={C.nameCont}>
