@@ -4,8 +4,12 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands, getCategories, postProduct } from "../redux/actions/index";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 export default function Form() {
+  const { user } = useAuth0();
+  const creator = user.nickname
   const initialState = {
     name: "",
     brand: "",
@@ -14,7 +18,10 @@ export default function Form() {
     description: "",
     img: [],
     category: "",
+    creator: creator
   };
+  //console.log(creator)
+  //console.log(user.email)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBrands());
@@ -23,6 +30,7 @@ export default function Form() {
 
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
+  const products = useSelector(state => state.products);
   const [image, setImage] = useState([]);
   const [url, setUrl] = useState("");
   const [active, setActive] = useState(false);
@@ -36,6 +44,7 @@ export default function Form() {
     description: "",
     img: [],
     category: "",
+    creator: creator
   });
 
   function clearForm() {
@@ -45,6 +54,8 @@ export default function Form() {
     const errors = {};
     if (!input.name) {
       errors.name = "*Name is required";
+    }else if (products.find(e => e.title.toLowerCase() === input.name.toLowerCase()) ){
+      errors.name = `The name ${input.name} is allready exist`
     }
     if (!input.brand) {
       errors.brand = "*Brand is required";
