@@ -4,12 +4,8 @@ import C from "../styles/Cards.module.css";
 import Pagination from "../components/Pagination";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  allProducts,
-  getFiltered,
-  addToCartAction,
-} from "../redux/actions/index.js";
-import { Link } from "react-router-dom";
+import { getFiltered, addToCartAction } from "../redux/actions/index.js";
+
 import NoProducts from "../alerts/NoProducts";
 
 export default function Cards(props) {
@@ -38,8 +34,8 @@ export default function Cards(props) {
       ? Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem)
       : Array.from(searchBar).slice(indexOfFirstItem, indexOfLastItem);
 
-  const addToCart = id => {
-    dispatch(addToCartAction(id));
+  const addToCart = product => {
+    dispatch(addToCartAction(product));
   };
   const data =
     filtered.length > 0
@@ -66,6 +62,7 @@ export default function Cards(props) {
               brand={el.brand.name}
               id={el.id}
               product={el}
+              quantity={el.quantity}
               addToCart={addToCart}
             />
             // </Link>

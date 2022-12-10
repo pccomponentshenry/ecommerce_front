@@ -9,13 +9,14 @@ import { useDispatch } from "react-redux";
 import { getProductsByName } from "../redux/actions";
 import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
-import { Profile } from "./Profile";
 import { useAuth0 } from "@auth0/auth0-react";
+import ShoppingCart from "../containers/ShoppingCart";
 
 export default function Nav() {
   const [nav, setNav] = useState(false);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
+  const [showCart, setShowCart] = useState(false);
 
   const { isAuthenticated } = useAuth0();
 
@@ -29,16 +30,6 @@ export default function Nav() {
   useEffect(() => {
     dispatch(getProductsByName);
   }, [dispatch]);
-  function handleInputChange(e) {
-    e.preventDefault();
-    setName(e.target.value);
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(getProductsByName(name));
-    //dispatch(clear());
-    setName("");
-  }
 
   window.addEventListener("scroll", switchMode);
   return (
@@ -69,16 +60,23 @@ export default function Nav() {
           <h6 className={N.loginText}>
             {isAuthenticated ? (
               <>
-                {/* <Profile /> */}
                 <LogoutButton />
               </>
             ) : (
               <LoginButton />
             )}
           </h6>
-          <Link to="/cart">
-            <img src={cart} className={N.cart} alt="cart icon" />
-          </Link>
+          {/* <Link to="/cart"> */}
+          <img
+            src={cart}
+            className={N.cart}
+            alt="cart icon"
+            // onClick={() => {
+            //   setShowCart(true);
+
+            // }}
+          />
+          {/* </Link> */}
           <img
             src={mode}
             alt=""
@@ -90,6 +88,11 @@ export default function Nav() {
           <hr />
         </div>
       </div>
+      {showCart === false && (
+        <div>
+          <ShoppingCart setShowCart={setShowCart} />
+        </div>
+      )}
     </>
   );
 }

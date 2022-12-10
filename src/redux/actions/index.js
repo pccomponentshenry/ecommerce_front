@@ -124,6 +124,7 @@ export const addToCartAction = payload => async dispatch => {
       ...payload,
       count: 1,
     };
+
     cart.push(payload);
     localStorage.setItem("cart", JSON.stringify(cart));
     dispatch({

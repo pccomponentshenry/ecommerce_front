@@ -5,6 +5,7 @@ import Cards from "../containers/Cards";
 import SideMenu from "../components/SideMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+
 import {
   allProducts,
   getFiltered,
@@ -55,7 +56,6 @@ export default function Home() {
       const filtered = products.filter(el => el.category.name === cat);
       const both = filtered.filter(el => el.brand.name === brand);
       if (filtered.length > 0) dispatch(getFiltered(both));
-      // dispatch(getFiltered(both));
     }
     if (cat === "Category" && brand !== "") {
       const filtered = products.filter(el => el.brand.name.includes(brand));
