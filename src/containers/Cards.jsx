@@ -5,6 +5,8 @@ import Pagination from "../components/Pagination";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFiltered, addToCartAction } from "../redux/actions/index.js";
+import Swal from 'sweetalert2'
+import { Navigate } from "react-router-dom"
 
 import NoProducts from "../alerts/NoProducts";
 
@@ -15,6 +17,7 @@ export default function Cards(props) {
   const [pageNumberLimit, setpageNumberLimit] = useState(6);
   const indexOfLastItem = props.currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  //const history = useNavigate()
 
   let dispatch = useDispatch();
   let products = useSelector(state => state.products);
@@ -36,7 +39,24 @@ export default function Cards(props) {
 
   const addToCart = product => {
     dispatch(addToCartAction(product));
+    successAlert()
   };
+  const successAlert =() => {
+    Swal.fire({
+        title:'Product Added to cart!',
+        confirmButtonText:"Les't buy more products",
+        showDenyButton: true,
+        denyButtonText: `No, Go to my Cart`,
+       icon:"success"
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          return <Navigate to='/'/>
+        } else if (result.isDenied) {
+          return <Navigate to='/cart'/>
+        }
+      })
+}
   const data =
     filtered.length > 0
       ? filtered.length
