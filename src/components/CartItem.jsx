@@ -6,28 +6,18 @@ export default function CartItem({ data, deleteFromCart }) {
   const { id, title, img, brand, price, quantity } = data;
 
   const cart = JSON.parse(localStorage.getItem("cart"));
+  const quant = JSON.parse(localStorage.getItem(id)) || 1;
+  // const index = cart.findIndex(el => el.id === id);
+  let [state, setState] = useState(quant);
 
-  const quantityStorage = localStorage.getItem("quantity")
-    ? JSON.parse(localStorage.getItem("quantity"))
-    : 1;
-  let [quantityState, setQuantityState] = useState(quantityStorage);
-
-  React.useEffect(() => {
-    localStorage.setItem("quantity", JSON.stringify(quantityState));
-  }, [quantityState]);
-
-  const setQuantityInput = e => {
-    // if (e.target.innerText === "+") {
-    //   setQuantityState(quantity + 1);
-
-    // }
-
-    setQuantityState(quantityState++);
-    // localStorage.setItem("quantity", JSON.stringify(quantityState));
-    // window.localStorage.setItem("quantity", JSON.stringify(quantityInput));
-    // if (e.target.innerText === "-" && quantity > 0) {
-    //   //  setQuantity(quantity--);
-    // }
+  const setQuantityInput = productId => {
+    for (let product of cart) {
+      if (product.id === productId) {
+        product.quantity++;
+        setState(state + 1);
+        localStorage.setItem(id, JSON.stringify(quant + 1));
+      }
+    }
   };
 
   return (
@@ -45,11 +35,11 @@ export default function CartItem({ data, deleteFromCart }) {
             <button className={C.Btn} id="-" onClick={e => setQuantityInput(e)}>
               -
             </button>
-            <span>{quantityStorage} </span>
+            <span>{state}</span>
             <button
               className={C.plus}
               id="+"
-              onClick={e => setQuantityInput(e)}
+              onClick={() => setQuantityInput(id)}
             >
               +
             </button>

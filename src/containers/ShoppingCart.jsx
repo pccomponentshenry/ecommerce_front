@@ -11,7 +11,7 @@ export default function ShoppingCart(props) {
   const clearCart = () => {
     dispatch(clear_cart());
   };
-  const [finalPrice, setFinalPrice] = useState();
+
   const deleteFromCart = id => {
     dispatch(remove_one_from_cart(id));
   };
