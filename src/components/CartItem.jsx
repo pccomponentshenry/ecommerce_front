@@ -3,19 +3,30 @@ import C from "../styles/CartItem.module.css";
 import { useState } from "react";
 
 export default function CartItem({ data, deleteFromCart }) {
-  const { id, title, img, brand, price, quantity } = data;
+  const { id, title, img, brand, price, quantity, stock } = data;
 
   const cart = JSON.parse(localStorage.getItem("cart"));
   const quant = JSON.parse(localStorage.getItem(id)) || 1;
-  // const index = cart.findIndex(el => el.id === id);
   let [state, setState] = useState(quant);
 
   const setQuantityInput = productId => {
     for (let product of cart) {
-      if (product.id === productId) {
+      if (product.id === productId && state < stock) {
         product.quantity++;
         setState(state + 1);
         localStorage.setItem(id, JSON.stringify(quant + 1));
+      }
+    }
+  };
+
+  const decreaseQuantityInput = productId => {
+    if (state !== 1) {
+      for (let product of cart) {
+        if (product.id === productId) {
+          product.quantity--;
+          setState(state - 1);
+          localStorage.setItem(id, JSON.stringify(quant - 1));
+        }
       }
     }
   };
@@ -32,7 +43,11 @@ export default function CartItem({ data, deleteFromCart }) {
           </div>
           <h4>{title.substr(0, 40) + "..."}</h4>
           <div className={C.counter}>
-            <button className={C.Btn} id="-" onClick={e => setQuantityInput(e)}>
+            <button
+              className={C.Btn}
+              id="-"
+              onClick={e => decreaseQuantityInput(id)}
+            >
               -
             </button>
             <span>{state}</span>
