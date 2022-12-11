@@ -15,12 +15,8 @@ export default function ShoppingCart(props) {
   const deleteFromCart = id => {
     dispatch(remove_one_from_cart(id));
   };
-
-  // const quantity = Number(window.localStorage.getItem("quantity"));
-  // const item = JSON.parse(window.localStorage.getItem("cart"));
-
-  // const totalPrice = item[0].price * quantity;
-  // const price = parseFloat(totalPrice).toFixed(2);
+  let [totalPrice, setTotalPrice] = useState("");
+  let [clicked, setClicked] = useState(0);
 
   return (
     <>
@@ -28,14 +24,7 @@ export default function ShoppingCart(props) {
         <div className={S.titleCont}>
           <h4 className={S.title}>Shopping Cart</h4>
         </div>
-        <span
-          className={S.exit}
-          onClick={() => {
-            props.setShowCart(false);
-          }}
-        >
-          X
-        </span>
+
         <div className={S.clearCont}>
           <button className={S.clearBtn} onClick={clearCart}>
             Clean Cart
@@ -43,13 +32,31 @@ export default function ShoppingCart(props) {
         </div>
         <div className={S.cartArea}>
           {cart.map((el, index) => (
-            <CartItem key={index} data={el} deleteFromCart={deleteFromCart} />
+            <CartItem
+              setTotalPrice={setTotalPrice}
+              clicked={clicked}
+              setClicked={setClicked}
+              key={index}
+              data={el}
+              deleteFromCart={deleteFromCart}
+            />
           ))}
         </div>
-        <h3 className={S.total}>Total: $</h3>
+        <h3 className={S.total}>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
         <div className={S.startShopping}>
           <span>Start shopping</span>
         </div>
+      </div>
+      <div className={S.imgCont}>
+        <h1>Just one step to become a pro</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod
+        </p>
+        <img
+          src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670795674/cqws5x8n/gamer_urddyh.jpg"
+          alt=""
+        />
       </div>
     </>
   );

@@ -10,7 +10,6 @@ import { getProductsByName } from "../redux/actions";
 import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
 import { useAuth0 } from "@auth0/auth0-react";
-import ShoppingCart from "../containers/ShoppingCart";
 
 export default function Nav() {
   const [nav, setNav] = useState(false);
@@ -66,17 +65,17 @@ export default function Nav() {
               <LoginButton />
             )}
           </h6>
-          {/* <Link to="/cart"> */}
-          <img
-            src={cart}
-            className={N.cart}
-            alt="cart icon"
-            // onClick={() => {
-            //   setShowCart(true);
+          <Link to="/cart">
+            <img
+              src={cart}
+              className={N.cart}
+              alt="cart icon"
+              // onClick={() => {
+              //   setShowCart(true);
 
-            // }}
-          />
-          {/* </Link> */}
+              // }}
+            />
+          </Link>
           <img
             src={mode}
             alt=""
@@ -88,11 +87,6 @@ export default function Nav() {
           <hr />
         </div>
       </div>
-      {showCart === false && (
-        <div>
-          <ShoppingCart setShowCart={setShowCart} />
-        </div>
-      )}
     </>
   );
 }

@@ -1,6 +1,7 @@
 .container {
   width: 50%;
-  height: 92vh;
+  height: 89vh;
+  overflow: hidden;
   position: fixed;
   top: 60px;
   right: 0px;
@@ -91,4 +92,23 @@
   position: relative;
   font-size: 20px;
   top: 5px;
+}
+.imgCont img {
+  width: 132%;
+}
+
+.imgCont h1 {
+  position: absolute;
+  margin-top: 500px;
+  left: 50px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.imgCont p {
+  position: absolute;
+  margin-top: 550px;
+  left: 50px;
+  font-weight: 200;
+  color: #fff;
 }
