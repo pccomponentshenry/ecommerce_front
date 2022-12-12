@@ -10,6 +10,7 @@
 .imgContainer {
   background-color: white;
   width: 230px;
+  height: 170px;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -19,7 +20,6 @@
 .image {
   height: fit-content;
   width: 180px;
-  height: 180px;
   cursor: pointer;
   border-radius: 10px 10px 0px 0px;
 }
@@ -53,12 +53,14 @@
   color: #fff;
   font-weight: 200;
   font-size: 14px;
+  position: relative;
+  bottom: 5px;
 }
 .price {
   font-weight: 600;
   color: #fff;
   position: relative;
-
+  top: 5px;
   font-size: 14px;
   text-align: left;
 }
@@ -95,6 +97,7 @@
   position: relative;
   bottom: 10px;
 }
+
 .fav {
   font-size: 25px;
   margin-left: 10px;

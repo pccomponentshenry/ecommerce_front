@@ -3,6 +3,7 @@ import S from "../styles/SideMenu.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearError,
   filterProducts,
   getBrands,
   getCategories,
@@ -52,12 +53,14 @@ export default function SideMenu() {
   };
 
   const clearFilters = () => {
+    dispatch(clearError());
     dispatch(getFiltered(products));
     document.querySelectorAll("input[type=text]").forEach(element => {
       element.value = "";
     });
     setBrand("");
     setCat("");
+    setName("");
     setPrice(prev => ({ ...prev, min: 0, max: 100000000 }));
     document.querySelectorAll("select")[0].selectedIndex = 0;
     document.querySelectorAll("select")[1].selectedIndex = 0;
@@ -77,7 +80,7 @@ export default function SideMenu() {
       <div className={S.subContainer}>
         <div className={S.categoryContainer}>
           <div className={S.filterContainer}>
-            <hr className={S.line} />
+            <hr />
             <h6>Filter by:</h6>
             <div className={S.select}>
               <select
@@ -88,7 +91,9 @@ export default function SideMenu() {
                   setCat(e.target.value);
                 }}
               >
-                <option defaultValue={"default"}>Category</option>
+                <option defaultValue={"default"} disabled>
+                  Category
+                </option>
                 {categories.map((el, i) => (
                   <option key={i} value={el.id}>
                     {el.name}
@@ -107,7 +112,9 @@ export default function SideMenu() {
                   setBrand(e.target.value);
                 }}
               >
-                <option defaultValue={"default"}>Brand</option>
+                <option defaultValue={"default"} disabled>
+                  Brand
+                </option>
                 {brands.map((el, i) => (
                   <option key={i} value={el.id}>
                     {el.name}
@@ -129,11 +136,11 @@ export default function SideMenu() {
 
             <div className={S.sharedInput}>
               <hr />
-              <h6 className={S.label}>Price range</h6>
+              <div className={S.label}>Price range</div>
               <input
                 key="min_price"
                 id="min"
-                type="number"
+                type="text"
                 name="min_price"
                 placeholder="Min"
                 onBlur={handlePriceChange}
@@ -142,14 +149,14 @@ export default function SideMenu() {
               <input
                 key="max_price"
                 id="max"
-                type="number"
+                type="text"
                 name="max_price"
                 placeholder="Max"
                 onBlur={handlePriceChange}
                 className={`${S.inputSmall} ${S.inputRight}`}
               />
               <button className={S.button} onClick={handlePriceSubmit}>
-                ➟
+                &#8680;
               </button>
               {priceError && <span>{priceError}</span>}
             </div>

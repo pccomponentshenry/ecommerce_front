@@ -68,10 +68,7 @@ export default function ShoppingCart(props) {
       </div>
       <div className={S.imgCont}>
         <h1>Just one step to become a pro</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod
-        </p>
+        <p>Customize your PC and level up!</p>
         <img
           src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670795674/cqws5x8n/gamer_urddyh.jpg"
           alt=""

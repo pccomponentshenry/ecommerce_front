@@ -1,8 +1,6 @@
 import axios from "axios";
 
 import {
-  //   SEARCH_PRODUCT,
-  //   ORDER_BY_NAME,
   GET_PRODUCT,
   GET_BRANDS,
   ALL_PRODUCTS,
@@ -19,6 +17,7 @@ import {
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
+  CLEAR_ERROR,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -84,7 +83,11 @@ export function getProductsByName(name) {
       });
     } catch (error) {
       console.log(error.message);
-      return alert("Sorry, product not found, try again.");
+      return dispatch({
+        type: SET_ERROR,
+        payload: "product not found",
+      });
+      // return alert("Sorry, product not found, try again.");
     }
   };
 }
@@ -117,14 +120,11 @@ export const addToCartAction = payload => async dispatch => {
   const cart = localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [];
-    const id = payload.id
-    const price = payload.price
+  const id = payload.id;
+  const price = payload.price;
   const duplicates = cart.filter(c => c.id === payload.id);
   localStorage.setItem(id, JSON.stringify(1));
-  localStorage.setItem(
-    "price " + id,
-    JSON.stringify(price)
-  );
+  localStorage.setItem("price " + id, JSON.stringify(price));
   if (duplicates.length === 0) {
     cart.push(payload);
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -145,5 +145,11 @@ export const remove_one_from_cart = payload => {
 export const clear_cart = () => {
   return {
     type: CLEAR_CART,
+  };
+};
+
+export const clearError = () => {
+  return {
+    type: CLEAR_ERROR,
   };
 };

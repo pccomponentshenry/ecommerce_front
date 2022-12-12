@@ -17,6 +17,7 @@ import {
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
+  CLEAR_ERROR,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -115,9 +116,22 @@ function rootReducer(state = initialState, action) {
         filtered: action.payload,
       };
     case SET_ERROR:
+      // return {
+      //   ...state,
+      //   products: AllBrands,
+      // };
       return {
         ...state,
-        products: AllBrands,
+        error: action.payload,
+      };
+    case CLEAR_ERROR:
+      // return {
+      //   ...state,
+      //   products: AllBrands,
+      // };
+      return {
+        ...state,
+        error: [],
       };
     case GET_PRODUCTS_BY_NAME:
       return {
@@ -146,11 +160,6 @@ function rootReducer(state = initialState, action) {
             cart: [...state.cart, { ...newItem, quantity: 1 }],
           };
 
-    // return {
-    //   ...state,
-    //   cart: state.cart.concat(action.payload),
-    // };
-
     case CLEAR_CART:
       localStorage.clear();
       return {
@@ -170,19 +179,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         cart: filtered,
       };
-    // return itemToDelete.quantity > 1
-    //   ? {
-    //       ...state,
-    //       cart: state.cart.map(item =>
-    //         item.id === action.payload
-    //           ? { ...item, quantity: item.quantity - 1 }
-    //           : item
-    //       ),
-    //     }
-    //   : {
-    //       ...state,
-    //       cart: state.cart.filter(item => item.id !== action.payload),
-    //     };
 
     default:
       return state;

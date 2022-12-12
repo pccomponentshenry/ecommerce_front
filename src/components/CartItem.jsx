@@ -71,7 +71,12 @@ export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
     <>
       <div className={C.card}>
         <div className={C.btnCont}>
-          <button onClick={() => deleteFromCart(id)}>🗑</button>
+          <button onClick={() => deleteFromCart(id)}>
+            <img
+              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670819389/cqws5x8n/iconmonstr-trash-can-27-240_gtmmpc.png"
+              alt=""
+            />
+          </button>
         </div>
         <div className={C.container}>
           <div className={C.imgCont}>

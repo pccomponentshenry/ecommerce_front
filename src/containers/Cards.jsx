@@ -23,6 +23,7 @@ export default function Cards(props) {
   let products = useSelector(state => state.products);
   let filtered = useSelector(state => state.filtered);
   let searchBar = useSelector(state => state.searchBar);
+  let error = useSelector(state => state.error);
 
   React.useEffect(() => {
     dispatch(getFiltered(products));
@@ -65,45 +66,51 @@ export default function Cards(props) {
       : products.length;
   return (
     <div className={C.cardContainer}>
-      {currentItems.length === 0 ? (
-        <NoProducts />
+      {!error.length ? (
+        currentItems.length === 0 ? (
+          <NoProducts />
+        ) : (
+          <>
+            {currentItems.map(el => (
+              <CardComponent
+                key={el.id}
+                img={el.img}
+                title={el.title.substr(0, 18) + "..."}
+                price={el.price}
+                brand={el.brand.name}
+                id={el.id}
+                product={el}
+                quantity={el.quantity}
+                addToCart={addToCart}
+              />
+              // </Link>
+            ))}
+            <div className={C.pagination}>
+              <Pagination
+                currentPage={props.currentPage}
+                setCurrentPage={props.setCurrentPage}
+                itemsPerPage={itemsPerPage}
+                setitemsPerPage={setitemsPerPage}
+                indexOfFirstItem={indexOfFirstItem}
+                indexOfLastItem={indexOfLastItem}
+                currentItems={currentItems}
+                data={data}
+                products={products}
+                minPageNumberLimit={minPageNumberLimit}
+                setminPageNumberLimit={setminPageNumberLimit}
+                maxPageNumberLimit={maxPageNumberLimit}
+                setmaxPageNumberLimit={setmaxPageNumberLimit}
+                pageNumberLimit={pageNumberLimit}
+                setpageNumberLimit={setpageNumberLimit}
+                name={props.name}
+              />
+            </div>
+          </>
+        )
       ) : (
-        <>
-          {currentItems.map(el => (
-            <CardComponent
-              key={el.id}
-              img={el.img}
-              title={el.title.substr(0, 20) + "..."}
-              price={el.price}
-              brand={el.brand.name}
-              id={el.id}
-              product={el}
-              quantity={el.quantity}
-              addToCart={addToCart}
-            />
-            // </Link>
-          ))}
-          <div className={C.pagination}>
-            <Pagination
-              currentPage={props.currentPage}
-              setCurrentPage={props.setCurrentPage}
-              itemsPerPage={itemsPerPage}
-              setitemsPerPage={setitemsPerPage}
-              indexOfFirstItem={indexOfFirstItem}
-              indexOfLastItem={indexOfLastItem}
-              currentItems={currentItems}
-              data={data}
-              products={products}
-              minPageNumberLimit={minPageNumberLimit}
-              setminPageNumberLimit={setminPageNumberLimit}
-              maxPageNumberLimit={maxPageNumberLimit}
-              setmaxPageNumberLimit={setmaxPageNumberLimit}
-              pageNumberLimit={pageNumberLimit}
-              setpageNumberLimit={setpageNumberLimit}
-              name={props.name}
-            />
-          </div>
-        </>
+        <div>
+          <NoProducts />
+        </div>
       )}
     </div>
   );
