@@ -9,18 +9,18 @@ import { useDispatch } from "react-redux";
 import { getProductsByName } from "../redux/actions";
 import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
-import { Profile } from "./Profile";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Nav() {
   const [nav, setNav] = useState(false);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
+  const [showCart, setShowCart] = useState(false);
 
   const { isAuthenticated } = useAuth0();
 
   function switchMode() {
-    if (window.scrollY >= 800) {
+    if (window.scrollY >= 400) {
       setNav(true);
     } else {
       setNav(false);
@@ -29,16 +29,6 @@ export default function Nav() {
   useEffect(() => {
     dispatch(getProductsByName);
   }, [dispatch]);
-  function handleInputChange(e) {
-    e.preventDefault();
-    setName(e.target.value);
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(getProductsByName(name));
-    //dispatch(clear());
-    setName("");
-  }
 
   window.addEventListener("scroll", switchMode);
   return (
@@ -46,7 +36,11 @@ export default function Nav() {
       <div className={`${N.container} ${nav ? N.active : N.container}`}>
         <div className={N.logoAndMenu}>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <h1>Logo</h1>
+            <img
+              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670804226/cqws5x8n/logo_play_expert_wv0yh2.png"
+              alt=""
+              className={N.logo}
+            />
           </Link>
           <ul className={N.navList}>
             <Link to="/categories" style={{ textDecoration: "none" }}>
@@ -55,8 +49,9 @@ export default function Nav() {
             <Link to="/latest" style={{ textDecoration: "none" }}>
               <li>Latest</li>
             </Link>
+
             <Link to="/sell" style={{ textDecoration: "none" }}>
-              <li>Sell</li>
+              {isAuthenticated ? <li>Sell</li> : <></>}
             </Link>
             <Link to="/favorites" style={{ textDecoration: "none" }}>
               <li>Favorites</li>
@@ -68,7 +63,6 @@ export default function Nav() {
           <h6 className={N.loginText}>
             {isAuthenticated ? (
               <>
-                <Profile />
                 <LogoutButton />
               </>
             ) : (
@@ -76,7 +70,15 @@ export default function Nav() {
             )}
           </h6>
           <Link to="/cart">
-            <img src={cart} className={N.cart} alt="cart icon" />
+            <img
+              src={cart}
+              className={N.cart}
+              alt="cart icon"
+              // onClick={() => {
+              //   setShowCart(true);
+
+              // }}
+            />
           </Link>
           <img
             src={mode}

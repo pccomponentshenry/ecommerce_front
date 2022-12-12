@@ -1,17 +1,25 @@
-.image{
-    filter: brightness(30%);
-    width: 100vw;
-    
+.imageCont {
+  width: 100vw;
+}
+.image {
+  filter: brightness(30%);
+  width: 100%;
 }
 
-.title{
-    font-size: 40px;
-    color:  #62AAA1;
-    font-weight: 800;
+.title {
+  font-size: 40px;
+  color: #2bfab7;
+  font-weight: 800;
 }
 
-.caption{
-text-align: left;
-position: relative;
-margin-bottom: 300px;
+.caption {
+  text-align: left;
+  position: relative;
+  margin-bottom: 100px;
+  right: 80px;
+}
+.captionHeadphones {
+  text-align: right;
+  position: relative;
+  margin-bottom: 100px;
 }

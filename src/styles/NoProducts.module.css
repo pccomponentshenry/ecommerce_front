@@ -1,11 +1,7 @@
-.detail {
-  margin: 0.2em 3rem;
-  font-size: 50px;
-}
-
 .container {
-  text-align: center;
-  align-items: center;
-  color: #62AAA1;
-  margin-top: 20vh;
+  display: flex;
+  width: 70%;
+}
+.container img {
+  width: 100%;
 }

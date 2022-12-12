@@ -1,0 +1,49 @@
+.container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  bottom: 10px;
+}
+.container img {
+  width: 40px;
+  border-radius: 50px;
+  float: right;
+  margin-left: 15px;
+}
+.container h2 {
+  font-size: 14px;
+  position: relative;
+  top: 15px;
+}
+.logoutAndProfile {
+  display: flex;
+}
+.logoutAndProfile button {
+  background-color: transparent;
+  height: 30px;
+  color: #2bfab7;
+  border: solid 1px #2bfab7;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-left: 30px;
+}
+.logoutAndProfile button:hover {
+  background-color: #2bfab7;
+  color: #000;
+  transition: 0.15s ease-in-out;
+}
+
+.loginBtn {
+  background-color: transparent;
+  height: 30px;
+  color: #2bfab7;
+  border: solid 1px #2bfab7;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-left: 30px;
+}
+.loginBtn:hover {
+  background-color: #62aaa1;
+  color: #000;
+  transition: 0.15s ease-in-out;
+}

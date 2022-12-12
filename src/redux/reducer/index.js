@@ -16,9 +16,9 @@ import {
   ADD_TO_CART,
   REMOVE_ONE_FROM_CART,
   REMOVE_ALL_FROM_CART,
-  CLEAR_CART
-
-} from "../actions/actionNames"; //Para las action creators
+  CLEAR_CART,
+  CLEAR_ERROR,
+} from "../actions/actionNames";
 
 const initialState = {
   products: [],
@@ -28,9 +28,15 @@ const initialState = {
   brand: [],
   error: [],
   filtered: [],
-  searchBar:[],
-  cart:[]
+  searchBar: [],
+  cart: [],
 };
+
+if (localStorage.getItem("cart")) {
+  initialState.cart = JSON.parse(localStorage.getItem("cart"));
+} else {
+  initialState.cart = [];
+}
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -110,9 +116,22 @@ function rootReducer(state = initialState, action) {
         filtered: action.payload,
       };
     case SET_ERROR:
+      // return {
+      //   ...state,
+      //   products: AllBrands,
+      // };
       return {
         ...state,
-        products: AllBrands,
+        error: action.payload,
+      };
+    case CLEAR_ERROR:
+      // return {
+      //   ...state,
+      //   products: AllBrands,
+      // };
+      return {
+        ...state,
+        error: [],
       };
     case GET_PRODUCTS_BY_NAME:
       return {
@@ -124,42 +143,43 @@ function rootReducer(state = initialState, action) {
         ...state,
         error: action.payload,
       };
-      //logica carrito
     case ADD_TO_CART:
-      let newItem=state.products.find(el=>el.id===action.payload)
-      let itemInCart=state.cart.find(item=>item.id===newItem.id)
-      return itemInCart?
-      {
-        ...state,
-        cart:state.cart.map(item=>item.id===newItem.id
-          ?{...item,quantity:item.quantity+1}
-          :item)
-      }
-      :{
-        ...state,
-        cart:[...state.cart,{...newItem,quantity:1}]
-      }
+      let newItem = state.products.find(el => el.id === action.payload.id);
+      let itemInCart = state.cart.find(item => item.id === newItem.id);
+      return itemInCart
+        ? {
+            ...state,
+            cart: state.cart.map(item =>
+              item.id === newItem.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            ),
+          }
+        : {
+            ...state,
+            cart: [...state.cart, { ...newItem, quantity: 1 }],
+          };
+
     case CLEAR_CART:
-      return{
+      localStorage.clear();
+      return {
         ...state,
-        cart:[]
-      }
+        cart: [],
+      };
     case REMOVE_ALL_FROM_CART:
-      return{
+      return {
         ...state,
-        cart:state.cart.filter(item=>item.id!==action.payload)
-      }
+        cart: [],
+      };
     case REMOVE_ONE_FROM_CART:
-      const itemToDelete=state.cart.find(item=>item.id===action.payload);
-      return itemToDelete.quantity>1?{
+      const filtered = state.cart.filter(i => i.id !== action.payload);
+      localStorage.setItem("cart", JSON.stringify(filtered));
+
+      return {
         ...state,
-        cart:state.cart.map(item=>item.id===action.payload?{...item,quantity:item.quantity-1}:item)
-      }
-      :{
-        ...state,
-        cart:state.cart.filter(item=>item.id!==action.payload)
-      }
-      ///
+        cart: filtered,
+      };
+
     default:
       return state;
   }

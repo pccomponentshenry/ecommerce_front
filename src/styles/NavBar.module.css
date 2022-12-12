@@ -1,28 +1,21 @@
 .container {
   display: flex;
   width: 100%;
-  justify-content: center;
   position: fixed;
   z-index: 900;
 }
 .container.active {
-  background-color: #310c3f;
+  background-color: #1b1b1b;
   z-index: 900;
   transition: 0.15s ease-in-out;
 }
 .logoAndMenu {
   display: flex;
-  height: 60px;
-  width: 400px;
+  height: 70px;
   position: relative;
-  right: 80px;
+  float: left;
   top: 10px;
-}
-.logoAndMenu h1 {
-  color: #fff;
-  font-size: 30px;
-  text-transform: uppercase;
-  cursor: pointer;
+  right: 30px;
 }
 
 .navList {
@@ -34,13 +27,17 @@
   list-style: none;
   margin-left: 10px;
   margin-right: 10px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 2px;
   cursor: pointer;
+  background-color: transparent;
 }
 .navList li:hover {
-  color: #62aaa1;
+  color: #2bfab7;
   transition: 0.15s ease-in-out;
 }
 
@@ -113,7 +110,12 @@ switch {
 }
 hr {
   position: relative;
-  top: 40px;
+  top: 50px;
   border: none;
   border: solid 1px #fff;
+}
+.logo {
+  height: 120px;
+  position: relative;
+  bottom: 38px;
 }
