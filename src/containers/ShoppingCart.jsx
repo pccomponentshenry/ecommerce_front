@@ -5,18 +5,36 @@ import S from "../styles/ShoppingCart.module.css";
 import { useState } from "react";
 import { clear_cart, remove_one_from_cart } from "../redux/actions/index.js";
 
+
 export default function ShoppingCart(props) {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const clearCart = () => {
     dispatch(clear_cart());
   };
+  let claves = Object.keys(localStorage)
+  let forPaySeparated = []
+  
+  
+  for(let i=0; i< claves.length; i++){
+    let clave = claves[i]
+    if(clave.startsWith('price')){
+      forPaySeparated.push(parseFloat(localStorage[clave]))
+      
+    }
+    
+  } 
+  let forPay = forPaySeparated.reduce((a,b) => a + b)
+  
 
   const deleteFromCart = id => {
     dispatch(remove_one_from_cart(id));
   };
   let [totalPrice, setTotalPrice] = useState("");
   let [clicked, setClicked] = useState(0);
+  //console.log(CartItem)
+//puedo recorrer el cart para sumar los precios,pero falta de dnd vienen las cantidades
+ 
 
   return (
     <>
@@ -36,13 +54,15 @@ export default function ShoppingCart(props) {
               setTotalPrice={setTotalPrice}
               clicked={clicked}
               setClicked={setClicked}
+              totalPrice={totalPrice}
               key={index}
               data={el}
               deleteFromCart={deleteFromCart}
+              
             />
           ))}
         </div>
-        <h3 className={S.total}>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
+        <h3 className={S.total}>Total: ${forPay}</h3>
         <div className={S.startShopping}>
           <span>Start shopping</span>
         </div>
