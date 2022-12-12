@@ -16,17 +16,18 @@ export default function ShoppingCart(props) {
   let forPaySeparated = []
   let forPay=0
   
-  if(cart.length >0){
+  if(localStorage.length >1){
     for(let i=0; i< claves.length; i++){
       let clave = claves[i]
       if(clave.startsWith('price')){
         forPaySeparated.push(parseFloat(localStorage[clave]))
       }
     } 
-    let forPay = forPaySeparated.reduce((a,b) => a + b)
+     forPay = forPaySeparated.reduce((a,b) => a + b)
   }else{
-    let forPay = 0
+     forPay = 0
   }
+  console.log(forPay)
   
 
   const deleteFromCart = id => {
