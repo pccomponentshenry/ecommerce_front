@@ -14,17 +14,19 @@ export default function ShoppingCart(props) {
   };
   let claves = Object.keys(localStorage)
   let forPaySeparated = []
+  let forPay=0
   
-  
-  for(let i=0; i< claves.length; i++){
-    let clave = claves[i]
-    if(clave.startsWith('price')){
-      forPaySeparated.push(parseFloat(localStorage[clave]))
-      
-    }
-    
-  } 
-  let forPay = forPaySeparated.reduce((a,b) => a + b)
+  if(cart.length >0){
+    for(let i=0; i< claves.length; i++){
+      let clave = claves[i]
+      if(clave.startsWith('price')){
+        forPaySeparated.push(parseFloat(localStorage[clave]))
+      }
+    } 
+    let forPay = forPaySeparated.reduce((a,b) => a + b)
+  }else{
+    let forPay = 0
+  }
   
 
   const deleteFromCart = id => {
