@@ -19,7 +19,7 @@
 .numberList li {
   font-weight: 400;
   cursor: pointer;
-  border: solid 1px #272727;
+  border: solid 1px #555;
   padding-bottom: 15px;
   padding-top: 3px;
   padding-left: 10px;
@@ -36,8 +36,8 @@
 
 .active {
   color: #111;
-  background-color: #62aaa1;
-  border: solid 1px #62aaa1;
+  background-color: #2bfab7;
+  border: solid 1px #2bfab7;
 }
 .off {
   font-weight: 400;

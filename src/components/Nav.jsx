@@ -20,7 +20,7 @@ export default function Nav() {
   const { isAuthenticated } = useAuth0();
 
   function switchMode() {
-    if (window.scrollY >= 800) {
+    if (window.scrollY >= 400) {
       setNav(true);
     } else {
       setNav(false);
@@ -36,7 +36,11 @@ export default function Nav() {
       <div className={`${N.container} ${nav ? N.active : N.container}`}>
         <div className={N.logoAndMenu}>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <h1>Logo</h1>
+            <img
+              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670804226/cqws5x8n/logo_play_expert_wv0yh2.png"
+              alt=""
+              className={N.logo}
+            />
           </Link>
           <ul className={N.navList}>
             <Link to="/categories" style={{ textDecoration: "none" }}>

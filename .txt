@@ -1,7 +1,7 @@
 PALETA DE COLORES:
 
 LIGHT MODE
-Verde agua: #62AAA1
+Verde agua: #2bfab7
 Violeta: #310C3F (en divs muy anchos, preferible con degradé: #310C3F > #8A2E7E)
 Magenta: #8A2E7E
 "Casi blanco": #E6E6E9

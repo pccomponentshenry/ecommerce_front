@@ -14,13 +14,15 @@
 .categoryContainer {
   width: 150px;
   height: 100vh;
-  margin-top: 40px;
 }
 
 .Container h6 {
-  color: #62aaa1;
+  color: #2bfab7;
   text-transform: uppercase;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
+  position: relative;
+  top: 10px;
 }
 
 .Container span {
@@ -30,12 +32,8 @@
   font-size: 14px;
 }
 
-.catCont {
-  height: 20px;
-}
-
 .Container span:hover {
-  color: #62aaa1;
+  color: #2bfab7;
   transition: 0.15s ease-in-out;
 }
 
@@ -49,14 +47,12 @@ select {
   margin-top: 5px;
   font-size: 14px;
   width: 150px;
+  position: relative;
+  top: 15px;
 }
 
 option {
   color: #000;
-}
-
-.select {
-  margin-top: 5px;
 }
 
 .order button {
@@ -71,8 +67,8 @@ option {
 
 .order button:hover {
   transition: 0.15s ease-in-out;
-  border: solid 1px #62aaa1;
-  background-color: #62aaa1;
+  border: solid 1px #2bfab7;
+  background-color: #2bfab7;
   color: #111;
 }
 
@@ -80,27 +76,31 @@ hr {
   border: none;
   border-bottom: 1px solid #fff;
 }
-
+.order button {
+  position: relative;
+  top: 10px;
+}
+.line {
+  position: relative;
+}
 .clearFilters {
   width: 150px;
-  /* height: 100vh; */
   margin-top: 20px;
 }
 .clearFilters button {
   background-color: transparent;
-  border: solid 1px #62aaa1;
-  color: #62aaa1;
+  border: solid 1px #2bfab7;
+  color: #2bfab7;
   border-radius: 10px;
   width: 150px;
 }
 .clearFilters button:hover {
   transition: 0.15s ease-in-out;
-  background-color: #62aaa1;
+  background-color: #2bfab7;
   color: #272727;
 }
 .sharedInput {
-  /* margin-top: 30px; */
-  color: #62aaa1;
+  color: #2bfab7;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -116,7 +116,7 @@ hr {
 }
 
 .inputSmall {
-  margin-top: 10px;
+  margin-top: 20px;
   display: inline;
   width: 30%;
   height: 25px;
@@ -129,16 +129,29 @@ hr {
 
 .sharedInput button {
   margin-left: 15px;
+  position: relative;
+  top: 2px;
   background-color: transparent;
-  color: #62aaa1;
-  border: solid 1px #62aaa1;
+  color: #2bfab7;
+  border: solid 1px #2bfab7;
+  height: 25px;
+}
+.sharedInput button:hover {
+  color: #fff;
+  border: solid 1px #fff;
+  transition: 0.15s;
 }
 .sharedInput input {
   background-color: transparent;
-  color: #62aaa1;
-  border: solid 1px #62aaa1;
+  color: #fff;
+  font-weight: 200;
+  border: solid 1px #272727;
   outline: none;
   font-size: 14px;
+}
+.sharedInput input::placeholder {
+  font-size: 14px;
+  font-weight: 200;
 }
 .sharedInput input:hover,
 .sharedInput button:hover {

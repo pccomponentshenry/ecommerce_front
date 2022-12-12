@@ -10,6 +10,7 @@ import {
   allProducts,
   getFiltered,
   clearState,
+  clearError,
   getProductsByName,
 } from "../redux/actions";
 import NotFound from "../alerts/NotFound";
@@ -72,6 +73,7 @@ export default function Home() {
   }, [cat, brand]);
 
   function handleInputChange(e) {
+    clearError();
     e.preventDefault();
     setName(e.target.value);
     dispatch(getProductsByName(name));
@@ -89,6 +91,7 @@ export default function Home() {
             handleFilter={handleFilter}
             setCat={setCat}
             setBrand={setBrand}
+            setName={setName}
           />
           <div className={H.searchBarCont}>
             <div className={H.searchBar}>

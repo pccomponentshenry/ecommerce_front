@@ -3,7 +3,7 @@
   height: 89vh;
   overflow: hidden;
   position: fixed;
-  top: 60px;
+  top: 70px;
   right: 0px;
   z-index: 900;
   background-color: #fafafa;
@@ -93,6 +93,10 @@
   font-size: 20px;
   top: 5px;
 }
+.imgCont {
+  width: 100%;
+  overflow: hidden;
+}
 .imgCont img {
   width: 132%;
 }
@@ -103,6 +107,7 @@
   left: 50px;
   font-weight: 600;
   color: #fff;
+  font-size: 35px;
 }
 
 .imgCont p {

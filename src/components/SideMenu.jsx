@@ -3,6 +3,7 @@ import S from "../styles/SideMenu.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearError,
   filterProducts,
   getBrands,
   getCategories,
@@ -52,12 +53,14 @@ export default function SideMenu() {
   };
 
   const clearFilters = () => {
+    dispatch(clearError());
     dispatch(getFiltered(products));
     document.querySelectorAll("input[type=text]").forEach(element => {
       element.value = "";
     });
     setBrand("");
     setCat("");
+    setName("");
     setPrice(prev => ({ ...prev, min: 0, max: 100000000 }));
     document.querySelectorAll("select")[0].selectedIndex = 0;
     document.querySelectorAll("select")[1].selectedIndex = 0;
@@ -76,17 +79,6 @@ export default function SideMenu() {
     <div className={S.Container}>
       <div className={S.subContainer}>
         <div className={S.categoryContainer}>
-          {/*<hr />
-           <h6>Categories</h6>
-          {categories.map((el, i) => (
-            <>
-              <div className={S.catCont} key={i}>
-                <span>{el.name}</span>
-                <br />
-              </div>
-            </>
-          ))} */}
-
           <div className={S.filterContainer}>
             <hr />
             <h6>Filter by:</h6>
