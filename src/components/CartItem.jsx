@@ -60,8 +60,11 @@ export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
         }
       }
     }
-    getQuantities(state, productId);
-    setClicked(clicked + 1);
+    setTotalPrice(
+      priceProduct.length > 0 && cart.length > 0
+        ? priceProduct * cart.length
+        : parseFloat(priceState).toFixed(2) * 1
+    );
   };
 
   return (
