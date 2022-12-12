@@ -130,10 +130,26 @@ function rootReducer(state = initialState, action) {
         error: action.payload,
       };
     case ADD_TO_CART:
-      return {
-        ...state,
-        cart: state.cart.concat(action.payload),
-      };
+      let newItem = state.products.find(el => el.id === action.payload.id);
+      let itemInCart = state.cart.find(item => item.id === newItem.id);
+      return itemInCart
+        ? {
+            ...state,
+            cart: state.cart.map(item =>
+              item.id === newItem.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            ),
+          }
+        : {
+            ...state,
+            cart: [...state.cart, { ...newItem, quantity: 1 }],
+          };
+
+    // return {
+    //   ...state,
+    //   cart: state.cart.concat(action.payload),
+    // };
 
     case CLEAR_CART:
       localStorage.clear();

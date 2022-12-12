@@ -117,13 +117,15 @@ export const addToCartAction = payload => async dispatch => {
   const cart = localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [];
+    const id = payload.id
+    const price = payload.price
   const duplicates = cart.filter(c => c.id === payload.id);
-
+  localStorage.setItem(id, JSON.stringify(1));
+  localStorage.setItem(
+    "price " + id,
+    JSON.stringify(price)
+  );
   if (duplicates.length === 0) {
-    const productToAdd = {
-      ...payload,
-      count: 1,
-    };
     cart.push(payload);
     localStorage.setItem("cart", JSON.stringify(cart));
     dispatch({
