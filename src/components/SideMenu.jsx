@@ -76,19 +76,8 @@ export default function SideMenu() {
     <div className={S.Container}>
       <div className={S.subContainer}>
         <div className={S.categoryContainer}>
-          {/*<hr />
-           <h6>Categories</h6>
-          {categories.map((el, i) => (
-            <>
-              <div className={S.catCont} key={i}>
-                <span>{el.name}</span>
-                <br />
-              </div>
-            </>
-          ))} */}
-
           <div className={S.filterContainer}>
-            <hr />
+            <hr className={S.line} />
             <h6>Filter by:</h6>
             <div className={S.select}>
               <select
@@ -99,9 +88,7 @@ export default function SideMenu() {
                   setCat(e.target.value);
                 }}
               >
-                <option defaultValue={"default"} disabled>
-                  Category
-                </option>
+                <option defaultValue={"default"}>Category</option>
                 {categories.map((el, i) => (
                   <option key={i} value={el.id}>
                     {el.name}
@@ -120,9 +107,7 @@ export default function SideMenu() {
                   setBrand(e.target.value);
                 }}
               >
-                <option defaultValue={"default"} disabled>
-                  Brand
-                </option>
+                <option defaultValue={"default"}>Brand</option>
                 {brands.map((el, i) => (
                   <option key={i} value={el.id}>
                     {el.name}
@@ -144,11 +129,11 @@ export default function SideMenu() {
 
             <div className={S.sharedInput}>
               <hr />
-              <div className={S.label}>Price range</div>
+              <h6 className={S.label}>Price range</h6>
               <input
                 key="min_price"
                 id="min"
-                type="text"
+                type="number"
                 name="min_price"
                 placeholder="Min"
                 onBlur={handlePriceChange}
@@ -157,14 +142,14 @@ export default function SideMenu() {
               <input
                 key="max_price"
                 id="max"
-                type="text"
+                type="number"
                 name="max_price"
                 placeholder="Max"
                 onBlur={handlePriceChange}
                 className={`${S.inputSmall} ${S.inputRight}`}
               />
               <button className={S.button} onClick={handlePriceSubmit}>
-                &#8680;
+                ➟
               </button>
               {priceError && <span>{priceError}</span>}
             </div>

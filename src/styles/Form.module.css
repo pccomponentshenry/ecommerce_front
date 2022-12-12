@@ -23,13 +23,13 @@
 }
 .inputCont {
   cursor: pointer;
-  border: dashed 1px #62aaa1;
+  border: dashed 1px #2bfab7;
   height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  color: #62aaa1;
+  color: #2bfab7;
   font-size: 100px;
   font-weight: 200;
   text-align: center;
@@ -90,7 +90,7 @@ input::-webkit-inner-spin-button {
 .stock input,
 .price input,
 .category input {
-  border: solid 1px #62aaa1;
+  border: solid 1px #2bfab7;
   background-color: transparent;
   border-radius: 5px;
   color: #fff;
@@ -123,7 +123,7 @@ input::-webkit-inner-spin-button {
   height: 100px;
   margin-left: 10px;
   background-color: transparent;
-  border: solid 1px #62aaa1;
+  border: solid 1px #2bfab7;
   border-radius: 10px;
   color: #fff;
   padding: 10px;
@@ -253,9 +253,9 @@ input::-webkit-inner-spin-button {
 
 .activeBtn {
   background: transparent;
-  border: solid 1px #62aaa1;
+  border: solid 1px #2bfab7;
   border-radius: 10px;
-  color: #62aaa1;
+  color: #2bfab7;
   font-size: 14px;
   padding-top: 1px;
   padding-left: 10px;
@@ -286,7 +286,7 @@ input::-webkit-inner-spin-button {
 }
 
 .activeBtn:hover {
-  background-color: #62aaa1;
+  background-color: #2bfab7;
   color: #272727;
   transition: 0.15s ease-in-out;
 }
@@ -294,14 +294,14 @@ input::-webkit-inner-spin-button {
   position: absolute;
   margin-top: 250px;
   background-color: transparent;
-  color: #62aaa1;
+  color: #2bfab7;
   border-radius: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  border: solid 1px #62aaa1;
+  border: solid 1px #2bfab7;
 }
 .loadBtn:hover {
-  background-color: #62aaa1;
+  background-color: #2bfab7;
   color: #111111;
   transition: 0.15s ease-in-out;
 }
@@ -343,7 +343,7 @@ input::-webkit-inner-spin-button {
   left: 270px;
   top: 35px;
   font-size: 18px;
-  color: #62aaa1;
+  color: #2bfab7;
   cursor: pointer;
 }
 .btnCont {
@@ -354,8 +354,8 @@ input::-webkit-inner-spin-button {
   margin-left: 30px;
   margin-right: 30px;
   background-color: transparent;
-  color: #62aaa1;
-  border: solid 1px #62aaa1;
+  color: #2bfab7;
+  border: solid 1px #2bfab7;
   border-radius: 20px;
   padding-left: 10px;
   padding-right: 10px;
@@ -363,7 +363,7 @@ input::-webkit-inner-spin-button {
 
 .btn:hover {
   color: #272727;
-  background-color: #62aaa1;
+  background-color: #2bfab7;
   transition: 0.15s ease-in-out;
 }
 

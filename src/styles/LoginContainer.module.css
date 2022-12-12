@@ -21,14 +21,14 @@
 .logoutAndProfile button {
   background-color: transparent;
   height: 30px;
-  color: #62aaa1;
-  border: solid 1px #62aaa1;
+  color: #2bfab7;
+  border: solid 1px #2bfab7;
   border-radius: 8px;
   font-size: 16px;
   margin-left: 30px;
 }
 .logoutAndProfile button:hover {
-  background-color: #62aaa1;
+  background-color: #2bfab7;
   color: #000;
   transition: 0.15s ease-in-out;
 }
@@ -36,8 +36,8 @@
 .loginBtn {
   background-color: transparent;
   height: 30px;
-  color: #62aaa1;
-  border: solid 1px #62aaa1;
+  color: #2bfab7;
+  border: solid 1px #2bfab7;
   border-radius: 8px;
   font-size: 16px;
   margin-left: 30px;

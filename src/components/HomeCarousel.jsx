@@ -8,40 +8,53 @@ function HomeCarousel() {
     <div>
       <Carousel>
         <Carousel.Item>
-          <img className={HC.image} src={VR} alt="First slide" />
+          <div className={HC.imageCont}>
+            <img
+              className={HC.image}
+              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670798737/cqws5x8n/vr_jclrwm.jpg"
+              alt="Third slide"
+            />
+          </div>
           <Carousel.Caption>
             <div className={HC.caption}>
-              <h3 className={HC.title}>First slide label</h3>
+              <h3 className={HC.title}>Feel the experience of VR </h3>
               <p className={HC.subtitle}>
-                Nulla vitae elit libero, a pharetra augue mollis interdum.
+                Change your gaming experience with OWO's haptic gaming system
               </p>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className={HC.image} src={headphones} alt="Second slide" />
+          <div className={HC.imageCont}>
+            <img
+              className={HC.image}
+              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670799069/cqws5x8n/microphone_v3chtm.jpg"
+              alt="Third slide"
+            />
+          </div>
 
           <Carousel.Caption>
             <div className={HC.caption}>
-              <h3 className={HC.title}>Second slide label</h3>
+              <h3 className={HC.title}>The best Mic for your videos</h3>
               <p className={HC.subtitle}>
-                Nulla vitae elit libero, a pharetra augue mollis interdum.
+                We have the best recording microphones from the biggest brands
               </p>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img
-            className={HC.image}
-            src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670274363/cqws5x8n/gamer_ppmlxi.jpg"
-            alt="Third slide"
-          />
-
+          <div className={HC.imageCont}>
+            <img
+              className={HC.image}
+              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670798389/cqws5x8n/headphones_o4iddc.jpg"
+              alt="Third slide"
+            />
+          </div>
           <Carousel.Caption>
-            <div className={HC.caption}>
-              <h3 className={HC.title}>Third slide label</h3>
+            <div className={HC.captionHeadphones}>
+              <h3 className={HC.title}>Headphones to shut out the world</h3>
               <p className={HC.subtitle}>
-                Nulla vitae elit libero, a pharetra augue mollis interdum.
+                The best wireless noise-cancelling headphones
               </p>
             </div>
           </Carousel.Caption>
