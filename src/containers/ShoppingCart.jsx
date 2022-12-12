@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "../components/CartItem";
 import C from "../styles/Cards.module.css";
+import Payment from "../stripe/Payment.jsx";
 
 import { clear_cart, remove_one_from_cart } from "../redux/actions/index.js";
 
@@ -32,6 +33,7 @@ export default function ShoppingCart() {
       ))}
 
       <button onClick={clearCart}>Clean Cart</button>
+      <Payment/>
     </div>
   );
 }
