@@ -9,6 +9,8 @@ const stripePromese = loadStripe("pk_test_51MCUPjIxZNdfrxaORwUsMY8yxCPm4xhLtIsru
 function Payment() {
     const cart = useSelector(state => state.cart);
     console.log(cart)
+    let claves = Object.keys(localStorage);
+    console.log("este es quant",claves);
 
     const handleClick = async (e) => {
         e.preventDefault();
@@ -16,7 +18,7 @@ function Payment() {
         cart.map(e => {
             let line = {
               name:e.title,
-              quantity:e.quantity,
+              quantity:claves.includes(e.id)?localStorage.getItem(e.id):1,
               price:Math.round(e.price * 100),
               images:[e.img],  
             }
@@ -45,7 +47,7 @@ function Payment() {
   return (
     <div>
         <button role="link" onClick={handleClick}>
-            REALIZAR PAGO
+         Start shopping
         </button>
     </div>
   )

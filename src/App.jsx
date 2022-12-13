@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { populateDB } from "./redux/actions";
 import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import Payment from "./stripe/Payment";
+
 
 function App() {
   populateDB();
@@ -31,7 +31,6 @@ function App() {
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/payment" element={<Payment/>} />
         </Routes>
       </BrowserRouter>
     </div>

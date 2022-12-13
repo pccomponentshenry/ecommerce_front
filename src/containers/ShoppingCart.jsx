@@ -38,22 +38,43 @@ export default function ShoppingCart(props) {
   //puedo recorrer el cart para sumar los precios,pero falta de dnd vienen las cantidades
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        position: "absolute",
-        top: "50%",
-      }}
-    >
-      {cart.map((el, index) => (
-        <CartItem key={index} data={el} deleteFromCart={deleteFromCart} />
-      ))}
+    <>
+      <div className={S.container}>
+        <div className={S.titleCont}>
+          <h4 className={S.title}>Shopping Cart</h4>
+        </div>
 
-      <button onClick={clearCart}>Clean Cart</button>
-      <div>
-        <Payment/>
+        <div className={S.clearCont}>
+          <button className={S.clearBtn} onClick={clearCart}>
+            Clean Cart
+          </button>
+        </div>
+        <div className={S.cartArea}>
+          {cart.map((el, index) => (
+            <CartItem
+              setTotalPrice={setTotalPrice}
+              clicked={clicked}
+              setClicked={setClicked}
+              totalPrice={totalPrice}
+              key={index}
+              data={el}
+              deleteFromCart={deleteFromCart}
+            />
+          ))}
+        </div>
+        <h3 className={S.total}>Total: ${parseFloat(forPay).toFixed(2)}</h3>
+        <div className={S.startShopping}>
+          <span><Payment/></span>
+        </div>
       </div>
-    </div>
+      <div className={S.imgCont}>
+        <h1>Just one step to become a pro</h1>
+        <p>Customize your PC and level up!</p>
+        <img
+          src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670795674/cqws5x8n/gamer_urddyh.jpg"
+          alt=""
+        />
+      </div>
+    </>
   );
 }
