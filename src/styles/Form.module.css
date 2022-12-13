@@ -57,11 +57,12 @@
 
 .imgCont img {
   cursor: pointer;
-  height: 200px;
-  display: flex;
+  height: 250px;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  position: relative;
+  top: 60px;
 }
 
 .titleCont {
@@ -84,7 +85,6 @@
   width: 50%;
   float: right;
   padding: 10px;
-  /* border: solid 1px #272727; */
   border-radius: 10px;
   position: absolute;
   left: 400px;
@@ -116,6 +116,9 @@ input::-webkit-inner-spin-button {
   color: #fff;
   font-weight: 200;
 }
+.brandAndCatContainer select {
+  border: solid 1px #2bfab7;
+}
 .name input::placeholder,
 .brand input::placeholder {
   color: #797979;
@@ -135,12 +138,11 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-direction: column;
   position: absolute;
-  margin-top: 40px;
-  right: 0px;
+  margin-top: 60px;
+  width: 350px;
 }
 .description textarea {
-  width: 70%;
-  height: 100px;
+  height: 60px;
   margin-left: 10px;
   background-color: transparent;
   border: solid 1px #2bfab7;
@@ -156,8 +158,8 @@ input::-webkit-inner-spin-button {
   font-size: 12px;
   font-weight: 200;
   position: absolute;
-  margin-top: 170px;
-  right: 110px;
+  margin-top: 150px;
+  left: 25px;
 }
 .descriptionCont {
   margin-top: 20px;
@@ -172,8 +174,6 @@ input::-webkit-inner-spin-button {
 
 .stock {
   width: 230px;
-  position: absolute;
-  left: 20px;
 }
 .stock input {
   width: 20%;
@@ -188,7 +188,32 @@ input::-webkit-inner-spin-button {
   bottom: 5px;
 }
 /* STOCK */
+.stockAndPrice {
+  display: flex;
+  width: 400px;
+  position: absolute;
+  margin-top: 180px;
+  left: 20px;
+}
+/* PRICE */
 
+.price {
+  width: 230px;
+}
+.price input {
+  width: 20%;
+  height: 20px;
+  margin-left: 10px;
+}
+.price span {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+  position: relative;
+  bottom: 5px;
+}
+
+/* PRICE */
 /* CATEGORY */
 
 .category {
@@ -210,27 +235,6 @@ input::-webkit-inner-spin-button {
   top: 15px;
 }
 /* CATEGORY */
-/* PRICE */
-
-.price {
-  width: 230px;
-  position: absolute;
-  right: 25px;
-}
-.price input {
-  width: 20%;
-  height: 20px;
-  margin-left: 10px;
-}
-.price span {
-  color: #fff;
-  font-size: 12px;
-  font-weight: 200;
-  position: relative;
-  bottom: 5px;
-}
-
-/* PRICE */
 /* NAME */
 .name {
   position: absolute;
@@ -277,10 +281,7 @@ input::-webkit-inner-spin-button {
   position: relative;
   top: 20px;
 }
-/* .brand select {
-  position: relative;
-  top: 15px;
-} */
+
 /* BRAND */
 /* BUTTON */
 
@@ -294,10 +295,12 @@ input::-webkit-inner-spin-button {
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 10px;
-  margin-top: 200px;
+  position: relative;
+  top: 250px;
   cursor: pointer;
   width: 135px;
   height: 25px;
+  z-index: 600;
 }
 
 .disabledBtn {
@@ -310,7 +313,7 @@ input::-webkit-inner-spin-button {
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 10px;
-  margin-top: 200px;
+  margin-top: 250px;
   width: 135px;
   height: 25px;
 }
