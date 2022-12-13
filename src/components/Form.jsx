@@ -94,7 +94,9 @@ export default function Form() {
       input.description.length > 0
     ) {
       setDisable(false);
-      console.log(disable);
+    } else {
+      console.log(error);
+      setDisable(true);
     }
 
     return errors;
@@ -154,12 +156,27 @@ export default function Form() {
   }, [image]);
 
   const handleSubmit = e => {
-    e.preventDefault();
-    setActive(true);
-    dispatch(postProduct(input));
-    setDisable(true);
-    clearForm();
-    setError({});
+    console.log("entré");
+    if (
+      !error.name &&
+      !error.brand &&
+      !error.price &&
+      !error.stock &&
+      !error.description &&
+      !error.img &&
+      !error.category &&
+      !error.brand &&
+      input.description.length > 0
+    ) {
+      e.preventDefault();
+      setActive(true);
+      dispatch(postProduct(input));
+      setDisable(true);
+      clearForm();
+      setError({});
+    } else {
+      console.log(error);
+    }
   };
 
   return (
@@ -287,35 +304,8 @@ export default function Form() {
               </div>
             </div>
           </div>
-          {/* <div className={F.stock}>
-            <label>Stock: </label>
-            <input
-              value={input.stock || ""}
-              type="number"
-              name="stock"
-              min="0"
-              onBlur={e => errorSetting(e)}
-              onChange={e => handleChange(e)}
-            />
-            <div>{error.stock && <span>{error.stock}</span>}</div>
-          </div> */}
 
-          {/* <div className={F.price}>
-            <label>Price: </label>
-            <input
-              value={input.price || ""}
-              type="number"
-              name="price"
-              min="0"
-              onBlur={e => errorSetting(e)}
-              onChange={e => handleChange(e)}
-            />
-            <div className={F.errorPrice}>
-              {error.price && <span>{error.price}</span>}
-            </div>
-          </div> */}
-
-          {/* <div className={F.descriptionCont}>
+          <div className={F.descriptionCont}>
             <div className={F.description}>
               <label>Description: </label>
               <textarea
@@ -334,13 +324,46 @@ export default function Form() {
               ></textarea>
             </div>
             {error.brand && <span>{error.description}</span>}
-          </div> */}
+          </div>
+          <div className={F.stockAndPrice}>
+            <div className={F.stock}>
+              <label>Stock: </label>
+              <input
+                value={input.stock || ""}
+                type="number"
+                name="stock"
+                min="0"
+                onBlur={e => errorSetting(e)}
+                onChange={e => handleChange(e)}
+              />
+              <div>{error.stock && <span>{error.stock}</span>}</div>
+            </div>
 
+            <div className={F.price}>
+              <label>Price: </label>
+              <input
+                value={input.price || ""}
+                type="number"
+                name="price"
+                min="0"
+                onBlur={e => {
+                  errorSetting(e);
+                  handleValidate(input);
+                }}
+                onChange={e => handleChange(e)}
+              />
+              <div className={F.errorPrice}>
+                {error.price && <span>{error.price}</span>}
+              </div>
+            </div>
+          </div>
           <div className={F.formBtn}>
             <button
               type="submit"
-              // disabled={!image.name || !input.description || !input.stock}
-              className={disable ? F.disabledBtn : F.activeBtn}
+              className={disable === false ? F.activeBtn : F.disabledBtn}
+              onClick={e => {
+                disable && e.preventDefault();
+              }}
             >
               Publish product
             </button>
