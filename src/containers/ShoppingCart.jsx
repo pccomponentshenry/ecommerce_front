@@ -4,6 +4,7 @@ import CartItem from "../components/CartItem";
 import S from "../styles/ShoppingCart.module.css";
 import { useState } from "react";
 import { clear_cart, remove_one_from_cart } from "../redux/actions/index.js";
+import Payment from "../stripe/Payment";
 
 export default function ShoppingCart(props) {
   const cart = useSelector(state => state.cart);
@@ -63,7 +64,7 @@ export default function ShoppingCart(props) {
         </div>
         <h3 className={S.total}>Total: ${parseFloat(forPay).toFixed(2)}</h3>
         <div className={S.startShopping}>
-          <span>Start shopping</span>
+          <span><Payment/></span>
         </div>
       </div>
       <div className={S.imgCont}>

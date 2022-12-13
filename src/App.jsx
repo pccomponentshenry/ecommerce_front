@@ -11,6 +11,7 @@ import { populateDB } from "./redux/actions";
 import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
+
 function App() {
   populateDB();
 
