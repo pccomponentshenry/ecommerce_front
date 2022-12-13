@@ -64,7 +64,7 @@ export default function ShoppingCart(props) {
         </div>
         <h3 className={S.total}>Total: ${parseFloat(forPay).toFixed(2)}</h3>
         <div className={S.startShopping}>
-          <span><Payment/></span>
+          <Payment />
         </div>
       </div>
       <div className={S.imgCont}>

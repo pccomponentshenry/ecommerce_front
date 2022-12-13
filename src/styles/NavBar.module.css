@@ -71,6 +71,15 @@
   margin-top: 20px;
   cursor: pointer;
 }
+.cartNumber {
+  color: #2bfab7;
+  font-size: 12px;
+  position: relative;
+  bottom: 5px;
+  left: 30px;
+  cursor: pointer;
+  z-index: 600;
+}
 .mode {
   height: 15px;
   position: relative;

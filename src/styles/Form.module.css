@@ -7,6 +7,22 @@
   float: left;
   width: 17%;
 }
+.container h5 {
+  color: #fff;
+  font-size: 16px;
+  position: relative;
+  top: 50px;
+  right: 50px;
+}
+/* .inputFile {
+  position: relative;
+  top: 350px;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 17%;
+} */
+
 .container h6 {
   color: #fff;
   font-size: 14px;
@@ -23,8 +39,9 @@
 }
 .inputCont {
   cursor: pointer;
-  border: dashed 1px #2bfab7;
-  height: 200px;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%232BFAB7FF' stroke-width='3' stroke-dasharray='50%25%2c 13%25' stroke-dashoffset='86' stroke-linecap='butt'/%3e%3c/svg%3e");
+  border-radius: 10px;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +50,9 @@
   font-size: 100px;
   font-weight: 200;
   text-align: center;
-  width: 120%;
+  width: 250px;
+  position: relative;
+  top: 60px;
 }
 
 .imgCont img {
@@ -48,11 +67,12 @@
 .titleCont {
   color: #fff;
   position: relative;
-  top: 100px;
+  top: 130px;
   left: 105px;
 }
 .titleCont h5 {
   font-weight: 600;
+  font-size: 25px;
 }
 
 .titleCont h6 {
@@ -61,13 +81,14 @@
   margin-bottom: 20px;
 }
 .formContainer {
-  width: 40%;
+  width: 50%;
   float: right;
   padding: 10px;
-  border: solid 1px #272727;
+  /* border: solid 1px #272727; */
   border-radius: 10px;
-  position: relative;
-  right: 200px;
+  position: absolute;
+  left: 400px;
+  margin-top: 200px;
   top: 50px;
 }
 .fullWidth {
@@ -85,7 +106,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-.name input,
 .brand input,
 .stock input,
 .price input,
@@ -173,8 +193,8 @@ input::-webkit-inner-spin-button {
 
 .category {
   width: 230px;
-  position: absolute;
-  margin-top: 60px;
+  /* position: absolute;
+  margin-top: 60px; */
   left: 20px;
 }
 .category input {
@@ -187,7 +207,7 @@ input::-webkit-inner-spin-button {
   font-size: 12px;
   font-weight: 200;
   position: relative;
-  top: 25px;
+  top: 15px;
 }
 /* CATEGORY */
 /* PRICE */
@@ -213,7 +233,6 @@ input::-webkit-inner-spin-button {
 /* PRICE */
 /* NAME */
 .name {
-  width: 190px;
   position: absolute;
   left: 20px;
 }
@@ -227,13 +246,27 @@ input::-webkit-inner-spin-button {
   font-size: 12px;
   font-weight: 200;
 }
+.name input {
+  border: none;
+  border-bottom: solid 1px #2bfab7;
+  background-color: transparent;
+  position: relative;
+  bottom: 10px;
+  left: 5px;
+  color: #fff;
+  font-weight: 200;
+}
 /* NAME */
-
+.brandAndCatContainer {
+  display: flex;
+  position: relative;
+  top: 50px;
+  right: 170px;
+  width: 50%;
+}
 /* BRAND */
 .brand {
   width: 190px;
-  position: absolute;
-  right: 65px;
 }
 
 .brand span {
@@ -244,10 +277,10 @@ input::-webkit-inner-spin-button {
   position: relative;
   top: 20px;
 }
-.brand select {
+/* .brand select {
   position: relative;
   top: 15px;
-}
+} */
 /* BRAND */
 /* BUTTON */
 

@@ -5,7 +5,7 @@ import cart from "../Images/cart.png";
 import mode from "../Images/mode.png";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProductsByName } from "../redux/actions";
 import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
@@ -16,7 +16,7 @@ export default function Nav() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [showCart, setShowCart] = useState(false);
-
+  const cartNumber = useSelector(state => state.cart);
   const { isAuthenticated } = useAuth0();
 
   function switchMode() {
@@ -69,17 +69,14 @@ export default function Nav() {
               <LoginButton />
             )}
           </h6>
-          <Link to="/cart">
-            <img
-              src={cart}
-              className={N.cart}
-              alt="cart icon"
-              // onClick={() => {
-              //   setShowCart(true);
-
-              // }}
-            />
-          </Link>
+          <div>
+            {cartNumber.length > 0 && (
+              <span className={N.cartNumber}>{cartNumber.length}</span>
+            )}
+            <Link to="/cart">
+              <img src={cart} className={N.cart} alt="cart icon" />
+            </Link>
+          </div>
           <img
             src={mode}
             alt=""

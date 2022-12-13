@@ -32,6 +32,7 @@ export default function Form() {
   const [image, setImage] = useState([]);
   const [url, setUrl] = useState("");
   const [active, setActive] = useState(false);
+  const [event, setEvent] = useState({});
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState({});
   const [input, setInput] = useState({
@@ -78,7 +79,7 @@ export default function Form() {
     if (!input.description || input.description === "") {
       errors.description = "*A description is required";
     }
-    if (!input.img[0]) {
+    if (!input.img) {
       errors.img = "*You must upload at least one image ";
     }
     if (
@@ -142,12 +143,15 @@ export default function Form() {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
   const loadImage = e => {
-    e.preventDefault(e);
     if (image.name) {
       handleChangeImg(e);
       errorImgSetting(e);
     }
   };
+
+  React.useEffect(() => {
+    loadImage(event);
+  }, [image]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -194,26 +198,19 @@ export default function Form() {
         </div>
 
         <div className={F.container}>
+          <h5>Upload an image</h5>
           <input
             type="file"
-            //HAY QUE ASIGNAR UN VALUE VÁLIDO PARA BORRAR EL ESTADO? O SE PISA CON EL PRÓXIMO ARCHIVO.
             name="uploadfile"
             multiple="multiple"
             id="img"
             style={{ display: "none" }}
             onChange={e => {
               setImage(e.target.files[0]);
+              setEvent(e);
             }}
           />
-          <button
-            disabled={!image.name}
-            className={image.name ? F.loadBtn : F.disabled}
-            onClick={e => {
-              loadImage(e);
-            }}
-          >
-            Load image
-          </button>
+
           {!input.img.length ? (
             <label className={F.inputCont} htmlFor="img">
               +
@@ -231,24 +228,46 @@ export default function Form() {
             <div className={F.name}>
               <label>Name of the product: </label>
               <input
-                value={input.name}
+                value={input.name || ""}
                 type="text"
                 name="name"
-                placeholder="Name"
+                placeholder=""
                 onBlur={e => errorSetting(e)}
                 onChange={e => handleChange(e)}
               />
-              {error.name && <span>{error.name}</span>}
+              <div>{error.name && <span>{error.name}</span>}</div>
             </div>
           </div>
+          <div className={F.brandAndCatContainer}>
+            <div>
+              <div className={F.brand}>
+                <select
+                  name="brand"
+                  value={input.brand}
+                  id="Brand"
+                  onBlur={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                  onChange={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                >
+                  <option defaultValue={"DEFAULT"}>Brand</option>
+                  {brands.map((el, i) => (
+                    <option key={i}>{el.name}</option>
+                  ))}
+                </select>
+                {error.brand && <span>{error.brand}</span>}
+              </div>
+            </div>
 
-          <div className={F.fullWidth}>
-            <div className={F.brand}>
+            <div className={F.category}>
               <select
-                name="brand"
-                defaultValue={"DEFAULT"}
-                value={input.brand}
-                id="Brand"
+                name="category"
+                id="Category"
+                value={input.category}
                 onBlur={e => {
                   handleChange(e);
                   errorSetting(e);
@@ -258,19 +277,20 @@ export default function Form() {
                   errorSetting(e);
                 }}
               >
-                <option defaultValue={"DEFAULT"}>Brand</option>
-                {brands.map((el, i) => (
+                <option defaultValue={"DEFAULT"}>Category</option>
+                {cat.map((el, i) => (
                   <option key={i}>{el.name}</option>
                 ))}
               </select>
-              {error.brand && <span>{error.brand}</span>}
+              <div className={F.errorStock}>
+                {error.category && <span>{error.category}</span>}
+              </div>
             </div>
           </div>
-
-          <div className={F.stock}>
+          {/* <div className={F.stock}>
             <label>Stock: </label>
             <input
-              value={input.stock}
+              value={input.stock || ""}
               type="number"
               name="stock"
               min="0"
@@ -278,12 +298,12 @@ export default function Form() {
               onChange={e => handleChange(e)}
             />
             <div>{error.stock && <span>{error.stock}</span>}</div>
-          </div>
+          </div> */}
 
-          <div className={F.price}>
+          {/* <div className={F.price}>
             <label>Price: </label>
             <input
-              value={input.price}
+              value={input.price || ""}
               type="number"
               name="price"
               min="0"
@@ -293,34 +313,9 @@ export default function Form() {
             <div className={F.errorPrice}>
               {error.price && <span>{error.price}</span>}
             </div>
-          </div>
+          </div> */}
 
-          <div className={F.category}>
-            <select
-              name="category"
-              defaultValue={"DEFAULT"}
-              id="Category"
-              value={input.category}
-              onBlur={e => {
-                handleChange(e);
-                errorSetting(e);
-              }}
-              onChange={e => {
-                handleChange(e);
-                errorSetting(e);
-              }}
-            >
-              <option defaultValue={"DEFAULT"}>Category</option>
-              {cat.map((el, i) => (
-                <option key={i}>{el.name}</option>
-              ))}
-            </select>
-            <div className={F.errorStock}>
-              {error.category && <span>{error.category}</span>}
-            </div>
-          </div>
-
-          <div className={F.descriptionCont}>
+          {/* <div className={F.descriptionCont}>
             <div className={F.description}>
               <label>Description: </label>
               <textarea
@@ -339,7 +334,7 @@ export default function Form() {
               ></textarea>
             </div>
             {error.brand && <span>{error.description}</span>}
-          </div>
+          </div> */}
 
           <div className={F.formBtn}>
             <button
