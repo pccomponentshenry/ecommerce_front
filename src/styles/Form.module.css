@@ -7,6 +7,15 @@
   float: left;
   width: 17%;
 }
+.inputFile {
+  position: relative;
+  top: 350px;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 17%;
+}
+
 .container h6 {
   color: #fff;
   font-size: 14px;

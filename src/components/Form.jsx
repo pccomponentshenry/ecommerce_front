@@ -19,8 +19,6 @@ export default function Form() {
     category: "",
     creator: creator,
   };
-  //console.log(creator)
-  //console.log(user.email)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBrands());
@@ -31,9 +29,11 @@ export default function Form() {
   const cat = useSelector(state => state.categories);
   const [image, setImage] = useState([]);
   const [url, setUrl] = useState("");
+  const [event, setEvent] = useState({});
   const [active, setActive] = useState(false);
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState({});
+
   const [input, setInput] = useState({
     name: "",
     brand: "",
@@ -44,7 +44,7 @@ export default function Form() {
     category: "",
     creator: creator,
   });
-
+  const [allImages, setAllImages] = useState([]);
   function clearForm() {
     setInput({ ...initialState });
   }
@@ -78,7 +78,7 @@ export default function Form() {
     if (!input.description || input.description === "") {
       errors.description = "*A description is required";
     }
-    if (!input.img[0]) {
+    if (!input.img) {
       errors.img = "*You must upload at least one image ";
     }
     if (
@@ -93,7 +93,8 @@ export default function Form() {
       input.description.length > 0
     ) {
       setDisable(false);
-      console.log(disable);
+    } else {
+      setDisable(true);
     }
 
     return errors;
@@ -118,7 +119,6 @@ export default function Form() {
   };
 
   const handleChangeImg = e => {
-    e.preventDefault();
     const data = new FormData();
     data.append("file", image);
 
@@ -133,7 +133,8 @@ export default function Form() {
       .then(resp => resp.json())
       .then(data => {
         setUrl(data.url); //Revisar por qué no se agregan más de una. En algúna llamada de función Onchange en el html habré puesto (e.target.files[0] y por ahí es eso)
-        setInput({ ...input, img: data.url }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
+        setInput({ ...input, img: data.url });
+        setAllImages(allImages.concat(data.url));
       })
       .catch(err => console.log(err));
   };
@@ -141,21 +142,41 @@ export default function Form() {
   const handleChange = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
-  const loadImage = e => {
-    e.preventDefault(e);
+
+  const loadImage = event => {
     if (image.name) {
-      handleChangeImg(e);
-      errorImgSetting(e);
+      handleChangeImg(event);
+      errorImgSetting(event);
     }
   };
 
+  React.useEffect(() => {
+    loadImage(event);
+    // input.length > 0 && console.log(input);
+    // if (allImages.length > 0) {
+    //   console.log(allImages);
+    // }
+  }, [image]);
+
   const handleSubmit = e => {
-    e.preventDefault();
-    setActive(true);
-    dispatch(postProduct(input));
-    setDisable(true);
-    clearForm();
-    setError({});
+    if (
+      !error.name &&
+      !error.brand &&
+      !error.price &&
+      !error.stock &&
+      !error.description &&
+      !error.img &&
+      !error.category &&
+      !error.brand &&
+      input.description.length > 0
+    ) {
+      e.preventDefault();
+      setActive(true);
+      dispatch(postProduct(input));
+      setDisable(true);
+      clearForm();
+      setError({});
+    }
   };
 
   return (
@@ -196,33 +217,32 @@ export default function Form() {
         <div className={F.container}>
           <input
             type="file"
-            //HAY QUE ASIGNAR UN VALUE VÁLIDO PARA BORRAR EL ESTADO? O SE PISA CON EL PRÓXIMO ARCHIVO.
             name="uploadfile"
             multiple="multiple"
             id="img"
             style={{ display: "none" }}
             onChange={e => {
               setImage(e.target.files[0]);
+              setEvent(e);
             }}
           />
-          <button
-            disabled={!image.name}
-            className={image.name ? F.loadBtn : F.disabled}
-            onClick={e => {
-              loadImage(e);
-            }}
-          >
-            Load image
-          </button>
-          {!input.img.length ? (
-            <label className={F.inputCont} htmlFor="img">
-              +
-            </label>
+
+          <label className={F.inputCont} htmlFor="img">
+            +
+          </label>
+
+          {allImages.length > 0 ? (
+            allImages.map((el, i) => {
+              <div key={i} className={F.imgCont}>
+                <img src={el} alt="" />
+              </div>;
+            })
           ) : (
             <div className={F.imgCont}>
-              <img src={input.img} alt="" />
+              <img src={input[0]} alt="" />
             </div>
           )}
+
           {error.img && <span>{error.img}</span>}
         </div>
 
@@ -231,7 +251,7 @@ export default function Form() {
             <div className={F.name}>
               <label>Name of the product: </label>
               <input
-                value={input.name}
+                value={input.name || ""}
                 type="text"
                 name="name"
                 placeholder="Name"
@@ -246,7 +266,6 @@ export default function Form() {
             <div className={F.brand}>
               <select
                 name="brand"
-                defaultValue={"DEFAULT"}
                 value={input.brand}
                 id="Brand"
                 onBlur={e => {
@@ -270,7 +289,7 @@ export default function Form() {
           <div className={F.stock}>
             <label>Stock: </label>
             <input
-              value={input.stock}
+              value={input.stock || ""}
               type="number"
               name="stock"
               min="0"
@@ -283,7 +302,7 @@ export default function Form() {
           <div className={F.price}>
             <label>Price: </label>
             <input
-              value={input.price}
+              value={input.price || ""}
               type="number"
               name="price"
               min="0"
@@ -298,7 +317,6 @@ export default function Form() {
           <div className={F.category}>
             <select
               name="category"
-              defaultValue={"DEFAULT"}
               id="Category"
               value={input.category}
               onBlur={e => {
@@ -325,7 +343,7 @@ export default function Form() {
               <label>Description: </label>
               <textarea
                 name="description"
-                value={input.description}
+                value={input.description || ""}
                 id="description"
                 cols="30"
                 rows="10"
@@ -344,8 +362,8 @@ export default function Form() {
           <div className={F.formBtn}>
             <button
               type="submit"
-              // disabled={!image.name || !input.description || !input.stock}
-              className={disable ? F.disabledBtn : F.activeBtn}
+              className={disable === false ? F.activeBtn : F.disabledBtn}
+              onClick={e => e.preventDefault()}
             >
               Publish product
             </button>

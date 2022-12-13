@@ -1,6 +1,6 @@
 .container {
   width: 50%;
-  height: 89vh;
+  height: 90vh;
   overflow: hidden;
   position: fixed;
   top: 70px;
@@ -73,8 +73,8 @@
   font-size: 20px;
   color: rgb(148, 148, 148);
   position: absolute;
-  margin-top: 470px;
-  left: 50px;
+  margin-top: 520px;
+  left: 70px;
 }
 .startShopping {
   background-color: rgb(148, 148, 148);

@@ -10,7 +10,7 @@ import {
   getFiltered,
 } from "../redux/actions/index";
 
-export default function SideMenu() {
+export default function SideMenu(props) {
   const dispatch = useDispatch();
   const brands = useSelector(state => state.brands);
   const categories = useSelector(state => state.categories);
@@ -60,7 +60,7 @@ export default function SideMenu() {
     });
     setBrand("");
     setCat("");
-    setName("");
+    props.setName("");
     setPrice(prev => ({ ...prev, min: 0, max: 100000000 }));
     document.querySelectorAll("select")[0].selectedIndex = 0;
     document.querySelectorAll("select")[1].selectedIndex = 0;
