@@ -3,13 +3,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function CardComponent(props) {
+  const productWithQuantity = { ...props.product, quantity: 1 };
   return (
     <>
       <div className={C.cardContainer}>
         <div className={C.imgContainer}>
-          <Link
-          to={`/detail/${props.id}`}>
-          <img src={props.img} alt="" className={C.image} />
+          <Link to={`/detail/${props.id}`}>
+            <img src={props.img} alt="" className={C.image} />
           </Link>
         </div>
         <div className={C.square}>
@@ -22,7 +22,7 @@ function CardComponent(props) {
             <div className={C.btnAndFav}>
               <button
                 className={C.cardBtn}
-                onClick={() => props.addToCart(props.product)}
+                onClick={() => props.addToCart(productWithQuantity)}
               >
                 Add to cart
               </button>

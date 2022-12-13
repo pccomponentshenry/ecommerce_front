@@ -6,10 +6,9 @@ import { getBrands, getCategories, postProduct } from "../redux/actions/index";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 export default function Form() {
   const { user } = useAuth0();
-  const creator = user.nickname
+  const creator = user.nickname;
   const initialState = {
     name: "",
     brand: "",
@@ -18,7 +17,7 @@ export default function Form() {
     description: "",
     img: [],
     category: "",
-    creator: creator
+    creator: creator,
   };
   //console.log(creator)
   //console.log(user.email)
@@ -43,7 +42,7 @@ export default function Form() {
     description: "",
     img: [],
     category: "",
-    creator: creator
+    creator: creator,
   });
 
   function clearForm() {
@@ -164,15 +163,14 @@ export default function Form() {
       {active && (
         <>
           <div className={F.successPic}>
-            <span onClick={() => setActive(false)}>X</span>
+            <span onClick={() => setActive(false)}>╳</span>
             <img
-              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670260244/cqws5x8n/published_smvv8j.jpg"
+              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670821085/cqws5x8n/success_lzoshi.png"
               alt=""
             />
             <div className={F.btnCont}>
               <Link to="/">
-                {" "}
-                <button className={F.btn}>Back to Home</button>{" "}
+                <button className={F.btn}>Back to Home</button>
               </Link>
               <button
                 className={F.btn}

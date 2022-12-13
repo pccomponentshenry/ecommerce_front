@@ -2,7 +2,7 @@
   border-radius: 10px;
   padding: 10px;
   width: 30%;
-  /* border: solid 1px #62aaa1; */
+  /* border: solid 1px #2bfab7; */
   display: flex;
   flex-direction: column;
 }
@@ -10,6 +10,7 @@
 .imgContainer {
   background-color: white;
   width: 230px;
+  height: 170px;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -19,13 +20,13 @@
 .image {
   height: fit-content;
   width: 180px;
-  height: 180px;
   cursor: pointer;
   border-radius: 10px 10px 0px 0px;
 }
 .square {
   border-radius: 0px 0px 10px 10px;
-  border: solid 1px #62aaa1;
+  border: solid 1px #2bfab7;
+  border-top: none;
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -34,11 +35,15 @@
   height: 120px;
   cursor: pointer;
 }
-.nameCont {
-  float: left;
-  display: flex;
+.square:hover {
+  box-shadow: -1px 10px 21px -6px rgba(0, 0, 0, 0.91);
+  border-top: none;
+  transition: 0.2s ease-in-out;
 }
-
+.name {
+  color: #fff;
+  font-weight: 600;
+}
 .nameCont {
   width: 90%;
   float: left;
@@ -48,21 +53,23 @@
   color: #fff;
   font-weight: 200;
   font-size: 14px;
+  position: relative;
+  bottom: 5px;
 }
 .price {
   font-weight: 600;
   color: #fff;
   position: relative;
-
+  top: 5px;
   font-size: 14px;
   text-align: left;
 }
 
 .cardBtn {
   background-color: transparent;
-  border: solid 1px #62aaa1;
+  border: solid 1px #fff;
   border-radius: 20px;
-  color: #62aaa1;
+  color: #fff;
   width: 95px;
   font-size: 12px;
   font-weight: 600;
@@ -72,8 +79,9 @@
 }
 
 .cardBtn:hover {
-  background-color: #62aaa1;
-  color: #fff;
+  background-color: #3bcc9e;
+  border: solid 1px #3bcc9e;
+  color: #2d574a;
   transition: 0.15s ease-in-out;
 }
 .btnAndFav {
@@ -89,18 +97,19 @@
   position: relative;
   bottom: 10px;
 }
+
 .fav {
   font-size: 25px;
   margin-left: 10px;
-  color: #62aaa1;
+  color: #fff;
 }
 .fav:hover {
-  color: #fff;
+  color: #1088e6;
   transition: 0.15s ease-in-out;
 }
 /* .square {
   border-radius: 0px 0px 10px 10px;
-  border: solid 1px #62aaa1;
+  border: solid 1px #2bfab7;
   padding: 5px;
   display: flex;
   flex-direction: column;

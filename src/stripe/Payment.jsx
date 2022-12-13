@@ -1,37 +1,31 @@
 import React from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import axios from 'axios';
+import { useSelector} from "react-redux";
 
 
 const stripePromese = loadStripe("pk_test_51MCUPjIxZNdfrxaORwUsMY8yxCPm4xhLtIsruiYWFCGr2xN6NzNOR984Z0gGfM8l8u2blkELjULUs1rbClLtmW9A00QbQXD9FC");
 
+function Payment() {
+    const cart = useSelector(state => state.cart);
+    console.log(cart)
 
-const handleClick = async (e) => {
-    const product=[
-        {
-            name:"teclado 1",
-            quantity:2,
-            price:200,
-            total:400
-        },
-        {
-            name:"teclado 2",
-            quantity:1,
-            price:200,
-            total:200
-        },
-        {
-            name:"teclado 3",
-            quantity:3,
-            price:200,
-            total:600
-        },
-    ]
+    const handleClick = async (e) => {
+        e.preventDefault();
+        const product=[];
+        cart.map(e => {
+            let line = {
+              name:e.title,
+              quantity:e.quantity,
+              price:Math.round(e.price * 100),
+              images:[e.img],  
+            }
+           product.push(line); 
+        });
 
-    const productObj = {
+        const productObj = {
         products:product
-    }
-    e.preventDefault();
+        }
     const stripe = await stripePromese
     const response = await fetch('http://localhost:3001/api/checkout',{
         method:"POST",
@@ -45,12 +39,9 @@ const handleClick = async (e) => {
         sessionId:session.id
     });
     if(result.error){
-
+        console.log(result.error);
     }
     }
-
-function Payment() {
-
   return (
     <div>
         <button role="link" onClick={handleClick}>

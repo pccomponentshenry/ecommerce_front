@@ -5,10 +5,12 @@ import Cards from "../containers/Cards";
 import SideMenu from "../components/SideMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+
 import {
   allProducts,
   getFiltered,
   clearState,
+  clearError,
   getProductsByName,
 } from "../redux/actions";
 import NotFound from "../alerts/NotFound";
@@ -55,7 +57,6 @@ export default function Home() {
       const filtered = products.filter(el => el.category.name === cat);
       const both = filtered.filter(el => el.brand.name === brand);
       if (filtered.length > 0) dispatch(getFiltered(both));
-      // dispatch(getFiltered(both));
     }
     if (cat === "Category" && brand !== "") {
       const filtered = products.filter(el => el.brand.name.includes(brand));
@@ -72,6 +73,7 @@ export default function Home() {
   }, [cat, brand]);
 
   function handleInputChange(e) {
+    clearError();
     e.preventDefault();
     setName(e.target.value);
     dispatch(getProductsByName(name));
@@ -89,6 +91,7 @@ export default function Home() {
             handleFilter={handleFilter}
             setCat={setCat}
             setBrand={setBrand}
+            setName={setName}
           />
           <div className={H.searchBarCont}>
             <div className={H.searchBar}>

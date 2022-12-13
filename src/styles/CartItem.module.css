@@ -1,0 +1,90 @@
+.container {
+  width: 40vw;
+  height: 20vh;
+  align-items: center;
+  border-bottom: solid 1px rgb(148, 148, 148);
+  position: relative;
+  bottom: 20px;
+}
+
+.container h4 {
+  font-size: 14px;
+  font-weight: 400;
+  position: relative;
+  top: 35px;
+  width: 350px;
+  float: left;
+  right: 20px;
+}
+.container h5 {
+  font-size: 14px;
+  position: relative;
+  top: 35px;
+}
+
+.container img {
+  border-radius: 10px;
+}
+
+.card button {
+  border: none;
+  background-color: transparent;
+  color: #272727;
+  z-index: 100;
+}
+
+.btnCont {
+  position: absolute;
+  right: 60px;
+  font-size: 26px;
+  z-index: 600;
+}
+.btnCont img {
+  height: 18px;
+  position: relative;
+  left: 25px;
+}
+.btnCont button {
+  color: #555;
+}
+
+.imgCont {
+  height: 16vh;
+  width: 130px;
+  display: flex;
+  overflow: hidden;
+  float: left;
+  position: relative;
+  top: 10px;
+  margin-right: 10px;
+}
+
+.counter {
+  border: solid 1px rgb(199, 199, 199);
+  position: relative;
+  top: 40px;
+  width: 12%;
+  height: 22px;
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  right: 190px;
+}
+.counter button {
+  font-size: 20px;
+  position: relative;
+  bottom: 5px;
+  color: #555;
+}
+.counter span {
+  font-size: 14px;
+  color: #555;
+}
+.price {
+  position: absolute;
+  right: 40px;
+  font-size: 16px;
+  margin-top: -70px;
+}
