@@ -49,6 +49,10 @@ export default function Cards(props) {
       showDenyButton: true,
       denyButtonText: `No, Go to my Cart`,
       icon: "success",
+      confirmButtonColor: "rgb(55, 172, 135)",
+      denyButtonColor: "#d83dd0",
+      background: "#272727",
+      color: "#fff",
     }).then(result => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {

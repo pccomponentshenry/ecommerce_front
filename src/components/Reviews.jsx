@@ -55,6 +55,7 @@ export default function Reviews() {
           {reviews.length > 0 &&
             reviews.map((el, i) => (
               <ReviewCard
+                key={i}
                 name={reviews[i].name}
                 profilePic={reviews[i].profilePic}
                 review={reviews[i].review}
