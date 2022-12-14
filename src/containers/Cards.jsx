@@ -1,16 +1,15 @@
-import React from "react";
-import CardComponent from "../components/Card";
-import C from "../styles/Cards.module.css";
-import Pagination from "../components/Pagination";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getFiltered, addToCartAction } from "../redux/actions/index.js";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
+import CardComponent from "../components/Card";
+import Pagination from "../components/Pagination";
+import { setFiltered, addToCartAction } from "../redux/actions/index.js";
+import C from "../styles/Cards.module.css";
 import NoProducts from "../alerts/NoProducts";
 
 export default function Cards(props) {
+
   const [itemsPerPage, setitemsPerPage] = useState(9);
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(6);
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
@@ -18,30 +17,23 @@ export default function Cards(props) {
   const indexOfLastItem = props.currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const products = useSelector(state => state.products);
+  const filtered = useSelector(state => state.filtered);
+  const error = useSelector(state => state.error);
 
-  let dispatch = useDispatch();
-  let products = useSelector(state => state.products);
-  let filtered = useSelector(state => state.filtered);
-  let searchBar = useSelector(state => state.searchBar);
-  let error = useSelector(state => state.error);
-
-  React.useEffect(() => {
-    dispatch(getFiltered(products));
+  useEffect(() => {
+    dispatch(setFiltered(products));
   }, [dispatch]);
 
-  React.useEffect(() => {
-    dispatch(getFiltered(filtered));
-  }, [dispatch]);
-
-  const currentItems =
-    filtered.length > 0
-      ? Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem)
-      : Array.from(searchBar).slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem);
+  const data = filtered.length > 0 ? filtered.length : products.length;
 
   const addToCart = product => {
     dispatch(addToCartAction(product));
     successAlert();
   };
+
   const successAlert = () => {
     Swal.fire({
       title: "Product Added to cart!",
@@ -62,12 +54,8 @@ export default function Cards(props) {
       }
     });
   };
-  const data =
-    filtered.length > 0
-      ? filtered.length
-      : searchBar.length > 0
-      ? searchBar.length
-      : products.length;
+
+
   return (
     <div className={C.cardContainer}>
       {!error.length ? (
