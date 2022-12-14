@@ -6,7 +6,7 @@ import { useState } from "react";
 import { clear_cart, remove_one_from_cart } from "../redux/actions/index.js";
 import Payment from "../stripe/Payment";
 
-export default function ShoppingCart(props) {
+export default function ShoppingCart() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const clearCart = () => {
@@ -29,18 +29,11 @@ export default function ShoppingCart(props) {
   }
 
   const deleteFromCart = id => {
-    const quant = JSON.parse(localStorage.getItem(id)) || 1;
-    const priceProduct =
-      JSON.parse(localStorage.getItem("price " + id)) || price;
+    dispatch(remove_one_from_cart(id));
     localStorage.removeItem(id);
     localStorage.removeItem("price " + id);
-    dispatch(remove_one_from_cart(id));
   };
   let [totalPrice, setTotalPrice] = useState(forPay);
-  let [clicked, setClicked] = useState(0);
-
-  //console.log(CartItem)
-  //puedo recorrer el cart para sumar los precios,pero falta de dnd vienen las cantidades
 
   return (
     <>
@@ -58,8 +51,6 @@ export default function ShoppingCart(props) {
           {cart.map((el, index) => (
             <CartItem
               setTotalPrice={setTotalPrice}
-              clicked={clicked}
-              setClicked={setClicked}
               totalPrice={totalPrice}
               key={index}
               data={el}
