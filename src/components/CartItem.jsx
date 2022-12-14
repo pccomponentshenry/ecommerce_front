@@ -24,8 +24,6 @@ export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
   const setQuantityInput = productId => {
     for (let product of cart) {
       if (product.id === productId && state < stock) {
-        product.quantity++;
-        product.price += price;
         setState(state + 1);
         setPriceState(priceState + price);
 
@@ -48,8 +46,6 @@ export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
     if (state !== 1) {
       for (let product of cart) {
         if (product.id === productId) {
-          product.quantity--;
-          product.price -= price;
           setState(state - 1);
           setPriceState(priceState - price);
           localStorage.setItem(id, JSON.stringify(quant - 1));

@@ -27,13 +27,18 @@ export default function ShoppingCart(props) {
   } else {
     forPay = 0;
   }
-  console.log(forPay);
 
   const deleteFromCart = id => {
+    const quant = JSON.parse(localStorage.getItem(id)) || 1;
+    const priceProduct =
+      JSON.parse(localStorage.getItem("price " + id)) || price;
+    localStorage.removeItem(id);
+    localStorage.removeItem("price " + id);
     dispatch(remove_one_from_cart(id));
   };
-  let [totalPrice, setTotalPrice] = useState("");
+  let [totalPrice, setTotalPrice] = useState(forPay);
   let [clicked, setClicked] = useState(0);
+
   //console.log(CartItem)
   //puedo recorrer el cart para sumar los precios,pero falta de dnd vienen las cantidades
 

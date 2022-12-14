@@ -20,8 +20,8 @@ import {
   CLEAR_ERROR,
 } from "../actions/actionNames";
 
-// const URL = "http://localhost:3001";
-const URL = "https://pfbackend-production.up.railway.app";
+const URL = "http://localhost:3001";
+// const URL = "https://pfbackend-production.up.railway.app";
 
 export function allProducts() {
   return function (dispatch) {
