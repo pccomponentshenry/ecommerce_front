@@ -4,17 +4,14 @@ import search from "../Images/Search.png";
 import cart from "../Images/cart.png";
 import mode from "../Images/mode.png";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductsByName } from "../redux/actions";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Nav() {
   const [nav, setNav] = useState(false);
-  const dispatch = useDispatch();
-  const [name, setName] = useState("");
   const [showCart, setShowCart] = useState(false);
   const cartNumber = useSelector(state => state.cart);
   const { isAuthenticated } = useAuth0();
@@ -26,9 +23,6 @@ export default function Nav() {
       setNav(false);
     }
   }
-  useEffect(() => {
-    dispatch(getProductsByName);
-  }, [dispatch]);
 
   window.addEventListener("scroll", switchMode);
   return (
