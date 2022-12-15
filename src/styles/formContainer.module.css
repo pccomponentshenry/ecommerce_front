@@ -1,12 +1,16 @@
 .formCont {
   margin-left: -15px;
+  z-index: 600;
 }
 
 .formBackground {
-  margin-top: -350px;
-  margin-left: -500px;
+  width: 100vw;
+  position: absolute;
+  bottom: 0px;
 }
 .container {
   height: 100vh;
   overflow: hidden;
+  background-color: #000522;
+  display: flex;
 }
