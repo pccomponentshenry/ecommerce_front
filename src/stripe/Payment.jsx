@@ -9,9 +9,8 @@ const stripePromese = loadStripe(
 
 function Payment() {
   const cart = useSelector(state => state.cart);
-  console.log(cart);
+
   let claves = Object.keys(localStorage);
-  console.log("este es quant", claves);
 
   const handleClick = async e => {
     e.preventDefault();
