@@ -3,31 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import CardComponent from "../components/Card";
-import Pagination from "../components/Pagination";
+import ReactPaginate from "react-paginate";
 import { setFiltered, addToCartAction } from "../redux/actions/index.js";
 import C from "../styles/Cards.module.css";
 import NoProducts from "../alerts/NoProducts";
 
 export default function Cards(props) {
 
-  const [itemsPerPage, setitemsPerPage] = useState(9);
-  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(6);
-  const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
-  const [pageNumberLimit, setpageNumberLimit] = useState(6);
-  const indexOfLastItem = props.currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector(state => state.products);
   const filtered = useSelector(state => state.filtered);
   const error = useSelector(state => state.error);
 
-  useEffect(() => {
-    dispatch(setFiltered(products));
-  }, [dispatch]);
+  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = Array.from(filtered).slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(filtered.length / itemsPerPage);
 
-  const currentItems = Array.from(filtered).slice(indexOfFirstItem, indexOfLastItem);
-  const data = filtered.length > 0 ? filtered.length : products.length;
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % filtered.length;
+    setItemOffset(newOffset);
+  };
 
   const addToCart = product => {
     dispatch(addToCartAction(product));
@@ -55,6 +53,10 @@ export default function Cards(props) {
     });
   };
 
+  useEffect(() => {
+    dispatch(setFiltered(products));
+  }, [dispatch]);
+
 
   return (
     <div className={C.cardContainer}>
@@ -75,26 +77,22 @@ export default function Cards(props) {
                 quantity={el.quantity}
                 addToCart={addToCart}
               />
-              // </Link>
             ))}
             <div className={C.pagination}>
-              <Pagination
-                currentPage={props.currentPage}
-                setCurrentPage={props.setCurrentPage}
-                itemsPerPage={itemsPerPage}
-                setitemsPerPage={setitemsPerPage}
-                indexOfFirstItem={indexOfFirstItem}
-                indexOfLastItem={indexOfLastItem}
-                currentItems={currentItems}
-                data={data}
-                products={products}
-                minPageNumberLimit={minPageNumberLimit}
-                setminPageNumberLimit={setminPageNumberLimit}
-                maxPageNumberLimit={maxPageNumberLimit}
-                setmaxPageNumberLimit={setmaxPageNumberLimit}
-                pageNumberLimit={pageNumberLimit}
-                setpageNumberLimit={setpageNumberLimit}
-                name={props.name}
+              <ReactPaginate
+                className={C.paginate}
+                activeClassName={C.active}
+                previousClassName={C.previousNext}
+                previousLinkClassName={C.previous}
+                nextClassName={C.previousNext}
+                breakLabel="..."
+                nextLabel=">>"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={1}
+                marginPagesDisplayed={4}
+                pageCount={pageCount}
+                previousLabel="<<"
+                renderOnZeroPageCount={null}
               />
             </div>
           </>

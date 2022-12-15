@@ -8,7 +8,44 @@
 }
 
 .pagination {
-  position: relative;
-  top: 15px;
+  margin: 25px;
   width: 100%;
+}
+
+.paginate {
+  list-style: none;
+  display: flex;
+  width: 350px;
+  top: 15px;
+  height: 20px;
+  align-items: center;
+}
+
+.paginate li {
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+  border: solid 1px #555;
+  padding-bottom: 15px;
+  padding-top: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 30px;
+  height: 30px;
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
+.previousNext {
+  list-style: none;
+}
+
+.previousNext a {
+  color: white;
+}
+
+.paginate .active {
+  color: #111;
+  background-color: #2bfab7;
+  border: solid 1px #2bfab7;
 }
