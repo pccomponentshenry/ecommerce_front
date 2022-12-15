@@ -1,9 +1,41 @@
 import C from "../styles/Card.module.css";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { addToCart } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 function CardComponent(props) {
-  const productWithQuantity = { ...props.product, quantity: 1 };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(props.product));
+    successAlert();
+  };
+
+  const successAlert = () => {
+    Swal.fire({
+      title: "Product Added to cart!",
+      confirmButtonText: "Les't buy more products",
+      showDenyButton: true,
+      denyButtonText: `No, Go to my Cart`,
+      icon: "success",
+      confirmButtonColor: "rgb(55, 172, 135)",
+      denyButtonColor: "#d83dd0",
+      background: "#272727",
+      color: "#fff",
+    }).then(result => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        navigate("/");
+      } else if (result.isDenied) {
+        navigate("/cart");
+      }
+    });
+  };
+
   return (
     <>
       <div className={C.cardContainer}>
@@ -22,7 +54,7 @@ function CardComponent(props) {
             <div className={C.btnAndFav}>
               <button
                 className={C.cardBtn}
-                onClick={() => props.addToCart(productWithQuantity)}
+                onClick={handleAddToCart}
               >
                 Add to cart
               </button>

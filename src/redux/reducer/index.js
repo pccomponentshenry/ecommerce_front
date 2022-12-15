@@ -1,18 +1,15 @@
 import {
   GET_PRODUCT,
   SEARCH_PRODUCT,
-  ORDER_BY_NAME,
   ALL_PRODUCTS,
   GET_BRANDS,
-  // GET_PRODUCTS_BY_NAME,
   GET_CATEGORIES,
   POST_PRODUCT,
   SET_ERROR,
   SET_FILTERED,
   CLEAR_STATE,
-  // SEARCH_BAR_FILTER,
   ADD_TO_CART,
-  REMOVE_ONE_FROM_CART,
+  REMOVE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   CLEAR_ERROR,
@@ -26,15 +23,12 @@ const initialState = {
   brand: [],
   error: [],
   filtered: [],
-  // searchBar: [],
-  cart: [],
+  cart: []
 };
 
-if (localStorage.getItem("cart")) {
-  initialState.cart = JSON.parse(localStorage.getItem("cart"));
-} else {
-  initialState.cart = [];
-}
+initialState.cart = localStorage.getItem("cart")
+  ? JSON.parse(localStorage.getItem("cart"))
+  : initialState.cart = [];
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -89,38 +83,6 @@ function rootReducer(state = initialState, action) {
         categories: action.payload,
       };
 
-    // case ORDER_BY_NAME:
-    //   let sortedArr =
-    //     action.payload === "asc"
-    //       ? state.product.sort(function (a, b) {
-    //         if (a.name > b.name) {
-    //           return 1;
-    //         }
-    //         if (b.name > a.name) {
-    //           return -1;
-    //         }
-    //         return 0;
-    //       })
-    //       : state.product.sort(function (a, b) {
-    //         if (a.name > b.name) {
-    //           return -1;
-    //         }
-    //         if (a.name > b.name) {
-    //           return 1;
-    //         }
-    //         return 0;
-    //       });
-
-    // case SET_ERROR:
-    //   return {
-    //     ...state,
-    //     products: AllBrands,
-    //   };
-    //   return {
-    //     ...state,
-    //     error: action.payload,
-    //   };
-
     case CLEAR_ERROR:
       // return {
       //   ...state,
@@ -138,24 +100,12 @@ function rootReducer(state = initialState, action) {
       };
 
     case ADD_TO_CART:
-      let newItem = state.products.find(el => el.id === action.payload.id);
-      let itemInCart = state.cart.find(item => item.id === newItem.id);
-      return itemInCart
-        ? {
-          ...state,
-          cart: state.cart.map(item =>
-            item.id === newItem.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          ),
-        }
-        : {
-          ...state,
-          cart: [...state.cart, { ...newItem, quantity: 1 }],
-        };
+      return {
+        ...state,
+        cart: action.payload,
+      };
 
     case CLEAR_CART:
-      localStorage.clear();
       return {
         ...state,
         cart: [],
@@ -167,12 +117,10 @@ function rootReducer(state = initialState, action) {
         cart: [],
       };
 
-    case REMOVE_ONE_FROM_CART:
-      const filtered = state.cart.filter(i => i.id !== action.payload);
-      localStorage.setItem("cart", JSON.stringify(filtered));
+    case REMOVE_FROM_CART:
       return {
         ...state,
-        cart: filtered,
+        cart: action.payload,
       };
 
     default:
