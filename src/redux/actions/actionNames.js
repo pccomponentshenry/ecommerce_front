@@ -14,7 +14,7 @@ export const FILTER_BRANDS = "FILTER_BRANDS";
 export const INCREASE_CART = "INCREASE_CART";
 //actions Cart
 export const ADD_TO_CART = "ADD_TO_CART";
-export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const CLEAR_ERROR = "CLEAR_ERROR";

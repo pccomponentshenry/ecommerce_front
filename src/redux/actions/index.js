@@ -10,7 +10,7 @@ import {
   SET_ERROR,
   CLEAR_STATE,
   ADD_TO_CART,
-  REMOVE_ONE_FROM_CART,
+  REMOVE_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   CLEAR_ERROR,
@@ -90,36 +90,54 @@ export const postProduct = payload => async dispatch => {
   }
 };
 
-export const addToCartAction = payload => async dispatch => {
+export const addToCart = item => dispatch => {
   const cart = localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [];
-  const id = payload.id;
-  const price = payload.price;
-  const duplicates = cart.filter(c => c.id === payload.id);
-  localStorage.setItem(id, JSON.stringify(1));
-  localStorage.setItem("price " + id, JSON.stringify(price));
-  if (duplicates.length === 0) {
-    cart.push(payload);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    dispatch({
-      type: ADD_TO_CART,
-      payload,
-    });
+
+  const existingElementIdx = cart.findIndex(el => el.id === item.id);
+
+  const newCart = [...cart];
+
+  if (existingElementIdx !== -1) {
+    newCart[existingElementIdx].quantity++;
   }
+  else {
+    const addElement = { ...item };
+    addElement.quantity = 1;
+    newCart.push(addElement);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(newCart));
+
+  dispatch({ type: ADD_TO_CART, payload: newCart });
 };
 
-export const remove_one_from_cart = payload => {
-  return {
-    type: REMOVE_ONE_FROM_CART,
-    payload,
-  };
+
+export const removeFromCart = (item, removeItem) => dispatch => {
+  const cart = localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [];
+
+  const elementIdx = cart.findIndex(el => el.id === item.id);
+
+  const newCart = [...cart];
+
+  if (removeItem || newCart[elementIdx].quantity === 1) {
+    newCart.splice(elementIdx, 1);
+  }
+  else {
+    newCart[elementIdx].quantity--;
+  }
+
+  localStorage.setItem("cart", JSON.stringify(newCart));
+
+  dispatch({ type: REMOVE_FROM_CART, payload: newCart });
 };
 
-export const clear_cart = () => {
-  return {
-    type: CLEAR_CART,
-  };
+export const clearCart = () => dispatch => {
+  localStorage.setItem("cart", []);
+  dispatch({ type: REMOVE_ALL_FROM_CART });
 };
 
 export const clearError = () => {

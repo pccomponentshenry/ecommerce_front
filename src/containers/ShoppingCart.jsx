@@ -1,39 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CartItem from "../components/CartItem";
 import S from "../styles/ShoppingCart.module.css";
 import { useState } from "react";
-import { clear_cart, remove_one_from_cart } from "../redux/actions/index.js";
+import { clearCart } from "../redux/actions/index.js";
 import Payment from "../stripe/Payment";
 
 export default function ShoppingCart() {
+
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
-  const clearCart = () => {
-    dispatch(clear_cart());
-  };
-  let claves = Object.keys(localStorage);
-  let forPaySeparated = [];
-  let forPay = 0;
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  if (localStorage.length > 1) {
-    for (let i = 0; i < claves.length; i++) {
-      let clave = claves[i];
-      if (clave.startsWith("price")) {
-        forPaySeparated.push(parseFloat(localStorage[clave]));
-      }
-    }
-    forPay = forPaySeparated.reduce((a, b) => a + b);
-  } else {
-    forPay = 0;
-  }
-
-  const deleteFromCart = id => {
-    dispatch(remove_one_from_cart(id));
-    localStorage.removeItem(id);
-    localStorage.removeItem("price " + id);
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
-  let [totalPrice, setTotalPrice] = useState(forPay);
+
+  useEffect(() => {
+    setTotalPrice(cart.reduce((acc, item) => acc + (item.price * item.quantity), 0));
+  }, [cart])
 
   return (
     <>
@@ -43,22 +28,19 @@ export default function ShoppingCart() {
         </div>
 
         <div className={S.clearCont}>
-          <button className={S.clearBtn} onClick={clearCart}>
+          <button className={S.clearBtn} onClick={handleClearCart}>
             Clean Cart
           </button>
         </div>
         <div className={S.cartArea}>
           {cart.map((el, index) => (
             <CartItem
-              setTotalPrice={setTotalPrice}
-              totalPrice={totalPrice}
               key={index}
-              data={el}
-              deleteFromCart={deleteFromCart}
+              item={el}
             />
           ))}
         </div>
-        <h3 className={S.total}>Total: ${parseFloat(forPay).toFixed(2)}</h3>
+        <h3 className={S.total}>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
         <div className={S.startShopping}>
           <Payment />
         </div>
