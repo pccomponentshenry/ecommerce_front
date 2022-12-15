@@ -18,7 +18,7 @@ export default function Cards(props) {
   const [itemsPerPage, setItemsPerPage] = useState(9);
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
-  const currentItems = Array.from(filtered).slice(itemOffset, endOffset);
+  const currentItems = filtered.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(filtered.length / itemsPerPage);
 
   const handlePageClick = event => {
@@ -55,6 +55,10 @@ export default function Cards(props) {
   useEffect(() => {
     dispatch(setFiltered(products));
   }, [dispatch]);
+
+  useEffect(() => {
+    setItemOffset(0);
+  }, [filtered])
 
   return (
     <div className={C.cardContainer}>
