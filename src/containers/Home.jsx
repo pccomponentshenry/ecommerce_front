@@ -38,7 +38,7 @@ export default function Home() {
           <Carousel />
         </div>
         <div className={H.CardsAndMenuContainer}>
-          <SideMenu name={name} />
+          <SideMenu name={name} setName={setName} />
           <div className={H.searchBarCont}>
             <div className={H.searchBar}>
               <img className={H.searchIcon} src={search} />
