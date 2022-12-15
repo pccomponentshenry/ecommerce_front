@@ -10,12 +10,13 @@
 .pagination {
   margin: 25px;
   width: 100%;
+  display: flex;
 }
 
 .paginate {
   list-style: none;
   display: flex;
-  width: 350px;
+
   top: 15px;
   height: 20px;
   align-items: center;
@@ -26,7 +27,6 @@
   font-weight: 400;
   cursor: pointer;
   border: solid 1px #555;
-  padding-bottom: 15px;
   padding-top: 3px;
   padding-left: 10px;
   padding-right: 10px;
@@ -35,13 +35,15 @@
   margin-right: 2px;
   margin-left: 2px;
 }
-
-.previousNext {
-  list-style: none;
+.paginate li:hover {
+  border: solid 1px #2bfab7;
+  transition: 0.15s ease-in-out;
 }
 
 .previousNext a {
   color: white;
+  text-decoration: none;
+  font-weight: 200;
 }
 
 .paginate .active {

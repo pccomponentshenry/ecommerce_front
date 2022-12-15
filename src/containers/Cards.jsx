@@ -9,7 +9,6 @@ import C from "../styles/Cards.module.css";
 import NoProducts from "../alerts/NoProducts";
 
 export default function Cards(props) {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector(state => state.products);
@@ -22,7 +21,7 @@ export default function Cards(props) {
   const currentItems = Array.from(filtered).slice(itemOffset, endOffset);
   const pageCount = Math.ceil(filtered.length / itemsPerPage);
 
-  const handlePageClick = (event) => {
+  const handlePageClick = event => {
     const newOffset = (event.selected * itemsPerPage) % filtered.length;
     setItemOffset(newOffset);
   };
@@ -56,7 +55,6 @@ export default function Cards(props) {
   useEffect(() => {
     dispatch(setFiltered(products));
   }, [dispatch]);
-
 
   return (
     <div className={C.cardContainer}>
