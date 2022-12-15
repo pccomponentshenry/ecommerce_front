@@ -3,32 +3,21 @@ import C from "../styles/CartItem.module.css";
 import { useState } from "react";
 
 export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
-  const { id, title, img, brand, price, quantity, stock } = data;
+  const { id, title, img, brand, price, stock } = data;
 
   const cart = JSON.parse(localStorage.getItem("cart"));
-
   const quant = JSON.parse(localStorage.getItem(id)) || 1;
   const priceProduct = JSON.parse(localStorage.getItem("price " + id)) || price;
 
   let [state, setState] = useState(quant);
-
   let [priceState, setPriceState] = useState(priceProduct);
-
-  // const totalPrice = (quantity, price) => {
-  //   let priceProduct = quantity * price;
-  //   let total = parseFloat(priceProduct).toFixed(2);
-
-  //   setPriceState(total);
-  // };
+  let [clicked, setClicked] = useState(false);
 
   const setQuantityInput = productId => {
     for (let product of cart) {
       if (product.id === productId && state < stock) {
-        product.quantity++;
-        product.price += price;
         setState(state + 1);
         setPriceState(priceState + price);
-
         localStorage.setItem(id, JSON.stringify(quant + 1));
         localStorage.setItem(
           "price " + id,
@@ -48,8 +37,6 @@ export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
     if (state !== 1) {
       for (let product of cart) {
         if (product.id === productId) {
-          product.quantity--;
-          product.price -= price;
           setState(state - 1);
           setPriceState(priceState - price);
           localStorage.setItem(id, JSON.stringify(quant - 1));
@@ -71,7 +58,12 @@ export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
     <>
       <div className={C.card}>
         <div className={C.btnCont}>
-          <button onClick={() => deleteFromCart(id)}>
+          <button
+            onClick={() => {
+              deleteFromCart(id);
+              setClicked(!clicked);
+            }}
+          >
             <img
               src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670819389/cqws5x8n/iconmonstr-trash-can-27-240_gtmmpc.png"
               alt=""
