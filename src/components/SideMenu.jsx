@@ -4,7 +4,7 @@ import S from "../styles/SideMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { clearError, filterProducts, getBrands, getCategories, setFiltered } from "../redux/actions/index";
 
-export default function SideMenu({ name }) {
+export default function SideMenu({ name, setName }) {
 
   const dispatch = useDispatch();
   const brands = useSelector(state => state.brands);
@@ -49,12 +49,13 @@ export default function SideMenu({ name }) {
 
   const clearFilters = () => {
     dispatch(clearError());
-    dispatch(setFiltered(products));
     document.querySelectorAll("input[type=text]").forEach(element => { element.value = "" });
     document.querySelectorAll('select').forEach(element => { element.selectedIndex = 0 });
     setBrand("");
     setCat("");
+    setName("");
     setPrice(prev => ({ ...prev, min: 0, max: 100000000 }));
+    dispatch(setFiltered(products));
   };
 
   useEffect(() => {
