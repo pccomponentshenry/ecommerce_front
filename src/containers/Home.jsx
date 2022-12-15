@@ -1,83 +1,34 @@
-import React from "react";
-import H from "../styles/Home.module.css";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../components/HomeCarousel";
 import Cards from "../containers/Cards";
 import SideMenu from "../components/SideMenu";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-
-import {
-  allProducts,
-  getFiltered,
-  clearState,
-  clearError,
-  getProductsByName,
-} from "../redux/actions";
-import NotFound from "../alerts/NotFound";
+import { allProducts, setFiltered, clearError, filterProducts } from "../redux/actions";
 import search from "../Images/Search.png";
+import H from "../styles/Home.module.css";
 
 export default function Home() {
-  const [cat, setCat] = useState("");
-  const [brand, setBrand] = useState("");
+
   const [currentPage, setCurrentPage] = useState(1);
   const [name, setName] = useState("");
+  const products = useSelector(state => state.products);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(allProducts());
   }, [dispatch]);
 
-  const products = useSelector(state => state.products);
-  React.useEffect(() => {
-    dispatch(getFiltered(products));
+  useEffect(() => {
+    dispatch(setFiltered(products));
   }, [dispatch]);
 
-  const handleFilter = e => {
-    dispatch(clearState());
-    if (
-      (e.target.id === "cat" && brand === "") ||
-      (e.target.id === "cat" && brand === "DEFAULT")
-    ) {
-      const filtered = products.filter(
-        el => el.category.name === e.target.value
-      );
-      if (filtered.length > 0) dispatch(getFiltered(filtered));
-    } else if (
-      (e.target.id === "brand" && cat === "") ||
-      (e.target.id === "brand" && cat === "DEFAULT")
-    ) {
-      const filtered = products.filter(el => el.brand.name === e.target.value);
-      if (filtered.length > 0) dispatch(getFiltered(filtered));
-    }
-  };
-
-  React.useEffect(() => {
-    if (cat !== "" && brand !== "" && cat !== "Category" && brand !== "Brand") {
-      dispatch(clearState());
-      const filtered = products.filter(el => el.category.name === cat);
-      const both = filtered.filter(el => el.brand.name === brand);
-      if (filtered.length > 0) dispatch(getFiltered(both));
-    }
-    if (cat === "Category" && brand !== "") {
-      const filtered = products.filter(el => el.brand.name.includes(brand));
-      if (filtered.length > 0) dispatch(getFiltered(filtered));
-    }
-
-    if (brand === "Brand" && cat !== "") {
-      const filtered = products.filter(el => el.category.name == cat);
-      if (filtered.length > 0) dispatch(getFiltered(filtered));
-    }
-    if (brand === "Brand" && cat === "Category") {
-      dispatch(getFiltered(products));
-    }
-  }, [cat, brand]);
-
   function handleInputChange(e) {
-    clearError();
     e.preventDefault();
-    setName(e.target.value);
-    dispatch(getProductsByName(name));
     setCurrentPage(1);
+    clearError();
+    dispatch(filterProducts("", "", { min: 0, max: 100000000 }, e.target.value))
+    setName(e.target.value);
   }
 
   return (
@@ -87,12 +38,7 @@ export default function Home() {
           <Carousel />
         </div>
         <div className={H.CardsAndMenuContainer}>
-          <SideMenu
-            handleFilter={handleFilter}
-            setCat={setCat}
-            setBrand={setBrand}
-            setName={setName}
-          />
+          <SideMenu name={name} setName={setName} />
           <div className={H.searchBarCont}>
             <div className={H.searchBar}>
               <img className={H.searchIcon} src={search} />
@@ -102,7 +48,7 @@ export default function Home() {
                 id="name"
                 autoComplete="off"
                 value={name}
-                onChange={e => handleInputChange(e)}
+                onChange={handleInputChange}
               />
             </div>
           </div>

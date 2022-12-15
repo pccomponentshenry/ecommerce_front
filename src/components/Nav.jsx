@@ -1,23 +1,23 @@
 import React from "react";
-import N from "../styles/NavBar.module.css";
-import search from "../Images/Search.png";
-import cart from "../Images/cart.png";
-import mode from "../Images/mode.png";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductsByName } from "../redux/actions";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
-import { useAuth0 } from "@auth0/auth0-react";
+import mode from "../Images/mode.png";
+import cartImg from "../Images/cart.png";
+import search from "../Images/Search.png";
+import N from "../styles/NavBar.module.css";
 
 export default function Nav() {
   const [nav, setNav] = useState(false);
-  const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [showCart, setShowCart] = useState(false);
-  const cartNumber = useSelector(state => state.cart);
+  const cart = useSelector(state => state.cart);
   const { isAuthenticated } = useAuth0();
+
+  const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+  console.log('cartQuantity', cartQuantity);
+
 
   function switchMode() {
     if (window.scrollY >= 400) {
@@ -26,9 +26,6 @@ export default function Nav() {
       setNav(false);
     }
   }
-  useEffect(() => {
-    dispatch(getProductsByName);
-  }, [dispatch]);
 
   window.addEventListener("scroll", switchMode);
   return (
@@ -70,11 +67,11 @@ export default function Nav() {
             )}
           </h6>
           <div>
-            {cartNumber.length > 0 && (
-              <span className={N.cartNumber}>{cartNumber.length}</span>
+            {cart.length > 0 && (
+              <span className={N.cartNumber}>{cartQuantity}</span>
             )}
             <Link to="/cart">
-              <img src={cart} className={N.cart} alt="cart icon" />
+              <img src={cartImg} className={N.cart} alt="cart icon" />
             </Link>
           </div>
           <img

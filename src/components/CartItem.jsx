@@ -1,77 +1,37 @@
 import React from "react";
-import C from "../styles/CartItem.module.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../redux/actions";
+import C from "../styles/CartItem.module.css";
 
-export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
-  const { id, title, img, brand, price, quantity, stock } = data;
+export default function CartItem({ item }) {
 
-  const cart = JSON.parse(localStorage.getItem("cart"));
+  const { title, img, price, quantity } = item;
+  const [clicked, setClicked] = useState(false);
+  const dispatch = useDispatch();
 
-  const quant = JSON.parse(localStorage.getItem(id)) || 1;
-  const priceProduct = JSON.parse(localStorage.getItem("price " + id)) || price;
-
-  let [state, setState] = useState(quant);
-
-  let [priceState, setPriceState] = useState(priceProduct);
-
-  // const totalPrice = (quantity, price) => {
-  //   let priceProduct = quantity * price;
-  //   let total = parseFloat(priceProduct).toFixed(2);
-
-  //   setPriceState(total);
-  // };
-
-  const setQuantityInput = productId => {
-    for (let product of cart) {
-      if (product.id === productId && state < stock) {
-        product.quantity++;
-        product.price += price;
-        setState(state + 1);
-        setPriceState(priceState + price);
-
-        localStorage.setItem(id, JSON.stringify(quant + 1));
-        localStorage.setItem(
-          "price " + id,
-          JSON.stringify(priceProduct + price)
-        );
-      }
-    }
-
-    setTotalPrice(
-      priceProduct.length > 0 && cart.length > 0
-        ? priceProduct * cart.length
-        : parseFloat(priceState).toFixed(2) * 1
-    );
+  const handleAddToCart = () => {
+    dispatch(addToCart(item));
   };
 
-  const decreaseQuantityInput = productId => {
-    if (state !== 1) {
-      for (let product of cart) {
-        if (product.id === productId) {
-          product.quantity--;
-          product.price -= price;
-          setState(state - 1);
-          setPriceState(priceState - price);
-          localStorage.setItem(id, JSON.stringify(quant - 1));
-          localStorage.setItem(
-            "price " + id,
-            JSON.stringify(priceProduct - price)
-          );
-        }
-      }
-    }
-    setTotalPrice(
-      priceProduct.length > 0 && cart.length > 0
-        ? priceProduct * cart.length
-        : parseFloat(priceState).toFixed(2) * 1
-    );
+  const handleDeleteFromCart = () => {
+    dispatch(removeFromCart(item, true));
+  };
+
+  const handleRemoveOneFromCart = () => {
+    dispatch(removeFromCart(item, false));
   };
 
   return (
     <>
       <div className={C.card}>
         <div className={C.btnCont}>
-          <button onClick={() => deleteFromCart(id)}>
+          <button
+            onClick={() => {
+              handleDeleteFromCart();
+              setClicked(!clicked);
+            }}
+          >
             <img
               src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670819389/cqws5x8n/iconmonstr-trash-can-27-240_gtmmpc.png"
               alt=""
@@ -87,22 +47,22 @@ export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
             <button
               className={C.Btn}
               id="-"
-              onClick={e => decreaseQuantityInput(id)}
+              onClick={handleRemoveOneFromCart}
             >
               -
             </button>
-            <span>{state}</span>
+            <span>{item.quantity}</span>
             <button
               className={C.plus}
               id="+"
-              onClick={() => setQuantityInput(id)}
+              onClick={handleAddToCart}
             >
               +
             </button>
           </div>
         </div>
-        {/* <h5 className={C.price}>${price}</h5> */}
-        <p className={C.price}>Total: ${parseFloat(priceState).toFixed(2)}</p>
+        {/* <h5 className={C.price}>Unit Price ${price}</h5> */}
+        <p className={C.price}>Total: ${parseFloat(price * quantity).toFixed(2)}</p>
       </div>
     </>
   );

@@ -2,15 +2,10 @@ import React, { useEffect, useState } from "react";
 import S from "../styles/SideMenu.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  clearError,
-  filterProducts,
-  getBrands,
-  getCategories,
-  getFiltered,
-} from "../redux/actions/index";
+import { clearError, filterProducts, getBrands, getCategories, setFiltered } from "../redux/actions/index";
 
-export default function SideMenu(props) {
+export default function SideMenu({ name, setName }) {
+
   const dispatch = useDispatch();
   const brands = useSelector(state => state.brands);
   const categories = useSelector(state => state.categories);
@@ -33,10 +28,10 @@ export default function SideMenu(props) {
           ? 1
           : -1
         : a.price < b.price
-        ? 1
-        : -1;
+          ? 1
+          : -1;
     });
-    dispatch(getFiltered(sorted));
+    dispatch(setFiltered(sorted));
   };
 
   const handlePriceChange = event => {
@@ -49,21 +44,18 @@ export default function SideMenu(props) {
   };
 
   const handlePriceSubmit = () => {
-    dispatch(filterProducts(cat, brand, price));
+    dispatch(filterProducts(cat, brand, price, name));
   };
 
   const clearFilters = () => {
     dispatch(clearError());
-    dispatch(getFiltered(products));
-    document.querySelectorAll("input[type=text]").forEach(element => {
-      element.value = "";
-    });
+    document.querySelectorAll("input[type=text]").forEach(element => { element.value = "" });
+    document.querySelectorAll('select').forEach(element => { element.selectedIndex = 0 });
     setBrand("");
     setCat("");
-    props.setName("");
+    setName("");
     setPrice(prev => ({ ...prev, min: 0, max: 100000000 }));
-    document.querySelectorAll("select")[0].selectedIndex = 0;
-    document.querySelectorAll("select")[1].selectedIndex = 0;
+    dispatch(setFiltered(products));
   };
 
   useEffect(() => {
@@ -72,7 +64,7 @@ export default function SideMenu(props) {
   }, []);
 
   useEffect(() => {
-    dispatch(filterProducts(cat, brand, price));
+    dispatch(filterProducts(cat, brand, price, name));
   }, [cat, brand]);
 
   return (
@@ -91,7 +83,7 @@ export default function SideMenu(props) {
                   setCat(e.target.value);
                 }}
               >
-                <option defaultValue={"default"} disabled>
+                <option value={"default"} disabled>
                   Category
                 </option>
                 {categories.map((el, i) => (
@@ -112,7 +104,7 @@ export default function SideMenu(props) {
                   setBrand(e.target.value);
                 }}
               >
-                <option defaultValue={"default"} disabled>
+                <option value={"default"} disabled>
                   Brand
                 </option>
                 {brands.map((el, i) => (
