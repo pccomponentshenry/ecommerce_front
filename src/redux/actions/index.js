@@ -14,6 +14,7 @@ import {
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   CLEAR_ERROR,
+  ADD_TO_FAV,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -101,8 +102,7 @@ export const addToCart = item => dispatch => {
 
   if (existingElementIdx !== -1) {
     newCart[existingElementIdx].quantity++;
-  }
-  else {
+  } else {
     const addElement = { ...item };
     addElement.quantity = 1;
     newCart.push(addElement);
@@ -113,6 +113,34 @@ export const addToCart = item => dispatch => {
   dispatch({ type: ADD_TO_CART, payload: newCart });
 };
 
+export const addToFav = item => dispatch => {
+  const fav = localStorage.getItem("fav")
+    ? JSON.parse(localStorage.getItem("fav"))
+    : [];
+  const favId = localStorage.getItem(item.id)
+    ? JSON.parse(localStorage.getItem(item.id))
+    : [];
+  const existingInFav = fav.find(el => el.id === item.id);
+
+  const newFav = [...fav];
+  let isFav = false;
+
+  if (!existingInFav) {
+    const addFavElement = { ...item };
+    newFav.push(addFavElement);
+    isFav = true;
+    localStorage.setItem("fav", JSON.stringify(newFav));
+    localStorage.setItem(item.id, JSON.stringify(isFav));
+  } else {
+    const elementIdx = fav.findIndex(el => el.id === item.id);
+    newFav.splice(elementIdx, 1);
+    isFav = false;
+    localStorage.setItem("fav", JSON.stringify(newFav));
+    localStorage.setItem(item.id, JSON.stringify(isFav));
+  }
+
+  dispatch({ type: ADD_TO_FAV, payload: newFav });
+};
 
 export const removeFromCart = (item, removeItem) => dispatch => {
   const cart = localStorage.getItem("cart")
@@ -125,8 +153,7 @@ export const removeFromCart = (item, removeItem) => dispatch => {
 
   if (removeItem || newCart[elementIdx].quantity === 1) {
     newCart.splice(elementIdx, 1);
-  }
-  else {
+  } else {
     newCart[elementIdx].quantity--;
   }
 

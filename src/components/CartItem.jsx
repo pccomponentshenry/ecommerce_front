@@ -5,7 +5,6 @@ import { addToCart, removeFromCart } from "../redux/actions";
 import C from "../styles/CartItem.module.css";
 
 export default function CartItem({ item }) {
-
   const { title, img, price, quantity } = item;
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
@@ -25,6 +24,17 @@ export default function CartItem({ item }) {
   return (
     <>
       <div className={C.card}>
+        <div className={C.counterContainer}>
+          <div className={C.counter}>
+            <button className={C.Btn} id="-" onClick={handleRemoveOneFromCart}>
+              -
+            </button>
+            <span>{item.quantity}</span>
+            <button className={C.plus} id="+" onClick={handleAddToCart}>
+              +
+            </button>
+          </div>
+        </div>
         <div className={C.btnCont}>
           <button
             onClick={() => {
@@ -42,27 +52,13 @@ export default function CartItem({ item }) {
           <div className={C.imgCont}>
             <img src={img} alt="" />
           </div>
-          <h4>{title.substr(0, 40) + "..."}</h4>
-          <div className={C.counter}>
-            <button
-              className={C.Btn}
-              id="-"
-              onClick={handleRemoveOneFromCart}
-            >
-              -
-            </button>
-            <span>{item.quantity}</span>
-            <button
-              className={C.plus}
-              id="+"
-              onClick={handleAddToCart}
-            >
-              +
-            </button>
-          </div>
+          <h4>{title.substr(0, 30) + "..."}</h4>
         </div>
+
         {/* <h5 className={C.price}>Unit Price ${price}</h5> */}
-        <p className={C.price}>Total: ${parseFloat(price * quantity).toFixed(2)}</p>
+        <p className={C.price}>
+          Total: ${parseFloat(price * quantity).toFixed(2)}
+        </p>
       </div>
     </>
   );
