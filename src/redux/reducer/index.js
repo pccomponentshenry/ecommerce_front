@@ -14,6 +14,7 @@ import {
   CLEAR_CART,
   CLEAR_ERROR,
   POST_USER,
+  LOGOUT_USER,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -132,6 +133,13 @@ function rootReducer(state = initialState, action) {
         user: action.payload,
       };
     };
+
+    case LOGOUT_USER: {
+      return {
+        ...state,
+        user: {}
+      }
+    }
 
     default:
       return state;
