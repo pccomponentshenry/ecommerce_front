@@ -1,10 +1,7 @@
 .infoContainer {
   width: 25%;
   height: 90vh;
-  border: solid 1px red;
   float: left;
-  position: absolute;
-  bottom: 0px;
 }
 .SwitchContainer {
   width: 70%;
@@ -26,6 +23,7 @@
   position: relative;
   top: 55px;
   display: flex;
+  right: 20px;
 }
 
 .inactive {

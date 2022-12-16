@@ -9,11 +9,15 @@ export const Profile = () => {
 
   const dispatch = useDispatch();
 
-  const dbUser = { username: user.nickname, email: user.email };
+  const dbUser = {
+    username: user.nickname,
+    email: user.email,
+    image: user.picture,
+  };
 
   useEffect(() => {
     dispatch(postUser(dbUser));
-  }, [user])
+  }, [user]);
 
   if (isLoading) {
     return <div>Loading...</div>;

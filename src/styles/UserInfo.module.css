@@ -1,12 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 180px;
+}
 .imgContainer {
   border-radius: 100px;
   overflow: hidden;
   width: fit-content;
 }
+.authContainer {
+  display: flex;
+  flex-direction: column;
+}
 .nameContainer {
   justify-content: center;
   position: relative;
   top: 5px;
+  display: flex;
+  flex-direction: column;
 }
 .name {
   color: #fff;
@@ -20,5 +32,30 @@
   font-size: 14px;
   text-align: center;
   position: relative;
-  bottom: 25px;
+}
+.profileLine {
+  margin-top: -40px;
+  width: 100%;
+}
+.postalAdressContainer {
+  margin-top: 50px;
+}
+.title {
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+}
+
+.adressCont h3 {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+  text-align: center;
+}
+.editBtn {
+  color: #fff;
+  position: relative;
+  left: 145px;
+  top: 15px;
+  cursor: pointer;
 }
