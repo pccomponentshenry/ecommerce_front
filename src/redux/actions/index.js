@@ -150,8 +150,8 @@ export const clearError = () => {
 //////////USERS////////
 export const postUser = payload => async dispatch => {
   try {
-    const res = await axios.post(`${URL}/users`, payload);
-    return dispatch({ type: POST_USER, payload: res.data });
+    await axios.post(`${URL}/users`, payload);
+    return dispatch({ type: POST_USER, payload });
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
   }

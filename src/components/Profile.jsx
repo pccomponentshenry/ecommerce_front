@@ -1,9 +1,17 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import L from "../styles/LoginContainer.module.css";
+import { useDispatch } from "react-redux";
+import { postUser } from "../redux/actions";
 
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+
+  const dispatch = useDispatch();
+
+  const dbUser = { username: user.nickname, email: user.email };
+
+  dispatch(postUser(dbUser));
 
   if (isLoading) {
     return <div>Loading...</div>;
