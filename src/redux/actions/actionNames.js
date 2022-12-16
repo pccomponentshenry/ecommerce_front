@@ -20,3 +20,4 @@ export const CLEAR_CART = "CLEAR_CART";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 //actions User
 export const POST_USER = "POST_USER"
+export const LOGOUT_USER = "LOGOUT_USER"
