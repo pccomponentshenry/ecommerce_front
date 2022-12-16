@@ -1,76 +1,24 @@
-.infoContainer {
-  width: 25%;
-  height: 90vh;
-  border: solid 1px red;
-  float: left;
-  position: absolute;
-  bottom: 0px;
+.imgContainer {
+  border-radius: 100px;
+  overflow: hidden;
+  width: fit-content;
 }
-.SwitchContainer {
-  width: 70%;
-  height: 90vh;
-  right: 40px;
-  position: absolute;
-  bottom: 0px;
-}
-
-.cardsContainer {
-  width: 95%;
-  height: 70vh;
-  border: solid 1px #555;
-  border-radius: 10px;
-  margin-top: 60px;
-}
-.BtnContainer {
-  width: 90%;
+.nameContainer {
+  justify-content: center;
   position: relative;
-  top: 55px;
-  display: flex;
+  top: 5px;
 }
-
-.inactive {
-  background-color: transparent;
-  border: solid 1px rgb(204, 204, 204);
-  border-radius: 5px;
-  color: #fff;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 10px;
-  font-weight: 400;
-}
-.inactive:hover {
-  transition: 0.15s ease-in-out;
-  background-color: rgb(204, 204, 204);
-  color: #000;
-}
-.active {
-  background-color: rgb(204, 204, 204);
-  border: solid 1px rgb(204, 204, 204);
-  border-radius: 5px;
-  color: #000;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 10px;
-  font-weight: 400;
-}
-
-.addProduct {
-  position: absolute;
-  right: 10px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.addProduct h4 {
-  margin-right: 5px;
-  border: solid 1px #fff;
-  border-radius: 30px;
+.name {
   color: #fff;
   font-size: 18px;
-  padding-left: 4px;
-  padding-right: 4px;
+  text-align: center;
 }
-.addProduct h5 {
+
+.email {
   color: #fff;
-  font-size: 16px;
+  font-weight: 200;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+  bottom: 25px;
 }
