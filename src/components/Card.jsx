@@ -53,26 +53,7 @@ function CardComponent(props) {
   };
 
   const successFavAlert = () => {
-    if (props.clickFromFav !== true) {
-      Swal.fire({
-        title: "Product Added to favorites!",
-        confirmButtonText: "Les't see more products",
-        showDenyButton: true,
-        denyButtonText: `No, Go to my favorites`,
-        icon: "success",
-        confirmButtonColor: "rgb(55, 172, 135)",
-        denyButtonColor: "#d83dd0",
-        background: "#272727",
-        color: "#fff",
-      }).then(result => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          navigate("/");
-        } else if (result.isDenied) {
-          navigate("/favorites");
-        }
-      });
-    } else {
+    if (props.clickFromFav === true) {
       props.setClicked(!clicked);
     }
   };

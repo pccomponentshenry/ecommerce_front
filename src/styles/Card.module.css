@@ -101,15 +101,17 @@
 .fav {
   font-size: 25px;
   margin-left: 10px;
-  color: #fff;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff;
 }
 .fav:hover {
-  color: #2bfab7;
+  color: #fff;
   transition: 0.15s ease-in-out;
 }
 
 .active {
   color: #2bfab7;
-  font-size: 25px;
+  font-size: 30px;
   margin-left: 10px;
+  position: relative;
+  bottom: 4px;
 }
