@@ -15,6 +15,8 @@ import {
   CLEAR_CART,
   CLEAR_ERROR,
   ADD_TO_FAV,
+  POST_USER,
+  LOGOUT_USER
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -171,4 +173,18 @@ export const clearError = () => {
   return {
     type: CLEAR_ERROR,
   };
+};
+
+//////////USERS////////
+export const postUser = payload => async dispatch => {
+  try {
+    dispatch({ type: POST_USER, payload });
+    await axios.post(`${URL}/users`, payload);
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};
+
+export const logoutUser = () => dispatch => {
+  return dispatch({ type: LOGOUT_USER });
 };

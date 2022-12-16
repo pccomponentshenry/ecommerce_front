@@ -14,6 +14,8 @@ import {
   CLEAR_CART,
   CLEAR_ERROR,
   ADD_TO_FAV,
+  POST_USER,
+  LOGOUT_USER,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -26,6 +28,7 @@ const initialState = {
   filtered: [],
   cart: [],
   fav: [],
+  user: {}
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -124,6 +127,21 @@ function rootReducer(state = initialState, action) {
         ...state,
         cart: action.payload,
       };
+
+    ////// USERS /////
+    case POST_USER: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    };
+
+    case LOGOUT_USER: {
+      return {
+        ...state,
+        user: {}
+      }
+    }
 
     default:
       return state;
