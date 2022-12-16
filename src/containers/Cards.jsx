@@ -12,7 +12,7 @@ export default function Cards() {
   const filtered = useSelector(state => state.filtered);
   const error = useSelector(state => state.error);
 
-  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = filtered.slice(itemOffset, endOffset);
