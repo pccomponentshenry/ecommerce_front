@@ -16,7 +16,7 @@ export default function Nav() {
   const { isAuthenticated } = useAuth0();
 
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
-  console.log('cartQuantity', cartQuantity);
+  //console.log('cartQuantity', cartQuantity);
 
 
   function switchMode() {

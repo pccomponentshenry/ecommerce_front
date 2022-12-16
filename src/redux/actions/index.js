@@ -14,6 +14,7 @@ import {
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   CLEAR_ERROR,
+  POST_USER
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -144,4 +145,14 @@ export const clearError = () => {
   return {
     type: CLEAR_ERROR,
   };
+};
+
+//////////USERS////////
+export const postUser = payload => async dispatch => {
+  try {
+    const res = await axios.post(`${URL}/users`, payload);
+    return dispatch({ type: POST_USER, payload: res.data });
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
 };
