@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import S from "../styles/SideMenu.module.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, filterProducts, getBrands, getCategories, setFiltered } from "../redux/actions/index";
+import {
+  clearError,
+  filterProducts,
+  getBrands,
+  getCategories,
+  setFiltered,
+} from "../redux/actions/index";
 
 export default function SideMenu({ name, setName }) {
-
   const dispatch = useDispatch();
   const brands = useSelector(state => state.brands);
   const categories = useSelector(state => state.categories);
@@ -28,8 +33,8 @@ export default function SideMenu({ name, setName }) {
           ? 1
           : -1
         : a.price < b.price
-          ? 1
-          : -1;
+        ? 1
+        : -1;
     });
     dispatch(setFiltered(sorted));
   };
@@ -49,8 +54,12 @@ export default function SideMenu({ name, setName }) {
 
   const clearFilters = () => {
     dispatch(clearError());
-    document.querySelectorAll("input[type=text]").forEach(element => { element.value = "" });
-    document.querySelectorAll('select').forEach(element => { element.selectedIndex = 0 });
+    document.querySelectorAll("input[type=text]").forEach(element => {
+      element.value = "";
+    });
+    document.querySelectorAll("select").forEach(element => {
+      element.selectedIndex = 0;
+    });
     setBrand("");
     setCat("");
     setName("");
@@ -128,7 +137,7 @@ export default function SideMenu({ name, setName }) {
 
             <div className={S.sharedInput}>
               <hr />
-              <div className={S.label}>Price range</div>
+              <h6 className={S.label}>Price range</h6>
               <input
                 key="min_price"
                 id="min"
@@ -148,7 +157,7 @@ export default function SideMenu({ name, setName }) {
                 className={`${S.inputSmall} ${S.inputRight}`}
               />
               <button className={S.button} onClick={handlePriceSubmit}>
-                &#8680;
+                ➜
               </button>
               {priceError && <span>{priceError}</span>}
             </div>

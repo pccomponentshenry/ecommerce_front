@@ -5,9 +5,9 @@ import S from "../styles/ShoppingCart.module.css";
 import { useState } from "react";
 import { clearCart } from "../redux/actions/index.js";
 import Payment from "../stripe/Payment";
+import { Link } from "react-router-dom";
 
 export default function ShoppingCart() {
-
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
@@ -17,8 +17,10 @@ export default function ShoppingCart() {
   };
 
   useEffect(() => {
-    setTotalPrice(cart.reduce((acc, item) => acc + (item.price * item.quantity), 0));
-  }, [cart])
+    setTotalPrice(
+      cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+    );
+  }, [cart]);
 
   return (
     <>
@@ -27,23 +29,38 @@ export default function ShoppingCart() {
           <h4 className={S.title}>Shopping Cart</h4>
         </div>
 
-        <div className={S.clearCont}>
-          <button className={S.clearBtn} onClick={handleClearCart}>
-            Clean Cart
-          </button>
-        </div>
-        <div className={S.cartArea}>
-          {cart.map((el, index) => (
-            <CartItem
-              key={index}
-              item={el}
-            />
-          ))}
-        </div>
-        <h3 className={S.total}>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
-        <div className={S.startShopping}>
-          <Payment />
-        </div>
+        {cart.length > 0 ? (
+          <div>
+            <div className={S.clearCont}>
+              <button className={S.clearBtn} onClick={handleClearCart}>
+                Clean Cart
+              </button>
+            </div>
+            <div className={S.cartArea}>
+              {cart.map((el, index) => (
+                <CartItem key={index} item={el} />
+              ))}
+            </div>
+            <h3 className={S.total}>
+              Total: ${parseFloat(totalPrice).toFixed(2)}
+            </h3>
+            <div className={S.startShopping}>
+              <Payment />
+            </div>
+          </div>
+        ) : (
+          <div className={S.emptyCart}>
+            <h3>There isn't any product in your cart</h3>
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+              }}
+            >
+              <span>Let's see some products</span>
+            </Link>
+          </div>
+        )}
       </div>
       <div className={S.imgCont}>
         <h1>Just one step to become a pro</h1>

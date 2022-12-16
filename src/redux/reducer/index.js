@@ -13,6 +13,7 @@ import {
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   CLEAR_ERROR,
+  ADD_TO_FAV,
   POST_USER,
   LOGOUT_USER,
 } from "../actions/actionNames";
@@ -26,16 +27,16 @@ const initialState = {
   error: [],
   filtered: [],
   cart: [],
-  user: {},
+  fav: [],
+  user: {}
 };
 
 initialState.cart = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
-  : initialState.cart = [];
+  : (initialState.cart = []);
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-
     case ALL_PRODUCTS:
       return {
         ...state,
@@ -53,7 +54,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         products: [...state.products, action.payload],
       };
-    };
+    }
 
     case CLEAR_STATE: {
       return {
@@ -87,10 +88,6 @@ function rootReducer(state = initialState, action) {
       };
 
     case CLEAR_ERROR:
-      // return {
-      //   ...state,
-      //   products: AllBrands,
-      // };
       return {
         ...state,
         error: [],
@@ -108,6 +105,11 @@ function rootReducer(state = initialState, action) {
         cart: action.payload,
       };
 
+    case ADD_TO_FAV:
+      return {
+        ...state,
+        fav: action.payload,
+      };
     case CLEAR_CART:
       return {
         ...state,

@@ -2,17 +2,33 @@ import C from "../styles/Card.module.css";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { addToCart } from "../redux/actions";
+import { addToCart, addToFav } from "../redux/actions";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 function CardComponent(props) {
+  const fav = localStorage.getItem(props.id)
+    ? JSON.parse(localStorage.getItem(props.id))
+    : [];
+
+  const [active, setActive] = useState(fav);
+  const [clicked, setClicked] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const handleAddToCart = () => {
     dispatch(addToCart(props.product));
     successAlert();
+  };
+
+  React.useEffect(() => {
+    setActive(fav);
+  }, [clicked]);
+
+  const handleAddToFav = () => {
+    dispatch(addToFav(props.product));
+    successFavAlert();
+    setClicked(!clicked);
   };
 
   const successAlert = () => {
@@ -36,6 +52,12 @@ function CardComponent(props) {
     });
   };
 
+  const successFavAlert = () => {
+    if (props.clickFromFav === true) {
+      props.setClicked(!clicked);
+    }
+  };
+
   return (
     <>
       <div className={C.cardContainer}>
@@ -52,13 +74,15 @@ function CardComponent(props) {
           <div className={C.bottomCont}>
             <h6 className={C.price}>$ {props.price}</h6>
             <div className={C.btnAndFav}>
-              <button
-                className={C.cardBtn}
-                onClick={handleAddToCart}
-              >
+              <button className={C.cardBtn} onClick={handleAddToCart}>
                 Add to cart
               </button>
-              <span className={C.fav}>♡</span>
+              <span
+                className={active === true ? C.active : C.fav}
+                onClick={handleAddToFav}
+              >
+                ❤
+              </span>
             </div>
           </div>
         </div>
