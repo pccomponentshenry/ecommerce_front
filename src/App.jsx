@@ -12,6 +12,8 @@ import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
+import BuyConfirm from "./components/BuyConfirm"
+
 function App() {
   populateDB();
 
@@ -36,6 +38,7 @@ function App() {
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />
+          <Route exact path="/success" element={<BuyConfirm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
