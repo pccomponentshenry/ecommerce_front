@@ -7,7 +7,6 @@ import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
 import mode from "../Images/mode.png";
 import cartImg from "../Images/cart.png";
-import search from "../Images/Search.png";
 import N from "../styles/NavBar.module.css";
 
 export default function Nav() {
@@ -17,7 +16,6 @@ export default function Nav() {
 
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
   //console.log('cartQuantity', cartQuantity);
-
 
   function switchMode() {
     if (window.scrollY >= 400) {
