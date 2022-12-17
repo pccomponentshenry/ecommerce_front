@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import CardComponent from "../components/Card";
 import ReactPaginate from "react-paginate";
-import { setFiltered, addToCartAction } from "../redux/actions/index.js";
+import CardComponent from "../components/Card";
+import { setFiltered } from "../redux/actions/index.js";
 import C from "../styles/Cards.module.css";
 import NoProducts from "../alerts/NoProducts";
 
-export default function Cards(props) {
-  const navigate = useNavigate();
+export default function Cards() {
   const dispatch = useDispatch();
   const products = useSelector(state => state.products);
   const filtered = useSelector(state => state.filtered);
   const error = useSelector(state => state.error);
 
-  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = filtered.slice(itemOffset, endOffset);
@@ -26,39 +23,13 @@ export default function Cards(props) {
     setItemOffset(newOffset);
   };
 
-  const addToCart = product => {
-    dispatch(addToCartAction(product));
-    successAlert();
-  };
-
-  const successAlert = () => {
-    Swal.fire({
-      title: "Product Added to cart!",
-      confirmButtonText: "Les't buy more products",
-      showDenyButton: true,
-      denyButtonText: `No, Go to my Cart`,
-      icon: "success",
-      confirmButtonColor: "rgb(55, 172, 135)",
-      denyButtonColor: "#d83dd0",
-      background: "#272727",
-      color: "#fff",
-    }).then(result => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        navigate("/");
-      } else if (result.isDenied) {
-        navigate("/cart");
-      }
-    });
-  };
-
   useEffect(() => {
     dispatch(setFiltered(products));
   }, [dispatch]);
 
   useEffect(() => {
     setItemOffset(0);
-  }, [filtered])
+  }, [filtered]);
 
   return (
     <div className={C.cardContainer}>
@@ -77,7 +48,6 @@ export default function Cards(props) {
                 id={el.id}
                 product={el}
                 quantity={el.quantity}
-                addToCart={addToCart}
               />
             ))}
             <div className={C.pagination}>

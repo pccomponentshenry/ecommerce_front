@@ -16,16 +16,19 @@ body {
 
 /* SEARCHBAR */
 .searchBarCont {
-  width: 80vw;
+  width: 100vw;
+  height: 40px;
   position: relative;
-  top: 20px;
-  float: right;
-  justify-content: center;
+  background-color: rgb(87, 0, 99);
+  align-items: center;
 }
 .searchBar {
-  border: solid 1px #2bfab7;
-  width: 250px;
+  border: solid 1px rgb(173, 94, 184);
+  width: 300px;
   border-radius: 20px;
+  position: relative;
+  left: 470px;
+  top: 5px;
 }
 .searchIcon {
   width: 25px;
@@ -35,13 +38,24 @@ body {
   margin-right: 10px;
 }
 .searchBar input {
-  width: 200px;
   background-color: transparent;
   border: none;
-
   font-weight: 200;
   color: #fff;
   outline: none;
 }
-
+.searchBar input::placeholder {
+  color: #fff;
+}
 /* SEARCHBAR */
+.loadingCont {
+  display: flex;
+  position: absolute;
+  left: 28%;
+  right: 45%;
+  margin-top: 150px;
+}
+.loadingBackground {
+  height: 100vh;
+  background-color: black;
+}

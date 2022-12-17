@@ -1,8 +1,7 @@
 .cardContainer {
-  border-radius: 10px;
+  border-radius: 7px;
   padding: 10px;
-  width: 30%;
-  /* border: solid 1px #2bfab7; */
+  width: 25%;
   display: flex;
   flex-direction: column;
 }
@@ -101,31 +100,17 @@
 .fav {
   font-size: 25px;
   margin-left: 10px;
-  color: #fff;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff;
 }
 .fav:hover {
-  color: #1088e6;
+  color: #fff;
   transition: 0.15s ease-in-out;
 }
-/* .square {
-  border-radius: 0px 0px 10px 10px;
-  border: solid 1px #2bfab7;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  height: 140px;
-  cursor: pointer;
-} */
 
-/* .square:hover {
-  background-color: #4b4b4b;
-  transition: 0.15s ease-in-out;
-  border: solid 1px transparent;
+.active {
+  color: #2bfab7;
+  font-size: 30px;
+  margin-left: 10px;
+  position: relative;
+  bottom: 4px;
 }
-
-
-
-
-
- */

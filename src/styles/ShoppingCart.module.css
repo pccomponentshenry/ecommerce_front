@@ -28,14 +28,18 @@
 }
 .cartArea {
   border: solid 1px rgb(148, 148, 148);
+  border-right: none;
   padding: 30px;
-  border-radius: 30px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
   height: 60vh;
   overflow-y: scroll;
+  overflow-x: hidden;
   position: relative;
-  bottom: 40px;
+  bottom: 20px;
   width: 90%;
 }
+
 .clearBtn {
   background-color: #f44336;
   border: none;
@@ -73,7 +77,7 @@
   font-size: 20px;
   color: rgb(148, 148, 148);
   position: absolute;
-  margin-top: 520px;
+  margin-top: 530px;
   left: 70px;
 }
 .startShopping {
@@ -82,6 +86,8 @@
   display: flex;
   justify-content: center;
   cursor: pointer;
+  height: 50px;
+  z-index: 600;
 }
 .startShopping:hover {
   background-color: rgb(110, 109, 109);
@@ -116,4 +122,17 @@
   left: 50px;
   font-weight: 200;
   color: #fff;
+}
+.emptyCart {
+  justify-content: center;
+  text-align: center;
+}
+.emptyCart span {
+  color: #555;
+  position: relative;
+  top: 30px;
+}
+.emptyCart span:hover {
+  color: #f44336;
+  transition: 0.15s ease-in-out;
 }

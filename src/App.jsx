@@ -11,6 +11,7 @@ import { populateDB } from "./redux/actions";
 import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProfileDetail from "./containers/ProfileDetail";
+import Favorites from "./containers/Favorites";
 function App() {
   populateDB();
 
@@ -31,6 +32,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route exact path="/favorites" element={<Favorites />} />
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />

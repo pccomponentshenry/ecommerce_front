@@ -8,13 +8,13 @@
 }
 
 .container h4 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
   position: relative;
+  right: 20px;
   top: 35px;
   width: 350px;
   float: left;
-  right: 20px;
 }
 .container h5 {
   font-size: 14px;
@@ -42,7 +42,6 @@
 .btnCont img {
   height: 18px;
   position: relative;
-  left: 25px;
 }
 .btnCont button {
   color: #555;
@@ -58,12 +57,14 @@
   top: 10px;
   margin-right: 10px;
 }
-
+.counterContainer {
+  position: absolute;
+  margin-top: 60px;
+  left: 150px;
+}
 .counter {
   border: solid 1px rgb(199, 199, 199);
   position: relative;
-  top: 80px;
-  width: 12%;
   height: 25px;
   padding-left: 3px;
   padding-right: 3px;
@@ -71,7 +72,6 @@
   border-radius: 6px;
   display: flex;
   justify-content: space-between;
-  right: 390px;
 }
 .counter button {
   font-size: 20px;

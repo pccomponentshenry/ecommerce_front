@@ -1,66 +1,44 @@
 import React from "react";
-import C from "../styles/CartItem.module.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../redux/actions";
+import C from "../styles/CartItem.module.css";
 
-export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
-  const { id, title, img, brand, price, stock } = data;
+export default function CartItem({ item }) {
+  const { title, img, price, quantity } = item;
+  const [clicked, setClicked] = useState(false);
+  const dispatch = useDispatch();
 
-  const cart = JSON.parse(localStorage.getItem("cart"));
-  const quant = JSON.parse(localStorage.getItem(id)) || 1;
-  const priceProduct = JSON.parse(localStorage.getItem("price " + id)) || price;
-
-  let [state, setState] = useState(quant);
-  let [priceState, setPriceState] = useState(priceProduct);
-  let [clicked, setClicked] = useState(false);
-
-  const setQuantityInput = productId => {
-    for (let product of cart) {
-      if (product.id === productId && state < stock) {
-        setState(state + 1);
-        setPriceState(priceState + price);
-        localStorage.setItem(id, JSON.stringify(quant + 1));
-        localStorage.setItem(
-          "price " + id,
-          JSON.stringify(priceProduct + price)
-        );
-      }
-    }
-
-    setTotalPrice(
-      priceProduct.length > 0 && cart.length > 0
-        ? priceProduct * cart.length
-        : parseFloat(priceState).toFixed(2) * 1
-    );
+  const handleAddToCart = () => {
+    dispatch(addToCart(item));
   };
 
-  const decreaseQuantityInput = productId => {
-    if (state !== 1) {
-      for (let product of cart) {
-        if (product.id === productId) {
-          setState(state - 1);
-          setPriceState(priceState - price);
-          localStorage.setItem(id, JSON.stringify(quant - 1));
-          localStorage.setItem(
-            "price " + id,
-            JSON.stringify(priceProduct - price)
-          );
-        }
-      }
-    }
-    setTotalPrice(
-      priceProduct.length > 0 && cart.length > 0
-        ? priceProduct * cart.length
-        : parseFloat(priceState).toFixed(2) * 1
-    );
+  const handleDeleteFromCart = () => {
+    dispatch(removeFromCart(item, true));
+  };
+
+  const handleRemoveOneFromCart = () => {
+    dispatch(removeFromCart(item, false));
   };
 
   return (
     <>
       <div className={C.card}>
+        <div className={C.counterContainer}>
+          <div className={C.counter}>
+            <button className={C.Btn} id="-" onClick={handleRemoveOneFromCart}>
+              -
+            </button>
+            <span>{item.quantity}</span>
+            <button className={C.plus} id="+" onClick={handleAddToCart}>
+              +
+            </button>
+          </div>
+        </div>
         <div className={C.btnCont}>
           <button
             onClick={() => {
-              deleteFromCart(id);
+              handleDeleteFromCart();
               setClicked(!clicked);
             }}
           >
@@ -74,27 +52,13 @@ export default function CartItem({ data, deleteFromCart, setTotalPrice }) {
           <div className={C.imgCont}>
             <img src={img} alt="" />
           </div>
-          <h4>{title.substr(0, 40) + "..."}</h4>
-          <div className={C.counter}>
-            <button
-              className={C.Btn}
-              id="-"
-              onClick={e => decreaseQuantityInput(id)}
-            >
-              -
-            </button>
-            <span>{state}</span>
-            <button
-              className={C.plus}
-              id="+"
-              onClick={() => setQuantityInput(id)}
-            >
-              +
-            </button>
-          </div>
+          <h4>{title.substr(0, 30) + "..."}</h4>
         </div>
-        {/* <h5 className={C.price}>${price}</h5> */}
-        <p className={C.price}>Total: ${parseFloat(priceState).toFixed(2)}</p>
+
+        {/* <h5 className={C.price}>Unit Price ${price}</h5> */}
+        <p className={C.price}>
+          Total: ${parseFloat(price * quantity).toFixed(2)}
+        </p>
       </div>
     </>
   );

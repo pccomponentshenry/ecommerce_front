@@ -1,16 +1,10 @@
 .Container {
-  /* background: rgb(0, 0, 0);
-  background: linear-gradient(
-    28deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(39, 39, 39, 1) 100%
-  ); */
   width: 200px;
   height: 90vh;
   float: left;
   margin-left: 30px;
-  position: sticky;
-  top: 150px;
+  position: relative;
+  top: 50px;
 }
 
 .categoryContainer {
@@ -95,6 +89,7 @@ hr {
   color: #2bfab7;
   border-radius: 10px;
   width: 150px;
+  font-size: 14px;
 }
 .clearFilters button:hover {
   transition: 0.15s ease-in-out;
@@ -130,9 +125,9 @@ hr {
 }
 
 .sharedInput button {
-  margin-left: 15px;
   position: relative;
   top: 2px;
+  left: 15px;
   background-color: transparent;
   color: #2bfab7;
   border: solid 1px #2bfab7;
