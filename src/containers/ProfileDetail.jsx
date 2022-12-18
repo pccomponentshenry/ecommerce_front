@@ -3,7 +3,8 @@ import UserInfo from "../components/UserInfo";
 import UserFav from "../components/UserFav";
 import U from "../styles/ProfileInfo.module.css";
 import { useState } from "react";
-
+import ForSale from "../components/ForSale";
+import Purchases from "../components/Purchases";
 export default function ProfileDetail() {
   const [active, setActive] = useState({
     fav: true,
@@ -57,9 +58,16 @@ export default function ProfileDetail() {
             <h5>New product</h5>
           </div>
         </div>
-
-        <div className={U.cardsContainer}>
-          <UserFav />
+        <div
+          className={active.sales ? U.cardsContainerWhite : U.cardsContainer}
+        >
+          {active.fav ? (
+            <UserFav />
+          ) : active.sales ? (
+            <ForSale />
+          ) : (
+            <Purchases />
+          )}
         </div>
       </div>
     </div>
