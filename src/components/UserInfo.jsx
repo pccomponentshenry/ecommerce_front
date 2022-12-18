@@ -4,8 +4,8 @@ import U from "../styles/UserInfo.module.css";
 import { useSelector } from "react-redux";
 
 export default function UserInfo() {
-  const { isLoading } = useAuth0();
-  const user = useSelector(state => state.user);
+  const { isLoading, user } = useAuth0();
+  // const user = useSelector(state => state.user);
   const profileData = {
     adress: "Calle falsa 123",
     city: "San Clemente del Tuyú",
@@ -20,7 +20,7 @@ export default function UserInfo() {
     <div className={U.container}>
       <div className={U.authContainer}>
         <div className={U.imgContainer}>
-          <img src={user.image} alt={user.name} />
+          <img src={user.picture} alt={user.name} />
         </div>
         <div className={U.nameContainer}>
           <h3 className={U.name}>{user.name}</h3>
