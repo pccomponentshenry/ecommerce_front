@@ -12,7 +12,7 @@ function HorizontalCard(props) {
     : [];
 
   const [active, setActive] = useState(fav);
-  const [clicked, setClicked] = useState(false);
+  // const [clicked, setClicked] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,12 +23,12 @@ function HorizontalCard(props) {
 
   React.useEffect(() => {
     setActive(fav);
-  }, [clicked]);
+  }, [props.clicked]);
 
   const handleAddToFav = () => {
     dispatch(addToFav(props.product));
     successFavAlert();
-    setClicked(!clicked);
+    props.setClicked(!props.clicked);
   };
 
   const successAlert = () => {
@@ -54,7 +54,7 @@ function HorizontalCard(props) {
 
   const successFavAlert = () => {
     if (props.clickFromFav === true) {
-      props.setClicked(!clicked);
+      props.setClicked(!props.clicked);
     }
   };
 

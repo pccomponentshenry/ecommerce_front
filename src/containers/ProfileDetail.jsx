@@ -2,8 +2,27 @@ import React from "react";
 import UserInfo from "../components/UserInfo";
 import UserFav from "../components/UserFav";
 import U from "../styles/ProfileInfo.module.css";
+import { useState } from "react";
 
 export default function ProfileDetail() {
+  const [active, setActive] = useState({
+    fav: true,
+    sales: false,
+    purchases: false,
+  });
+
+  const handleClick = e => {
+    if (e.target.id === "sales") {
+      return setActive({ fav: false, sales: true, purchases: false });
+    }
+    if (e.target.id === "purchases") {
+      return setActive({ fav: false, sales: false, purchases: true });
+    }
+    if (e.target.id === "fav") {
+      return setActive({ fav: true, sales: false, purchases: false });
+    }
+  };
+
   return (
     <div>
       <div className={U.infoContainer}>
@@ -12,9 +31,27 @@ export default function ProfileDetail() {
 
       <div className={U.SwitchContainer}>
         <div className={U.BtnContainer}>
-          <button className={U.active}>Favorites</button>
-          <button className={U.inactive}>For sale</button>
-          <button className={U.inactive}>Purchases</button>
+          <button
+            onClick={e => handleClick(e)}
+            id="fav"
+            className={active.fav ? U.active : U.inactive}
+          >
+            Favorites
+          </button>
+          <button
+            onClick={e => handleClick(e)}
+            id="sales"
+            className={active.sales ? U.active : U.inactive}
+          >
+            For sale
+          </button>
+          <button
+            onClick={e => handleClick(e)}
+            id="purchases"
+            className={active.purchases ? U.active : U.inactive}
+          >
+            Purchases
+          </button>
           <div className={U.addProduct}>
             <h4>+</h4>
             <h5>New product</h5>

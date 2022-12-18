@@ -11,7 +11,7 @@ export default function UserFav() {
 
   React.useEffect(() => {
     setFavorites(favs);
-  }, [favs]);
+  }, [clicked]);
 
   return (
     <div>
