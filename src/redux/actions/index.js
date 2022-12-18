@@ -16,11 +16,11 @@ import {
   CLEAR_ERROR,
   ADD_TO_FAV,
   POST_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
 } from "../actions/actionNames";
 
-const URL = "http://localhost:3001";
-// const URL = "https://pfbackend-production.up.railway.app";
+// const URL = "http://localhost:3001";
+const URL = "https://pfbackend-production.up.railway.app";
 
 export function allProducts() {
   return function (dispatch) {
@@ -125,22 +125,21 @@ export const addToFav = item => dispatch => {
   const existingInFav = fav.find(el => el.id === item.id);
 
   const newFav = [...fav];
+
   let isFav = false;
 
   if (!existingInFav) {
     const addFavElement = { ...item };
     newFav.push(addFavElement);
     isFav = true;
-    localStorage.setItem("fav", JSON.stringify(newFav));
     localStorage.setItem(item.id, JSON.stringify(isFav));
   } else {
     const elementIdx = fav.findIndex(el => el.id === item.id);
     newFav.splice(elementIdx, 1);
     isFav = false;
-    localStorage.setItem("fav", JSON.stringify(newFav));
     localStorage.setItem(item.id, JSON.stringify(isFav));
   }
-
+  localStorage.setItem("fav", JSON.stringify(newFav));
   dispatch({ type: ADD_TO_FAV, payload: newFav });
 };
 

@@ -1,0 +1,37 @@
+.favContainer {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.container {
+  display: flex;
+  background-color: #c9c9c9;
+  height: 30px;
+  position: sticky;
+  top: 0px;
+  z-index: 300;
+}
+.container h5 {
+  color: #000;
+  font-weight: 400;
+  font-size: 15px;
+  position: relative;
+  top: 5px;
+}
+.noProducts {
+  text-align: center;
+  height: 30%;
+  position: relative;
+  top: 130px;
+}
+.noProducts h5 {
+  color: #fff;
+}
+.noProducts p {
+  color: #fff;
+}
+.noProducts p:hover {
+  color: #2bfab7;
+  transition: 0.15s ease-in-out;
+}

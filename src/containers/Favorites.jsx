@@ -6,31 +6,31 @@ import CardComponent from "../components/Card";
 import { Link } from "react-router-dom";
 
 export default function Favorites() {
+  const favList = useSelector(state => state.fav);
+  const cart = useSelector(state => state.cart);
   const favs = JSON.parse(localStorage.getItem("fav"));
   const [favorites, setFavorites] = useState(favs);
   const [clicked, setClicked] = useState(false);
-  const favList = useSelector(state => state.fav);
-  const cart = useSelector(state => state.cart);
 
   React.useEffect(() => {
     setFavorites(favs);
-  }, [favList]);
+  }, [favs]);
 
   return (
     <>
       <div className={F.container}>
         <h5>
-          {favorites.length === 1
+          {favList.length === 1
             ? `This is your top favorite product`
-            : favorites.length > 1
+            : favList.length > 1
             ? `These are your top ${favorites.length} favorite products`
             : null}
         </h5>
       </div>
       <div className={F.itemsContainer}>
         <div className={F.favContainer}>
-          {favorites.length > 0 ? (
-            favorites.map((el, i) => (
+          {favList.length > 0 ? (
+            favList.map((el, i) => (
               <CardComponent
                 key={i}
                 title={el.title.substr(0, 18) + "..."}
