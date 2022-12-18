@@ -16,7 +16,8 @@ import {
   CLEAR_ERROR,
   ADD_TO_FAV,
   POST_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
+  POST_CART_ITEM
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -92,6 +93,16 @@ export const postProduct = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+export const postCartItem = payload => async dispatch =>{
+  //console.log(payload, 'payload')
+  try {
+    
+     dispatch({type: POST_CART_ITEM, payload})
+     await axios.post(`${URL}/cartItem`, payload);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const addToCart = item => dispatch => {
   const cart = localStorage.getItem("cart")

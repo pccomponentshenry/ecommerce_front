@@ -19,6 +19,8 @@ export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ADD_TO_FAV = "ADD_TO_FAV";
+export const POST_CART_ITEM = "POST_CART_ITEM"
 //actions User
 export const POST_USER = "POST_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
+export const PUT_CART_ITEM = "PUT_CART_ITEM"//falta hacer esta

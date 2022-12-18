@@ -1,16 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../redux/actions";
+import { addToCart, removeFromCart, putCartItem, postCartItem } from "../redux/actions";
 import C from "../styles/CartItem.module.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CartItem({ item }) {
   const { title, img, price, quantity } = item;
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
+  const { isAuthenticated } = useAuth0();  
 
   const handleAddToCart = () => {
-    dispatch(addToCart(item));
+    {isAuthenticated? dispatch (postCartItem(item)):dispatch(addToCart(item)) }
   };
 
   const handleDeleteFromCart = () => {
@@ -18,6 +20,7 @@ export default function CartItem({ item }) {
   };
 
   const handleRemoveOneFromCart = () => {
+    {isAuthenticated? dispatch (putCartItem(item, false)):dispatch(removeFromCart(item, false)) }
     dispatch(removeFromCart(item, false));
   };
 
