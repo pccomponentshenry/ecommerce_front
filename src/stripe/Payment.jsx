@@ -9,16 +9,16 @@ const stripePromese = loadStripe(
 
 function Payment() {
   const cart = useSelector(state => state.cart);
-
-  let claves = Object.keys(localStorage);
-
+  
+  //let claves = Object.keys(localStorage);
+  
   const handleClick = async e => {
     e.preventDefault();
     const product = [];
     cart.map(e => {
       let line = {
         name: e.title,
-        quantity: claves.includes(e.id) ? localStorage.getItem(e.id) : 1,
+        quantity: e.quantity,
         price: Math.round(e.price * 100),
         images: [e.img],
       };
@@ -41,7 +41,7 @@ function Payment() {
       sessionId: session.id,
     });
     if (result.error) {
-      console.log(result.error);
+      alert(result.error.message);
     }
   };
   return (
