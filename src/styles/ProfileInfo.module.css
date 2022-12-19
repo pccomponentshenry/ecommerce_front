@@ -1,0 +1,95 @@
+.infoContainer {
+  width: 25%;
+  height: 90vh;
+  float: left;
+}
+.SwitchContainer {
+  width: 70%;
+  height: 90vh;
+  right: 40px;
+  position: absolute;
+  bottom: 0px;
+}
+
+.cardsContainer {
+  width: 95%;
+  height: 65vh;
+  border: solid 1px #555;
+  border-radius: 10px;
+  margin-top: 60px;
+  overflow-y: scroll;
+}
+
+.cardsContainerWhite {
+  width: 95%;
+  height: 65vh;
+  border: solid 1px #555;
+  border-radius: 10px;
+  margin-top: 60px;
+  overflow-y: scroll;
+  background-color: #fff;
+}
+
+.BtnContainer {
+  width: 90%;
+  position: relative;
+  top: 55px;
+  display: flex;
+  right: 20px;
+}
+
+.inactive {
+  background-color: transparent;
+  border: solid 1px rgb(204, 204, 204);
+  border-radius: 5px;
+  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 10px;
+  font-weight: 400;
+}
+.inactive:hover {
+  transition: 0.15s ease-in-out;
+  background-color: rgb(204, 204, 204);
+  color: #000;
+}
+.active {
+  background-color: rgb(204, 204, 204);
+  border: solid 1px rgb(204, 204, 204);
+  border-radius: 5px;
+  color: #000;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 10px;
+  font-weight: 400;
+}
+
+.addProduct {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.addProduct h4 {
+  margin-right: 5px;
+  border: solid 1px #fff;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 18px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.addProduct h5 {
+  color: #fff;
+  font-size: 16px;
+}
+.addProduct:hover > h4 {
+  transition: 0.15s ease-in-out;
+  color: #2bfab7;
+  border: solid 1px #2bfab7;
+}
+.addProduct:hover > h5 {
+  transition: 0.15s ease-in-out;
+  color: #2bfab7;
+}

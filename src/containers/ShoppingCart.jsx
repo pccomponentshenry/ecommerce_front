@@ -6,11 +6,16 @@ import { useState } from "react";
 import { clearCart } from "../redux/actions/index.js";
 import Payment from "../stripe/Payment";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { LoginButton } from "../components/Login";
 
 export default function ShoppingCart() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
+  const { user} = useAuth0();
+  var guess = "default"
+  {user ?  guess = user.nickname : guess = "default"}
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -45,7 +50,7 @@ export default function ShoppingCart() {
               Total: ${parseFloat(totalPrice).toFixed(2)}
             </h3>
             <div className={S.startShopping}>
-              <Payment />
+              {guess === "default" ? <>Login to buy<LoginButton /> </> :<Payment />}
             </div>
           </div>
         ) : (

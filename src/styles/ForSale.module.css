@@ -1,0 +1,60 @@
+.cardContainer {
+  padding: 10px;
+}
+.container {
+  width: 95%;
+  height: 130px;
+  background-color: #fff;
+  border-bottom: 1px solid rgb(161, 161, 161);
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.imgCont {
+  width: 100px;
+  height: 130px;
+  background-color: #fff;
+  overflow: hidden;
+  float: left;
+}
+.imgCont img {
+  width: 95%;
+  cursor: pointer;
+}
+
+.titleCont {
+  position: relative;
+  left: 10px;
+  top: 10px;
+}
+.titleCont h4 {
+  font-size: 16px;
+}
+.titleCont h5 {
+  font-size: 14px;
+  color: rgb(153, 97, 160);
+}
+.titleCont span {
+  font-size: 12px;
+  background-color: rgb(132, 47, 143);
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.titleCont p {
+  display: inline;
+  position: relative;
+  bottom: 5px;
+}
+.titleCont label {
+  float: right;
+  font-size: 14px;
+  position: relative;
+  right: 15px;
+  background-color: rgb(132, 47, 143);
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
+  padding-top: 2px;
+}
