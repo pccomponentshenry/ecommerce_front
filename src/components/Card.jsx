@@ -11,15 +11,19 @@ function CardComponent(props) {
   const fav = localStorage.getItem(props.id)
     ? JSON.parse(localStorage.getItem(props.id))
     : [];
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const [active, setActive] = useState(fav);
   const [clicked, setClicked] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleAddToCart = () => {
-    {isAuthenticated? dispatch (postCartItem(props.product)):dispatch(addToCart(props.product)) }
-   /*  dispatch(addToCart(props.product)); */
+    {
+      isAuthenticated
+        ? dispatch(postCartItem(props.product, user.email))
+        : dispatch(addToCart(props.product));
+    }
+    /*  dispatch(addToCart(props.product)); */
     successAlert();
   };
 
