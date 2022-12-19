@@ -17,10 +17,11 @@ import {
   ADD_TO_FAV,
   POST_USER,
   LOGOUT_USER,
+  POST_CART_ITEM,
 } from "../actions/actionNames";
 
-// const URL = "http://localhost:3001";
-const URL = "https://pfbackend-production.up.railway.app";
+const URL = "http://localhost:3001";
+// const URL = "https://pfbackend-production.up.railway.app";
 
 export function allProducts() {
   return function (dispatch) {
@@ -90,6 +91,25 @@ export const postProduct = payload => async dispatch => {
     return dispatch({ type: POST_PRODUCT, payload: res.data });
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
+  }
+};
+
+export const postCartItem = (payload, email) => async dispatch => {
+  // const title = Object.values(payload)[1];
+  // // console.log(title);
+  // try {
+  //   const res = await axios.post(`${URL}/cartItem`, payload);
+  //   return dispatch({ type: POST_CART_ITEM, payload });
+  // } catch (error) {
+  //   console.log(error);
+  // }
+
+  try {
+    dispatch({ type: POST_CART_ITEM, payload });
+    payload.email = email;
+    await axios.post(`${URL}/cartItem`, payload);
+  } catch (error) {
+    console.log(error);
   }
 };
 

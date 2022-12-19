@@ -2,22 +2,28 @@ import C from "../styles/Card.module.css";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { addToCart, addToFav } from "../redux/actions";
+import { addToCart, addToFav, postCartItem } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function CardComponent(props) {
   const fav = localStorage.getItem(props.id)
     ? JSON.parse(localStorage.getItem(props.id))
     : [];
-
+  const { isAuthenticated, user } = useAuth0();
   const [active, setActive] = useState(fav);
   const [clicked, setClicked] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleAddToCart = () => {
-    dispatch(addToCart(props.product));
+    {
+      isAuthenticated
+        ? dispatch(postCartItem(props.product, user.email))
+        : dispatch(addToCart(props.product));
+    }
+    /*  dispatch(addToCart(props.product)); */
     successAlert();
   };
 

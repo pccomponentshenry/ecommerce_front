@@ -16,6 +16,7 @@ import {
   ADD_TO_FAV,
   POST_USER,
   LOGOUT_USER,
+  POST_CART_ITEM
 } from "../actions/actionNames";
 
 const initialState = {
@@ -98,6 +99,27 @@ function rootReducer(state = initialState, action) {
         ...state,
         error: action.payload,
       };
+////////////////////////////////// cart
+case POST_CART_ITEM: {
+  const cart = state.cart
+  const existingElementIdx = cart.findIndex(el => el.id === action.payload.id);
+
+  const newCart = [...cart];
+  //console.log(newCart)
+  if (existingElementIdx !== -1) {
+    newCart[existingElementIdx].quantity++;
+    return{
+      ...state
+    }
+  } else {
+    const addElement = { ...action.payload };
+    addElement.quantity = 1;
+    return{
+      ...state,
+      cart : [...state.cart, addElement]
+    }
+  }
+};
 
     case ADD_TO_CART:
       return {
