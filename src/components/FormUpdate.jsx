@@ -67,7 +67,7 @@ export default function Form() {
 
     if (!input.price) {
       errors.price = "*Price is required";
-    } else if (Math.floor(input.price) < 0) {
+    } else if (Number(input.price) < 0) {
       errors.price = "*Price must be a positive number";
     }
     if (!input.category || input.category === "Category") {
@@ -210,7 +210,7 @@ export default function Form() {
 
       <form onSubmit={e => handleSubmit(e)} autoComplete="off">
         <div className={F.titleCont}>
-          <h5>New product</h5>
+          <h5>Update your product</h5>
           <h6>Add images of your product</h6>
         </div>
 
@@ -365,7 +365,7 @@ export default function Form() {
                 disable && e.preventDefault();
               }}
             >
-              Publish product
+              Update product
             </button>
           </div>
         </div>
