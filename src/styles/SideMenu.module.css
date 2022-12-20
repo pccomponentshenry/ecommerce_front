@@ -160,3 +160,73 @@ hr {
   position: relative;
   left: 5px;
 }
+@media screen and (max-width: 480px) {
+  .Container {
+    width: 100%;
+    height: 60vh;
+    position: relative;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    background-color: #000;
+  }
+  .filterContainer {
+    display: flex;
+    position: absolute;
+    left: 20px;
+    height: 70px;
+    width: 300px;
+  }
+  .filterContainer h6 {
+    position: absolute;
+    left: 10px;
+    width: 150px;
+  }
+
+  .select {
+    position: relative;
+    top: 10px;
+    /* left: 200px; */
+    margin-left: 5px;
+  }
+  .select select {
+    width: 110px;
+  }
+  .orderPriceTitle {
+    margin-top: 65px;
+  }
+  .order {
+    display: flex;
+  }
+  .order button {
+    width: 130px;
+    height: 25px;
+    position: relative;
+    right: 235px;
+    top: 85px;
+    margin-left: 10px;
+  }
+  /* .label {
+    margin-top: -5px;
+  } */
+  .sharedInput {
+    position: absolute;
+    top: 135px;
+  }
+  .sharedInput h6 {
+    margin-top: -5px;
+  }
+  .sharedInput hr {
+    display: none;
+  }
+  .sharedInput input {
+    margin-left: 10px;
+    width: 75px;
+    position: relative;
+    top: 5px;
+  }
+  .sharedInput button {
+    position: relative;
+    top: 7px;
+  }
+}

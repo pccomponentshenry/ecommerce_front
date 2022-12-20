@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <>
       {products.length > 0 ? (
-        <div>
+        <div className={H.container}>
           <div className={H.carouselContainer}>
             <Carousel />
           </div>

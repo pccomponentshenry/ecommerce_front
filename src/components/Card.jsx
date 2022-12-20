@@ -23,7 +23,7 @@ function CardComponent(props) {
         ? dispatch(postCartItem(props.product, user.email))
         : dispatch(addToCart(props.product));
     }
-    /*  dispatch(addToCart(props.product)); */
+
     successAlert();
   };
 

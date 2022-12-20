@@ -38,12 +38,12 @@ export default function Nav() {
             />
           </Link>
           <ul className={N.navList}>
-            <Link to="/categories" style={{ textDecoration: "none" }}>
+            {/* <Link to="/categories" style={{ textDecoration: "none" }}>
               <li>Categories</li>
             </Link>
             <Link to="/latest" style={{ textDecoration: "none" }}>
               <li>Latest</li>
-            </Link>
+            </Link> */}
 
             <Link to="/sell" style={{ textDecoration: "none" }}>
               {isAuthenticated ? <li>Sell</li> : <></>}
@@ -55,7 +55,7 @@ export default function Nav() {
         </div>
 
         <div className={N.searchAndCart}>
-          <h6 className={N.loginText}>
+          <div className={N.loginText}>
             {isAuthenticated ? (
               <>
                 <LogoutButton />
@@ -63,8 +63,8 @@ export default function Nav() {
             ) : (
               <LoginButton />
             )}
-          </h6>
-          <div>
+          </div>
+          <div className={N.btnIcons}>
             {cart.length > 0 && (
               <span className={N.cartNumber}>{cartQuantity}</span>
             )}

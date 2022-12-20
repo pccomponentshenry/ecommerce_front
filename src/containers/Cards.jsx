@@ -34,11 +34,11 @@ export default function Cards() {
   //   for (let i = 0; i < cartLS.length; i++) {
   //     dispatch(postCartItem(cartLS[i]));
   //   }
-  //   localStorage.setItem("cart", []);
   if (cartLS.length !== 0 && isAuthenticated) {
     for (let i = 0; i < cartLS.length; i++) {
       dispatch(postCartItem(cartLS[i], user.email));
     }
+    localStorage.setItem("cart", []);
   }
 
   //falta hacer esta logica, pero ya limpie el LS

@@ -128,3 +128,32 @@ hr {
   position: relative;
   bottom: 38px;
 }
+@media screen and (max-width: 480px) {
+  .container {
+    justify-content: center;
+    /* width: 200px; */
+  }
+
+  .logoAndMenu {
+    height: 70px;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+  }
+
+  .navList {
+    display: none;
+  }
+  .loginText {
+    display: none;
+  }
+
+  .searchAndCart {
+    position: relative;
+    top: 10px;
+    left: 120px;
+  }
+  .container.active {
+    height: 70px;
+  }
+}

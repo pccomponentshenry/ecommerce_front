@@ -82,7 +82,7 @@ export default function SideMenu({ name, setName }) {
         <div className={S.categoryContainer}>
           <div className={S.filterContainer}>
             <hr />
-            <h6>Filter by:</h6>
+            <h6 className={S.filterByTitle}>Filter by:</h6>
             <div className={S.select}>
               <select
                 name="Filter"
@@ -102,7 +102,7 @@ export default function SideMenu({ name, setName }) {
                 ))}
               </select>
             </div>
-            <div className={S.select}></div>
+            {/* <div className={S.select}></div> */}
 
             <div className={S.select}>
               <select
@@ -126,7 +126,7 @@ export default function SideMenu({ name, setName }) {
 
             <div className={S.order}>
               <hr />
-              <h6>Order by price</h6>
+              <h6 className={S.orderPriceTitle}>Order by price</h6>
               <button id="desc" onClick={handleSort}>
                 Higher to lower
               </button>

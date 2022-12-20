@@ -1,11 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
 body {
-    font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-*{
-    padding: 0 auto;
-    margin: 0 auto;
-    box-sizing: border-box;
-
+* {
+  padding: 0 auto;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 480px) {
+  body {
+    overflow-x: hidden !important;
+  }
 }

@@ -12,7 +12,7 @@ import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
-import BuyConfirm from "./components/BuyConfirm"
+import BuyConfirm from "./components/BuyConfirm";
 
 function App() {
   populateDB();
@@ -23,7 +23,7 @@ function App() {
         <Nav />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/categories" element={<Categories />} />
+          {/* <Route exact path="/categories" element={<Categories />} /> */}
           <Route exact path="/latest" element={<Latest />} />
           <Route
             exact
