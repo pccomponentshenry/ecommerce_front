@@ -1,8 +1,15 @@
 import React from "react";
 import S from "../styles/ForSale.module.css";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
 
 export default function ForSale() {
+  const products = useSelector(state => state.products);
+  const { isLoading, user } = useAuth0();
+  
+  const myProducts = products.filter( p => p.creator === user.nickname)
+
   const productsForSale = [
     {
       id: 52,
@@ -78,8 +85,8 @@ export default function ForSale() {
 
   return (
     <div>
-      {productsForSale.length > 0 ? (
-        productsForSale.map((el, i) => (
+      {myProducts.length > 0 ? (
+        myProducts.map((el, i) => (
           <div className={S.cardContainer} key={i}>
             <div className={S.container}>
               <div className={S.imgCont}>
@@ -92,6 +99,11 @@ export default function ForSale() {
                 <h5>{el.brand.name}</h5>
                 <p>${el.price}</p>
                 <label>Stock: {el.stock}</label>
+                <label>Status: {el.status}</label>
+                <Link to='/update'>
+                <button>Update</button> 
+                </Link>
+                <button>Delete</button> 
               </div>
             </div>
           </div>

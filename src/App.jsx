@@ -13,6 +13,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
 import BuyConfirm from "./components/BuyConfirm"
+import UpdateProduct from "./containers/UpdateProduct"
 
 function App() {
   populateDB();
@@ -31,6 +32,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <FormContainer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/update"
+            element={
+              <ProtectedRoute>
+                <UpdateProduct />
               </ProtectedRoute>
             }
           />
