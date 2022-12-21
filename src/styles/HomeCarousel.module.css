@@ -24,18 +24,24 @@
   margin-bottom: 100px;
 }
 @media screen and (max-width: 500px) {
+  .imageCont {
+    display: flex;
+  }
+
+  .container {
+    display: flex;
+  }
   .caption {
     text-align: left;
     position: relative;
     margin-bottom: 10px;
-
     position: relative;
     left: 5px;
   }
   .captionHeadphones {
     text-align: right;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
   .title {
     font-size: 15px;

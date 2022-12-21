@@ -163,9 +163,10 @@ hr {
 @media screen and (max-width: 500px) {
   .Container {
     width: 100%;
-    height: 60vh;
+    height: 200px;
     position: relative;
-    top: 30px;
+    top: 70px;
+    padding-top: 10px;
     right: 30px;
     display: flex;
     background-color: #000;
@@ -173,23 +174,24 @@ hr {
     padding-left: 20px;
   }
   .filterContainer {
-    display: flex;
     width: 100%;
-    padding-top: 20px;
+    position: absolute;
+    height: 180px;
   }
+  .filterContainer hr {
+    display: none;
+  }
+
   .select {
-    background-color: transparent;
-    color: #fff;
-    border: none;
-    padding: 2px;
-    border-radius: 10px;
-    cursor: pointer;
+    height: 100px;
+    position: absolute;
     margin-top: -10px;
+  }
+  .brand {
+    margin-top: 40px;
+  }
+  .Container h6 {
     font-size: 14px;
-    width: 100%;
-    position: relative;
-    top: 0px;
-    height: 60px;
   }
   .categoryContainer {
     width: 100%;
@@ -197,10 +199,9 @@ hr {
   }
   .order {
     position: absolute;
-    margin-top: 50px;
-    display: flex;
-
     height: 100px;
+    right: 50px;
+    margin-top: -25px;
   }
   .order hr {
     display: none;
@@ -214,22 +215,21 @@ hr {
     font-weight: 400;
     height: 20px;
     position: relative;
-    top: 20px;
+    display: block;
+    top: 10px;
     width: 130px;
-    height: 30px;
+    height: 25px;
     font-size: 12px;
   }
   .orderPriceTitle,
   .label {
     position: absolute;
     width: 100%;
-    margin-left: -45px;
     overflow: hidden;
   }
 
   .sharedInput {
-    position: absolute;
-    margin-top: 120px;
+    margin-top: 85px;
     height: 70px;
     width: 50%;
   }
@@ -238,13 +238,12 @@ hr {
   }
   .sharedInput input {
     position: relative;
-    top: 10px;
-    left: 5px;
+    bottom: 10px;
   }
   .sharedInput button {
-    position: relative;
-    top: 9px;
-    left: 20px;
+    position: absolute;
+    margin-top: 135px;
+    left: 150px;
     background-color: transparent;
     color: #2bfab7;
     border: solid 1px #2bfab7;
@@ -252,20 +251,17 @@ hr {
     width: 25px;
     font-size: 12px;
   }
-  .Container h6 {
-    font-size: 14px;
-    position: absolute;
-    left: 50px;
-  }
+
   .clearFilters {
     width: 150px;
     position: relative;
   }
 
   .clearFilters {
-    width: 150px;
-    margin-top: 190px;
+    width: 130px;
     position: absolute;
+    right: 50px;
+    margin-top: -35px;
   }
   .clearFilters button {
     background-color: transparent;

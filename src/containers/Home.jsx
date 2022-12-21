@@ -59,7 +59,12 @@ export default function Home() {
                 />
               </div>
             </div>
-            <Cards currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            <div className={H.cardsContainer}>
+              <Cards
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+            </div>
           </div>
         </div>
       ) : (

@@ -12,12 +12,8 @@ import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
-<<<<<<< HEAD
 import BuyConfirm from "./components/BuyConfirm";
-=======
-import BuyConfirm from "./components/BuyConfirm"
-import UpdateProduct from "./containers/UpdateProduct"
->>>>>>> 94012fabf1fa9512548019ae6f855aff8eb9dded
+import UpdateProduct from "./containers/UpdateProduct";
 
 function App() {
   populateDB();

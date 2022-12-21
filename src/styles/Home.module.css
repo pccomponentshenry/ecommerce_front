@@ -72,4 +72,30 @@ body {
     position: relative;
     top: 70px;
   }
+
+  .searchBarCont {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    top: 70px;
+    background-color: rgb(87, 0, 99);
+  }
+  .searchBar {
+    border: solid 1px rgb(173, 94, 184);
+    width: 200px;
+    border-radius: 20px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    height: 20px;
+    font-size: 12px;
+  }
+  .searchBar input::placeholder {
+    position: relative;
+    bottom: 3px;
+  }
+  .cardsContainer {
+    display: flex;
+    justify-content: center;
+  }
 }

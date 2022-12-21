@@ -85,6 +85,7 @@ export default function SideMenu({ name, setName }) {
             <h6 className={S.filterByTitle}>Filter by:</h6>
             <div className={S.select}>
               <select
+                className={S.category}
                 name="Filter"
                 id="cat"
                 defaultValue={"default"}
@@ -102,10 +103,10 @@ export default function SideMenu({ name, setName }) {
                 ))}
               </select>
             </div>
-            {/* <div className={S.select}></div> */}
 
             <div className={S.select}>
               <select
+                className={S.brand}
                 name="Filter"
                 defaultValue={"default"}
                 id="brand"

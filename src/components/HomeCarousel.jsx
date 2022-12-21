@@ -5,7 +5,7 @@ import headphones from "../Images/headphones.jpg";
 
 function HomeCarousel() {
   return (
-    <div>
+    <div className={HC.container}>
       <Carousel>
         <Carousel.Item>
           <div className={HC.imageCont}>

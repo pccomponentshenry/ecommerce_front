@@ -52,4 +52,13 @@
   border: solid 1px #2bfab7;
 }
 @media screen and (max-width: 500px) {
+  .cardContainer {
+    width: 60%;
+    flex-wrap: nowrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    top: 100px;
+  }
 }
