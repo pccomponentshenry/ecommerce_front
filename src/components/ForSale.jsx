@@ -100,7 +100,7 @@ export default function ForSale() {
                 <p>${el.price}</p>
                 <label>Stock: {el.stock}</label>
                 <label>Status: {el.status}</label>
-                <Link to='/update'>
+                <Link to={'/update/' + el.id}>
                 <button>Update</button> 
                 </Link>
                 <button>Delete</button> 
