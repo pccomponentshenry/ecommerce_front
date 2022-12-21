@@ -51,14 +51,5 @@
   background-color: #2bfab7;
   border: solid 1px #2bfab7;
 }
-@media screen and (max-width: 480px) {
-  .cardContainer {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    position: relative;
-    top: 30px;
-    justify-content: center;
-    /* background-color: red; */
-  }
+@media screen and (max-width: 500px) {
 }

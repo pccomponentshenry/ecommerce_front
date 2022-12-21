@@ -3,14 +3,24 @@ import F from "../styles/Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands, getCategories, postProduct } from "../redux/actions/index";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getProductDetail } from "../redux/actions";
 
 export default function Form() {
   const { user } = useAuth0();
   const creator = user.nickname;
+  const params = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector(state => state.product);
+  
+  useEffect(() => {
+    dispatch(getProductDetail(params.id));
+  }, [dispatch]);
+console.log(product)
+
   const initialState = {
-    name: "",
+    name: "title",
     brand: "",
     stock: "",
     price: "",
@@ -19,9 +29,12 @@ export default function Form() {
     category: "",
     creator: creator,
   };
-  //console.log(creator)
+  //console.log(forUpdate)
   //console.log(user.email)
-  const dispatch = useDispatch();
+  
+  /* useEffect(() => {
+    dispatch(getProductDetail(params.id));
+  }, [dispatch]); */
   useEffect(() => {
     dispatch(getBrands());
     dispatch(getCategories());
@@ -67,7 +80,7 @@ export default function Form() {
 
     if (!input.price) {
       errors.price = "*Price is required";
-    } else if (Math.floor(input.price) < 0) {
+    } else if (Number(input.price) < 0) {
       errors.price = "*Price must be a positive number";
     }
     if (!input.category || input.category === "Category") {
@@ -210,16 +223,19 @@ export default function Form() {
 
       <form onSubmit={e => handleSubmit(e)} autoComplete="off">
         <div className={F.titleCont}>
-          <h5>New product</h5>
+          <h5>Update your product</h5>
           <h6>Add images of your product</h6>
         </div>
 
-        <div className={F.container}>
+        <div 
+        className={F.container}
+        style={{backgroundImage: `url(${product.img})`}}>
           <h5>Upload an image</h5>
           <input
             type="file"
             name="uploadfile"
             multiple="multiple"
+            placeholder={product.img}
             id="img"
             style={{ display: "none" }}
             onChange={e => {
@@ -248,7 +264,7 @@ export default function Form() {
                 value={input.name || ""}
                 type="text"
                 name="name"
-                placeholder=""
+                placeholder={product.title}
                 onBlur={e => errorSetting(e)}
                 onChange={e => handleChange(e)}
               />
@@ -314,6 +330,7 @@ export default function Form() {
                 id="description"
                 cols="30"
                 rows="10"
+                placeholder={product.description}
                 onBlur={e => {
                   errorSetting(e);
                 }}
@@ -333,6 +350,7 @@ export default function Form() {
                 type="number"
                 name="stock"
                 min="0"
+                placeholder={product.stock}
                 onBlur={e => errorSetting(e)}
                 onChange={e => handleChange(e)}
               />
@@ -346,6 +364,7 @@ export default function Form() {
                 type="float"
                 name="price"
                 min="0"
+                placeholder={product.price}
                 onBlur={e => {
                   errorSetting(e);
                   handleValidate(input);
@@ -365,7 +384,7 @@ export default function Form() {
                 disable && e.preventDefault();
               }}
             >
-              Publish product
+              Update product
             </button>
           </div>
         </div>

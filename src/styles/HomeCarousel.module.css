@@ -23,45 +23,27 @@
   position: relative;
   margin-bottom: 100px;
 }
-@media screen and (max-width: 480px) {
-  .imageCont {
-    width: 100%;
+@media screen and (max-width: 500px) {
+  .caption {
+    text-align: left;
+    position: relative;
+    margin-bottom: 10px;
+
+    position: relative;
+    left: 5px;
   }
-  .image {
-    filter: brightness(30%);
-    width: 150%;
+  .captionHeadphones {
+    text-align: right;
+    position: relative;
+    margin-bottom: 20px;
   }
   .title {
-    font-size: 16px;
+    font-size: 15px;
     color: #2bfab7;
     font-weight: 800;
   }
-
-  .caption {
-    text-align: left;
-    position: relative;
-    margin-bottom: 100px;
-    right: 80px;
-  }
-  .captionHeadphones {
-    text-align: right;
-    position: relative;
-    margin-bottom: 10px;
-  }
-  .caption {
-    text-align: left;
-    position: absolute;
-    right: 5px;
-    top: -50px;
-    font-size: 12px;
+  .subtitle {
     font-weight: 200;
-  }
-  .captionHeadphones {
-    text-align: right;
-    position: absolute;
-    bottom: 0px;
     font-size: 12px;
-    font-weight: 200;
-    width: 300px;
   }
 }

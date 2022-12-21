@@ -3,6 +3,7 @@
   width: 100%;
   position: fixed;
   z-index: 900;
+  justify-content: space-around;
 }
 .container.active {
   background-color: #1b1b1b;
@@ -11,11 +12,10 @@
 }
 .logoAndMenu {
   display: flex;
-  height: 70px;
+  height: 60px;
   position: relative;
   float: left;
   top: 10px;
-  right: 30px;
 }
 
 .navList {
@@ -45,15 +45,9 @@
   display: flex;
   align-items: center;
   position: relative;
-  left: 60px;
+  /* left: 60px; */
 }
-.searchBar {
-  border: solid 1px gray;
-  padding: 3px;
-  padding-left: 10px;
-  padding-right: 5px;
-  border-radius: 5px;
-}
+
 .searchBar input {
   color: #fff;
   outline: none;
@@ -62,13 +56,16 @@
   color: #fff;
   font-weight: 200;
   font-size: 12px;
-  margin-left: 15px;
-  margin-top: 20px;
+  margin-top: 10px;
   cursor: pointer;
+  display: flex;
+  height: 60px;
 }
+
 .cart {
-  margin-left: 15px;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   cursor: pointer;
 }
 .cartNumber {
@@ -83,8 +80,7 @@
 .mode {
   height: 15px;
   position: relative;
-  top: 7px;
-  left: 20px;
+  top: 2px;
   cursor: pointer;
 }
 switch {
@@ -98,24 +94,10 @@ switch {
   position: relative;
   bottom: 3px;
 }
-.searchIcon {
-  border-left: solid 1px gray;
-  bottom: 0px;
-}
-.searchBar button {
-  background-color: transparent;
-  border: none;
-}
-.searchAndCart input {
-  background-color: transparent;
-  border: none;
-  height: 15px;
-}
 .line {
   width: 100%;
   position: absolute;
   margin-top: 3px;
-  z-index: -999;
 }
 hr {
   position: relative;
@@ -128,32 +110,28 @@ hr {
   position: relative;
   bottom: 38px;
 }
-@media screen and (max-width: 480px) {
-  .container {
-    justify-content: center;
-    /* width: 200px; */
-  }
-
-  .logoAndMenu {
-    height: 70px;
-    position: absolute;
-    top: 10px;
-    left: 40px;
-  }
-
+@media screen and (max-width: 500px) {
   .navList {
     display: none;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    height: 70px;
+    border-bottom: solid 1px rgb(114, 114, 114);
+    padding-bottom: 10px;
   }
   .loginText {
     display: none;
   }
-
-  .searchAndCart {
+  .line {
+    display: none;
+  }
+  .logoAndMenu {
+    display: flex;
+    height: fit-content;
     position: relative;
     top: 10px;
-    left: 120px;
-  }
-  .container.active {
-    height: 70px;
+    overflow: hidden;
   }
 }

@@ -38,12 +38,12 @@ export default function Nav() {
             />
           </Link>
           <ul className={N.navList}>
-            {/* <Link to="/categories" style={{ textDecoration: "none" }}>
+            <Link to="/categories" style={{ textDecoration: "none" }}>
               <li>Categories</li>
             </Link>
             <Link to="/latest" style={{ textDecoration: "none" }}>
               <li>Latest</li>
-            </Link> */}
+            </Link>
 
             <Link to="/sell" style={{ textDecoration: "none" }}>
               {isAuthenticated ? <li>Sell</li> : <></>}
@@ -63,21 +63,23 @@ export default function Nav() {
             ) : (
               <LoginButton />
             )}
+
+            <div className={N.btnIcons}>
+              {cart.length > 0 && (
+                <span className={N.cartNumber}>{cartQuantity}</span>
+              )}
+              <Link to="/cart">
+                <img src={cartImg} className={N.cart} alt="cart icon" />
+              </Link>
+
+              <img
+                src={mode}
+                alt=""
+                className={N.mode}
+                onClick={() => switchMode()}
+              />
+            </div>
           </div>
-          <div className={N.btnIcons}>
-            {cart.length > 0 && (
-              <span className={N.cartNumber}>{cartQuantity}</span>
-            )}
-            <Link to="/cart">
-              <img src={cartImg} className={N.cart} alt="cart icon" />
-            </Link>
-          </div>
-          <img
-            src={mode}
-            alt=""
-            className={N.mode}
-            onClick={() => switchMode()}
-          />
         </div>
         <div className={N.line}>
           <hr />

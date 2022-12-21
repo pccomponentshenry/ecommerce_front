@@ -20,15 +20,15 @@ body {
   height: 40px;
   position: relative;
   background-color: rgb(87, 0, 99);
-  align-items: center;
 }
 .searchBar {
   border: solid 1px rgb(173, 94, 184);
   width: 300px;
   border-radius: 20px;
-  position: relative;
-  left: 470px;
+  position: absolute;
   top: 5px;
+  right: 160px;
+  height: 30px;
 }
 .searchIcon {
   width: 25px;
@@ -43,10 +43,15 @@ body {
   font-weight: 200;
   color: #fff;
   outline: none;
+  height: 30px;
+  position: absolute;
+  left: 40px;
+  margin-top: -2px;
 }
 .searchBar input::placeholder {
   color: #fff;
 }
+
 /* SEARCHBAR */
 .loadingCont {
   display: flex;
@@ -59,52 +64,12 @@ body {
   height: 100vh;
   background-color: black;
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 500px) {
   body {
     overflow-x: hidden !important;
   }
-  .container {
-    max-width: 100% !important;
-    overflow-x: hidden !important;
+  .carouselContainer {
     position: relative;
     top: 70px;
-  }
-  .searchBarCont {
-    width: 100%;
-    height: 30px;
-    position: relative;
-
-    background-color: rgb(87, 0, 99);
-    align-items: center;
-  }
-  .searchBar {
-    border: solid 1px rgb(173, 94, 184);
-    width: 200px;
-    height: 20px;
-    border-radius: 20px;
-    position: absolute;
-    left: 25px;
-    top: 5px;
-  }
-  .searchIcon {
-    width: 20px;
-    padding-left: 5px;
-    position: relative;
-    bottom: 5px;
-    margin-right: 10px;
-  }
-  .searchBar input {
-    background-color: transparent;
-    border: none;
-    font-weight: 200;
-    color: #fff;
-    outline: none;
-    position: absolute;
-    left: 20px;
-    font-size: 12px;
-  }
-  .searchBar input::placeholder {
-    color: #fff;
-    font-size: 12px;
   }
 }

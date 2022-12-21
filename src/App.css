@@ -4,12 +4,16 @@ body {
   font-family: "Poppins", sans-serif;
 }
 * {
-  padding: 0 auto;
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
-@media screen and (max-width: 480px) {
-  body {
+@media screen and (max-width: 500px) {
+  * {
     overflow-x: hidden !important;
+    max-width: 100% !important;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 }
