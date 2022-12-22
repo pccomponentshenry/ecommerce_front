@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import CardComponent from "../components/Card";
-import {
-  setFiltered,
-  postCartItem,
-  removeFromCart,
-} from "../redux/actions/index.js";
+import { postCartItem } from "../redux/actions/index.js";
 import C from "../styles/Cards.module.css";
 import NoProducts from "../alerts/NoProducts";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -16,18 +12,20 @@ export default function Cards() {
 
   const products = useSelector(state => state.products);
   const filtered = useSelector(state => state.filtered);
+
   const error = useSelector(state => state.error);
   const cartLS = localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [];
-  //const cartLS = localStorage.getItem("cart")
 
   const { isAuthenticated, user } = useAuth0();
 
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
-  const currentItems = filtered.slice(itemOffset, endOffset);
+  let currentItems = filtered.slice(itemOffset, endOffset);
+  currentItems = currentItems.filter(el => el.status === "active");
+
   const pageCount = Math.ceil(filtered.length / itemsPerPage);
   // if (cartLS.length !== 0 && isAuthenticated) {
   //   // console.log(cartLS.length)
@@ -53,9 +51,9 @@ export default function Cards() {
     setItemOffset(newOffset);
   };
 
-  useEffect(() => {
-    dispatch(setFiltered(products));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(setFiltered(products));
+  // }, [dispatch]);
 
   useEffect(() => {
     setItemOffset(0);
