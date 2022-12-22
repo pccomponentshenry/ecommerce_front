@@ -18,6 +18,7 @@ import {
   POST_USER,
   LOGOUT_USER,
   POST_CART_ITEM,
+  PUT_PRODUCT,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -60,7 +61,7 @@ export const setFiltered = payload => {
   return { type: SET_FILTERED, payload };
 };
 
-export function getProductDetail(id) {
+export function getProductDetail( id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/products/${id}`);
     return dispatch({ type: GET_PRODUCT, payload: res.data });
@@ -93,6 +94,13 @@ export const postProduct = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+export function putProduct(id, payload) {
+  console.log(id, payload)
+  return async dispatch => {
+    const res = await axios.put(`${URL}/products/${id}`, payload);
+    return dispatch({ type: PUT_PRODUCT, payload: res.data })
+  }
+}
 
 export const postCartItem = (payload, email) => async dispatch => {
   // const title = Object.values(payload)[1];

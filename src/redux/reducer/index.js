@@ -16,7 +16,8 @@ import {
   ADD_TO_FAV,
   POST_USER,
   LOGOUT_USER,
-  POST_CART_ITEM
+  POST_CART_ITEM,
+  PUT_PRODUCT
 } from "../actions/actionNames";
 
 const initialState = {
@@ -56,7 +57,12 @@ function rootReducer(state = initialState, action) {
         products: [...state.products, action.payload],
       };
     }
-
+    case PUT_PRODUCT:{
+      return {
+        ...state,
+        product: action.payload
+      }
+    }
     case CLEAR_STATE: {
       return {
         ...state,
