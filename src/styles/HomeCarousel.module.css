@@ -1,5 +1,6 @@
 .imageCont {
   width: 100vw;
+  overflow: hidden;
 }
 .image {
   filter: brightness(30%);
@@ -24,6 +25,7 @@
   text-align: right;
   position: relative;
   margin-bottom: 100px;
+  overflow: hidden;
 }
 @media screen and (max-width: 500px) {
   .imageCont {
@@ -39,6 +41,7 @@
     margin-bottom: 10px;
     position: relative;
     left: 5px;
+    overflow: hidden;
   }
   .captionHeadphones {
     text-align: right;
