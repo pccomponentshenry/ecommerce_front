@@ -17,7 +17,8 @@ import {
   POST_USER,
   LOGOUT_USER,
   POST_CART_ITEM,
-  PUT_PRODUCT
+  PUT_PRODUCT,
+  DELETE_PRODUCT
 } from "../actions/actionNames";
 
 const initialState = {
@@ -61,6 +62,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         product: action.payload
+      }
+    }
+    case DELETE_PRODUCT:{
+      return {
+        ...state
       }
     }
     case CLEAR_STATE: {
