@@ -2,7 +2,7 @@ import React from "react";
 import F from "../styles/Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands, getCategories, postProduct } from "../redux/actions/index";
+import { getBrands, getCategories, putProduct } from "../redux/actions/index";
 import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getProductDetail } from "../redux/actions";
@@ -17,19 +17,19 @@ export default function Form() {
   useEffect(() => {
     dispatch(getProductDetail(params.id));
   }, [dispatch]);
-console.log(product)
+//console.log(input)
 
   const initialState = {
-    name: "title",
-    brand: "",
-    stock: "",
-    price: "",
-    description: "",
-    img: [],
-    category: "",
+    name: product.title,
+    brand: product.brand,
+    stock: product.stock,
+    price: product.price,
+    description: product.description,
+    img: product.img,
+    category: product.category,
     creator: creator,
   };
-  //console.log(forUpdate)
+  //console.log(initialState)
   //console.log(user.email)
   
   /* useEffect(() => {
@@ -51,60 +51,31 @@ console.log(product)
   const [input, setInput] = useState({
     name: "",
     brand: "",
-    stock: 0,
+    stock: "",
     price: null,
     description: "",
     img: [],
     category: "",
     creator: creator,
   });
-
+//console.log(input, "en el estado")
   function clearForm() {
     setInput({ ...initialState });
   }
   const handleValidate = input => {
     const errors = {};
-    if (!input.name) {
-      errors.name = "*Name is required";
-    }
-    if (!input.brand) {
-      errors.brand = "*Brand is required";
-    }
-    if (!input.stock) {
-      errors.stock = "*Stock is required";
-    } else if (Number(input.stock) < 0) {
+   
+     if (Number(input.stock) < 0) {
       errors.stock = "*Stock must be a positive number";
-    } else if (Number(input.stock) !== parseInt(input.stock, 10)) {
+    } else if (input.stock && Number(input.stock) !== parseInt(input.stock, 10)) {
       errors.stock = "*Stock must be an integer number";
     }
-
-    if (!input.price) {
-      errors.price = "*Price is required";
-    } else if (Number(input.price) < 0) {
+    if (Number(input.price) < 0) {
       errors.price = "*Price must be a positive number";
     }
-    if (!input.category || input.category === "Category") {
-      errors.category = "*Choose a category";
-    }
-    if (!input.brand || input.brand === "Brand") {
-      errors.brand = "*Choose a brand";
-    }
-    if (!input.description || input.description === "") {
-      errors.description = "*A description is required";
-    }
-    if (!input.img) {
-      errors.img = "*You must upload at least one image ";
-    }
     if (
-      !error.name &&
-      !error.brand &&
       !error.price &&
-      !error.stock &&
-      !error.description &&
-      !error.img &&
-      !error.category &&
-      !error.brand &&
-      input.description.length > 0
+      !error.stock 
     ) {
       setDisable(false);
     } else {
@@ -155,7 +126,8 @@ console.log(product)
   };
 
   const handleChange = e => {
-    setInput({ ...input, [e.target.name]: e.target.value });
+    setInput({ ...initialState, [e.target.name]: e.target.value });
+    console.log(input)
   };
   const loadImage = e => {
     if (image.name) {
@@ -171,19 +143,13 @@ console.log(product)
   const handleSubmit = e => {
     console.log("entré");
     if (
-      !error.name &&
-      !error.brand &&
       !error.price &&
-      !error.stock &&
-      !error.description &&
-      !error.img &&
-      !error.category &&
-      !error.brand &&
-      input.description.length > 0
+      !error.stock
     ) {
       e.preventDefault();
       setActive(true);
-      dispatch(postProduct(input));
+      console.log(input)
+      dispatch(putProduct(product.id, input));
       setDisable(true);
       clearForm();
       setError({});
