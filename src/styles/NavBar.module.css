@@ -4,6 +4,7 @@
   position: fixed;
   z-index: 900;
   justify-content: space-around;
+  overflow: hidden;
 }
 .container.active {
   background-color: #1b1b1b;

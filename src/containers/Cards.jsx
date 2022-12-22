@@ -62,47 +62,49 @@ export default function Cards() {
   }, [filtered]);
 
   return (
-    <div className={C.cardContainer}>
-      {!error.length ? (
-        currentItems.length === 0 ? (
-          <NoProducts />
+    <>
+      <div className={C.cardContainer}>
+        {!error.length ? (
+          currentItems.length === 0 ? (
+            <NoProducts />
+          ) : (
+            <>
+              {currentItems.map(el => (
+                <CardComponent
+                  key={el.id}
+                  img={el.img}
+                  title={el.title.substr(0, 18) + "..."}
+                  price={el.price}
+                  brand={el.brand}
+                  id={el.id}
+                  product={el}
+                />
+              ))}
+            </>
+          )
         ) : (
-          <>
-            {products.map(el => (
-              <CardComponent
-                key={el.id}
-                img={el.img}
-                title={el.title.substr(0, 18) + "..."}
-                price={el.price}
-                brand={el.brand.name}
-                id={el.id}
-                product={el}
-              />
-            ))}
-            <div className={C.pagination}>
-              <ReactPaginate
-                className={C.paginate}
-                activeClassName={C.active}
-                previousClassName={C.previousNext}
-                previousLinkClassName={C.previous}
-                nextClassName={C.previousNext}
-                breakLabel="..."
-                nextLabel=">>"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={1}
-                marginPagesDisplayed={4}
-                pageCount={pageCount}
-                previousLabel="<<"
-                renderOnZeroPageCount={null}
-              />
-            </div>
-          </>
-        )
-      ) : (
-        <div>
-          <NoProducts />
-        </div>
-      )}
-    </div>
+          <div>
+            <NoProducts />
+          </div>
+        )}
+      </div>
+      <div className={C.pagination}>
+        <ReactPaginate
+          className={C.paginate}
+          activeClassName={C.active}
+          previousClassName={C.previousNext}
+          previousLinkClassName={C.previous}
+          nextClassName={C.previousNext}
+          breakLabel="..."
+          nextLabel=">>"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={1}
+          marginPagesDisplayed={4}
+          pageCount={pageCount}
+          previousLabel="<<"
+          renderOnZeroPageCount={null}
+        />
+      </div>
+    </>
   );
 }

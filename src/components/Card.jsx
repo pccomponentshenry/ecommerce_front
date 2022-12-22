@@ -77,7 +77,9 @@ function CardComponent(props) {
             <h6 className={C.name}>{props.title}</h6>
           </div>
           <div className={C.brandCont}>
-            <h6 className={C.brand}>{props.brand}</h6>
+            <h6 className={C.brand}>
+              {props.brand.length > 0 ? props.brand : props.brand.name}
+            </h6>
           </div>
           <div className={C.bottomCont}>
             <h6 className={C.price}>$ {props.price}</h6>

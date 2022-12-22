@@ -10,6 +10,7 @@
   font-size: 40px;
   color: #2bfab7;
   font-weight: 800;
+  overflow: hidden;
 }
 
 .caption {
@@ -17,6 +18,7 @@
   position: relative;
   margin-bottom: 100px;
   right: 80px;
+  overflow: hidden;
 }
 .captionHeadphones {
   text-align: right;

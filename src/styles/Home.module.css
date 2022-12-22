@@ -29,6 +29,7 @@ body {
   top: 5px;
   right: 160px;
   height: 30px;
+  overflow: hidden;
 }
 .searchIcon {
   width: 25px;
@@ -64,6 +65,7 @@ body {
   height: 100vh;
   background-color: black;
 }
+
 @media screen and (max-width: 500px) {
   body {
     overflow-x: hidden !important;
@@ -96,6 +98,9 @@ body {
   }
   .cardsContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    overflow: hidden;
+    width: 100%;
   }
 }

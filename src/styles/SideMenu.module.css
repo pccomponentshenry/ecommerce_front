@@ -172,6 +172,7 @@ hr {
     background-color: #000;
     justify-content: left;
     padding-left: 20px;
+    overflow: hidden;
   }
   .filterContainer {
     width: 90%;
@@ -188,6 +189,8 @@ hr {
   }
   .filterByTitle {
     font-size: 12px !important;
+
+    overflow: hidden;
   }
 
   .select {
@@ -196,12 +199,14 @@ hr {
     margin-top: 0px;
     font-size: 10px;
     height: 40px;
+    overflow: hidden;
   }
 
   .selectCont {
     position: relative;
     margin-top: 0px;
     width: 30%;
+    overflow: hidden;
   }
   .category {
     margin-top: 0px;
@@ -255,7 +260,6 @@ hr {
     position: relative;
     right: 0px;
     height: 120px;
-
     width: 30%;
   }
   .sharedInput hr {
