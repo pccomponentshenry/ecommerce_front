@@ -3,12 +3,22 @@ import S from "../styles/ForSale.module.css";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector } from "react-redux";
+import { deleteProduct } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 export default function ForSale() {
   const products = useSelector(state => state.products);
   const { isLoading, user } = useAuth0();
+  const dispatch = useDispatch();
   
   const myProducts = products.filter( p => p.creator === user.nickname)
+
+  function handleDelete(e){
+    
+    dispatch(deleteProduct(e));
+    alert("Videogame has remove succesfully")
+    
+}
 
   const productsForSale = [
     {
@@ -103,7 +113,7 @@ export default function ForSale() {
                 <Link to={'/update/' + el.id}>
                 <button>Update</button> 
                 </Link>
-                <button>Delete</button> 
+                <button onClick={e => handleDelete(el.id)}>Delete</button> 
               </div>
             </div>
           </div>

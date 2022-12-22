@@ -19,6 +19,7 @@ import {
   LOGOUT_USER,
   POST_CART_ITEM,
   PUT_PRODUCT,
+  DELETE_PRODUCT,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -100,8 +101,14 @@ export function putProduct(id, payload) {
     const res = await axios.put(`${URL}/products/${id}`, payload);
     return dispatch({ type: PUT_PRODUCT, payload: res.data })
   }
-}
+};
+export function deleteProduct(id){
+  return async dispatch => {
+    const res = await axios.delete (`${URL}/products/${id}`);
+    return dispatch({ type: DELETE_PRODUCT, payload: res.data })
+  }
 
+}
 export const postCartItem = (payload, email) => async dispatch => {
   // const title = Object.values(payload)[1];
   // // console.log(title);
