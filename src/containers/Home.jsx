@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../components/HomeCarousel";
 import Cards from "../containers/Cards";
 import SideMenu from "../components/SideMenu";
+
 import {
   allProducts,
   setFiltered,
@@ -46,9 +47,13 @@ export default function Home() {
           </div>
           <div className={H.CardsAndMenuContainer}>
             <SideMenu name={name} setName={setName} />
+
             <div className={H.searchBarCont}>
+              {/* ACÁ MENÚ HAMBURGUESA => HIDDEN, ABRE PLENO Y BOTONES ARRIBA. */}
+
               <div className={H.searchBar}>
                 <img className={H.searchIcon} src={search} />
+
                 <input
                   type="text"
                   placeholder="Search"

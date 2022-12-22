@@ -8,6 +8,7 @@ import { LogoutButton } from "./Logout";
 import mode from "../Images/mode.png";
 import cartImg from "../Images/cart.png";
 import N from "../styles/NavBar.module.css";
+import Menu from "../Images/menu.png";
 
 export default function Nav() {
   const [nav, setNav] = useState(false);
@@ -28,6 +29,8 @@ export default function Nav() {
   window.addEventListener("scroll", switchMode);
   return (
     <>
+      <img src={Menu} alt="menu" className={N.menuIcon} />
+      <div className={N.sideMenu}></div>
       <div className={`${N.container} ${nav ? N.active : N.container}`}>
         <div className={N.logoAndMenu}>
           <Link to="/" style={{ textDecoration: "none" }}>

@@ -18,7 +18,13 @@
   float: left;
   top: 10px;
 }
-
+.menuIcon {
+  width: 30px;
+  margin-left: 20px;
+  margin-top: 30px;
+  display: none;
+  position: absolute;
+}
 .navList {
   display: flex;
   align-items: center;
@@ -112,8 +118,20 @@ hr {
   bottom: 38px;
 }
 @media screen and (max-width: 500px) {
+  .sideMenu {
+    width: 40%;
+    height: 300px;
+    background-color: #000;
+    position: absolute;
+    z-index: 900;
+    margin-top: 70px;
+  }
   .navList {
     display: none;
+  }
+  .menuIcon {
+    display: block;
+    cursor: pointer;
   }
   .container {
     display: flex;
