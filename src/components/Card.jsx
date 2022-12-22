@@ -76,19 +76,23 @@ function CardComponent(props) {
           <div className={C.nameCont}>
             <h6 className={C.name}>{props.title}</h6>
           </div>
-          <h6 className={C.brand}>{props.brand}</h6>
+          <div className={C.brandCont}>
+            <h6 className={C.brand}>{props.brand}</h6>
+          </div>
           <div className={C.bottomCont}>
             <h6 className={C.price}>$ {props.price}</h6>
             <div className={C.btnAndFav}>
               <button className={C.cardBtn} onClick={handleAddToCart}>
                 Add to cart
               </button>
-              <span
-                className={active === true ? C.active : C.fav}
-                onClick={handleAddToFav}
-              >
-                ❤
-              </span>
+              <div className={C.heartCont}>
+                <span
+                  className={active === true ? C.active : C.fav}
+                  onClick={handleAddToFav}
+                >
+                  ❤
+                </span>
+              </div>
             </div>
           </div>
         </div>

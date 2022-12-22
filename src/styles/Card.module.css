@@ -56,7 +56,6 @@
   position: relative;
   bottom: 5px;
   height: 25px;
-  border: solid 1px red;
   z-index: 600;
 }
 .price {
@@ -127,11 +126,70 @@
     width: 100%;
     display: flex;
   }
+
+  .name {
+    font-size: 14px;
+
+    overflow: hidden;
+  }
+  .brandCont {
+    height: 50px;
+    overflow: hidden;
+    margin-top: -15px;
+  }
+  .brand {
+    font-size: 11px;
+    top: 1px;
+  }
   .btnAndFav {
-    height: 40px;
-    margin-top: 10px;
+    height: 95px;
+    margin-top: 5px;
+    overflow: hidden;
   }
   .cardBtn {
-    height: 25px;
+    position: relative;
+    height: 20px;
+    font-size: 10px;
+    margin-top: -3px;
+  }
+  .heartCont {
+    overflow: hidden;
+    width: 30px;
+  }
+  .fav {
+    font-size: 18px;
+    top: 10px;
+  }
+  .active {
+    font-size: 22px;
+  }
+
+  .nameCont {
+    width: 90%;
+    height: 70px;
+    float: left;
+    display: flex;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .price {
+    height: 50px;
+    margin-top: 10px;
+  }
+
+  .imgContainer {
+    height: 140px;
+  }
+  .square {
+    height: 120px;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .fav:hover {
+    margin-left: 10px;
+    color: rgb(43, 43, 43);
+    transition: 0.15s ease-in-out;
   }
 }

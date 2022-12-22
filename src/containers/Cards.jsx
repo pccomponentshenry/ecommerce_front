@@ -64,23 +64,21 @@ export default function Cards() {
   return (
     <div className={C.cardContainer}>
       {!error.length ? (
-        filtered.length === 0 ? (
+        currentItems.length === 0 ? (
           <NoProducts />
         ) : (
           <>
-            {filtered.length > 0 &&
-              filtered.map(el => (
-                <CardComponent
-                  key={el.id}
-                  img={el.img}
-                  title={el.title.substr(0, 18) + "..."}
-                  price={el.price}
-                  // brand={el.brand}
-                  id={el.id}
-                  product={el}
-                  // quantity={el.quantity}
-                />
-              ))}
+            {products.map(el => (
+              <CardComponent
+                key={el.id}
+                img={el.img}
+                title={el.title.substr(0, 18) + "..."}
+                price={el.price}
+                brand={el.brand.name}
+                id={el.id}
+                product={el}
+              />
+            ))}
             <div className={C.pagination}>
               <ReactPaginate
                 className={C.paginate}
