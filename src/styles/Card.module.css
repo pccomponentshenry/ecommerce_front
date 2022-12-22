@@ -27,6 +27,7 @@
   border: solid 1px #2bfab7;
   border-top: none;
   padding: 5px;
+  padding-left: 10px;
   display: flex;
   flex-direction: column;
   width: 230px;
@@ -54,6 +55,9 @@
   font-size: 14px;
   position: relative;
   bottom: 5px;
+  height: 25px;
+  border: solid 1px red;
+  z-index: 600;
 }
 .price {
   font-weight: 600;
@@ -86,6 +90,8 @@
 .btnAndFav {
   display: flex;
   height: 25px;
+  width: 100%;
+  justify-content: center;
 }
 
 .bottomCont {
@@ -119,7 +125,13 @@
     position: relative;
     right: 0px;
     width: 100%;
-
     display: flex;
+  }
+  .btnAndFav {
+    height: 40px;
+    margin-top: 10px;
+  }
+  .cardBtn {
+    height: 25px;
   }
 }
