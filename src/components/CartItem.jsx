@@ -6,28 +6,31 @@ import C from "../styles/CartItem.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CartItem({ item }) {
-  const { title, img, price, quantity } = item;
+  const { id, title, img, price, quantity } = item;
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
 
   const handleAddToCart = () => {
-    {
-      isAuthenticated
-        ? dispatch(postCartItem(item))
-        : dispatch(addToCart(item));
+    if (isAuthenticated) {
+      const post = { id, quantity: 1, email: user.email, add: true };
+      dispatch(postCartItem(post));
     }
+    dispatch(addToCart(item, isAuthenticated));
   };
 
-  const handleDeleteFromCart = () => {
+  const handleRemoveItemFromCart = () => {
+    if (isAuthenticated) {
+      const post = { id, quantity, email: user.email };
+      dispatch(postCartItem(post));
+    }
     dispatch(removeFromCart(item, true));
   };
 
   const handleRemoveOneFromCart = () => {
-    {
-      isAuthenticated
-        ? dispatch(putCartItem(item, false))
-        : dispatch(removeFromCart(item, false));
+    if (isAuthenticated) {
+      const post = { id, quantity: 1, email: user.email, del: true };
+      dispatch(postCartItem(post));
     }
     dispatch(removeFromCart(item, false));
   };
@@ -49,7 +52,7 @@ export default function CartItem({ item }) {
         <div className={C.btnCont}>
           <button
             onClick={() => {
-              handleDeleteFromCart();
+              handleRemoveItemFromCart();
               setClicked(!clicked);
             }}
           >

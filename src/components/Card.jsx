@@ -1,11 +1,10 @@
-import C from "../styles/Card.module.css";
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { addToCart, addToFav, postCartItem } from "../redux/actions";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import C from "../styles/Card.module.css";
 
 function CardComponent(props) {
   const fav = localStorage.getItem(props.id)
@@ -17,13 +16,17 @@ function CardComponent(props) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleAddToCart = () => {
-    {
-      isAuthenticated
-        ? dispatch(postCartItem(props.product, user.email))
-        : dispatch(addToCart(props.product));
-    }
 
+  const handleAddToCart = () => {
+    if (isAuthenticated) {
+      const post = { id: props.product.id, quantity: 1, email: user.email, add: true };
+      dispatch(postCartItem(post))
+    }
+<<<<<<< HEAD
+
+=======
+    dispatch(addToCart(props.product, isAuthenticated));
+>>>>>>> 5e62f1f3bbb058aa72bbd90b6c8444dfe04e405d
     successAlert();
   };
 

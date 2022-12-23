@@ -10,6 +10,7 @@ export default function ForSale() {
   const products = useSelector(state => state.products);
   const { user } = useAuth0();
   const dispatch = useDispatch();
+<<<<<<< HEAD
   const myProducts = products.filter(
     p => p.creator === user.nickname && p.status === "active"
   );
@@ -24,6 +25,89 @@ export default function ForSale() {
     alert("Your product has been succesfully removed");
     setClick(!click);
   }
+=======
+
+  const myProducts = products.filter(p => p.creator === user.nickname)
+
+  function handleDelete(e) {
+    dispatch(deleteProduct(e));
+    alert("Product has been removed succesfully")
+
+  }
+
+  const productsForSale = [
+    {
+      id: 52,
+      creator: "admin",
+      title:
+        "Silverstone FT01S-W Aluminum ATX Mid Tower Uni-Body Computer Case With Window Side Panel - Retail (Silver)",
+      img: "https://images-na.ssl-images-amazon.com/images/I/41RQ9NHDUBL._SL600_.jpg",
+      price: 189.99,
+      description: "FT01S-W",
+      stock: 98,
+      categoryId: 1,
+      brandId: 73,
+      category: {
+        name: "Case",
+      },
+      brand: {
+        name: "SilverStone Technology",
+      },
+    },
+    {
+      id: 53,
+      creator: "admin",
+      title: "CORSAIR Carbide AIR 540 ATX Cube Case",
+      img: "https://images-na.ssl-images-amazon.com/images/I/413pnWERvOL._SL600_.jpg",
+      price: 369.99,
+      description: "CC-9011030-WW",
+      stock: 302,
+      categoryId: 1,
+      brandId: 18,
+      category: {
+        name: "Case",
+      },
+      brand: {
+        name: "Corsair",
+      },
+    },
+    {
+      id: 54,
+      creator: "admin",
+      title: "Cooler Master RC-130-KKN1 Elite 130",
+      img: "https://images-na.ssl-images-amazon.com/images/I/51ji1521AYL._SL600_.jpg",
+      price: 64.99,
+      description: "RC-130-KKN1",
+      stock: 119,
+      categoryId: 1,
+      brandId: 17,
+      category: {
+        name: "Case",
+      },
+      brand: {
+        name: "Cooler Master",
+      },
+    },
+    {
+      id: 55,
+      creator: "admin",
+      title:
+        "Silverstone Extended-ATX Tek Aluminum Full Tower Computer Case, Black FT04B-W",
+      img: "https://images-na.ssl-images-amazon.com/images/I/41Mr-WLCpwL._SL600_.jpg",
+      price: 239.99,
+      description: "FT04B-W",
+      stock: 286,
+      categoryId: 1,
+      brandId: 73,
+      category: {
+        name: "Case",
+      },
+      brand: {
+        name: "SilverStone Technology",
+      },
+    },
+  ];
+>>>>>>> 5e62f1f3bbb058aa72bbd90b6c8444dfe04e405d
 
   return (
     <div>
@@ -42,7 +126,11 @@ export default function ForSale() {
                 <p>${el.price}</p>
                 <label>Stock: {el.stock}</label>
                 <label>Status: {el.status}</label>
+<<<<<<< HEAD
                 <Link to={"/update/" + el.id}>
+=======
+                <Link to={'/update/' + el.id}>
+>>>>>>> 5e62f1f3bbb058aa72bbd90b6c8444dfe04e405d
                   <button>Update</button>
                 </Link>
                 <button onClick={e => handleDelete(el.id)}>Delete</button>
