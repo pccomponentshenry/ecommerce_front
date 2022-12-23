@@ -2,15 +2,34 @@
   display: flex;
   width: 100%;
   position: fixed;
-  z-index: 900;
+  z-index: 999;
   justify-content: space-around;
   align-items: center;
+  height: 70px;
+  border-bottom: solid 1px gray;
+  padding-bottom: 10px;
 }
-.container.active {
+/* .active {
   background-color: #1b1b1b;
-  z-index: 900;
+  z-index: 999;
+  position: fixed;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  justify-content: space-around;
   transition: 0.15s ease-in-out;
   height: 70px;
+} */
+.active {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  justify-content: space-around;
+  align-items: center;
+  height: 70px;
+  background-color: rgb(7, 7, 7);
+  padding-bottom: 10px;
 }
 .cross {
   display: none;
