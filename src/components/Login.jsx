@@ -6,11 +6,9 @@ export const LoginButton = props => {
   const { loginWithRedirect } = useAuth0();
   return (
     <>
-      {props.active === false && (
-        <button className={L.loginBtn} onClick={() => loginWithRedirect()}>
-          Login
-        </button>
-      )}
+      <button className={L.loginBtn} onClick={() => loginWithRedirect()}>
+        Login
+      </button>
     </>
   );
 };

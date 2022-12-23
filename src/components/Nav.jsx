@@ -50,8 +50,23 @@ export default function Nav() {
               className={N.logo}
             />
           </Link>
+          <ul className={N.notResponsiveNav}>
+            <Link to="/categories" style={{ textDecoration: "none" }}>
+              <li>Categories</li>
+            </Link>
+            <Link to="/latest" style={{ textDecoration: "none" }}>
+              <li>Latest</li>
+            </Link>
+
+            <Link to="/sell" style={{ textDecoration: "none" }}>
+              {isAuthenticated ? <li>Sell</li> : <></>}
+            </Link>
+            <Link to="/favorites" style={{ textDecoration: "none" }}>
+              <li>Favorites</li>
+            </Link>
+          </ul>
           {activeNav === true && (
-            <ul className={N.navList}>
+            <ul className={isAuthenticated ? N.navList : N.authNavList}>
               <Link to="/categories" style={{ textDecoration: "none" }}>
                 <li
                   className={
@@ -96,36 +111,36 @@ export default function Nav() {
             </ul>
           )}
         </div>
-
-        <div className={N.searchAndCart}>
-          <h6 className={N.loginText}>
-            {isAuthenticated ? (
-              <>
-                <LogoutButton active={activeNav} />
-              </>
-            ) : (
-              <LoginButton active={activeNav} />
-            )}
-          </h6>
-          <div>
-            {cart.length > 0 && (
-              <span className={N.cartNumber}>{cartQuantity}</span>
-            )}
-            <Link to="/cart">
-              <img src={cartImg} className={N.cart} alt="cart icon" />
-            </Link>
-          </div>
-          <img
-            src={mode}
-            alt=""
-            className={N.mode}
-            onClick={() => switchMode()}
-          />
+        {/* 
+        <div className={N.searchAndCart}> */}
+        <div className={isAuthenticated ? N.loginText : N.authLoginText}>
+          {isAuthenticated ? (
+            <>
+              <LogoutButton active={activeNav} />
+            </>
+          ) : (
+            <LoginButton active={activeNav} />
+          )}
         </div>
-        <div className={N.line}>
-          <hr />
+        <div>
+          {cart.length > 0 && (
+            <span className={N.cartNumber}>{cartQuantity}</span>
+          )}
+          <Link to="/cart">
+            <img src={cartImg} className={N.cart} alt="cart icon" />
+          </Link>
         </div>
+        <img
+          src={mode}
+          alt=""
+          className={N.mode}
+          onClick={() => switchMode()}
+        />
       </div>
+      <div className={N.line}>
+        <hr />
+      </div>
+      {/* </div> */}
     </>
   );
 }

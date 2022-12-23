@@ -55,8 +55,11 @@
   cursor: pointer;
   background-color: transparent;
 }
-
-.navList li {
+.notResponsiveNav {
+  display: flex;
+  align-items: center;
+}
+.notResponsiveNav li {
   list-style: none;
   margin-left: 10px;
   margin-right: 10px;
@@ -69,7 +72,8 @@
   cursor: pointer;
   background-color: transparent;
 }
-.navList li:hover {
+
+.notResponsiveNav li:hover {
   color: #2bfab7;
   transition: 0.15s ease-in-out;
 }
@@ -79,6 +83,7 @@
   align-items: center;
   position: relative;
   /* left: 60px; */
+  display: none;
 }
 
 .searchBar input {
@@ -86,13 +91,10 @@
   outline: none;
 }
 .loginText {
-  color: #fff;
-  font-weight: 200;
-  font-size: 12px;
   margin-top: 10px;
   cursor: pointer;
   display: flex;
-  height: 60px;
+  /* height: 60px; */
   z-index: 600;
 }
 
@@ -161,10 +163,25 @@ hr {
     width: 150px;
     height: 100%;
     margin-top: 70px;
-    padding-top: 100px;
+    padding-top: 150px;
     position: fixed;
     padding-left: 20px;
     overflow: hidden;
+  }
+
+  .authNavList {
+    display: block;
+    background-color: #000;
+    width: 150px;
+    height: 100%;
+    margin-top: 70px;
+    padding-top: 80px;
+    position: fixed;
+    padding-left: 30px;
+    overflow: hidden;
+  }
+  .notResponsiveNav {
+    display: none;
   }
   .navList li {
     margin-left: 0px;
@@ -173,23 +190,25 @@ hr {
     padding-left: 0px;
     padding-right: 0px;
     font-size: 12px;
+    cursor: pointer;
   }
 
   .notAuthenticated {
-    font-size: 11px;
+    font-size: 12px;
     margin-left: -20px;
     font-weight: 200;
-    margin-top: 0px;
-    margin-bottom: -0px;
+    margin-top: 5px;
+    margin-bottom: 0px;
     overflow: hidden;
+    cursor: pointer;
   }
   .authenticated {
-    font-size: 11px;
+    font-size: 12px;
     margin-left: -20px;
     font-weight: 200;
-    margin-top: 70px;
-    margin-bottom: -70px;
+    margin-top: 5px;
     overflow: hidden;
+    cursor: pointer;
   }
 
   .logoAndMenu {
@@ -253,12 +272,20 @@ hr {
   }
   .loginText {
     left: 0px;
-    margin-top: -50px;
-    margin-left: 20px;
+    position: absolute;
+    margin-left: 0px;
+    left: 20px;
+    margin-top: 30px;
     overflow: hidden;
-    height: fit-content;
   }
-
+  .authLoginText {
+    left: 0px;
+    position: absolute;
+    margin-left: 0px;
+    left: 20px;
+    margin-top: 100px;
+    overflow: hidden;
+  }
   .line {
     position: absolute;
 
