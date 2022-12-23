@@ -130,10 +130,10 @@ export default function SideMenu({ name, setName }) {
               <hr />
               <h6 className={S.orderPriceTitle}>Order by price</h6>
               <button id="desc" onClick={handleSort}>
-                Higher to lower
+                Lower
               </button>
               <button id="asc" onClick={handleSort}>
-                Lower to higher
+                Higher
               </button>
             </div>
 

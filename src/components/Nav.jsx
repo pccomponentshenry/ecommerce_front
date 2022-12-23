@@ -44,11 +44,13 @@ export default function Nav() {
         </div>
         <div className={N.logoAndMenu}>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <img
-              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670804226/cqws5x8n/logo_play_expert_wv0yh2.png"
-              alt=""
-              className={N.logo}
-            />
+            <div className={N.logoCont}>
+              <img
+                src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670804226/cqws5x8n/logo_play_expert_wv0yh2.png"
+                alt=""
+                className={N.logo}
+              />
+            </div>
           </Link>
           <ul className={N.notResponsiveNav}>
             <Link to="/categories" style={{ textDecoration: "none" }}>

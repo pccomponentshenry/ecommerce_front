@@ -4,6 +4,7 @@
   position: fixed;
   z-index: 900;
   justify-content: space-around;
+  align-items: center;
 }
 .container.active {
   background-color: #1b1b1b;
@@ -123,11 +124,11 @@ switch {
   rotate: 180deg;
 }
 
-.searchIcon,
 .cart {
   width: 25px;
   padding-left: 5px;
   position: relative;
+  left: 300%;
   bottom: 3px;
 }
 .line {
@@ -162,7 +163,7 @@ hr {
     background-color: #000;
     width: 150px;
     height: 100%;
-    margin-top: 70px;
+    margin-top: 10px;
     padding-top: 150px;
     position: fixed;
     padding-left: 20px;
@@ -174,7 +175,7 @@ hr {
     background-color: #000;
     width: 150px;
     height: 100%;
-    margin-top: 70px;
+    margin-top: 10px;
     padding-top: 80px;
     position: fixed;
     padding-left: 30px;
@@ -249,6 +250,7 @@ hr {
     border: none;
     background-color: rgb(0, 0, 0, 0.7);
     overflow: hidden;
+    align-items: unset;
   }
 
   .containerSmall {
@@ -262,6 +264,7 @@ hr {
     background-color: transparent;
     overflow: hidden;
     background-color: rgb(7, 7, 7);
+    align-items: unset;
   }
   .searchAndCart {
     position: absolute;
@@ -300,7 +303,19 @@ hr {
     top: 38px;
   }
   .cart {
-    right: 50px;
+    right: 0px;
     top: 25px;
+    left: 70%;
+  }
+  .logo {
+    width: fit-content;
+    height: 130%;
+    margin-top: -7px;
+    margin-left: 35%;
+  }
+  .logoCont {
+    height: 60px;
+    width: 100%;
+    display: flex;
   }
 }
