@@ -13,12 +13,14 @@ export default function ShoppingCart() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
-  const { user} = useAuth0();
-  var guess = "default"
-  {user ?  guess = user.nickname : guess = "default"}
+  const { user, isAuthenticated } = useAuth0();
+  var guest = "default"
+  { user ? guest = user.nickname : guest = "default" }
 
   const handleClearCart = () => {
-    dispatch(clearCart());
+    isAuthenticated ?
+      dispatch(clearCart(user.email)) :
+      dispatch(clearCart());
   };
 
   useEffect(() => {
@@ -50,12 +52,12 @@ export default function ShoppingCart() {
               Total: ${parseFloat(totalPrice).toFixed(2)}
             </h3>
             <div className={S.startShopping}>
-              {guess === "default" ? <>Login to buy<LoginButton /> </> :<Payment />}
+              {guest === "default" ? <>Login to buy<LoginButton /> </> : <Payment />}
             </div>
           </div>
         ) : (
           <div className={S.emptyCart}>
-            <h3>There isn't any product in your cart</h3>
+            <h3>There are no products in your cart</h3>
             <Link
               to="/"
               style={{

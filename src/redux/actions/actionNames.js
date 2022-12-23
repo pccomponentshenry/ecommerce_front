@@ -15,8 +15,10 @@ export const INCREASE_CART = "INCREASE_CART";
 export const PUT_PRODUCT = "PUT_PRODUCT"
 export const DELETE_PRODUCT = "DELETE_PRODUCT"
 //actions Cart
-export const ADD_TO_CART = "ADD_TO_CART";
-export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const ADD_ONE_TO_CART = "ADD_ONE_TO_CART";
+export const UPDATE_CART = "UPDATE_CART";
+export const REMOVE_ONE_FROM_CART = "REMOVE_ONE_FROM_CART";
+export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const CLEAR_ERROR = "CLEAR_ERROR";

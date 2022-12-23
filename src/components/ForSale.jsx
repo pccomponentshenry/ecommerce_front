@@ -10,15 +10,14 @@ export default function ForSale() {
   const products = useSelector(state => state.products);
   const { isLoading, user } = useAuth0();
   const dispatch = useDispatch();
-  
-  const myProducts = products.filter( p => p.creator === user.nickname)
 
-  function handleDelete(e){
-    
+  const myProducts = products.filter(p => p.creator === user.nickname)
+
+  function handleDelete(e) {
     dispatch(deleteProduct(e));
-    alert("Videogame has remove succesfully")
-    
-}
+    alert("Product has been removed succesfully")
+
+  }
 
   const productsForSale = [
     {
@@ -111,9 +110,9 @@ export default function ForSale() {
                 <label>Stock: {el.stock}</label>
                 <label>Status: {el.status}</label>
                 <Link to={'/update/' + el.id}>
-                <button>Update</button> 
+                  <button>Update</button>
                 </Link>
-                <button onClick={e => handleDelete(el.id)}>Delete</button> 
+                <button onClick={e => handleDelete(el.id)}>Delete</button>
               </div>
             </div>
           </div>
