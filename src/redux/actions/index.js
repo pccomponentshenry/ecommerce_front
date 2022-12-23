@@ -18,6 +18,7 @@ import {
   POST_USER,
   LOGOUT_USER,
   POST_CART_ITEM,
+  GET_REVIEWS,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -207,3 +208,11 @@ export const postUser = payload => async dispatch => {
 export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
+//REVIEWS
+export function getReviews() {
+  console.log('entraaa');
+  return async dispatch => {
+    const res = await axios.get(`${URL}/review`);
+    return dispatch({ type: GET_REVIEWS, payload: res.data });
+  };
+}

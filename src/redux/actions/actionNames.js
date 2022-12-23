@@ -24,3 +24,5 @@ export const POST_CART_ITEM = "POST_CART_ITEM"
 export const POST_USER = "POST_USER"
 export const LOGOUT_USER = "LOGOUT_USER"
 export const PUT_CART_ITEM = "PUT_CART_ITEM"//falta hacer esta
+//action reviews
+export const GET_REVIEWS='GET_REVIEWS';

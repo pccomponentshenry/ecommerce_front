@@ -16,7 +16,8 @@ import {
   ADD_TO_FAV,
   POST_USER,
   LOGOUT_USER,
-  POST_CART_ITEM
+  POST_CART_ITEM,
+  GET_REVIEWS
 } from "../actions/actionNames";
 
 const initialState = {
@@ -29,7 +30,8 @@ const initialState = {
   filtered: [],
   cart: [],
   fav: [],
-  user: {}
+  user: {},
+  reviews:[],
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -164,6 +166,12 @@ case POST_CART_ITEM: {
         user: {}
       }
     }
+    ////REVIEWS////
+    case GET_REVIEWS:
+      return{
+        ...state,
+        reviews:action.payload
+      }
 
     default:
       return state;
