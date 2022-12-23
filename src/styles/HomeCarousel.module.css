@@ -1,5 +1,6 @@
 .imageCont {
   width: 100vw;
+  overflow: hidden;
 }
 .image {
   filter: brightness(30%);
@@ -10,6 +11,7 @@
   font-size: 40px;
   color: #2bfab7;
   font-weight: 800;
+  overflow: hidden;
 }
 
 .caption {
@@ -17,9 +19,43 @@
   position: relative;
   margin-bottom: 100px;
   right: 80px;
+  overflow: hidden;
 }
 .captionHeadphones {
   text-align: right;
   position: relative;
   margin-bottom: 100px;
+  overflow: hidden;
+}
+@media screen and (max-width: 500px) {
+  .imageCont {
+    display: flex;
+  }
+
+  .container {
+    display: flex;
+  }
+  .caption {
+    text-align: left;
+    position: relative;
+    margin-bottom: 10px;
+    position: relative;
+    left: 5px;
+    overflow: hidden;
+  }
+  .captionHeadphones {
+    text-align: right;
+    position: relative;
+    margin-bottom: 0px;
+  }
+  .title {
+    font-size: 15px;
+    color: #2bfab7;
+    font-weight: 800;
+  }
+  .subtitle {
+    font-weight: 200;
+    font-size: 12px;
+  }
+
 }

@@ -93,3 +93,6 @@
   transition: 0.15s ease-in-out;
   color: #2bfab7;
 }
+
+@media screen and (max-width: 480px) {
+}

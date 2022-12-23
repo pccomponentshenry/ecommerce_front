@@ -46,3 +46,9 @@
   color: #000;
   transition: 0.15s ease-in-out;
 }
+
+@media screen and (max-width: 480px) {
+  .container {
+    display: none;
+  }
+}
