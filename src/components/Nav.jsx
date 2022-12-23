@@ -7,7 +7,6 @@ import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
 import mode from "../Images/mode.png";
 import cartImg from "../Images/cart.png";
-import cross from "../Images/cross.png";
 import menu from "../Images/menu.png";
 import N from "../styles/NavBar.module.css";
 
@@ -30,7 +29,11 @@ export default function Nav() {
   window.addEventListener("scroll", switchMode);
   return (
     <>
-      <div className={`${N.container} ${nav ? N.active : N.container}`}>
+      <div
+        className={`${activeNav === true ? N.container : N.containerSmall} ${
+          nav ? N.active : N.container
+        }`}
+      >
         <div
           className={N.menuCont}
           onClick={() => {
@@ -47,11 +50,8 @@ export default function Nav() {
               className={N.logo}
             />
           </Link>
-          {activeNav && (
+          {activeNav === true && (
             <ul className={N.navList}>
-              {/* <div className={N.cross}>
-              <img src={cross} alt="cross" />
-            </div> */}
               <Link to="/categories" style={{ textDecoration: "none" }}>
                 <li
                   className={

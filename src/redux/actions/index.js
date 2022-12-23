@@ -99,36 +99,34 @@ export const postProduct = payload => async dispatch => {
 };
 
 export function putProduct(id, payload) {
-  console.log(id, payload)
+  console.log(id, payload);
   return async dispatch => {
     const res = await axios.put(`${URL}/products/${id}`, payload);
-    return dispatch({ type: PUT_PRODUCT, payload: res.data })
-  }
-};
+    return dispatch({ type: PUT_PRODUCT, payload: res.data });
+  };
+}
 
 export function deleteProduct(id) {
   return async dispatch => {
     const res = await axios.delete(`${URL}/products/${id}`);
-    return dispatch({ type: DELETE_PRODUCT, payload: res.data })
-  }
+    return dispatch({ type: DELETE_PRODUCT, payload: res.data });
+  };
 }
 
 //////////CART////////
-export const postCartItem = (payload) => async dispatch => {
+export const postCartItem = payload => async dispatch => {
   try {
     await axios.post(`${URL}/cartItem`, payload);
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
 };
 
-export const getUserCartItem = (email) => async dispatch => {
+export const getUserCartItem = email => async dispatch => {
   try {
     const response = await axios.get(`${URL}/cartItem/${email}`);
     dispatch({ type: UPDATE_CART, payload: response.data });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
 };
@@ -136,8 +134,7 @@ export const getUserCartItem = (email) => async dispatch => {
 export const addToCart = (item, authenticated) => dispatch => {
   if (authenticated) {
     dispatch({ type: ADD_ONE_TO_CART, payload: item });
-  }
-  else {
+  } else {
     const cart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
@@ -161,7 +158,6 @@ export const addToCart = (item, authenticated) => dispatch => {
 };
 
 export const removeFromCart = (item, removeItem) => dispatch => {
-
   if (localStorage.cart) {
     const cart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
@@ -180,15 +176,14 @@ export const removeFromCart = (item, removeItem) => dispatch => {
     localStorage.setItem("cart", JSON.stringify(newCart));
 
     dispatch({ type: UPDATE_CART, payload: newCart });
-  }
-  else {
-    removeItem ?
-      dispatch({ type: REMOVE_ITEM_FROM_CART, payload: item }) :
-      dispatch({ type: REMOVE_ONE_FROM_CART, payload: item })
+  } else {
+    removeItem
+      ? dispatch({ type: REMOVE_ITEM_FROM_CART, payload: item })
+      : dispatch({ type: REMOVE_ONE_FROM_CART, payload: item });
   }
 };
 
-export const clearCart = (email) => async dispatch => {
+export const clearCart = email => async dispatch => {
   localStorage.setItem("cart", []);
   dispatch({ type: REMOVE_ALL_FROM_CART });
   if (email) {
@@ -237,7 +232,6 @@ export const clearError = () => {
 
 //////////USERS////////
 export const postUser = payload => async dispatch => {
-
   try {
     dispatch({ type: POST_USER, payload });
     await axios.post(`${URL}/users`, payload);

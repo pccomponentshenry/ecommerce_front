@@ -180,6 +180,7 @@ hr {
     height: 130px;
     display: flex;
     justify-content: space-around;
+    overflow: hidden;
   }
   .filterContainer h6 {
     height: 15px;
@@ -211,12 +212,18 @@ hr {
   .category {
     margin-top: 0px;
     font-size: 10px;
+    overflow: hidden;
+  }
+  .categoryContainer {
+    height: 120px;
+    overflow: hidden;
   }
   .brand {
     position: relative;
     top: 0px;
     margin-top: 10px;
     font-size: 10px;
+    overflow: hidden;
   }
 
   .order {
@@ -227,6 +234,7 @@ hr {
     border-right: solid 1px rgb(167, 167, 167);
     padding-left: 10px;
     padding-right: 10px;
+    overflow: hidden;
   }
   .order hr {
     display: none;

@@ -86,4 +86,16 @@
     font-size: 14px;
     margin-left: 0px;
   }
+
+  .logoutAndProfile button:hover {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+  }
+
+  .loginBtn:hover {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+  }
 }

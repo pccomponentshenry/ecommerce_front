@@ -11,19 +11,17 @@ export const LogoutButton = props => {
 
   return (
     <>
-      {props.active && (
-        <div className={L.logoutAndProfile}>
-          <Profile />
-          <button
-            onClick={() => {
-              dispatch(logoutUser());
-              logout({ returnTo: window.location.origin });
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      )}
+      <div className={L.logoutAndProfile}>
+        <Profile />
+        <button
+          onClick={() => {
+            dispatch(logoutUser());
+            logout({ returnTo: window.location.origin });
+          }}
+        >
+          Logout
+        </button>
+      </div>
     </>
   );
 };
