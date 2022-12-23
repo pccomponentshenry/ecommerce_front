@@ -1,0 +1,71 @@
+.cardContainer {
+  width: 47%;
+  border: solid 1px #555;
+  border-radius: 8px;
+  height: 100px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.imgContainer {
+  background-color: #fff;
+  width: 100px;
+  height: 100px;
+  float: left;
+  overflow: hidden;
+}
+.image {
+  width: 100%;
+  cursor: pointer;
+}
+.nameCont {
+  width: 100%;
+}
+.name {
+  text-align: left;
+  color: #fff;
+  position: relative;
+  top: 20px;
+  left: 10px;
+}
+
+.bottomCont {
+  display: flex;
+}
+.cardBtn {
+  background-color: transparent;
+  border: solid 1px #2bfab7;
+  border-radius: 5px;
+  color: #2bfab7;
+  font-size: 12px;
+  position: relative;
+  left: 10px;
+  top: 10px;
+}
+
+.price {
+  font-weight: 200;
+  color: #fff;
+  font-size: 12px;
+  position: relative;
+  left: 10px;
+  top: 15px;
+}
+.active {
+  color: #2bfab7;
+  position: relative;
+  top: 10px;
+  left: 25px;
+  cursor: pointer;
+}
+
+.fav {
+  font-size: 15px;
+  position: relative;
+  top: 10px;
+  left: 25px;
+  cursor: pointer;
+  text-shadow: 2px 0 #555, -2px 0 #555, 0 2px #555, 0 -2px #555;
+}

@@ -8,12 +8,16 @@ import { logoutUser } from "../redux/actions";
 export const LogoutButton = () => {
   const { logout } = useAuth0();
   const dispatch = useDispatch();
-  dispatch(logoutUser());
 
   return (
     <div className={L.logoutAndProfile}>
       <Profile />
-      <button onClick={() => logout({ returnTo: window.location.origin })}>
+      <button
+        onClick={() => {
+          dispatch(logoutUser());
+          logout({ returnTo: window.location.origin });
+        }}
+      >
         Logout
       </button>
     </div>

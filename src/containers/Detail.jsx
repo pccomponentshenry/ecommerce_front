@@ -1,31 +1,60 @@
 import React from "react";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 import D from "../styles/Detail.module.css";
 import Carousel from "../components/DetailCarousel";
 import Reviews from "../components/Reviews";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../redux/actions";
-import { useEffect } from "react";
+import Swal from "sweetalert2";
+import { addToCart, getProductDetail, postCartItem } from "../redux/actions";
 import NotFound from "../alerts/NotFound";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Detail() {
   const params = useParams();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
-  const { user} = useAuth0();
-  const creator= product.creator;
-  var guess = "default"
-  {user ?  guess = user.nickname : guess = "default"}
-  
-   /*  const guess = user.nickname */
-  
-    
- /*  console.log(creator, guess) */
+  const { user, isAuthenticated } = useAuth0();
+  const creator = product.creator;
+  let guest = "default";
+  user ? guest = user.nickname : guest = "default";
+
+  /*  const guess = user.nickname */
+  /*  console.log(creator, guess) */
+
+  const handleAddToCart = () => {
+    if (isAuthenticated) {
+      const post = { id: product.id, quantity: 1, email: user.email, add: true };
+      dispatch(postCartItem(post));
+    }
+    dispatch(addToCart(product, isAuthenticated));
+    successAlert();
+  };
 
   useEffect(() => {
     dispatch(getProductDetail(params.id));
   }, [dispatch]);
+
+  const successAlert = () => {
+    Swal.fire({
+      title: "Product Added to cart!",
+      confirmButtonText: "Les't buy more products",
+      showDenyButton: true,
+      denyButtonText: `No, Go to my Cart`,
+      icon: "success",
+      confirmButtonColor: "rgb(55, 172, 135)",
+      denyButtonColor: "#d83dd0",
+      background: "#272727",
+      color: "#fff",
+    }).then(result => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        navigate("/");
+      } else if (result.isDenied) {
+        navigate("/cart");
+      }
+    });
+  };
 
   //TODO: change hardcoded data
   //console.log(product)
@@ -60,7 +89,7 @@ export default function Detail() {
         <h3 className={D.price}>Price: {product.price}</h3>
       </div>
       <div className={D.btnCont}>
-        <button>Add to cart</button>
+        <button onClick={handleAddToCart}>Add to cart</button>
         <span>♡</span>
       </div>
       <div className={D.owner}>
@@ -75,16 +104,16 @@ export default function Detail() {
         </Link>
       </div>
       {
-        creator === guess? 
-       
-        <button>update</button> 
-        
-        : <></>
+        creator === guest ?
+
+          <button>update</button>
+
+          : <></>
       }
       {
-        creator === guess? <button>delete</button> : <></>
+        creator === guest ? <button>delete</button> : <></>
       }
-     
+
     </div>
   );
 }

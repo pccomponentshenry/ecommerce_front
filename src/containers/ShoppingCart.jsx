@@ -6,14 +6,21 @@ import { useState } from "react";
 import { clearCart } from "../redux/actions/index.js";
 import Payment from "../stripe/Payment";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { LoginButton } from "../components/Login";
 
 export default function ShoppingCart() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
+  const { user, isAuthenticated } = useAuth0();
+  var guest = "default"
+  { user ? guest = user.nickname : guest = "default" }
 
   const handleClearCart = () => {
-    dispatch(clearCart());
+    isAuthenticated ?
+      dispatch(clearCart(user.email)) :
+      dispatch(clearCart());
   };
 
   useEffect(() => {
@@ -45,12 +52,12 @@ export default function ShoppingCart() {
               Total: ${parseFloat(totalPrice).toFixed(2)}
             </h3>
             <div className={S.startShopping}>
-              <Payment />
+              {guest === "default" ? <>Login to buy<LoginButton /> </> : <Payment />}
             </div>
           </div>
         ) : (
           <div className={S.emptyCart}>
-            <h3>There isn't any product in your cart</h3>
+            <h3>There are no products in your cart</h3>
             <Link
               to="/"
               style={{

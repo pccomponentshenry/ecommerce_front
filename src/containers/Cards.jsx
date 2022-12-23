@@ -2,20 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import CardComponent from "../components/Card";
-import { setFiltered } from "../redux/actions/index.js";
+
+import { postCartItem, setFiltered  } from "../redux/actions/index.js";
+
+
 import C from "../styles/Cards.module.css";
 import NoProducts from "../alerts/NoProducts";
 
 export default function Cards() {
+
   const dispatch = useDispatch();
   const products = useSelector(state => state.products);
   const filtered = useSelector(state => state.filtered);
+
   const error = useSelector(state => state.error);
+
 
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
-  const currentItems = filtered.slice(itemOffset, endOffset);
+  let currentItems = filtered.slice(itemOffset, endOffset);
+  currentItems = currentItems.filter(el => el.status === "active");
+
   const pageCount = Math.ceil(filtered.length / itemsPerPage);
 
   const handlePageClick = event => {
@@ -23,9 +31,9 @@ export default function Cards() {
     setItemOffset(newOffset);
   };
 
-  useEffect(() => {
-    dispatch(setFiltered(products));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(setFiltered(products));
+  // }, [dispatch]);
 
   useEffect(() => {
     setItemOffset(0);

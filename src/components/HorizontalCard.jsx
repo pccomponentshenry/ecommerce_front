@@ -1,39 +1,39 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import C from "../styles/HorizontalCard.module.css";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { addToCart, addToFav, postCartItem } from "../redux/actions";
-import C from "../styles/Card.module.css";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
-function CardComponent(props) {
+function HorizontalCard(props) {
+  const { isAuthenticated } = useAuth0();
   const fav = localStorage.getItem(props.id)
     ? JSON.parse(localStorage.getItem(props.id))
     : [];
-  const { isAuthenticated, user } = useAuth0();
-  const [active, setActive] = useState(fav);
-  const [clicked, setClicked] = useState(false);
 
+  const [active, setActive] = useState(fav);
+  // const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
     if (isAuthenticated) {
-      const post = { id: props.product.id, quantity: 1, email: user.email, add: true };
-      dispatch(postCartItem(post))
+      const post = { id, quantity: 1, email: user.email, add: true };
+      dispatch(postCartItem(post));
     }
-    dispatch(addToCart(props.product, isAuthenticated));
+    dispatch(addToCart(props, isAuthenticated));
     successAlert();
   };
 
   React.useEffect(() => {
     setActive(fav);
-  }, [clicked]);
+  }, [props.clicked]);
 
   const handleAddToFav = () => {
     dispatch(addToFav(props.product));
     successFavAlert();
-    setClicked(!clicked);
+    props.setClicked(!props.clicked);
   };
 
   const successAlert = () => {
@@ -59,7 +59,7 @@ function CardComponent(props) {
 
   const successFavAlert = () => {
     if (props.clickFromFav === true) {
-      props.setClicked(!clicked);
+      props.setClicked(!props.clicked);
     }
   };
 
@@ -71,29 +71,26 @@ function CardComponent(props) {
             <img src={props.img} alt="" className={C.image} />
           </Link>
         </div>
-        <div className={C.square}>
-          <div className={C.nameCont}>
-            <h6 className={C.name}>{props.title}</h6>
-          </div>
+
+        <div className={C.nameCont}>
+          <h6 className={C.name}>{props.title}</h6>
           <h6 className={C.brand}>{props.brand}</h6>
-          <div className={C.bottomCont}>
-            <h6 className={C.price}>$ {props.price}</h6>
-            <div className={C.btnAndFav}>
-              <button className={C.cardBtn} onClick={handleAddToCart}>
-                Add to cart
-              </button>
-              <span
-                className={active === true ? C.active : C.fav}
-                onClick={handleAddToFav}
-              >
-                ❤
-              </span>
-            </div>
-          </div>
         </div>
+
+        <h6 className={C.price}>$ {props.price}</h6>
+
+        <button className={C.cardBtn} onClick={handleAddToCart}>
+          Add to cart
+        </button>
+        <span
+          className={active === true ? C.active : C.fav}
+          onClick={handleAddToFav}
+        >
+          ❤
+        </span>
       </div>
     </>
   );
 }
 
-export default CardComponent;
+export default HorizontalCard;

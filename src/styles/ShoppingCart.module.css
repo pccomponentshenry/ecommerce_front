@@ -36,7 +36,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
   position: relative;
-  bottom: 20px;
+  bottom: 10px;
   width: 90%;
 }
 
@@ -50,7 +50,7 @@
   border-radius: 20px;
   color: #fff;
   position: relative;
-  bottom: 30px;
+  bottom: 15px;
 }
 .clearBtn:hover {
   background-color: rgb(161, 35, 35);
@@ -76,18 +76,17 @@
 .total {
   font-size: 20px;
   color: rgb(148, 148, 148);
-  position: absolute;
-  margin-top: 530px;
-  left: 70px;
+  position: relative;
+  left: 40px;
 }
 .startShopping {
   background-color: rgb(148, 148, 148);
   width: 100%;
-  display: flex;
   justify-content: center;
   cursor: pointer;
   height: 50px;
   z-index: 600;
+  position: relative;
 }
 .startShopping:hover {
   background-color: rgb(110, 109, 109);

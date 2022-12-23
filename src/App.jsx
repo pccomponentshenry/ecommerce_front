@@ -12,6 +12,9 @@ import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
+import BuyConfirm from "./components/BuyConfirm"
+import UpdateProduct from "./containers/UpdateProduct"
+
 function App() {
   populateDB();
 
@@ -32,10 +35,20 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            exact
+            path="/update/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateProduct />
+              </ProtectedRoute>
+            }
+          />
           <Route exact path="/favorites" element={<Favorites />} />
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />
+          <Route exact path="/success" element={<BuyConfirm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
