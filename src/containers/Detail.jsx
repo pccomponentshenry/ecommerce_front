@@ -4,31 +4,37 @@ import Carousel from "../components/DetailCarousel";
 import Reviews from "../components/Reviews";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../redux/actions";
+import { getProductDetail, deleteProduct, allProducts } from "../redux/actions";
 import { useEffect } from "react";
-import NotFound from "../alerts/NotFound";
+import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Detail() {
   const params = useParams();
+  const [click, setClick] = useState(false);
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
-  const { user} = useAuth0();
-  const creator= product.creator;
-  var guess = "default"
-  {user ?  guess = user.nickname : guess = "default"}
-  
-   /*  const guess = user.nickname */
-  
-    
- /*  console.log(creator, guess) */
+  const { user } = useAuth0();
+  const creator = product.creator;
+
+  var guest = "default";
+  {
+    user ? (guest = user.nickname) : (guest = "default");
+  }
+  React.useEffect(() => {
+    dispatch(allProducts());
+  }, [dispatch, click]);
 
   useEffect(() => {
     dispatch(getProductDetail(params.id));
   }, [dispatch]);
 
-  //TODO: change hardcoded data
-  //console.log(product)
+  function handleDelete(id) {
+    dispatch(deleteProduct(id));
+    alert("Your product has been succesfully removed");
+    setClick(!click);
+  }
+
   const owner = [
     {
       name: "Usuario 1",
@@ -51,9 +57,7 @@ export default function Detail() {
       <div className={D.dataContainer}>
         <span className={D.category}>{product.category}</span>
         <h3 className={D.name}>{product.title}</h3>
-        {/* <div className={D.nameCont}>
-          <h1 className={D.name}>{product.title}</h1>
-        </div> */}
+
         <h3 className={D.brand}>Brand: {product.brand}</h3>
         <p className={D.description}>{product.description}</p>
         <span className={D.stock}>{product.stock} units</span>
@@ -74,17 +78,24 @@ export default function Detail() {
           </div>
         </Link>
       </div>
-      {
-        creator === guess? 
-       
-        <button>update</button> 
-        
-        : <></>
-      }
-      {
-        creator === guess? <button>delete</button> : <></>
-      }
-     
+
+      {creator === guest ? (
+        <Link to={"/update/" + product.id}>
+          <button className={D.updateBtn}>Update</button>
+        </Link>
+      ) : (
+        <></>
+      )}
+      {creator === guest ? (
+        <button
+          className={D.deleteBtn}
+          onClick={() => handleDelete(product.id)}
+        >
+          delete
+        </button>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

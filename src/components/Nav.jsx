@@ -16,7 +16,6 @@ export default function Nav() {
   const { isAuthenticated } = useAuth0();
 
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
-  //console.log('cartQuantity', cartQuantity);
 
   function switchMode() {
     if (window.scrollY >= 400) {
@@ -30,7 +29,7 @@ export default function Nav() {
   return (
     <>
       <img src={Menu} alt="menu" className={N.menuIcon} />
-      <div className={N.sideMenu}></div>
+
       <div className={`${N.container} ${nav ? N.active : N.container}`}>
         <div className={N.logoAndMenu}>
           <Link to="/" style={{ textDecoration: "none" }}>
@@ -88,6 +87,8 @@ export default function Nav() {
           <hr />
         </div>
       </div>
+
+      <div className={N.sideMenu}></div>
     </>
   );
 }

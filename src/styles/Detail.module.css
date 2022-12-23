@@ -12,7 +12,9 @@
   left: 50px;
   flex-direction: column;
 }
-
+.deleteBtn {
+  position: absolute;
+}
 .name,
 .stock {
   color: #2bfab7;
