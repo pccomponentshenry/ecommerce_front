@@ -63,6 +63,7 @@
 .notResponsiveNav li {
   list-style: none;
   margin-left: 10px;
+  margin-top: 10px;
   margin-right: 10px;
   border-radius: 10px;
   padding-left: 10px;
@@ -93,18 +94,13 @@
 }
 .loginText {
   margin-top: 10px;
+  margin-left: 200px;
   cursor: pointer;
   display: flex;
   /* height: 60px; */
   z-index: 600;
 }
 
-.cart {
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  cursor: pointer;
-}
 .cartNumber {
   color: #2bfab7;
   font-size: 12px;
@@ -118,18 +114,20 @@
   height: 15px;
   position: relative;
   top: 2px;
+  margin-left: 20px;
   cursor: pointer;
 }
 switch {
   rotate: 180deg;
 }
-
+.tinyBtns {
+  display: flex;
+  align-items: center;
+}
 .cart {
   width: 25px;
   padding-left: 5px;
   position: relative;
-  left: 300%;
-  bottom: 3px;
 }
 .line {
   width: 100%;
@@ -294,19 +292,15 @@ hr {
 
     height: 70px;
   }
-  .cart,
-  .mode {
+
+  .tinyBtns {
+    display: flex;
+    align-items: center;
     position: absolute;
+    right: 20px;
+    top: 30px;
   }
-  .mode {
-    right: 30px;
-    top: 38px;
-  }
-  .cart {
-    right: 0px;
-    top: 25px;
-    left: 70%;
-  }
+
   .logo {
     width: fit-content;
     height: 130%;

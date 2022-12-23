@@ -124,20 +124,21 @@ export default function Nav() {
             <LoginButton active={activeNav} />
           )}
         </div>
-        <div>
+        <div className={N.tinyBtns}>
           {cart.length > 0 && (
             <span className={N.cartNumber}>{cartQuantity}</span>
           )}
           <Link to="/cart">
             <img src={cartImg} className={N.cart} alt="cart icon" />
           </Link>
+
+          <img
+            src={mode}
+            alt=""
+            className={N.mode}
+            onClick={() => switchMode()}
+          />
         </div>
-        <img
-          src={mode}
-          alt=""
-          className={N.mode}
-          onClick={() => switchMode()}
-        />
       </div>
       <div className={N.line}>
         <hr />

@@ -85,7 +85,7 @@ body {
   }
   .searchBar {
     border: solid 1px rgb(173, 94, 184);
-    width: 200px;
+    width: 50%;
     border-radius: 20px;
     position: absolute;
     top: 5px;

@@ -59,6 +59,7 @@ option {
   font-size: 13px;
   font-weight: 400;
   margin-top: 10px;
+  width: 70px;
 }
 
 .order button:hover {
