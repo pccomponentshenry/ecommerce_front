@@ -7,10 +7,13 @@ import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
 import mode from "../Images/mode.png";
 import cartImg from "../Images/cart.png";
+import cross from "../Images/cross.png";
+import menu from "../Images/menu.png";
 import N from "../styles/NavBar.module.css";
 
 export default function Nav() {
   const [nav, setNav] = useState(false);
+  const [activeNav, setActiveNav] = useState(false);
   const cart = useSelector(state => state.cart);
   const { isAuthenticated } = useAuth0();
 
@@ -28,6 +31,14 @@ export default function Nav() {
   return (
     <>
       <div className={`${N.container} ${nav ? N.active : N.container}`}>
+        <div
+          className={N.menuCont}
+          onClick={() => {
+            setActiveNav(!activeNav);
+          }}
+        >
+          <img src={menu} alt="menu icon" />
+        </div>
         <div className={N.logoAndMenu}>
           <Link to="/" style={{ textDecoration: "none" }}>
             <img
@@ -36,31 +47,64 @@ export default function Nav() {
               className={N.logo}
             />
           </Link>
-          <ul className={N.navList}>
-            <Link to="/categories" style={{ textDecoration: "none" }}>
-              <li>Categories</li>
-            </Link>
-            <Link to="/latest" style={{ textDecoration: "none" }}>
-              <li>Latest</li>
-            </Link>
+          {activeNav && (
+            <ul className={N.navList}>
+              {/* <div className={N.cross}>
+              <img src={cross} alt="cross" />
+            </div> */}
+              <Link to="/categories" style={{ textDecoration: "none" }}>
+                <li
+                  className={
+                    isAuthenticated ? N.authenticated : N.notAuthenticated
+                  }
+                >
+                  Categories
+                </li>
+              </Link>
+              <Link to="/latest" style={{ textDecoration: "none" }}>
+                <li
+                  className={
+                    isAuthenticated ? N.authenticated : N.notAuthenticated
+                  }
+                >
+                  Latest
+                </li>
+              </Link>
 
-            <Link to="/sell" style={{ textDecoration: "none" }}>
-              {isAuthenticated ? <li>Sell</li> : <></>}
-            </Link>
-            <Link to="/favorites" style={{ textDecoration: "none" }}>
-              <li>Favorites</li>
-            </Link>
-          </ul>
+              <Link to="/sell" style={{ textDecoration: "none" }}>
+                {isAuthenticated ? (
+                  <li
+                    className={
+                      isAuthenticated ? N.authenticated : N.notAuthenticated
+                    }
+                  >
+                    Sell
+                  </li>
+                ) : (
+                  <></>
+                )}
+              </Link>
+              <Link to="/favorites" style={{ textDecoration: "none" }}>
+                <li
+                  className={
+                    isAuthenticated ? N.authenticated : N.notAuthenticated
+                  }
+                >
+                  Favorites
+                </li>
+              </Link>
+            </ul>
+          )}
         </div>
 
         <div className={N.searchAndCart}>
           <h6 className={N.loginText}>
             {isAuthenticated ? (
               <>
-                <LogoutButton />
+                <LogoutButton active={activeNav} />
               </>
             ) : (
-              <LoginButton />
+              <LoginButton active={activeNav} />
             )}
           </h6>
           <div>
