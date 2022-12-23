@@ -27,6 +27,7 @@
   border: solid 1px #2bfab7;
   border-top: none;
   padding: 5px;
+  padding-left: 10px;
   display: flex;
   flex-direction: column;
   width: 230px;
@@ -54,6 +55,8 @@
   font-size: 14px;
   position: relative;
   bottom: 5px;
+  height: 25px;
+  z-index: 600;
 }
 .price {
   font-weight: 600;
@@ -86,6 +89,8 @@
 .btnAndFav {
   display: flex;
   height: 25px;
+  width: 100%;
+  justify-content: center;
 }
 
 .bottomCont {
@@ -113,4 +118,90 @@
   margin-left: 10px;
   position: relative;
   bottom: 4px;
+}
+@media screen and (max-width: 500px) {
+  .cardContainer {
+    position: relative;
+    right: 0px;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .brandCont {
+    height: 50px;
+    overflow: hidden;
+    margin-top: -15px;
+  }
+  .brand {
+    font-size: 12px;
+    margin-top: -20px;
+    overflow: hidden;
+  }
+  .btnAndFav {
+    height: 95px;
+    margin-top: 15px;
+    overflow: hidden;
+    height: 60px;
+  }
+  .cardBtn {
+    position: relative;
+    height: 20px;
+    font-size: 10px;
+    margin-top: -3px;
+  }
+  .heartCont {
+    overflow: hidden;
+    width: 20px;
+  }
+  .fav {
+    font-size: 18px;
+    top: 10px;
+    overflow: hidden;
+  }
+  .active {
+    font-size: 22px;
+  }
+
+  .nameCont {
+    width: 100%;
+    height: 70px;
+    float: left;
+    display: flex;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .name {
+    font-size: 14px;
+    overflow: hidden;
+    height: 30px;
+    text-align: center;
+  }
+  .bottomCont {
+    margin-top: -10px;
+  }
+  .price {
+    height: 50px;
+    position: relative;
+    top: 15px;
+  }
+  .fav {
+    width: 30px;
+    text-align: center;
+  }
+  .imgContainer {
+    height: 140px;
+  }
+  .square {
+    height: 120px;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .fav:hover {
+    margin-left: 10px;
+    color: rgb(43, 43, 43);
+    transition: 0.15s ease-in-out;
+  }
 }

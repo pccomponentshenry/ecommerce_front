@@ -18,7 +18,7 @@ import {
   POST_USER,
   LOGOUT_USER,
   PUT_PRODUCT,
-  DELETE_PRODUCT
+  DELETE_PRODUCT,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -31,7 +31,7 @@ const initialState = {
   filtered: [],
   cart: [],
   fav: [],
-  user: {}
+  user: {},
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -39,9 +39,7 @@ initialState.cart = localStorage.getItem("cart")
   : (initialState.cart = []);
 
 function rootReducer(state = initialState, action) {
-
   switch (action.type) {
-
     case ALL_PRODUCTS:
       return {
         ...state,
@@ -64,14 +62,14 @@ function rootReducer(state = initialState, action) {
     case PUT_PRODUCT: {
       return {
         ...state,
-        product: action.payload
-      }
+        product: action.payload,
+      };
     }
 
     case DELETE_PRODUCT: {
       return {
-        ...state
-      }
+        ...state,
+      };
     }
 
     case CLEAR_STATE: {
@@ -135,8 +133,7 @@ function rootReducer(state = initialState, action) {
         if (item.id === action.payload.id) {
           const quant = item.quantity + 1;
           return { ...item, quantity: quant };
-        }
-        else {
+        } else {
           return { ...item };
         }
       });
@@ -149,29 +146,28 @@ function rootReducer(state = initialState, action) {
 
       return {
         ...state,
-        cart
+        cart,
       };
 
     case REMOVE_ONE_FROM_CART:
       return {
         ...state,
-        cart:
-          state.cart.map(item => {
+        cart: state.cart
+          .map(item => {
             if (item.id === action.payload.id) {
               const quant = item.quantity - 1;
               return { ...item, quantity: quant };
-            }
-            else {
+            } else {
               return { ...item };
             }
-          }).filter(item => item.quantity !== 0)
+          })
+          .filter(item => item.quantity !== 0),
       };
 
     case REMOVE_ITEM_FROM_CART:
       return {
         ...state,
-        cart:
-          state.cart.filter(item => item.id !== action.payload.id)
+        cart: state.cart.filter(item => item.id !== action.payload.id),
       };
 
     case ADD_TO_FAV:
@@ -186,13 +182,13 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
-    };
+    }
 
     case LOGOUT_USER: {
       return {
         ...state,
-        user: {}
-      }
+        user: {},
+      };
     }
 
     default:

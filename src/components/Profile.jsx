@@ -6,7 +6,6 @@ import L from "../styles/LoginContainer.module.css";
 import { getUserCartItem, postCartItem, postUser } from "../redux/actions";
 
 export const Profile = () => {
-
   const { user, isAuthenticated, isLoading } = useAuth0();
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
@@ -20,18 +19,23 @@ export const Profile = () => {
 
   const postUserWithCartToDB = () => {
     dispatch(postUser(dbUser)).then(postCartToDB);
-  }
+  };
 
   const postCartToDB = () => {
     if (cart.length && isAuthenticated) {
       for (let i = 0; i < cart.length; i++) {
-        const post = { id: cart[i].id, quantity: cart[i].quantity, email: user.email, add: true }
+        const post = {
+          id: cart[i].id,
+          quantity: cart[i].quantity,
+          email: user.email,
+          add: true,
+        };
         dispatch(postCartItem(post));
       }
     }
     dispatch(getUserCartItem(user.email));
     localStorage.clear();
-  }
+  };
 
   useEffect(() => {
     if (shouldUpdate.current) {

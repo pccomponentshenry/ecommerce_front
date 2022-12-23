@@ -12,7 +12,7 @@
 .container h2 {
   font-size: 14px;
   position: relative;
-  top: 15px;
+  top: 10px;
 }
 .logoutAndProfile {
   display: flex;
@@ -21,7 +21,7 @@
   background-color: transparent;
   height: 30px;
   color: #2bfab7;
-  border: solid 1px #2bfab7;
+  border: none;
   border-radius: 8px;
   font-size: 16px;
   margin-left: 30px;
@@ -36,7 +36,7 @@
   background-color: transparent;
   height: 30px;
   color: #2bfab7;
-  border: solid 1px #2bfab7;
+  border: none;
   border-radius: 8px;
   font-size: 16px;
   margin-left: 30px;
@@ -45,4 +45,57 @@
   background-color: #62aaa1;
   color: #000;
   transition: 0.15s ease-in-out;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    flex-direction: column-reverse;
+    height: 150px;
+    margin-top: -10px;
+    overflow: hidden;
+  }
+  .container h2 {
+    font-size: 12px;
+    overflow: hidden;
+    top: 0px;
+  }
+  .container img {
+    height: 60px;
+    width: 60px;
+    float: none;
+    margin-left: 25%;
+  }
+  .loginBtn {
+    background-color: transparent;
+    height: 30px;
+    color: #2bfab7;
+    border: none;
+    font-size: 16px;
+    margin-left: 0px;
+  }
+
+  .logoutAndProfile {
+    display: flex;
+    flex-direction: column;
+  }
+  .logoutAndProfile button {
+    border: none;
+    background-color: transparent;
+    height: 30px;
+    color: #2bfab7;
+    font-size: 14px;
+    margin-left: 0px;
+  }
+
+  .logoutAndProfile button:hover {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+  }
+
+  .loginBtn:hover {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+  }
 }
