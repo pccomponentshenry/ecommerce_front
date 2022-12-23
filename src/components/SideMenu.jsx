@@ -82,51 +82,53 @@ export default function SideMenu({ name, setName }) {
         <div className={S.categoryContainer}>
           <div className={S.filterContainer}>
             <hr />
-            <h6>Filter by:</h6>
-            <div className={S.select}>
-              <select
-                name="Filter"
-                id="cat"
-                defaultValue={"default"}
-                onChange={e => {
-                  setCat(e.target.value);
-                }}
-              >
-                <option value={"default"} disabled>
-                  Category
-                </option>
-                {categories.map((el, i) => (
-                  <option key={i} value={el.id}>
-                    {el.name}
+            <div className={S.selectCont}>
+              <h6 className={S.filterByTitle}>Filter by:</h6>
+              <div className={S.select}>
+                <select
+                  className={S.category}
+                  name="Filter"
+                  id="cat"
+                  defaultValue={"default"}
+                  onChange={e => {
+                    setCat(e.target.value);
+                  }}
+                >
+                  <option value={"default"} disabled>
+                    Category
                   </option>
-                ))}
-              </select>
-            </div>
-            <div className={S.select}></div>
+                  {categories.map((el, i) => (
+                    <option key={i} value={el.id}>
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            <div className={S.select}>
-              <select
-                name="Filter"
-                defaultValue={"default"}
-                id="brand"
-                onChange={e => {
-                  setBrand(e.target.value);
-                }}
-              >
-                <option value={"default"} disabled>
-                  Brand
-                </option>
-                {brands.map((el, i) => (
-                  <option key={i} value={el.id}>
-                    {el.name}
+              <div className={S.select}>
+                <select
+                  className={S.brand}
+                  name="Filter"
+                  defaultValue={"default"}
+                  id="brand"
+                  onChange={e => {
+                    setBrand(e.target.value);
+                  }}
+                >
+                  <option value={"default"} disabled>
+                    Brand
                   </option>
-                ))}
-              </select>
+                  {brands.map((el, i) => (
+                    <option key={i} value={el.id}>
+                      {el.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-
             <div className={S.order}>
               <hr />
-              <h6>Order by price</h6>
+              <h6 className={S.orderPriceTitle}>Order by price</h6>
               <button id="desc" onClick={handleSort}>
                 Higher to lower
               </button>
@@ -145,7 +147,7 @@ export default function SideMenu({ name, setName }) {
                 name="min_price"
                 placeholder="Min"
                 onBlur={handlePriceChange}
-                className={S.inputSmall}
+                className={`${S.inputSmall} ${S.inputLeft}`}
               />
               <input
                 key="max_price"
