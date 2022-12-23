@@ -8,15 +8,15 @@ import {
   SET_ERROR,
   SET_FILTERED,
   CLEAR_STATE,
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
+  ADD_ONE_TO_CART,
+  UPDATE_CART,
+  REMOVE_ONE_FROM_CART,
+  REMOVE_ITEM_FROM_CART,
   REMOVE_ALL_FROM_CART,
-  CLEAR_CART,
   CLEAR_ERROR,
   ADD_TO_FAV,
   POST_USER,
   LOGOUT_USER,
-  POST_CART_ITEM,
   PUT_PRODUCT,
   DELETE_PRODUCT
 } from "../actions/actionNames";
@@ -39,7 +39,9 @@ initialState.cart = localStorage.getItem("cart")
   : (initialState.cart = []);
 
 function rootReducer(state = initialState, action) {
+
   switch (action.type) {
+
     case ALL_PRODUCTS:
       return {
         ...state,
@@ -58,17 +60,20 @@ function rootReducer(state = initialState, action) {
         products: [...state.products, action.payload],
       };
     }
-    case PUT_PRODUCT:{
+
+    case PUT_PRODUCT: {
       return {
         ...state,
         product: action.payload
       }
     }
-    case DELETE_PRODUCT:{
+
+    case DELETE_PRODUCT: {
       return {
         ...state
       }
     }
+
     case CLEAR_STATE: {
       return {
         ...state,
@@ -111,43 +116,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         error: action.payload,
       };
-////////////////////////////////// cart
-case POST_CART_ITEM: {
-  const cart = state.cart
-  const existingElementIdx = cart.findIndex(el => el.id === action.payload.id);
 
-  const newCart = [...cart];
-  //console.log(newCart)
-  if (existingElementIdx !== -1) {
-    newCart[existingElementIdx].quantity++;
-    return{
-      ...state
-    }
-  } else {
-    const addElement = { ...action.payload };
-    addElement.quantity = 1;
-    return{
-      ...state,
-      cart : [...state.cart, addElement]
-    }
-  }
-};
-
-    case ADD_TO_CART:
+    //////////CART////////
+    case UPDATE_CART:
       return {
         ...state,
         cart: action.payload,
-      };
-
-    case ADD_TO_FAV:
-      return {
-        ...state,
-        fav: action.payload,
-      };
-    case CLEAR_CART:
-      return {
-        ...state,
-        cart: [],
       };
 
     case REMOVE_ALL_FROM_CART:
@@ -156,10 +130,54 @@ case POST_CART_ITEM: {
         cart: [],
       };
 
-    case REMOVE_FROM_CART:
+    case ADD_ONE_TO_CART:
+      const cart = state.cart.map(item => {
+        if (item.id === action.payload.id) {
+          const quant = item.quantity + 1;
+          return { ...item, quantity: quant };
+        }
+        else {
+          return { ...item };
+        }
+      });
+
+      if (!cart.find(item => item.id === action.payload.id)) {
+        const newItem = { ...action.payload };
+        newItem.quantity = 1;
+        cart.push(newItem);
+      }
+
       return {
         ...state,
-        cart: action.payload,
+        cart
+      };
+
+    case REMOVE_ONE_FROM_CART:
+      return {
+        ...state,
+        cart:
+          state.cart.map(item => {
+            if (item.id === action.payload.id) {
+              const quant = item.quantity - 1;
+              return { ...item, quantity: quant };
+            }
+            else {
+              return { ...item };
+            }
+          }).filter(item => item.quantity !== 0)
+      };
+
+    case REMOVE_ITEM_FROM_CART:
+      return {
+        ...state,
+        cart:
+          state.cart.filter(item => item.id !== action.payload.id)
+      };
+
+    case ADD_TO_FAV:
+      return {
+        ...state,
+        fav: action.payload,
       };
 
     ////// USERS /////
