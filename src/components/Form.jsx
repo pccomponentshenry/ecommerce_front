@@ -156,7 +156,6 @@ export default function Form() {
   }, [image]);
 
   const handleSubmit = e => {
-    console.log("entré");
     if (
       !error.name &&
       !error.brand &&
