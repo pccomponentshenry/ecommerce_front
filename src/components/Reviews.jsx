@@ -50,7 +50,6 @@ export default function Reviews() {
   return (
     <>
       <div className={R.reviews}>
-        <h6>Reviews</h6>
         <div className={R.container}>
           {reviews.length > 0 &&
             reviews.map((el, i) => (

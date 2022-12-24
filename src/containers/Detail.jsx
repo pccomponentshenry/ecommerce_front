@@ -82,7 +82,10 @@ export default function Detail() {
         owner={owner}
         guest={guest}
       />
-      {/* <Reviews /> */}
+      <div className={D.reviewsContainer}>
+        <h3>Product reviews</h3>
+        <Reviews />
+      </div>
       {/* <div className={D.dataContainer}>
         <span className={D.category}>{product.category}</span>
         <h3 className={D.name}>{product.title}</h3>
