@@ -1,46 +1,50 @@
 .imageContainer {
-  width: 40%;
+  width: 30%;
+  height: 89vh;
   float: left;
   position: relative;
-  top: 70px;
+  top: 11vh;
+  display: inline;
+}
+.Container {
+  height: 100vh;
+  overflow: hidden;
+  display: inline;
+}
+.topContainer {
+  position: absolute;
+  /* right: 15%; */
+  margin-top: 70px;
+  width: 70%;
+  right: 0px;
+}
+.dataContainer {
+  border-bottom: solid 1px gray;
+  height: 50vh;
+  padding-left: 50px;
+  padding-top: 30px;
+}
+.titleContainer {
+  width: 50%;
+  height: 60px;
+  display: flex;
 }
 
-.dataContainer {
-  position: relative;
-  top: 100px;
-  width: 40%;
-  left: 50px;
-  flex-direction: column;
-}
 .deleteBtn {
   position: absolute;
 }
-.name,
-.stock {
-  color: #2bfab7;
-}
-
-.brand,
-.description,
-.price {
-  color: #fff;
-}
-
-.nameCont {
-  width: 250px;
-  position: relative;
-  right: 10px;
-}
 
 .name {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   padding-bottom: 10px;
   padding-top: 5px;
+  color: #fff;
 }
 
 .category,
-.stock {
+.stock,
+.description {
   font-weight: 200;
   font-size: 14px;
   color: #fff;
@@ -48,34 +52,28 @@
 
 .brand {
   font-size: 16px;
-  position: relative;
-  bottom: 10px;
-  color: #2bfab7;
+  color: #fff;
 }
 
 .stock {
   position: relative;
-  bottom: 20px;
+  bottom: 10px;
 }
 
 .description {
   font-weight: 200;
-  position: relative;
-  bottom: 10px;
 }
 
 .price {
-  font-size: 18px;
-  color: #2bfab7;
-  position: relative;
-  bottom: 15px;
+  font-size: 16px;
+  color: #fff;
 }
 
 .btnCont {
-  position: relative;
+  position: absolute;
   left: 50px;
   width: 30%;
-  top: 100px;
+  bottom: 10px;
 }
 
 .btnCont button {
@@ -109,15 +107,21 @@
 
 .owner {
   color: #fff;
-  position: relative;
-  top: 150px;
-  float: left;
-  left: 50px;
-  width: 18%;
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  width: 30%;
   display: flex;
   border: solid 1px #2bfab7;
+  border-right: none;
   padding: 10px;
-  border-radius: 20px;
+  padding-right: none;
+  -webkit-border-top-left-radius: 20px;
+  -webkit-border-bottom-left-radius: 20px;
+  -moz-border-radius-topleft: 20px;
+  -moz-border-radius-bottomleft: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   cursor: pointer;
 }
 
@@ -128,7 +132,7 @@
 
 .ownerText {
   position: relative;
-  right: 10px;
+  left: 10%;
   top: 10px;
 }
 
@@ -156,4 +160,20 @@
 .profilePic {
   width: fit-content;
   height: 70px;
+}
+
+@media screen and (max-width: 500px) {
+  .imageContainer {
+    width: 100%;
+    height: 100vh;
+    float: none;
+    position: relative;
+    top: 11vh;
+    overflow: hidden;
+  }
+
+  .Container {
+    height: 100%;
+    overflow: auto;
+  }
 }

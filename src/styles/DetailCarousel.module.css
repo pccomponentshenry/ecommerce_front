@@ -1,8 +1,19 @@
-.imgCont{
-    height: 90vh;
-    overflow: hidden;
+.imgCont {
+  height: 89vh;
+  overflow: hidden;
+  background-color: #fff;
 }
-.image{
-    height: 100%;
+.image {
+  width: 100%;
+  height: fit-content;
 }
 
+@media screen and (max-width: 500px) {
+  .imgCont {
+    height: 100%;
+    overflow: hidden;
+    background-color: #fff;
+    position: relative;
+    top: 20px;
+  }
+}
