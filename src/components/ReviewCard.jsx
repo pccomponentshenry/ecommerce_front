@@ -1,5 +1,6 @@
 import React from "react";
 import R from "../styles/ReviewCard.module.css";
+import ReviewRating from "./reviewRating";
 
 export default function ReviewCard(props) {
   return (
@@ -10,6 +11,9 @@ export default function ReviewCard(props) {
       <div className={R.reviewCont}>
         <span className={R.name}>{props.name}</span>
         <p className={R.review}>{props.review}</p>
+      </div>
+      <div className={R.ratingCont}>
+        <ReviewRating />
       </div>
     </div>
   );
