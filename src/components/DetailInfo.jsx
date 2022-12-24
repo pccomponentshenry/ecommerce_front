@@ -8,10 +8,6 @@ export default function DetailInfo({ handleAddToCart, owner, creator, guest }) {
   return (
     <div className={D.topContainer}>
       <div className={D.dataContainer}>
-        <div className={D.btnCont}>
-          <button onClick={handleAddToCart}>Add to cart</button>
-          <span>♡</span>
-        </div>
         <span className={D.category}>{product.category}</span>
         <div className={D.titleContainer}>
           <h3 className={D.name}>{product.title}</h3>
@@ -22,19 +18,23 @@ export default function DetailInfo({ handleAddToCart, owner, creator, guest }) {
           <h3 className={D.price}>$ {product.price}</h3>
           <p className={D.description}>{product.description}</p>
         </div>
+        <div className={D.btnCont}>
+          <button onClick={handleAddToCart}>Add to cart</button>
+          <span>♡</span>
+        </div>
+        <div className={D.owner}>
+          <div className={D.ProfilePicCont}>
+            <img src={owner[0].profilePic} alt="" className={D.profilePic} />
+          </div>
+          <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
+            <div className={D.ownerText}>
+              <h3>{product.creator}</h3>
+              <p>See the seller's rating</p>
+            </div>
+          </Link>
+        </div>
       </div>
 
-      <div className={D.owner}>
-        <div className={D.ProfilePicCont}>
-          <img src={owner[0].profilePic} alt="" className={D.profilePic} />
-        </div>
-        <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
-          <div className={D.ownerText}>
-            <h3>{product.creator}</h3>
-            <p>See the seller's rating</p>
-          </div>
-        </Link>
-      </div>
       {creator === guest ? <button>update</button> : <></>}
       {creator === guest ? <button>delete</button> : <></>}
     </div>
