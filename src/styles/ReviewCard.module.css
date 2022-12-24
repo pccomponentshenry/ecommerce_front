@@ -20,6 +20,7 @@
   width: 100%;
   position: relative;
   top: 10px;
+  overflow: hidden;
 }
 
 .name {
@@ -32,4 +33,6 @@
   font-size: 12px;
   font-weight: 200;
   margin-left: 10px;
+}
+@media screen and (max-width: 500px) {
 }

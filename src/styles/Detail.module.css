@@ -186,9 +186,9 @@
     right: 0px;
     width: 100%;
     height: 39vh;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
     overflow-y: scroll;
   }
   .imageContainer {
@@ -213,8 +213,8 @@
   .dataContainer {
     border-bottom: solid 1px gray;
     height: 65vh;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
     padding-top: 0px;
   }
 
@@ -227,6 +227,7 @@
     font-size: 14px;
     overflow: hidden;
     font-weight: 400;
+    width: 70%;
   }
   .brand,
   .stock,
@@ -284,6 +285,7 @@
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     cursor: pointer;
+    padding-left: 30px;
     overflow: hidden;
   }
 
@@ -307,7 +309,7 @@
     font-size: 12px;
     position: relative;
     top: 10px;
-    left: 40px;
+    left: 55px;
   }
 
   .owner p {
@@ -315,7 +317,7 @@
     font-weight: 200;
     position: relative;
     top: 0px;
-    margin-left: 40px;
+    margin-left: 55px;
     width: 300px;
   }
 

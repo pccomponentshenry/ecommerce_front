@@ -112,8 +112,9 @@
   outline: none;
 }
 .loginText {
-  margin-top: 10px;
+  margin-top: 25px;
   margin-left: 200px;
+
   cursor: pointer;
   display: flex;
   /* height: 60px; */
@@ -124,8 +125,8 @@
   color: #2bfab7;
   font-size: 12px;
   position: relative;
-  bottom: 10px;
-  left: 25px;
+  bottom: 15px;
+  left: 15px;
   cursor: pointer;
   z-index: 600;
 }
@@ -142,6 +143,8 @@ switch {
 .tinyBtns {
   display: flex;
   align-items: center;
+  position: relative;
+  top: 5px;
 }
 .cart {
   width: 25px;
@@ -317,7 +320,8 @@ hr {
     align-items: center;
     position: absolute;
     right: 20px;
-    top: 30px;
+    top: 10px;
+    height: 70px;
   }
 
   .logo {

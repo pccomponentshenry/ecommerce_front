@@ -1,8 +1,10 @@
 .reviews {
   width: 100%;
+  overflow: hidden;
 }
 .container {
   width: 100%;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 500px) {

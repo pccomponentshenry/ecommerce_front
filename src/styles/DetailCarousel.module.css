@@ -11,9 +11,16 @@
 @media screen and (max-width: 500px) {
   .imgCont {
     height: 60vh;
-    overflow: hidden;
     background-color: #fff;
     position: relative;
     top: 20px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .image {
+    width: fit-content;
+    height: 50vh;
+    overflow: hidden;
   }
 }

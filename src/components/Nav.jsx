@@ -140,9 +140,7 @@ export default function Nav() {
           />
         </div>
       </div>
-      <div className={N.line}>
-        <hr />
-      </div>
+
       {/* </div> */}
     </>
   );
