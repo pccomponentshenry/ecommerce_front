@@ -9,11 +9,11 @@ export default function Favorites() {
   const favList = useSelector(state => state.fav);
   const cart = useSelector(state => state.cart);
   const favs = JSON.parse(localStorage.getItem("fav"));
-  const [favorites, setFavorites] = useState(favs);
+  const [favorites, setFavorites] = useState(favs ? favs : favList);
   const [clicked, setClicked] = useState(false);
 
   React.useEffect(() => {
-    setFavorites(favs);
+    setFavorites(favs ? favs : favList);
   }, [favs]);
 
   return (

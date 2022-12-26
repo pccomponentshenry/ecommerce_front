@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function HorizontalCard(props) {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const fav = localStorage.getItem(props.id)
     ? JSON.parse(localStorage.getItem(props.id))
     : [];
@@ -20,10 +20,10 @@ function HorizontalCard(props) {
 
   const handleAddToCart = () => {
     if (isAuthenticated) {
-      const post = { id, quantity: 1, email: user.email, add: true };
+      const post = { id: props.id, quantity: 1, email: user.email, add: true };
       dispatch(postCartItem(post));
     }
-    dispatch(addToCart(props, isAuthenticated));
+    dispatch(addToCart(props.product, isAuthenticated));
     successAlert();
   };
 

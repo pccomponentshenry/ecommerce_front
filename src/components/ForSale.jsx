@@ -8,15 +8,14 @@ import { useDispatch } from "react-redux";
 
 export default function ForSale() {
   const products = useSelector(state => state.products);
-  const { isLoading, user } = useAuth0();
+  const { user } = useAuth0();
   const dispatch = useDispatch();
 
-  const myProducts = products.filter(p => p.creator === user.nickname)
+  const myProducts = products.filter(p => p.creator === user.nickname);
 
   function handleDelete(e) {
     dispatch(deleteProduct(e));
-    alert("Product has been removed succesfully")
-
+    alert("Product has been removed succesfully");
   }
 
   const productsForSale = [
@@ -31,6 +30,7 @@ export default function ForSale() {
       stock: 98,
       categoryId: 1,
       brandId: 73,
+      status: "Active",
       category: {
         name: "Case",
       },
@@ -48,6 +48,7 @@ export default function ForSale() {
       stock: 302,
       categoryId: 1,
       brandId: 18,
+      status: "Active",
       category: {
         name: "Case",
       },
@@ -65,6 +66,7 @@ export default function ForSale() {
       stock: 119,
       categoryId: 1,
       brandId: 17,
+      status: "Active",
       category: {
         name: "Case",
       },
@@ -83,6 +85,7 @@ export default function ForSale() {
       stock: 286,
       categoryId: 1,
       brandId: 73,
+      status: "Active",
       category: {
         name: "Case",
       },
@@ -91,6 +94,7 @@ export default function ForSale() {
       },
     },
   ];
+  // const myProducts = productsForSale;
 
   return (
     <div>
@@ -107,18 +111,22 @@ export default function ForSale() {
                 <h4>{el.title}</h4>
                 <h5>{el.brand.name}</h5>
                 <p>${el.price}</p>
-                <label>Stock: {el.stock}</label>
-                <label>Status: {el.status}</label>
-                <Link to={'/update/' + el.id}>
-                  <button>Update</button>
-                </Link>
-                <button onClick={e => handleDelete(el.id)}>Delete</button>
+                <div className={S.stockAndStatus}>
+                  <label>Stock: {el.stock}</label>
+                  <label>{el.status}</label>
+                </div>
+                <div className={S.btnContainer}>
+                  <Link to={"/update/" + el.id}>
+                    <button>Update</button>
+                  </Link>
+                  <button onClick={e => handleDelete(el.id)}>Delete</button>
+                </div>
               </div>
             </div>
           </div>
         ))
       ) : (
-        <div>
+        <div className={S.noProductsCont}>
           <h5>You haven't got any products for sale yet</h5>
           <Link to="/sell" style={{ textDecoration: "none", color: "#fff" }}>
             <span>Publish now!</span>{" "}
