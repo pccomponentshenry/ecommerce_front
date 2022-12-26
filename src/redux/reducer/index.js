@@ -38,6 +38,10 @@ initialState.cart = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : (initialState.cart = []);
 
+initialState.fav = localStorage.getItem("fav")
+  ? JSON.parse(localStorage.getItem("fav"))
+  : (initialState.cart = []);
+
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case ALL_PRODUCTS:

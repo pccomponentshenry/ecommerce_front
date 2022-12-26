@@ -6,9 +6,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import D from "../styles/Detail.module.css";
 import Carousel from "../components/DetailCarousel";
 import Reviews from "../components/Reviews";
+import DetailInfo from "../components/DetailInfo";
 import Swal from "sweetalert2";
 import { addToCart, getProductDetail, postCartItem } from "../redux/actions";
-import NotFound from "../alerts/NotFound";
 
 export default function Detail() {
   const params = useParams();
@@ -17,14 +17,16 @@ export default function Detail() {
   const { user, isAuthenticated } = useAuth0();
   const creator = product.creator;
   let guest = "default";
-  user ? guest = user.nickname : guest = "default";
-
-  /*  const guess = user.nickname */
-  /*  console.log(creator, guess) */
+  user ? (guest = user.nickname) : (guest = "default");
 
   const handleAddToCart = () => {
     if (isAuthenticated) {
-      const post = { id: product.id, quantity: 1, email: user.email, add: true };
+      const post = {
+        id: product.id,
+        quantity: 1,
+        email: user.email,
+        add: true,
+      };
       dispatch(postCartItem(post));
     }
     dispatch(addToCart(product, isAuthenticated));
@@ -47,7 +49,6 @@ export default function Detail() {
       background: "#272727",
       color: "#fff",
     }).then(result => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         navigate("/");
       } else if (result.isDenied) {
@@ -75,14 +76,20 @@ export default function Detail() {
       <div className={D.imageContainer}>
         <Carousel img={imgs} />
       </div>
-      {/* reviews.length > 0 &&  ---- Depende de lo que llegue del back */}
-      <Reviews />
-      <div className={D.dataContainer}>
+      <DetailInfo
+        handleAddToCart={handleAddToCart}
+        creator={creator}
+        owner={owner}
+        guest={guest}
+      />
+      <div className={D.reviewsContainer}>
+        <h3>Product reviews</h3>
+        <Reviews />
+      </div>
+      {/* <div className={D.dataContainer}>
         <span className={D.category}>{product.category}</span>
         <h3 className={D.name}>{product.title}</h3>
-        {/* <div className={D.nameCont}>
-          <h1 className={D.name}>{product.title}</h1>
-        </div> */}
+
         <h3 className={D.brand}>Brand: {product.brand}</h3>
         <p className={D.description}>{product.description}</p>
         <span className={D.stock}>{product.stock} units</span>
@@ -103,17 +110,8 @@ export default function Detail() {
           </div>
         </Link>
       </div>
-      {
-        creator === guest ?
-
-          <button>update</button>
-
-          : <></>
-      }
-      {
-        creator === guest ? <button>delete</button> : <></>
-      }
-
+      {creator === guest ? <button>update</button> : <></>}
+      {creator === guest ? <button>delete</button> : <></>} */}
     </div>
   );
 }
