@@ -13,14 +13,20 @@ function CardComponent(props) {
   const { isAuthenticated, user } = useAuth0();
   const [active, setActive] = useState(fav);
   const [clicked, setClicked] = useState(false);
+  const favs = JSON.parse(localStorage.getItem("fav"));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
     if (isAuthenticated) {
-      const post = { id: props.product.id, quantity: 1, email: user.email, add: true };
-      dispatch(postCartItem(post))
+      const post = {
+        id: props.product.id,
+        quantity: 1,
+        email: user.email,
+        add: true,
+      };
+      dispatch(postCartItem(post));
     }
     dispatch(addToCart(props.product, isAuthenticated));
     successAlert();

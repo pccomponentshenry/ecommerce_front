@@ -20,17 +20,17 @@ export default function Favorites() {
     <>
       <div className={F.container}>
         <h5>
-          {favList.length === 1
+          {favorites.length === 1
             ? `This is your top favorite product`
-            : favList.length > 1
+            : favorites.length > 1
             ? `These are your top ${favorites.length} favorite products`
             : null}
         </h5>
       </div>
       <div className={F.itemsContainer}>
         <div className={F.favContainer}>
-          {favList.length > 0 ? (
-            favList.map((el, i) => (
+          {favorites.length > 0 ? (
+            favorites.map((el, i) => (
               <CardComponent
                 key={i}
                 title={el.title.substr(0, 18) + "..."}

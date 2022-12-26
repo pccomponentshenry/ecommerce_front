@@ -1,12 +1,14 @@
 .infoContainer {
   width: 25%;
-  height: 90vh;
+  height: 89vh;
   float: left;
+  position: relative;
+  top: 11vh;
 }
 .SwitchContainer {
-  width: 70%;
-  height: 90vh;
-  right: 40px;
+  width: 75%;
+  height: 89vh;
+  right: 0px;
   position: absolute;
   bottom: 0px;
 }
@@ -31,11 +33,13 @@
 }
 
 .BtnContainer {
-  width: 90%;
+  width: 95%;
   position: relative;
-  top: 55px;
+  top: 50px;
   display: flex;
-  right: 20px;
+}
+.BtnContainer button {
+  font-size: 14px;
 }
 
 .inactive {
@@ -66,7 +70,8 @@
 
 .addProduct {
   position: absolute;
-  right: 10px;
+  right: 50px;
+  top: 50px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -76,13 +81,13 @@
   border: solid 1px #fff;
   border-radius: 30px;
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   padding-left: 4px;
   padding-right: 4px;
 }
 .addProduct h5 {
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
 }
 .addProduct:hover > h4 {
   transition: 0.15s ease-in-out;
@@ -94,5 +99,65 @@
   color: #2bfab7;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 500px) {
+  .infoContainer {
+    width: 100%;
+    height: fit-content;
+    float: left;
+    top: 11vh;
+  }
+  .SwitchContainer {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    right: 0px;
+    bottom: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cardsContainer {
+    width: 90%;
+    height: fit-content;
+    border: solid 1px #555;
+    border-radius: 10px;
+    margin-top: 60px;
+    overflow-y: scroll;
+  }
+  .BtnContainer {
+    width: 100%;
+    height: 60px;
+
+    padding-left: 10px;
+
+    justify-content: space-around;
+  }
+  .BtnContainer button {
+    font-size: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 20px;
+    position: relative;
+    top: 40px;
+  }
+
+  .addProduct {
+    position: absolute;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: solid 1px gray;
+    width: 100%;
+  }
+  .addProduct h5 {
+    font-size: 10px;
+    overflow: hidden;
+  }
+  .addProduct h4 {
+    overflow: hidden;
+  }
 }

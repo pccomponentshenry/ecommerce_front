@@ -20,8 +20,9 @@ export const Profile = () => {
   const postUserWithCartToDB = () => {
     dispatch(postUser(dbUser)).then(postCartToDB);
   };
-
+  //EN FAVORITOS, HAY UN ERROR DE PERSISTENCIA DE DATOS EN EL LS QUE CART EN CAMBIO NO TIENE.
   const postCartToDB = () => {
+    //ESTO POSTEA A DB AL CART CUANDO SE RENDERIZA ESTANDO LOGGEADO
     if (cart.length && isAuthenticated) {
       for (let i = 0; i < cart.length; i++) {
         const post = {
@@ -33,7 +34,7 @@ export const Profile = () => {
         dispatch(postCartItem(post));
       }
     }
-    dispatch(getUserCartItem(user.email));
+    dispatch(getUserCartItem(user.email)); //ESTO LLAMA AL STATE CART CUANDO SE RENDERIZA ESTANDO LOGGEADO
     localStorage.clear();
   };
 

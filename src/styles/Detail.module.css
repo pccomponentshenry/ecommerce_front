@@ -91,15 +91,29 @@
   transition: 0.15s ease-in-out;
 }
 
-.btnCont span {
-  color: #2bfab7;
-  font-size: 35px;
+.fav {
+  font-size: 25px;
   position: relative;
-  top: 7px;
-  left: 15px;
+  top: 4px;
+  margin-left: 15px;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff;
   cursor: pointer;
 }
+.fav:hover {
+  color: #fff;
+  transition: 0.15s ease-in-out;
+}
 
+.active {
+  color: #2bfab7;
+  font-size: 29px;
+
+  margin-left: 15px;
+  position: relative;
+  top: 6px;
+  right: 2px;
+  cursor: pointer;
+}
 .btnCont span:hover {
   color: #fff;
   transition: 0.15s ease-in-out;

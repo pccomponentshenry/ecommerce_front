@@ -2,7 +2,9 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  top: 180px;
+  height: 100%;
+  padding-top: 50px;
+  align-items: center;
 }
 .imgContainer {
   border-radius: 100px;
@@ -11,6 +13,7 @@
 }
 .authContainer {
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
 .nameContainer {
@@ -58,4 +61,49 @@
   left: 145px;
   top: 15px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    padding-top: 50px;
+    align-items: center;
+    border-bottom: solid 1px gray;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+  .imgContainer {
+    border-radius: 100px;
+    overflow: hidden;
+
+    width: 80px;
+    margin-right: 0px;
+    margin-top: 10px;
+  }
+
+  .authContainer {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .profileLine {
+    display: none;
+  }
+  .name {
+    color: #fff;
+    font-size: 18px;
+    overflow: hidden;
+  }
+  .email {
+    height: 20px;
+    font-size: 12px;
+    overflow: hidden;
+  }
+  .postalAdressContainer {
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
 }

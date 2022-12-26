@@ -54,13 +54,13 @@
 }
 @media screen and (max-width: 500px) {
   .cardContainer {
-    width: 60%;
+    width: 100%;
     margin-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
-    margin-left: 20%;
+
+    align-items: center;
   }
 
   .pagination {

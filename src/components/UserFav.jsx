@@ -2,32 +2,35 @@ import React from "react";
 import U from "../styles/UserFav.module.css";
 import HorizontalCard from "./HorizontalCard";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function UserFav() {
-  const favs = JSON.parse(localStorage.getItem("fav"));
-  const [favorites, setFavorites] = useState(favs);
+  // const fav = JSON.parse(localStorage.getItem("fav"));
+  const favList = useSelector(state => state.fav);
+  // const [favorites, setFavorites] = useState(fav);
   const [clicked, setClicked] = useState(false);
 
-  React.useEffect(() => {
-    setFavorites(favs);
-  }, [clicked]);
+  // React.useEffect(() => {
+  //   setFavorites(favs);
+  //   console.log(favs);
+  // }, [clicked]);
 
   return (
     <div>
       <div className={U.container}>
         <h5>
-          {favorites.length > 0 && favorites.length === 1
+          {favList.length > 0 && favList.length === 1
             ? `This is your top favorite product`
-            : favorites.length > 1
-            ? `These are your top ${favorites.length} favorite products`
+            : favList.length > 1
+            ? `These are your top ${favList.length} favorite products`
             : null}
         </h5>
       </div>
       <div className={U.itemsContainer}>
         <div className={U.favContainer}>
-          {favorites.length > 0 ? (
-            favorites.map((el, i) => (
+          {favList.length > 0 ? (
+            favList.map((el, i) => (
               <HorizontalCard
                 key={i}
                 title={el.title.substr(0, 18) + "..."}

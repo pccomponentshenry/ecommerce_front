@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { addToCart, addToFav, postCartItem } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function HorizontalCard(props) {
   const { isAuthenticated } = useAuth0();
