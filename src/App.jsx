@@ -1,8 +1,6 @@
 import "./App.css";
 import Nav from "./components/Nav";
 import Home from "./containers/Home";
-import Categories from "./containers/Categories";
-import Latest from "./containers/Latest";
 import FormContainer from "./containers/formContainer";
 import Detail from "./containers/Detail";
 import NotFound from "./alerts/NotFound";
@@ -12,8 +10,8 @@ import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
-import BuyConfirm from "./components/BuyConfirm"
-import UpdateProduct from "./containers/UpdateProduct"
+import BuyConfirm from "./components/BuyConfirm";
+import UpdateProduct from "./containers/UpdateProduct";
 
 function App() {
   populateDB();
@@ -24,8 +22,7 @@ function App() {
         <Nav />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/categories" element={<Categories />} />
-          <Route exact path="/latest" element={<Latest />} />
+
           <Route
             exact
             path="/sell"
