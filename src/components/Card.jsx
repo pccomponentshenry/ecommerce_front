@@ -18,6 +18,20 @@ function CardComponent(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // const handleAddToCart = () => {
+  //   if (isAuthenticated) {
+  //     const post = {
+  //       id: props.product.id,
+  //       quantity: 1,
+  //       email: user.email,
+  //       add: true,
+  //     };
+  //     dispatch(postCartItem(post));
+  //   }
+  //   dispatch(addToCart(props.product, isAuthenticated));
+  //   successAlert();
+  // };
+
   const handleAddToCart = () => {
     if (isAuthenticated) {
       const post = {

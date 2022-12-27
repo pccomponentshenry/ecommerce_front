@@ -40,7 +40,7 @@ initialState.cart = localStorage.getItem("cart")
 
 initialState.fav = localStorage.getItem("fav")
   ? JSON.parse(localStorage.getItem("fav"))
-  : (initialState.cart = []);
+  : (initialState.fav = []);
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {

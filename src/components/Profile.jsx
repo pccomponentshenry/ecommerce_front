@@ -4,25 +4,21 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import L from "../styles/LoginContainer.module.css";
 import { getUserCartItem, postCartItem, postUser } from "../redux/actions";
-
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const shouldUpdate = useRef(true);
-
   const dbUser = {
     username: user.nickname,
     email: user.email,
     image: user.picture,
   };
-
   const postUserWithCartToDB = () => {
     dispatch(postUser(dbUser)).then(postCartToDB);
   };
-  //EN FAVORITOS, HAY UN ERROR DE PERSISTENCIA DE DATOS EN EL LS QUE CART EN CAMBIO NO TIENE.
+
   const postCartToDB = () => {
-    //ESTO POSTEA A DB AL CART CUANDO SE RENDERIZA ESTANDO LOGGEADO
     if (cart.length && isAuthenticated) {
       for (let i = 0; i < cart.length; i++) {
         const post = {
@@ -34,7 +30,7 @@ export const Profile = () => {
         dispatch(postCartItem(post));
       }
     }
-    dispatch(getUserCartItem(user.email)); //ESTO LLAMA AL STATE CART CUANDO SE RENDERIZA ESTANDO LOGGEADO
+    dispatch(getUserCartItem(user.email));
     localStorage.clear();
   };
 
@@ -44,7 +40,11 @@ export const Profile = () => {
       postUserWithCartToDB();
     }
   }, [user]);
-
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(getUserCartItem(user.email));
+    }
+  }, [dispatch]);
   if (isLoading) {
     return <div>Loading...</div>;
   }
