@@ -57,8 +57,6 @@ export default function Detail() {
     });
   };
 
-  //TODO: change hardcoded data
-  //console.log(product)
   const owner = [
     {
       name: "Usuario 1",
@@ -86,32 +84,6 @@ export default function Detail() {
         <h3>Product reviews</h3>
         <Reviews />
       </div>
-      {/* <div className={D.dataContainer}>
-        <span className={D.category}>{product.category}</span>
-        <h3 className={D.name}>{product.title}</h3>
-
-        <h3 className={D.brand}>Brand: {product.brand}</h3>
-        <p className={D.description}>{product.description}</p>
-        <span className={D.stock}>{product.stock} units</span>
-        <h3 className={D.price}>Price: {product.price}</h3>
-      </div>
-      <div className={D.btnCont}>
-        <button onClick={handleAddToCart}>Add to cart</button>
-        <span>♡</span>
-      </div>
-      <div className={D.owner}>
-        <div className={D.ProfilePicCont}>
-          <img src={owner[0].profilePic} alt="" className={D.profilePic} />
-        </div>
-        <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
-          <div className={D.ownerText}>
-            <h3>{product.creator}</h3>
-            <p>See the seller's rating</p>
-          </div>
-        </Link>
-      </div>
-      {creator === guest ? <button>update</button> : <></>}
-      {creator === guest ? <button>delete</button> : <></>} */}
     </div>
   );
 }
