@@ -13,6 +13,7 @@ export default function Reviews({id}) {
       ],
       name: "Usuario 1",
       review: "A really good product!",
+      rating: 3,
     },
     {
       profilePic: [
@@ -20,6 +21,7 @@ export default function Reviews({id}) {
       ],
       name: "Usuario 2",
       review: "Can't wait to try it out!",
+      rating: 5,
     },
     {
       profilePic: [
@@ -27,6 +29,7 @@ export default function Reviews({id}) {
       ],
       name: "Usuario 3",
       review: "A really good product!",
+      rating: 1,
     },
     {
       profilePic: [
@@ -34,6 +37,7 @@ export default function Reviews({id}) {
       ],
       name: "Usuario 4",
       review: "Can't wait to try it out!",
+      rating: 2,
     },
     {
       profilePic: [
@@ -41,6 +45,7 @@ export default function Reviews({id}) {
       ],
       name: "Usuario 5",
       review: "A really good product!",
+      rating: 3,
     },
     {
       profilePic: [
@@ -48,6 +53,7 @@ export default function Reviews({id}) {
       ],
       name: "Usuario 6",
       review: "Can't wait to try it out!",
+      rating: 4,
     },
   ];
   const dispatch = useDispatch();
@@ -60,15 +66,21 @@ export default function Reviews({id}) {
   return (
     <>
       <div className={R.reviews}>
-        <h6>Reviews</h6>
         <div className={R.container}>
           {reviews.length > 0 &&
             reviewsFiltered.map((el, i) => (
               <ReviewCard
                 key={i}
+<<<<<<< HEAD
                 name={el.title}
                 // profilePic={reviews[i].profilePic}
                 review={el.message}
+=======
+                name={reviews[i].name}
+                profilePic={reviews[i].profilePic}
+                review={reviews[i].review}
+                rating={reviews[i].rating}
+>>>>>>> 47a20cafb83c1be2150a1a9d9560be47305e8ca6
               />
             ))}
         </div>

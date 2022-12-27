@@ -1,34 +1,62 @@
 import React from "react";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 import D from "../styles/Detail.module.css";
 import Carousel from "../components/DetailCarousel";
 import Reviews from "../components/Reviews";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../redux/actions";
-import { useEffect } from "react";
-import NotFound from "../alerts/NotFound";
-import { useAuth0 } from "@auth0/auth0-react";
+import DetailInfo from "../components/DetailInfo";
+import Swal from "sweetalert2";
+import { addToCart, getProductDetail, postCartItem } from "../redux/actions";
 
 export default function Detail() {
   const params = useParams();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
-  const { user} = useAuth0();
-  const creator= product.creator;
-  var guess = "default"
-  {user ?  guess = user.nickname : guess = "default"}
-  
-   /*  const guess = user.nickname */
-  
-    
- /*  console.log(creator, guess) */
+  const { user, isAuthenticated } = useAuth0();
+  const creator = product.creator;
+  let guest = "default";
+  user ? (guest = user.nickname) : (guest = "default");
+
+  const handleAddToCart = () => {
+    if (isAuthenticated) {
+      const post = {
+        id: product.id,
+        quantity: 1,
+        email: user.email,
+        add: true,
+      };
+      dispatch(postCartItem(post));
+    }
+    dispatch(addToCart(product, isAuthenticated));
+    successAlert();
+  };
 
   useEffect(() => {
     dispatch(getProductDetail(params.id));
   }, [dispatch]);
 
-  //TODO: change hardcoded data
-  //console.log(product)
+  const successAlert = () => {
+    Swal.fire({
+      title: "Product Added to cart!",
+      confirmButtonText: "Les't buy more products",
+      showDenyButton: true,
+      denyButtonText: `No, Go to my Cart`,
+      icon: "success",
+      confirmButtonColor: "rgb(55, 172, 135)",
+      denyButtonColor: "#d83dd0",
+      background: "#272727",
+      color: "#fff",
+    }).then(result => {
+      if (result.isConfirmed) {
+        navigate("/");
+      } else if (result.isDenied) {
+        navigate("/cart");
+      }
+    });
+  };
+
   const owner = [
     {
       name: "Usuario 1",
@@ -46,6 +74,7 @@ export default function Detail() {
       <div className={D.imageContainer}>
         <Carousel img={imgs} />
       </div>
+<<<<<<< HEAD
       {/* reviews.length > 0 &&  ---- Depende de lo que llegue del back */}
       <Reviews id={params.id} />
       <div className={D.dataContainer}>
@@ -62,29 +91,18 @@ export default function Detail() {
       <div className={D.btnCont}>
         <button>Add to cart</button>
         <span>♡</span>
+=======
+      <DetailInfo
+        handleAddToCart={handleAddToCart}
+        creator={creator}
+        owner={owner}
+        guest={guest}
+      />
+      <div className={D.reviewsContainer}>
+        <h3>Product reviews</h3>
+        <Reviews />
+>>>>>>> 47a20cafb83c1be2150a1a9d9560be47305e8ca6
       </div>
-      <div className={D.owner}>
-        <div className={D.ProfilePicCont}>
-          <img src={owner[0].profilePic} alt="" className={D.profilePic} />
-        </div>
-        <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
-          <div className={D.ownerText}>
-            <h3>{product.creator}</h3>
-            <p>See the seller's rating</p>
-          </div>
-        </Link>
-      </div>
-      {
-        creator === guess? 
-       
-        <button>update</button> 
-        
-        : <></>
-      }
-      {
-        creator === guess? <button>delete</button> : <></>
-      }
-     
     </div>
   );
 }

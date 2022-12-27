@@ -1,6 +1,6 @@
 .formCont {
-  margin-left: -15px;
   z-index: 600;
+  width: 100%;
 }
 
 .formBackground {

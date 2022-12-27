@@ -156,7 +156,6 @@ export default function Form() {
   }, [image]);
 
   const handleSubmit = e => {
-    console.log("entré");
     if (
       !error.name &&
       !error.brand &&
@@ -256,28 +255,26 @@ export default function Form() {
             </div>
           </div>
           <div className={F.brandAndCatContainer}>
-            <div>
-              <div className={F.brand}>
-                <select
-                  name="brand"
-                  value={input.brand}
-                  id="Brand"
-                  onBlur={e => {
-                    handleChange(e);
-                    errorSetting(e);
-                  }}
-                  onChange={e => {
-                    handleChange(e);
-                    errorSetting(e);
-                  }}
-                >
-                  <option defaultValue={"DEFAULT"}>Brand</option>
-                  {brands.map((el, i) => (
-                    <option key={i}>{el.name}</option>
-                  ))}
-                </select>
-                {error.brand && <span>{error.brand}</span>}
-              </div>
+            <div className={F.brand}>
+              <select
+                name="brand"
+                value={input.brand}
+                id="Brand"
+                onBlur={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
+                onChange={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
+              >
+                <option defaultValue={"DEFAULT"}>Brand</option>
+                {brands.map((el, i) => (
+                  <option key={i}>{el.name}</option>
+                ))}
+              </select>
+              {error.brand && <span>{error.brand}</span>}
             </div>
 
             <div className={F.category}>
@@ -304,7 +301,6 @@ export default function Form() {
               </div>
             </div>
           </div>
-
           <div className={F.descriptionCont}>
             <div className={F.description}>
               <label>Description: </label>
@@ -322,8 +318,8 @@ export default function Form() {
                   errorSetting(e);
                 }}
               ></textarea>
+              {error.brand && <span>{error.description}</span>}
             </div>
-            {error.brand && <span>{error.description}</span>}
           </div>
           <div className={F.stockAndPrice}>
             <div className={F.stock}>

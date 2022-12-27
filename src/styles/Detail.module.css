@@ -1,44 +1,50 @@
 .imageContainer {
-  width: 40%;
+  width: 30%;
+  height: 89vh;
   float: left;
   position: relative;
-  top: 70px;
+  top: 11vh;
+  display: inline;
 }
-
+.Container {
+  height: 100vh;
+  overflow: hidden;
+  display: inline;
+}
+.topContainer {
+  position: absolute;
+  margin-top: 70px;
+  width: 70%;
+  right: 0px;
+  box-shadow: -1px 5px 5px 0px rgba(0, 0, 0, 0.4);
+}
 .dataContainer {
-  position: relative;
-  top: 100px;
-  width: 40%;
-  left: 50px;
-  flex-direction: column;
+  border-bottom: solid 1px gray;
+  height: 50vh;
+  padding-left: 50px;
+  padding-top: 30px;
+}
+.titleContainer {
+  width: 50%;
+  height: 60px;
+  display: flex;
 }
 
-.name,
-.stock {
-  color: #2bfab7;
-}
-
-.brand,
-.description,
-.price {
-  color: #fff;
-}
-
-.nameCont {
-  width: 250px;
-  position: relative;
-  right: 10px;
+.deleteBtn {
+  position: absolute;
 }
 
 .name {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   padding-bottom: 10px;
   padding-top: 5px;
+  color: #fff;
 }
 
 .category,
-.stock {
+.stock,
+.description {
   font-weight: 200;
   font-size: 14px;
   color: #fff;
@@ -46,34 +52,28 @@
 
 .brand {
   font-size: 16px;
-  position: relative;
-  bottom: 10px;
-  color: #2bfab7;
+  color: #fff;
 }
 
 .stock {
   position: relative;
-  bottom: 20px;
+  bottom: 10px;
 }
 
 .description {
   font-weight: 200;
-  position: relative;
-  bottom: 10px;
 }
 
 .price {
-  font-size: 18px;
-  color: #2bfab7;
-  position: relative;
-  bottom: 15px;
+  font-size: 16px;
+  color: #fff;
 }
 
 .btnCont {
-  position: relative;
+  position: absolute;
   left: 50px;
   width: 30%;
-  top: 100px;
+  bottom: 10px;
 }
 
 .btnCont button {
@@ -91,42 +91,59 @@
   transition: 0.15s ease-in-out;
 }
 
-.btnCont span {
-  color: #2bfab7;
-  font-size: 35px;
+.fav {
+  font-size: 25px;
   position: relative;
-  top: 5px;
-  left: 30px;
+  top: 4px;
+  margin-left: 15px;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff;
   cursor: pointer;
 }
-
-.btnCont span:hover {
+.fav:hover {
   color: #fff;
+  transition: 0.15s ease-in-out;
+}
+
+.active {
+  color: #2bfab7;
+  font-size: 29px;
+
+  margin-left: 15px;
+  position: relative;
+  top: 6px;
+  right: 2px;
+  cursor: pointer;
+}
+.btnCont span:hover {
   transition: 0.15s ease-in-out;
 }
 
 .owner {
   color: #fff;
-  position: relative;
-  top: 150px;
-  float: left;
-  left: 50px;
-  width: 18%;
+  position: absolute;
+  bottom: 0px;
+  right: 50px;
+  width: 30%;
   display: flex;
   border: solid 1px #2bfab7;
+  border-bottom: solid 1px gray;
+  /* border-right: none; */
   padding: 10px;
-  border-radius: 20px;
+  padding-right: none;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   cursor: pointer;
 }
 
 .owner:hover {
   border: solid 1px #fff;
+  border-bottom: solid 1px gray;
   transition: 0.15s ease-in-out;
 }
 
 .ownerText {
   position: relative;
-  right: 10px;
+  left: 10%;
   top: 10px;
 }
 
@@ -154,4 +171,211 @@
 .profilePic {
   width: fit-content;
   height: 70px;
+}
+
+.reviewsContainer {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 70%;
+  height: 39vh;
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  overflow-y: scroll;
+}
+.reviewsContainer h3 {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  overflow: hidden;
+}
+.editBtn button {
+  border: none;
+  background-color: transparent;
+  color: #2bfab7;
+  margin-right: 15px;
+  font-size: 14px;
+  position: relative;
+  bottom: 10px;
+}
+.editBtn button:hover {
+  transition: 0.15s ease-in-out;
+  color: #fff;
+  border-bottom: solid 1px #fff;
+}
+@media screen and (max-width: 500px) {
+  .reviewsContainer {
+    position: absolute;
+    bottom: 0px;
+    top: 130vh;
+    right: 0px;
+    width: 100%;
+    height: 39vh;
+    /* padding-top: 10px; */
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow-y: scroll;
+    /* position: relative;
+    top: 10vh; */
+  }
+  .imageContainer {
+    width: 100%;
+    height: 100vh;
+    float: none;
+    position: relative;
+    top: 11vh;
+    overflow: hidden;
+  }
+
+  .topContainer {
+    position: absolute;
+    margin-top: 20px;
+    width: 100%;
+    right: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: fit-content;
+  }
+  .dataContainer {
+    border-bottom: none;
+    height: fit-content;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+  }
+
+  .titleContainer {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+  }
+  .titleContainer h3 {
+    font-size: 14px;
+    overflow: hidden;
+    font-weight: 400;
+    width: 70%;
+  }
+  .brand,
+  .stock,
+  .price,
+  .description,
+  .category {
+    font-size: 12px;
+    overflow: hidden;
+  }
+
+  .btnCont {
+    position: relative;
+    left: 0px;
+    width: 100%;
+    bottom: 15px;
+    overflow: hidden;
+  }
+
+  .btnCont button {
+    background-color: transparent;
+    border: solid 1px #2bfab7;
+    color: #2bfab7;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+  }
+
+  .owner {
+    color: #fff;
+    position: relative;
+    right: 0px;
+    bottom: 5px;
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    border: solid 1px gray;
+    padding: none;
+    padding-left: none;
+    padding-right: none;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-left: 30px;
+    overflow: hidden;
+  }
+
+  .owner:hover {
+    border: solid 1px #fff;
+    transition: 0.15s ease-in-out;
+  }
+
+  .ownerText {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    overflow: unset;
+  }
+  .description {
+    height: fit-content;
+  }
+
+  .owner h3 {
+    font-size: 12px;
+    position: relative;
+    top: 10px;
+    left: 55px;
+  }
+
+  .owner p {
+    font-size: 10px;
+    font-weight: 200;
+    margin-left: 55px;
+    top: 2px;
+  }
+
+  .ProfilePicCont {
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50px;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+  }
+
+  .profilePic {
+    width: fit-content;
+    height: 35px;
+  }
+  .editBtn button {
+    font-size: 12px;
+    bottom: 0px;
+  }
+
+  .fav {
+    font-size: 15px;
+    position: relative;
+    top: 4px;
+    margin-left: 15px;
+    text-shadow: 1px 0 #2bfab7, -1px 0 #2bfab7, 0 1px #2bfab7, 0 -1px #2bfab7;
+    cursor: pointer;
+  }
+  .fav:hover {
+    color: black;
+    transition: 0.15s ease-in-out;
+  }
+
+  .active {
+    color: #2bfab7;
+    font-size: 16px;
+    margin-left: 15px;
+    position: relative;
+    top: 3px;
+    right: 2px;
+    cursor: pointer;
+  }
 }

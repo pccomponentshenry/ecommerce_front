@@ -9,28 +9,28 @@ export default function Favorites() {
   const favList = useSelector(state => state.fav);
   const cart = useSelector(state => state.cart);
   const favs = JSON.parse(localStorage.getItem("fav"));
-  const [favorites, setFavorites] = useState(favs);
+  const [favorites, setFavorites] = useState(favs ? favs : favList);
   const [clicked, setClicked] = useState(false);
 
   React.useEffect(() => {
-    setFavorites(favs);
+    setFavorites(favs ? favs : favList);
   }, [favs]);
 
   return (
     <>
       <div className={F.container}>
         <h5>
-          {favList.length === 1
+          {favorites.length === 1
             ? `This is your top favorite product`
-            : favList.length > 1
+            : favorites.length > 1
             ? `These are your top ${favorites.length} favorite products`
             : null}
         </h5>
       </div>
       <div className={F.itemsContainer}>
         <div className={F.favContainer}>
-          {favList.length > 0 ? (
-            favList.map((el, i) => (
+          {favorites.length > 0 ? (
+            favorites.map((el, i) => (
               <CardComponent
                 key={i}
                 title={el.title.substr(0, 18) + "..."}

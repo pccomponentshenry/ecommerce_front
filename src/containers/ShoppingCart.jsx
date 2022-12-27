@@ -13,12 +13,14 @@ export default function ShoppingCart() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
-  const { user} = useAuth0();
-  var guess = "default"
-  {user ?  guess = user.nickname : guess = "default"}
+  const { user, isAuthenticated } = useAuth0();
+  var guest = "default";
+  {
+    user ? (guest = user.nickname) : (guest = "default");
+  }
 
   const handleClearCart = () => {
-    dispatch(clearCart());
+    isAuthenticated ? dispatch(clearCart(user.email)) : dispatch(clearCart());
   };
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export default function ShoppingCart() {
         </div>
 
         {cart.length > 0 ? (
-          <div>
+          <div className={S.cartContainer}>
             <div className={S.clearCont}>
               <button className={S.clearBtn} onClick={handleClearCart}>
                 Clean Cart
@@ -49,13 +51,10 @@ export default function ShoppingCart() {
             <h3 className={S.total}>
               Total: ${parseFloat(totalPrice).toFixed(2)}
             </h3>
-            <div className={S.startShopping}>
-              {guess === "default" ? <>Login to buy<LoginButton /> </> :<Payment />}
-            </div>
           </div>
         ) : (
           <div className={S.emptyCart}>
-            <h3>There isn't any product in your cart</h3>
+            <h3>There are no products in your cart</h3>
             <Link
               to="/"
               style={{
@@ -66,7 +65,18 @@ export default function ShoppingCart() {
             </Link>
           </div>
         )}
+        <div className={S.startShopping}>
+          {guest === "default" ? (
+            <>
+              Login to buy
+              <LoginButton />{" "}
+            </>
+          ) : (
+            <Payment />
+          )}
+        </div>
       </div>
+
       <div className={S.imgCont}>
         <h1>Just one step to become a pro</h1>
         <p>Customize your PC and level up!</p>

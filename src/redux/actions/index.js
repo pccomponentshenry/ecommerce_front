@@ -9,8 +9,10 @@ import {
   SET_FILTERED,
   SET_ERROR,
   CLEAR_STATE,
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
+  UPDATE_CART,
+  ADD_ONE_TO_CART,
+  REMOVE_ONE_FROM_CART,
+  REMOVE_ITEM_FROM_CART,
   REMOVE_ALL_FROM_CART,
   CLEAR_CART,
   CLEAR_ERROR,
@@ -19,6 +21,8 @@ import {
   LOGOUT_USER,
   POST_CART_ITEM,
   GET_REVIEWS,
+  PUT_PRODUCT,
+  DELETE_PRODUCT,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -95,47 +99,104 @@ export const postProduct = payload => async dispatch => {
   }
 };
 
-export const postCartItem = (payload, email) => async dispatch => {
-  // const title = Object.values(payload)[1];
-  // // console.log(title);
-  // try {
-  //   const res = await axios.post(`${URL}/cartItem`, payload);
-  //   return dispatch({ type: POST_CART_ITEM, payload });
-  // } catch (error) {
-  //   console.log(error);
-  // }
+export function putProduct(id, payload) {
+  console.log(id, payload);
+  return async dispatch => {
+    const res = await axios.put(`${URL}/products/${id}`, payload);
+    return dispatch({ type: PUT_PRODUCT, payload: res.data });
+  };
+}
 
+export function deleteProduct(id) {
+  return async dispatch => {
+    const res = await axios.delete(`${URL}/products/${id}`);
+    return dispatch({ type: DELETE_PRODUCT, payload: res.data });
+  };
+}
+
+//////////CART////////
+export const postCartItem = payload => async dispatch => {
   try {
-    dispatch({ type: POST_CART_ITEM, payload });
-    payload.email = email;
     await axios.post(`${URL}/cartItem`, payload);
   } catch (error) {
     console.log(error);
   }
 };
 
-export const addToCart = item => dispatch => {
-  const cart = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
-
-  const existingElementIdx = cart.findIndex(el => el.id === item.id);
-
-  const newCart = [...cart];
-
-  if (existingElementIdx !== -1) {
-    newCart[existingElementIdx].quantity++;
-  } else {
-    const addElement = { ...item };
-    addElement.quantity = 1;
-    newCart.push(addElement);
+export const getUserCartItem = email => async dispatch => {
+  try {
+    const response = await axios.get(`${URL}/cartItem/${email}`);
+    dispatch({ type: UPDATE_CART, payload: response.data });
+  } catch (error) {
+    console.log(error);
   }
-
-  localStorage.setItem("cart", JSON.stringify(newCart));
-
-  dispatch({ type: ADD_TO_CART, payload: newCart });
 };
 
+export const addToCart = (item, authenticated) => dispatch => {
+  if (authenticated) {
+    dispatch({ type: ADD_ONE_TO_CART, payload: item });
+  } else {
+    const cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+
+    const existingElementIdx = cart.findIndex(el => el.id === item.id);
+
+    const newCart = [...cart];
+
+    if (existingElementIdx !== -1) {
+      newCart[existingElementIdx].quantity++;
+    } else {
+      const addElement = { ...item };
+      addElement.quantity = 1;
+      newCart.push(addElement);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(newCart));
+
+    dispatch({ type: UPDATE_CART, payload: newCart });
+  }
+};
+
+export const removeFromCart = (item, removeItem) => dispatch => {
+  if (localStorage.cart) {
+    const cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+
+    const elementIdx = cart.findIndex(el => el.id === item.id);
+
+    const newCart = [...cart];
+
+    if (removeItem || newCart[elementIdx].quantity === 1) {
+      newCart.splice(elementIdx, 1);
+    } else {
+      newCart[elementIdx].quantity--;
+    }
+
+    localStorage.setItem("cart", JSON.stringify(newCart));
+
+    dispatch({ type: UPDATE_CART, payload: newCart });
+  } else {
+    removeItem
+      ? dispatch({ type: REMOVE_ITEM_FROM_CART, payload: item })
+      : dispatch({ type: REMOVE_ONE_FROM_CART, payload: item });
+  }
+};
+
+export const clearCart = email => async dispatch => {
+  localStorage.setItem("cart", []);
+  dispatch({ type: REMOVE_ALL_FROM_CART });
+  if (email) {
+    try {
+      await axios.put(`${URL}/cartItem/${email}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
+//////////FAVORITES////////
 export const addToFav = item => dispatch => {
   const fav = localStorage.getItem("fav")
     ? JSON.parse(localStorage.getItem("fav"))
@@ -162,31 +223,6 @@ export const addToFav = item => dispatch => {
   }
   localStorage.setItem("fav", JSON.stringify(newFav));
   dispatch({ type: ADD_TO_FAV, payload: newFav });
-};
-
-export const removeFromCart = (item, removeItem) => dispatch => {
-  const cart = localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart"))
-    : [];
-
-  const elementIdx = cart.findIndex(el => el.id === item.id);
-
-  const newCart = [...cart];
-
-  if (removeItem || newCart[elementIdx].quantity === 1) {
-    newCart.splice(elementIdx, 1);
-  } else {
-    newCart[elementIdx].quantity--;
-  }
-
-  localStorage.setItem("cart", JSON.stringify(newCart));
-
-  dispatch({ type: REMOVE_FROM_CART, payload: newCart });
-};
-
-export const clearCart = () => dispatch => {
-  localStorage.setItem("cart", []);
-  dispatch({ type: REMOVE_ALL_FROM_CART });
 };
 
 export const clearError = () => {
