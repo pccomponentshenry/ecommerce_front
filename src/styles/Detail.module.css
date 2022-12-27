@@ -115,7 +115,6 @@
   cursor: pointer;
 }
 .btnCont span:hover {
-  color: #fff;
   transition: 0.15s ease-in-out;
 }
 
@@ -191,7 +190,20 @@
   font-weight: 600;
   overflow: hidden;
 }
-
+.editBtn button {
+  border: none;
+  background-color: transparent;
+  color: #2bfab7;
+  margin-right: 15px;
+  font-size: 14px;
+  position: relative;
+  bottom: 10px;
+}
+.editBtn button:hover {
+  transition: 0.15s ease-in-out;
+  color: #fff;
+  border-bottom: solid 1px #fff;
+}
 @media screen and (max-width: 500px) {
   .reviewsContainer {
     position: absolute;
@@ -271,15 +283,6 @@
     font-size: 10px;
   }
 
-  .btnCont span {
-    color: #2bfab7;
-    font-size: 25px;
-    position: relative;
-    top: 5px;
-    left: 10px;
-    cursor: pointer;
-  }
-
   .owner {
     color: #fff;
     position: relative;
@@ -347,5 +350,32 @@
   .profilePic {
     width: fit-content;
     height: 35px;
+  }
+  .editBtn button {
+    font-size: 12px;
+    bottom: 0px;
+  }
+
+  .fav {
+    font-size: 15px;
+    position: relative;
+    top: 4px;
+    margin-left: 15px;
+    text-shadow: 1px 0 #2bfab7, -1px 0 #2bfab7, 0 1px #2bfab7, 0 -1px #2bfab7;
+    cursor: pointer;
+  }
+  .fav:hover {
+    color: black;
+    transition: 0.15s ease-in-out;
+  }
+
+  .active {
+    color: #2bfab7;
+    font-size: 16px;
+    margin-left: 15px;
+    position: relative;
+    top: 3px;
+    right: 2px;
+    cursor: pointer;
   }
 }

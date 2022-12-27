@@ -54,14 +54,19 @@ export default function DetailInfo({ handleAddToCart, owner, creator, guest }) {
           <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
             <div className={D.ownerText}>
               <h3>{product.creator}</h3>
-              <p>See the seller's rating</p>
+              <p>See the seller's profile</p>
             </div>
           </Link>
         </div>
+        {creator === guest ? (
+          <div className={D.editBtn}>
+            <button class>update</button>
+            <button>delete</button>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
-
-      {creator === guest ? <button>update</button> : <></>}
-      {creator === guest ? <button>delete</button> : <></>}
     </div>
   );
 }
