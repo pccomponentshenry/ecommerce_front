@@ -46,13 +46,16 @@
 .ratingTitle {
   margin-right: 10px;
 }
+
 .fullStar {
   font-size: 18px;
   color: #2bfab7;
+  cursor: pointer;
 }
 .emptyStar {
   font-size: 18px;
   color: gray;
+  cursor: pointer;
 }
 @media screen and (max-width: 500px) {
   .ProfilePicCont {

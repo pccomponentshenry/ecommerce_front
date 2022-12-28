@@ -72,7 +72,13 @@ export default function ShoppingCart() {
               <LoginButton />{" "}
             </>
           ) : (
-            <Payment />
+            <Link to="/order">
+              {" "}
+              <div className={S.payment}>
+                {" "}
+                Start shopping {/* <Payment /> */}
+              </div>
+            </Link>
           )}
         </div>
       </div>
