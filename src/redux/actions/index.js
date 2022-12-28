@@ -22,6 +22,7 @@ import {
   POST_CART_ITEM,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+  GET_LOCATIONS,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -54,6 +55,12 @@ export function getCategories() {
   return async dispatch => {
     const res = await axios.get(`${URL}/categories`);
     return dispatch({ type: GET_CATEGORIES, payload: res.data });
+  };
+}
+export function getLocations() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/locations`);
+    return dispatch({ type: GET_LOCATIONS, payload: res.data });
   };
 }
 export function clearState() {

@@ -19,6 +19,7 @@ import {
   LOGOUT_USER,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+  GET_LOCATIONS,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
   filtered: [],
   cart: [],
   fav: [],
+  locations: [],
   user: {},
 };
 
@@ -69,7 +71,12 @@ function rootReducer(state = initialState, action) {
         product: action.payload,
       };
     }
-
+    case GET_LOCATIONS: {
+      return {
+        ...state,
+        locations: action.payload,
+      };
+    }
     case DELETE_PRODUCT: {
       return {
         ...state,

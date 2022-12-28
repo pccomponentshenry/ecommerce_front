@@ -9,6 +9,7 @@ import {
   setFiltered,
   clearError,
   filterProducts,
+  getLocations,
 } from "../redux/actions";
 import search from "../Images/Search.png";
 import H from "../styles/Home.module.css";
@@ -25,6 +26,10 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(setFiltered(products));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getLocations());
   }, [dispatch]);
 
   function handleInputChange(e) {
