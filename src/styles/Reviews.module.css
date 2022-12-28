@@ -7,6 +7,20 @@
   display: flex;
   justify-content: center;
 }
+.noReviews {
+  width: 70%;
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44vh;
+}
+.noReviews h6 {
+  color: #fff;
+}
 .container {
   width: 90%;
   height: 44vh;
@@ -15,6 +29,7 @@
   display: inline;
   overflow-y: scroll;
 }
+
 .titleReviews {
   color: #fff;
   position: absolute;

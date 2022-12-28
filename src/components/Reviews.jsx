@@ -83,8 +83,8 @@ export default function Reviews({ id }) {
           </div>
         </div>
       ) : (
-        <div className={R.container}>
-          <h6>Reviews no disponibles para este producto</h6>
+        <div className={R.noReviews}>
+          <h6>This product doesn't have any reviews yet!</h6>
         </div>
       )}
     </>

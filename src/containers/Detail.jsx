@@ -75,18 +75,12 @@ export default function Detail() {
         <Carousel img={imgs} />
       </div>
 
-      <div className={D.dataContainer}>
-        <span className={D.category}>{product.category}</span>
-        <h3 className={D.name}>{product.title}</h3>
-        <h3 className={D.brand}>Brand: {product.brand}</h3>
-        <p className={D.description}>{product.description}</p>
-        <span className={D.stock}>{product.stock} units</span>
-        <h3 className={D.price}>Price: {product.price}</h3>
-        <div className={D.btnCont}>
-          <button>Add to cart</button>
-          <span>♡</span>
-        </div>
-      </div>
+      <DetailInfo
+        handleAddToCart={handleAddToCart}
+        creator={creator}
+        owner={owner}
+        guest={guest}
+      />
 
       <Reviews id={params.id} />
     </div>
