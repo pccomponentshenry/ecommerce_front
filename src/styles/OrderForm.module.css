@@ -110,3 +110,16 @@
   position: relative;
   bottom: 15px;
 }
+.newAddressCont {
+  border: solid 1px red;
+  /* display: flex; */
+  position: relative;
+  top: 300px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px blue;
+  width: 50%;
+}

@@ -76,8 +76,8 @@ export default function OrderForm() {
       )}
 
       <div className={O.newAddressCont}>
-        <h1>Add a new address</h1>
-        <div className={O.newAddressForm}>
+        {/* <h1>Add a new address</h1> */}
+        <div className={O.formContainer}>
           <form>
             <input type="text" placeholder="Street name" />
             <input type="number" placeholder="Street number" />
