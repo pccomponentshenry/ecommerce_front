@@ -252,3 +252,13 @@ export function getReviews() {
     return dispatch({ type: GET_REVIEWS, payload: res.data });
   };
 }
+
+export const postReviews = payload => async dispatch => {
+  try {
+    const res = await axios.post(`${URL}/review`, payload);
+    return dispatch({ type: POST_REVIEWS, payload: res.data });
+  } catch (e) {
+    console.log(e.message);
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};

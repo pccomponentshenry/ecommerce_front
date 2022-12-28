@@ -14,6 +14,7 @@ import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
 import BuyConfirm from "./components/BuyConfirm"
 import UpdateProduct from "./containers/UpdateProduct"
+import PostReview from "./components/PostReview";
 
 function App() {
   populateDB();
@@ -50,6 +51,7 @@ function App() {
           <Route exact path="/cart" element={<ShoppingCart />} />
           <Route exact path="/success" element={<BuyConfirm />} />
           <Route path="*" element={<NotFound />} />
+          <Route exact path="/reviews" element={<PostReview />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -66,6 +66,10 @@ export default function Nav() {
             <Link to="/favorites" style={{ textDecoration: "none" }}>
               <li>Favorites</li>
             </Link>
+            <Link to="/reviews" style={{ textDecoration: "none" }}>
+              <li>Reviews</li>
+            </Link>
+            
           </ul>
           {activeNav === true && (
             <ul className={isAuthenticated ? N.navList : N.authNavList}>
