@@ -1,10 +1,15 @@
 .reviews {
-  width: 100%;
+  width: 50%;
   overflow: hidden;
+  top: 11vh;
 }
 .container {
-  width: 100%;
-  overflow: hidden;
+  width: 50%;
+  height: 89vh;
+  float: right;
+  position: relative;
+  top: 11vh;
+  display: inline;
 }
 
 @media screen and (max-width: 500px) {

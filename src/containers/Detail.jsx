@@ -74,7 +74,6 @@ export default function Detail() {
       <div className={D.imageContainer}>
         <Carousel img={imgs} />
       </div>
-<<<<<<< HEAD
       {/* reviews.length > 0 &&  ---- Depende de lo que llegue del back */}
       <Reviews id={params.id} />
       <div className={D.dataContainer}>
@@ -91,17 +90,6 @@ export default function Detail() {
       <div className={D.btnCont}>
         <button>Add to cart</button>
         <span>♡</span>
-=======
-      <DetailInfo
-        handleAddToCart={handleAddToCart}
-        creator={creator}
-        owner={owner}
-        guest={guest}
-      />
-      <div className={D.reviewsContainer}>
-        <h3>Product reviews</h3>
-        <Reviews />
->>>>>>> 47a20cafb83c1be2150a1a9d9560be47305e8ca6
       </div>
     </div>
   );

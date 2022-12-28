@@ -32,7 +32,8 @@ const initialState = {
   filtered: [],
   cart: [],
   fav: [],
-  user: {}
+  user: {},
+  reviews:[]
 };
 
 initialState.cart = localStorage.getItem("cart")
