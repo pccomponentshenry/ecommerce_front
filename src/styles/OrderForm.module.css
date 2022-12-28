@@ -26,11 +26,12 @@
 .cartContainer {
   border-left: solid 1px rgb(185, 185, 185);
   height: 89vh;
-  width: fit-content;
+
   padding: 30px;
   position: absolute;
   top: 11vh;
   right: 0px;
+  background-color: #212121;
 }
 .cartContainer h4 {
   font-size: 12px;
@@ -54,22 +55,21 @@
 .cartContainer h1 {
   font-weight: 600;
   font-size: 20px;
+  color: #fff;
 }
 .addressContainer {
   display: flex;
-  width: 70%;
+  width: 90%;
   height: 210px;
   padding-top: 30px;
-  justify-content: space-around;
-  /* border: solid 1px rgb(199, 199, 199); */
-  border-radius: 10px;
+
   /* overflow-x: scroll; */
 }
 .yourAddress {
   font-size: 18px;
   font-weight: 600;
   position: absolute;
-  left: 150px;
+  left: 50px;
   margin-top: 90px;
   color: rgb(128, 39, 155);
   top: 10px;
@@ -82,6 +82,7 @@
   top: 10px;
   height: 150px;
   background-color: rgb(247, 247, 247);
+  margin-right: 30px;
 }
 .addressBox {
   border-bottom: solid 1px rgb(185, 185, 185);
@@ -105,21 +106,61 @@
 }
 
 .default {
-  font-size: 14px;
+  font-size: 12px;
   color: rgb(128, 39, 155);
   position: relative;
-  bottom: 15px;
+  bottom: 10px;
+  font-weight: 600;
+  float: right;
 }
 .newAddressCont {
-  border: solid 1px red;
   /* display: flex; */
-  position: relative;
-  top: 300px;
+  position: absolute;
+  bottom: 25px;
+  width: 63vw;
+  padding: 20px;
+  padding-left: 50px;
 }
-
+.newAddressCont h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
 .formContainer {
   display: flex;
   flex-direction: column;
-  border: solid 1px blue;
   width: 50%;
+}
+.formContainer textarea {
+  height: 50px;
+  width: 100%;
+  font-size: 14px;
+  padding: 5px;
+}
+.formContainer input {
+  font-size: 14px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding-left: 5px;
+}
+.formContainer select {
+  color: #212121;
+  position: relative;
+  top: -7px;
+}
+.formContainer button {
+  border: none;
+  background-color: #212121;
+  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+.formContainer button:hover {
+  transition: 0.1s ease-in-out;
+  background-color: #555;
+}
+.darkNav {
+  height: 11vh;
+  background-color: #161616;
 }
