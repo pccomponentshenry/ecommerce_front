@@ -74,23 +74,21 @@ export default function Detail() {
       <div className={D.imageContainer}>
         <Carousel img={imgs} />
       </div>
-      {/* reviews.length > 0 &&  ---- Depende de lo que llegue del back */}
-      <Reviews id={params.id} />
+
       <div className={D.dataContainer}>
         <span className={D.category}>{product.category}</span>
         <h3 className={D.name}>{product.title}</h3>
-        {/* <div className={D.nameCont}>
-          <h1 className={D.name}>{product.title}</h1>
-        </div> */}
         <h3 className={D.brand}>Brand: {product.brand}</h3>
         <p className={D.description}>{product.description}</p>
         <span className={D.stock}>{product.stock} units</span>
         <h3 className={D.price}>Price: {product.price}</h3>
+        <div className={D.btnCont}>
+          <button>Add to cart</button>
+          <span>♡</span>
+        </div>
       </div>
-      <div className={D.btnCont}>
-        <button>Add to cart</button>
-        <span>♡</span>
-      </div>
+
+      <Reviews id={params.id} />
     </div>
   );
 }

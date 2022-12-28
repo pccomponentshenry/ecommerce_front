@@ -20,9 +20,13 @@
 }
 .dataContainer {
   border-bottom: solid 1px gray;
-  height: 50vh;
+  height: 45vh;
   padding-left: 50px;
   padding-top: 30px;
+  width: 70%;
+  position: absolute;
+  right: 0px;
+  margin-top: 11vh;
 }
 .titleContainer {
   width: 50%;
@@ -90,7 +94,14 @@
   color: #111;
   transition: 0.15s ease-in-out;
 }
-
+.btnCont span {
+  font-size: 25px;
+  position: relative;
+  top: 4px;
+  margin-left: 15px;
+  color: #fff;
+  cursor: pointer;
+}
 .fav {
   font-size: 25px;
   position: relative;
@@ -98,6 +109,7 @@
   margin-left: 15px;
   text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff;
   cursor: pointer;
+  border: solid 1px red;
 }
 .fav:hover {
   color: #fff;
@@ -173,17 +185,6 @@
   height: 70px;
 }
 
-.reviewsContainer {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  width: 70%;
-  height: 39vh;
-  padding-top: 20px;
-  padding-left: 50px;
-  padding-right: 50px;
-  overflow-y: scroll;
-}
 .reviewsContainer h3 {
   color: #fff;
   font-size: 16px;

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { getReviews } from "../redux/actions";
 
-export default function Reviews({id}) {
+export default function Reviews({ id }) {
   // const reviews = [
   //   {
   //     profilePic: [
@@ -61,28 +61,32 @@ export default function Reviews({id}) {
     dispatch(getReviews());
   }, [dispatch]);
 
-  const reviewsFromReducer=useSelector(state => state.reviews);
-  const reviewsFiltered=reviewsFromReducer.filter(el=>el.productId===parseInt(id))
-  console.log("estas son las filtradas",reviewsFiltered);
+  const reviewsFromReducer = useSelector(state => state.reviews);
+  const reviewsFiltered = reviewsFromReducer.filter(
+    el => el.productId === parseInt(id)
+  );
+  console.log("estas son las filtradas", reviewsFiltered);
   return (
     <>
-      {reviewsFiltered.length > 0 ? 
-      <div className={R.reviews}>
-        <div className={R.container}>
-          {reviewsFiltered.map((el) => (
+      {reviewsFiltered.length > 0 ? (
+        <div className={R.reviews}>
+          <div className={R.container}>
+            {reviewsFiltered.map(el => (
               <ReviewCard
                 key={el.id}
                 name={el.title}
                 review={el.message}
                 score={el.score}
-                profilePic= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU"
+                profilePic="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU"
               />
             ))}
+          </div>
         </div>
-      </div> : 
-      <div className={R.container}>
-        <h6>Reviews no disponibles para este producto</h6>
-      </div>}
+      ) : (
+        <div className={R.container}>
+          <h6>Reviews no disponibles para este producto</h6>
+        </div>
+      )}
     </>
   );
 }
