@@ -25,7 +25,6 @@
 .userContainer {
     padding: 40px;
     width: 70%;
-    height: 70vh;
     border-top: solid 1px #2bfab7;
     border-left: solid 1px #2bfab7;
     border-bottom: solid 1px #2bfab7;
@@ -37,6 +36,16 @@
     margin: 0 auto;
     justify-content: center;
     margin-top: 150px;
-    max-height: 500px;
     color: #FFF;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+.listaUsuarios{
+    width:100%;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: center;
+    margin-top: 20px;
+    color: #FFF;
+    background-color: #2bfab7;
 }
