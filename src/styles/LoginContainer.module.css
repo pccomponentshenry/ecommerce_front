@@ -40,6 +40,7 @@
   border-radius: 8px;
   font-size: 16px;
   margin-left: 300px;
+  margin-top: 10px;
 }
 .loginBtn:hover {
   color: #fff;

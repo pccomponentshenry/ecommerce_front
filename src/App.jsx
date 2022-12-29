@@ -14,7 +14,9 @@ import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
 import BuyConfirm from "./components/BuyConfirm";
 import UpdateProduct from "./containers/UpdateProduct";
-import AppBarChart from "./containers/AppBarChart"
+import DashBoard from "./containers/DashBoard"
+import DashBoardSales from "./containers/DashBoardSales"
+import DashBoardUsers from "./containers/DashBoardUsers"
 
 function App() {
   populateDB();
@@ -46,7 +48,9 @@ function App() {
             }
           />
           <Route exact path="/favorites" element={<Favorites />} />
-          <Route exact path="/dhasboard" element={<AppBarChart />} />
+          <Route exact path="/dashboard" element={<DashBoard />} />
+          <Route exact path="/dashboard/sales" element={<DashBoardSales />} />
+          <Route exact path="/dashboard/users" element={<DashBoardUsers />} />
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />

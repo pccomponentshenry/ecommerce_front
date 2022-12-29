@@ -66,8 +66,8 @@ export default function Nav() {
             <Link to="/favorites" style={{ textDecoration: "none" }}>
               <li>Favorites</li>
             </Link>
-            <Link to="/dhasboard" style={{ textDecoration: "none" }}>
-              <li>Dhasboard</li>
+            <Link to="/dashboard" style={{ textDecoration: "none" }}>
+              <li>Dashboard</li>
             </Link>
           </ul>
           {activeNav === true && (

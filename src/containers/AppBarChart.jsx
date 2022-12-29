@@ -29,15 +29,15 @@ function AppBarChart() {
   console.log(userData);
   return (
     <div className={F.favContainer}>
-      <div style={{ width: 700 }}>
+      <div style={{ width: 800 }}>
         <BarChart chartData={userData} />
       </div>
-      <div style={{ width: 700 }}>
+      {/* <div style={{ width: 400 }}>
         <LineChart chartData={userData} />
       </div>
-      <div style={{ width: 700 }}>
+      <div style={{ width: 400 }}>
         <PieChart chartData={userData} />
-      </div>
+      </div> */}
     </div>
   );
 }
