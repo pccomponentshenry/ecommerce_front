@@ -59,6 +59,9 @@ export default function Nav() {
             <Link to="/favorites" style={{ textDecoration: "none" }}>
               <li>Favorites</li>
             </Link>
+            <Link to="/dashboard" style={{ textDecoration: "none" }}>
+              <li>Dashboard</li>
+            </Link>
           </ul>
           {activeNav === true && (
             <ul className={isAuthenticated ? N.navList : N.authNavList}>
@@ -102,7 +105,7 @@ export default function Nav() {
                 >
                   Favorites
                 </li>
-              </Link>
+              </Link>             
             </ul>
           )}
         </div>

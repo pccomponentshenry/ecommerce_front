@@ -13,7 +13,13 @@ import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
 import BuyConfirm from "./components/BuyConfirm";
 import UpdateProduct from "./containers/UpdateProduct";
+<<<<<<< HEAD
 import AddReview from "./containers/AddReview";
+=======
+import DashBoard from "./containers/DashBoard"
+import DashBoardSales from "./containers/DashBoardSales"
+import DashBoardUsers from "./containers/DashBoardUsers"
+>>>>>>> 90f8108dbd0e541d77a3e5b477d319d62466bebb
 
 function App() {
   populateDB();
@@ -44,7 +50,13 @@ function App() {
             }
           />
           <Route exact path="/favorites" element={<Favorites />} />
+<<<<<<< HEAD
           <Route exact path="/order" element={<OrderForm />} />
+=======
+          <Route exact path="/dashboard" element={<DashBoard />} />
+          <Route exact path="/dashboard/sales" element={<DashBoardSales />} />
+          <Route exact path="/dashboard/users" element={<DashBoardUsers />} />
+>>>>>>> 90f8108dbd0e541d77a3e5b477d319d62466bebb
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />
