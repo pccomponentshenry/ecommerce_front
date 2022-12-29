@@ -2,16 +2,17 @@ import { useState } from "react";
 import F from "../styles/BarChart.module.css";
 import BarChart from "../components/BarChart";
 import LineChart from "../components/LineChart";
+import PieChart from "../components/PieChart";
 import { UserData } from "../Data";
 import "chart.js/auto";
 
 function AppBarChart() {
   const [userData, setUserData] = useState({
-    labels: UserData.map((data) => data.stock),
+    labels: UserData.map((data) => data.description),
     datasets: [
       {
         label: "Ventas",
-        data: UserData.map((data) => data.description),
+        data: UserData.map((data) => data.stock),
         backgroundColor: [
           "rgba(75,192,192,1)",
           "#ecf0f1",
@@ -33,6 +34,9 @@ function AppBarChart() {
       </div>
       <div style={{ width: 700 }}>
         <LineChart chartData={userData} />
+      </div>
+      <div style={{ width: 700 }}>
+        <PieChart chartData={userData} />
       </div>
     </div>
   );
