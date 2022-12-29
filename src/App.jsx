@@ -12,8 +12,9 @@ import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
-import BuyConfirm from "./components/BuyConfirm"
-import UpdateProduct from "./containers/UpdateProduct"
+import BuyConfirm from "./components/BuyConfirm";
+import UpdateProduct from "./containers/UpdateProduct";
+import AppBarChart from "./containers/AppBarChart"
 
 function App() {
   populateDB();
@@ -45,6 +46,7 @@ function App() {
             }
           />
           <Route exact path="/favorites" element={<Favorites />} />
+          <Route exact path="/dhasboard" element={<AppBarChart />} />
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />

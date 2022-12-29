@@ -1,0 +1,19 @@
+
+.favContainer {
+    background-color: aliceblue;
+    padding-top: 20px;
+    width: 90%;
+    height: 55vh;
+    border-top: solid 1px #2bfab7;
+    border-left: solid 1px #2bfab7;
+    border-right: solid 1px #2bfab7;
+    border-radius: 10px;
+    position: relative;
+    top: 50px;
+    display: flex;
+    position: absolute;
+    right: 5%;
+    margin-top: 100px;
+    max-height: 400px;
+}
+
