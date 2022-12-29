@@ -274,7 +274,6 @@ export const logoutUser = () => dispatch => {
 export function getAddress(id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/address/${id}`);
-    console.log(res.data);
     return dispatch({ type: GET_ADDRESS, payload: res.data });
   };
 }

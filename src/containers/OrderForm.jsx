@@ -4,14 +4,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { getLocations, postAddress, getAddress } from "../redux/actions";
 import { useEffect } from "react";
-import Addresses from "../components/Addresses";
+
 export default function OrderForm() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getLocations());
   }, [dispatch]);
-
+  const address = useSelector(state => state.address);
   const user = useSelector(state => state.user);
+
+  React.useEffect(() => {
+    dispatch(getAddress(user.id));
+  }, [dispatch]);
 
   const initialState = {
     streetName: "",
@@ -93,7 +97,7 @@ export default function OrderForm() {
   };
 
   const cart = useSelector(state => state.cart);
-  const address = useSelector(state => state.address);
+
   const clearForm = () => {
     setInput({ ...initialState });
   };
@@ -133,7 +137,26 @@ export default function OrderForm() {
         ))}
       </div>
 
-      <Addresses id={user.id} />
+      {address.length > 0 && (
+        <>
+          <h2 className={O.yourAddress}>Your addresses</h2>
+          <div className={O.addressBox}>
+            <div className={O.addressContainer}>
+              {address.length > 0 &&
+                address.map((el, i) => (
+                  <div className={O.address} key={i}>
+                    <input type="radio" />
+                    <span>{`Address n° ${i + 1}`}</span>
+                    <p>{`${el.streetName} n° ${el.streetNumber}, apartment ${el.apartment}, Zip Code n° ${el.zipCode}. ${el.additionalDetails}`}</p>
+                    <span className={O.default}>
+                      {el.isDefault === true && `Default`}
+                    </span>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </>
+      )}
 
       <div className={O.newAddressCont}>
         <h1>Add a new address</h1>{" "}

@@ -71,6 +71,12 @@ function rootReducer(state = initialState, action) {
     case GET_ADDRESS: {
       return {
         ...state,
+        address: action.payload,
+      };
+    }
+    case POST_ADDRESS: {
+      return {
+        ...state,
         address: state.address.concat(action.payload),
       };
     }
