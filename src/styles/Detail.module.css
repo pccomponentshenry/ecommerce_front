@@ -1,32 +1,40 @@
 .imageContainer {
   width: 30%;
+  background-color: #FFF;
   height: 89vh;
   float: left;
   position: relative;
   top: 11vh;
-  display: inline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .Container {
   height: 100vh;
+  width: 600px;
   overflow: hidden;
   display: inline;
 }
+
 .topContainer {
   position: absolute;
   margin-top: 70px;
   width: 70%;
   right: 0px;
+  max-height: 400px;
   box-shadow: -1px 5px 5px 0px rgba(0, 0, 0, 0.4);
 }
+
 .dataContainer {
-  border-bottom: solid 1px gray;
   height: 50vh;
   padding-left: 50px;
   padding-top: 30px;
 }
+
 .titleContainer {
   width: 50%;
-  height: 60px;
+  height: 100px;
   display: flex;
 }
 
@@ -99,6 +107,7 @@
   text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff;
   cursor: pointer;
 }
+
 .fav:hover {
   color: #fff;
   transition: 0.15s ease-in-out;
@@ -114,6 +123,7 @@
   right: 2px;
   cursor: pointer;
 }
+
 .btnCont span:hover {
   transition: 0.15s ease-in-out;
 }
@@ -178,18 +188,21 @@
   bottom: 0px;
   right: 0px;
   width: 70%;
-  height: 39vh;
+  height: 48vh;
   padding-top: 20px;
   padding-left: 50px;
   padding-right: 50px;
   overflow-y: scroll;
+
 }
+
 .reviewsContainer h3 {
   color: #fff;
   font-size: 16px;
   font-weight: 600;
   overflow: hidden;
 }
+
 .editBtn button {
   border: none;
   background-color: transparent;
@@ -199,11 +212,13 @@
   position: relative;
   bottom: 10px;
 }
+
 .editBtn button:hover {
   transition: 0.15s ease-in-out;
   color: #fff;
   border-bottom: solid 1px #fff;
 }
+
 @media screen and (max-width: 500px) {
   .reviewsContainer {
     position: absolute;
@@ -219,6 +234,7 @@
     /* position: relative;
     top: 10vh; */
   }
+
   .imageContainer {
     width: 100%;
     height: 100vh;
@@ -237,6 +253,7 @@
     padding-right: 30px;
     height: fit-content;
   }
+
   .dataContainer {
     border-bottom: none;
     height: fit-content;
@@ -250,12 +267,14 @@
     height: fit-content;
     display: flex;
   }
+
   .titleContainer h3 {
     font-size: 14px;
     overflow: hidden;
     font-weight: 400;
     width: 70%;
   }
+
   .brand,
   .stock,
   .price,
@@ -316,6 +335,7 @@
     top: 0px;
     overflow: unset;
   }
+
   .description {
     height: fit-content;
   }
@@ -351,6 +371,7 @@
     width: fit-content;
     height: 35px;
   }
+
   .editBtn button {
     font-size: 12px;
     bottom: 0px;
@@ -364,6 +385,7 @@
     text-shadow: 1px 0 #2bfab7, -1px 0 #2bfab7, 0 1px #2bfab7, 0 -1px #2bfab7;
     cursor: pointer;
   }
+
   .fav:hover {
     color: black;
     transition: 0.15s ease-in-out;

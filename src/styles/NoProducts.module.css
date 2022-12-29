@@ -1,6 +1,9 @@
 .container {
   display: flex;
-  width: 70%;
+  width: 85%;
+  padding-top: 100px;
+  grid-column-start: 2;
+  grid-column-end: 4;
 }
 .container img {
   width: 100%;
