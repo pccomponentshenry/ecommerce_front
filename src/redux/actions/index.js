@@ -23,6 +23,9 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   GET_LOCATIONS,
+  POST_ADDRESS,
+  GET_USER,
+  GET_ADDRESS,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -100,6 +103,15 @@ export const postProduct = payload => async dispatch => {
   try {
     const res = await axios.post(`${URL}/products`, payload);
     return dispatch({ type: POST_PRODUCT, payload: res.data });
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};
+
+export const postAddress = payload => async dispatch => {
+  try {
+    const res = await axios.post(`${URL}/address`, payload);
+    return dispatch({ tyoe: POST_ADDRESS, payload: res.data });
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
   }
@@ -240,13 +252,29 @@ export const clearError = () => {
 //////////USERS////////
 export const postUser = payload => async dispatch => {
   try {
-    dispatch({ type: POST_USER, payload });
+    // dispatch({ type: POST_USER, payload });
     await axios.post(`${URL}/users`, payload);
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
 
+export function getUser(email) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/users/${email}`);
+    return dispatch({ type: GET_USER, payload: res.data });
+  };
+}
+
 export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
+//////ADDRESS///
+
+export function getAddress(id) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/address/${id}`);
+    console.log(res.data);
+    return dispatch({ type: GET_ADDRESS, payload: res.data });
+  };
+}

@@ -2,25 +2,49 @@ import React from "react";
 import O from "../styles/OrderForm.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { getLocations } from "../redux/actions";
+import { getLocations, postAddress, getAddress } from "../redux/actions";
 import { useEffect } from "react";
+import Addresses from "../components/Addresses";
 export default function OrderForm() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getLocations());
   }, [dispatch]);
 
-  const [input, setInput] = useState({
+  const user = useSelector(state => state.user);
+
+  const initialState = {
     streetName: "",
     streetNumber: "",
     apartment: "",
     zipCode: "",
-    location: "",
-    aditionalInformation: "",
+    locationId: "",
+    additionalDetails: "",
+  };
+
+  const [input, setInput] = useState({
+    userId: "",
+    streetName: "",
+    streetNumber: "",
+    apartment: "",
+    zipCode: "",
+    locationId: "",
+    additionalDetails: "",
   });
+
   const [error, setError] = useState({});
+  const [disable, setDisable] = useState(true);
+
   const handleChange = e => {
-    setInput({ ...input, [e.target.name]: e.target.value });
+    if (e.target.id === "locationId") {
+      setInput({
+        ...input,
+        locationId: Number(e.target.value),
+        userId: user.id,
+      });
+    } else {
+      setInput({ ...input, [e.target.name]: e.target.value, userId: user.id });
+    }
   };
   const locations = useSelector(state => state.locations);
   const errorSetting = e => {
@@ -49,48 +73,49 @@ export default function OrderForm() {
     if (!input.zipCode) {
       errors.zipCode = "*Zip code is required";
     }
-    if (!input.location) {
+    if (!input.locationId) {
       errors.location = "*Location is required";
     }
+    if (
+      !error.streetName &&
+      !error.streetNumber &&
+      !error.apartment &&
+      !error.location &&
+      !error.zipCode &&
+      !error.location
+    ) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+
     return errors;
   };
 
   const cart = useSelector(state => state.cart);
-  const address = [
-    {
-      streetName: "Fake avenue",
-      streetNumber: 12,
-      apartment: "6A",
-      zipCode: 7600,
-      additionalDetailes: "Red front door",
-      isDefault: true,
-      location: {
-        name: "Santa Cruz",
-      },
-    },
-    {
-      streetName: "Fake street",
-      streetNumber: 8,
-      apartment: "3A",
-      zipCode: 1900,
-      additionalDetailes: "Blue front door",
-      isDefault: false,
-      location: {
-        name: "Córdoba",
-      },
-    },
-    {
-      streetName: "Fake street 2",
-      streetNumber: 64,
-      apartment: "2B",
-      zipCode: 7105,
-      additionalDetailes: "Brown front door",
-      isDefault: false,
-      location: {
-        name: "Buenos Aires",
-      },
-    },
-  ];
+  const address = useSelector(state => state.address);
+  const clearForm = () => {
+    setInput({ ...initialState });
+  };
+
+  const handleSubmit = e => {
+    if (
+      !error.streetName &&
+      !error.streetNumber &&
+      !error.zipCode &&
+      !error.location &&
+      !error.apartment
+    ) {
+      e.preventDefault();
+      console.log(input);
+      dispatch(postAddress(input));
+      setDisable(true);
+      clearForm();
+    } else {
+      alert("Something went wrong, try again!");
+    }
+  };
+
   return (
     <div className={O.container}>
       <div className={O.darkNav}></div>
@@ -108,30 +133,18 @@ export default function OrderForm() {
         ))}
       </div>
 
-      {address.length && (
-        <>
-          <h2 className={O.yourAddress}>Your addresses</h2>
-          <div className={O.addressBox}>
-            <div className={O.addressContainer}>
-              {address.map((el, i) => (
-                <div className={O.address} key={i}>
-                  <input type="radio" />
-                  <span>{`Address n° ${i + 1}`}</span>
-                  <p>{`${el.streetName} n° ${el.streetNumber}, ${el.location.name}, apartment ${el.apartment}, Zip Code n° ${el.zipCode}. ${el.additionalDetailes}`}</p>
-                  <span className={O.default}>
-                    {el.isDefault === true && `Default`}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </>
-      )}
+      <Addresses id={user.id} />
 
       <div className={O.newAddressCont}>
-        <h1>Add a new address</h1>
+        <h1>Add a new address</h1>{" "}
+        <span
+          className={O.getAddress}
+          onClick={() => dispatch(getAddress(user.id))}
+        >
+          ⚠ Already have an address? Click here
+        </span>
         <div className={O.formContainer}>
-          <form>
+          <form onSubmit={e => handleSubmit(e)} autoComplete="off">
             <div className={O.street}>
               <input
                 type="text"
@@ -188,10 +201,13 @@ export default function OrderForm() {
               <span className={O.errorZipCode}>{error.zipCode}</span>
             )}
             <div className={O.location}>
-              <select name="location" id="location">
-                <option value={"default"} disabled>
-                  Location
-                </option>
+              <select
+                name="locationId"
+                id="locationId"
+                onChange={e => handleChange(e)}
+                onBlur={e => errorSetting(e)}
+              >
+                <option defaultValue={"DEFAULT"}>Location</option>
                 {locations.map((el, i) => (
                   <option key={i} value={el.id}>
                     {el.name}
@@ -204,16 +220,24 @@ export default function OrderForm() {
               )}
             </div>
             <textarea
-              name="additionalInformation"
-              value={input.aditionalInformation || ""}
-              id=""
+              name="additionalDetails"
+              value={input.additionalInformation}
+              id="information"
               cols="30"
               rows="10"
               placeholder="Additional information"
               onChange={e => handleChange(e)}
               onBlur={e => errorSetting(e)}
             />
-            <button type="submit">Submit address</button>
+            <button
+              type="submit"
+              onClick={e => {
+                disable && e.preventDefault();
+              }}
+              className={disable ? O.disabled : O.enabled}
+            >
+              Submit address
+            </button>{" "}
           </form>
         </div>
       </div>

@@ -28,4 +28,8 @@ export const POST_CART_ITEM = "POST_CART_ITEM";
 //actions User
 export const POST_USER = "POST_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
+export const GET_USER = "GET_USER";
 export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
+//actions address
+export const POST_ADDRESS = "POST_ADDRESS";
+export const GET_ADDRESS = "GET_ADDRESS";

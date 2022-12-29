@@ -3,12 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import L from "../styles/LoginContainer.module.css";
-import { getUserCartItem, postCartItem, postUser } from "../redux/actions";
+import {
+  getUserCartItem,
+  postCartItem,
+  postUser,
+  getUser,
+} from "../redux/actions";
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const shouldUpdate = useRef(true);
+
   const dbUser = {
     username: user.nickname,
     email: user.email,
@@ -40,6 +46,11 @@ export const Profile = () => {
       postUserWithCartToDB();
     }
   }, [user]);
+
+  useEffect(() => {
+    dispatch(getUser(user.email));
+  }, [dispatch]);
+
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(getUserCartItem(user.email));
