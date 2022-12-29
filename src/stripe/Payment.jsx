@@ -1,6 +1,6 @@
 import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
+import P from "../styles/Payment.module.css";
 import { useSelector } from "react-redux";
 
 const stripePromese = loadStripe(
@@ -45,20 +45,8 @@ function Payment() {
     }
   };
   return (
-    <div>
-      <button
-        style={{
-          border: "none",
-          background: "none",
-          color: "white",
-          position: "relative",
-          top: "10px",
-          fontSize: "18px",
-          width: "700px",
-        }}
-        role="link"
-        onClick={e => handleClick(e)}
-      >
+    <div className={P.container}>
+      <button className={P.btn} role="link" onClick={e => handleClick(e)}>
         Start shopping
       </button>
     </div>

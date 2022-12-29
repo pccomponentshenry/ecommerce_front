@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { getLocations, postAddress, getAddress } from "../redux/actions";
 import { useEffect } from "react";
+import Payment from "../stripe/Payment";
 
 export default function OrderForm() {
   const dispatch = useDispatch();
@@ -12,10 +13,19 @@ export default function OrderForm() {
   }, [dispatch]);
   const address = useSelector(state => state.address);
   const user = useSelector(state => state.user);
+  const defaultAdress = address.find(el => el.isDefault === true);
+  const [order, setOrder] = useState({
+    address: defaultAdress,
+  }); /// Acá recolecta cart, userId y la dirección seleccionada
+  const [click, setClick] = useState(false);
 
   React.useEffect(() => {
     dispatch(getAddress(user.id));
   }, [dispatch]);
+
+  React.useEffect(() => {
+    dispatch(getAddress(user.id));
+  }, [click]);
 
   const initialState = {
     streetName: "",
@@ -115,9 +125,21 @@ export default function OrderForm() {
       dispatch(postAddress(input));
       setDisable(true);
       clearForm();
+      dispatch(getAddress(user.id));
     } else {
       alert("Something went wrong, try again!");
     }
+    setClick(!click);
+    dispatch(getAddress(user.id));
+  };
+
+  const handleOrder = e => {
+    setOrder({
+      ...order,
+      userId: user.id,
+      cart: cart,
+      address: address[e.target.value],
+    });
   };
 
   return (
@@ -135,6 +157,9 @@ export default function OrderForm() {
             <h6>Total: ${el.price}</h6>
           </div>
         ))}
+        <div className={O.payment}>
+          <Payment />
+        </div>
       </div>
 
       {address.length > 0 && (
@@ -145,7 +170,13 @@ export default function OrderForm() {
               {address.length > 0 &&
                 address.map((el, i) => (
                   <div className={O.address} key={i}>
-                    <input type="radio" />
+                    <input
+                      defaultChecked={el.isDefault === true ? "checked" : null}
+                      type="radio"
+                      name="address"
+                      value={i}
+                      onClick={e => handleOrder(e)}
+                    />
                     <span>{`Address n° ${i + 1}`}</span>
                     <p>{`${el.streetName} n° ${el.streetNumber}, apartment ${el.apartment}, Zip Code n° ${el.zipCode}. ${el.additionalDetails}`}</p>
                     <span className={O.default}>
@@ -160,12 +191,14 @@ export default function OrderForm() {
 
       <div className={O.newAddressCont}>
         <h1>Add a new address</h1>{" "}
-        <span
-          className={O.getAddress}
-          onClick={() => dispatch(getAddress(user.id))}
-        >
-          ⚠ Already have an address? Click here
-        </span>
+        {address.length === 0 && (
+          <span
+            className={O.getAddress}
+            onClick={() => dispatch(getAddress(user.id))}
+          >
+            ⚠ Already have an address? Click here
+          </span>
+        )}
         <div className={O.formContainer}>
           <form onSubmit={e => handleSubmit(e)} autoComplete="off">
             <div className={O.street}>
