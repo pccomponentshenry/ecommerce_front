@@ -66,6 +66,7 @@ export function getLocations() {
     return dispatch({ type: GET_LOCATIONS, payload: res.data });
   };
 }
+
 export function clearState() {
   return { type: CLEAR_STATE };
 }
@@ -103,15 +104,6 @@ export const postProduct = payload => async dispatch => {
   try {
     const res = await axios.post(`${URL}/products`, payload);
     return dispatch({ type: POST_PRODUCT, payload: res.data });
-  } catch (e) {
-    return dispatch({ type: SET_ERROR, payload: e });
-  }
-};
-
-export const postAddress = payload => async dispatch => {
-  try {
-    const res = await axios.post(`${URL}/address`, payload);
-    return dispatch({ tyoe: POST_ADDRESS, payload: res.data });
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
   }
@@ -203,16 +195,48 @@ export const removeFromCart = (item, removeItem) => dispatch => {
 };
 
 export const clearCart = email => async dispatch => {
-  localStorage.setItem("cart", []);
-  dispatch({ type: REMOVE_ALL_FROM_CART });
-  if (email) {
+  if (localStorage.cart) {
+    localStorage.setItem("cart", []);
+    dispatch({ type: REMOVE_ALL_FROM_CART });
+  }
+  else {
     try {
       await axios.put(`${URL}/cartItem/${email}`);
-    } catch (error) {
+    }
+    catch (error) {
       console.log(error);
     }
   }
 };
+
+//////////CHECKOUT-ORDER////////
+export const checkout = products => async () => {
+  try {
+    const stripePromise = loadStripe(
+      "pk_test_51MCUPjIxZNdfrxaORwUsMY8yxCPm4xhLtIsruiYWFCGr2xN6NzNOR984Z0gGfM8l8u2blkELjULUs1rbClLtmW9A00QbQXD9FC"
+    );
+    const stripe = await stripePromise;
+    const response = await fetch(`${URL}/order/checkout`, {
+      method: "POST",
+      body: JSON.stringify(products),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const session = await response.json();
+
+    await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+  }
+  catch (error) {
+    alert(error);
+  }
+}
+
+export const createOrder = (cart, email) => {
+
+}
 
 //////////FAVORITES////////
 export const addToFav = item => dispatch => {
@@ -252,7 +276,7 @@ export const clearError = () => {
 //////////USERS////////
 export const postUser = payload => async dispatch => {
   try {
-    // dispatch({ type: POST_USER, payload });
+    dispatch({ type: POST_USER, payload });
     await axios.post(`${URL}/users`, payload);
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
@@ -269,11 +293,20 @@ export function getUser(email) {
 export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
-//////ADDRESS///
 
+//////ADDRESS///
 export function getAddress(id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/address/${id}`);
     return dispatch({ type: GET_ADDRESS, payload: res.data });
   };
 }
+
+export const postAddress = payload => async dispatch => {
+  try {
+    const res = await axios.post(`${URL}/address`, payload);
+    return dispatch({ tyoe: POST_ADDRESS, payload: res.data });
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};

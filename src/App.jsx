@@ -11,12 +11,12 @@ import ShoppingCart from "./containers/ShoppingCart";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ProfileDetail from "./containers/ProfileDetail";
 import Favorites from "./containers/Favorites";
-import BuyConfirm from "./components/BuyConfirm";
 import UpdateProduct from "./containers/UpdateProduct";
 import AddReview from "./containers/AddReview";
 import DashBoard from "./containers/DashBoard";
 import DashBoardSales from "./containers/DashBoardSales";
 import DashBoardUsers from "./containers/DashBoardUsers";
+import OrderConfirmed from "./components/OrderConfirmed";
 
 function App() {
   populateDB();
@@ -54,7 +54,7 @@ function App() {
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />
-          <Route exact path="/success" element={<BuyConfirm />} />
+          <Route exact path="/success" element={<OrderConfirmed />} />
           <Route exact path="/addreview" element={<AddReview />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -25,11 +25,11 @@ export const CLEAR_CART = "CLEAR_CART";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ADD_TO_FAV = "ADD_TO_FAV";
 export const POST_CART_ITEM = "POST_CART_ITEM";
+export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
 //actions User
 export const POST_USER = "POST_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_USER = "GET_USER";
-export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
 //actions address
 export const POST_ADDRESS = "POST_ADDRESS";
 export const GET_ADDRESS = "GET_ADDRESS";
