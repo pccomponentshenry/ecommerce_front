@@ -45,8 +45,26 @@ function Payment() {
     }
   };
   return (
+
     <div className={P.container}>
       <button className={P.btn} role="link" onClick={e => handleClick(e)}>
+
+    <div>
+      <button
+        style={{
+          border: "none",
+          background: "none",
+          color: "black",
+          position: "relative",
+          top: "10px",
+          fontSize: "18px",
+          fontWeight:"500",
+          width: "700px",
+        }}
+        role="link"
+        onClick={e => handleClick(e)}
+      >
+
         Start shopping
       </button>
     </div>
