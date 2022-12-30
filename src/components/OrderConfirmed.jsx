@@ -1,26 +1,38 @@
 import React from "react";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Sell() {
+export default function OrderConfirmed() {
+
+  const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch();
+  const { user } = useAuth0();
+
+  const order = () => {
+    dispatch(createOrder(cart, user.email));
+    dispatch(clearCart(user.email));
+  }
+
   const successAlert = () => {
     const navigate = useNavigate();
+
     Swal.fire({
       title: "Successful Purchase!",
-      confirmButtonText: "Les't buy more products",
+      confirmButtonText: "Home",
       showDenyButton: true,
-      denyButtonText: `Post a Review`,
+      denyButtonText: "My Profile",
       icon: "success",
       confirmButtonColor: "rgb(55, 172, 135)",
       denyButtonColor: "#d83dd0",
       background: "#272727",
       color: "#fff",
-    }).then(result => {
+    }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         navigate("/");
       } else if (result.isDenied) {
-        navigate("/addreview");
+        navigate("/profile");
       }
     });
   };

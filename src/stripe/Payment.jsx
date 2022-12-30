@@ -10,8 +10,6 @@ const stripePromese = loadStripe(
 function Payment() {
   const cart = useSelector(state => state.cart);
 
-  //let claves = Object.keys(localStorage);
-
   const handleClick = async e => {
     e.preventDefault();
     const product = [];
@@ -29,7 +27,7 @@ function Payment() {
       products: product,
     };
     const stripe = await stripePromese;
-    const response = await fetch("http://localhost:3001/api/checkout", {
+    const response = await fetch("http://localhost:3001/order/checkout", {
       method: "POST",
       body: JSON.stringify(productObj),
       headers: {
@@ -44,29 +42,28 @@ function Payment() {
       alert(result.error.message);
     }
   };
+
   return (
-
     <div className={P.container}>
-      <button className={P.btn} role="link" onClick={e => handleClick(e)}>
-
-    <div>
-      <button
-        style={{
-          border: "none",
-          background: "none",
-          color: "black",
-          position: "relative",
-          top: "10px",
-          fontSize: "18px",
-          fontWeight:"500",
-          width: "700px",
-        }}
-        role="link"
-        onClick={e => handleClick(e)}
-      >
-
-        Start shopping
-      </button>
+      <button className={P.btn} role="link" onClick={e => handleClick(e)} />
+      <div>
+        <button
+          style={{
+            border: "none",
+            background: "none",
+            color: "black",
+            position: "relative",
+            top: "10px",
+            fontSize: "18px",
+            fontWeight: "500",
+            width: "700px",
+          }}
+          role="link"
+          onClick={e => handleClick(e)}
+        >
+          Start shopping
+        </button>
+      </div>
     </div>
   );
 }
