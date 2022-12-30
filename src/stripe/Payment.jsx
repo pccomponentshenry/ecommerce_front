@@ -50,10 +50,11 @@ function Payment() {
         style={{
           border: "none",
           background: "none",
-          color: "white",
+          color: "black",
           position: "relative",
           top: "10px",
           fontSize: "18px",
+          fontWeight:"500",
           width: "700px",
         }}
         role="link"

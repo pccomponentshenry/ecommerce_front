@@ -52,6 +52,8 @@ export default function Favorites() {
             </div>
           )}
         </div>
+
+        
       </div>
 
       <div className={F.BtnContainer}>

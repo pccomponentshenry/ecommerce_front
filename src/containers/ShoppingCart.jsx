@@ -54,7 +54,7 @@ export default function ShoppingCart() {
           </div>
         ) : (
           <div className={S.emptyCart}>
-            <h3>There are no products in your cart</h3>
+            <h3>There are no products in your cart!</h3>
             <Link
               to="/"
               style={{
