@@ -19,6 +19,10 @@ import {
   LOGOUT_USER,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+  GET_LOCATIONS,
+  POST_ADDRESS,
+  GET_USER,
+  GET_ADDRESS,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -31,7 +35,9 @@ const initialState = {
   filtered: [],
   cart: [],
   fav: [],
+  locations: [],
   user: {},
+  address: [],
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -62,14 +68,30 @@ function rootReducer(state = initialState, action) {
         products: [...state.products, action.payload],
       };
     }
-
+    case GET_ADDRESS: {
+      return {
+        ...state,
+        address: action.payload,
+      };
+    }
+    case POST_ADDRESS: {
+      return {
+        ...state,
+        address: state.address.concat(action.payload),
+      };
+    }
     case PUT_PRODUCT: {
       return {
         ...state,
         product: action.payload,
       };
     }
-
+    case GET_LOCATIONS: {
+      return {
+        ...state,
+        locations: action.payload,
+      };
+    }
     case DELETE_PRODUCT: {
       return {
         ...state,
@@ -181,13 +203,18 @@ function rootReducer(state = initialState, action) {
       };
 
     ////// USERS /////
-    case POST_USER: {
+    // case POST_USER: {
+    //   return {
+    //     ...state,
+    //     user: action.payload,
+    //   };
+    // }
+    case GET_USER: {
       return {
         ...state,
         user: action.payload,
       };
     }
-
     case LOGOUT_USER: {
       return {
         ...state,

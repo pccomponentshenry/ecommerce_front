@@ -11,6 +11,7 @@ import { LoginButton } from "../components/Login";
 
 export default function ShoppingCart() {
   const cart = useSelector(state => state.cart);
+  const userId = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
   const { user, isAuthenticated } = useAuth0();
@@ -72,7 +73,12 @@ export default function ShoppingCart() {
               <LoginButton />{" "}
             </>
           ) : (
-            <Payment />
+            <Link to="/order">
+              {" "}
+              <div className={S.payment}>
+                Start shopping {/* <Payment /> */}
+              </div>
+            </Link>
           )}
         </div>
       </div>

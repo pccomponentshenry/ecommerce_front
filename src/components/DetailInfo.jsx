@@ -53,7 +53,7 @@ export default function DetailInfo({ handleAddToCart, owner, creator, guest }) {
           </div>
           <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
             <div className={D.ownerText}>
-              <h3>{product.creator}</h3>
+              <h3>{product.userId}</h3>
               <p>See the seller's profile</p>
             </div>
           </Link>

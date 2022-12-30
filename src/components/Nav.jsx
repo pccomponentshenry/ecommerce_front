@@ -53,13 +53,6 @@ export default function Nav() {
             </div>
           </Link>
           <ul className={N.notResponsiveNav}>
-            <Link to="/categories" style={{ textDecoration: "none" }}>
-              <li>Categories</li>
-            </Link>
-            <Link to="/latest" style={{ textDecoration: "none" }}>
-              <li>Latest</li>
-            </Link>
-
             <Link to="/sell" style={{ textDecoration: "none" }}>
               {isAuthenticated ? <li>Sell</li> : <></>}
             </Link>

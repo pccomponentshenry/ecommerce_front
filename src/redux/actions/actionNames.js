@@ -4,6 +4,7 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const GET_BRANDS = "GET_BRANDS";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_LOCATIONS = "GET_LOCATIONS";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const SET_ERROR = " SET_ERROR";
@@ -27,4 +28,8 @@ export const POST_CART_ITEM = "POST_CART_ITEM";
 //actions User
 export const POST_USER = "POST_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
+export const GET_USER = "GET_USER";
 export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
+//actions address
+export const POST_ADDRESS = "POST_ADDRESS";
+export const GET_ADDRESS = "GET_ADDRESS";

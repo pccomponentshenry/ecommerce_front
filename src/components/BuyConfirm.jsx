@@ -3,7 +3,6 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 export default function Sell() {
-
   const successAlert = () => {
     const navigate = useNavigate();
     Swal.fire({
@@ -16,12 +15,12 @@ export default function Sell() {
       denyButtonColor: "#d83dd0",
       background: "#272727",
       color: "#fff",
-    }).then((result) => {
+    }).then(result => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         navigate("/");
       } else if (result.isDenied) {
-        navigate("/cart");
+        navigate("/addreview");
       }
     });
   };

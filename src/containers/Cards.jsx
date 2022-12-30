@@ -19,7 +19,9 @@ export default function Cards() {
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   let currentItems = filtered.slice(itemOffset, endOffset);
-  currentItems = currentItems.filter(el => el.status === "active");
+  currentItems = currentItems.filter(
+    el => el.status === "active" && el.stock > 0
+  );
 
   const pageCount = Math.ceil(filtered.length / itemsPerPage);
 
