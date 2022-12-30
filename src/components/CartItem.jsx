@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart, postCartItem } from "../redux/actions";
 import C from "../styles/CartItem.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from 'react-router-dom';
 
 export default function CartItem({ item }) {
   const { id, title, img, price, quantity, stock } = item;
@@ -66,9 +67,9 @@ export default function CartItem({ item }) {
         </div>
         <div className={C.container}>
           <div className={C.imgCont}>
-            <img src={img} alt="" />
+            <Link to={'/detail/'+id}><img className={C.imageItem} src={img} alt="" /></Link>
           </div>
-          <h4>{title.substr(0, 30) + "..."}</h4>
+          <Link to={'/detail/'+id}><h4 className={C.link}>{title.substr(0, 30) + "..."}</h4></Link>
         </div>
 
         {/* <h5 className={C.price}>Unit Price ${price}</h5> */}

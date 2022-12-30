@@ -6,10 +6,11 @@
   top: 70px;
   right: 0px;
   z-index: 900;
-  background-color: #fafafa;
+  background-color: #fafafa12;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  border-radius: 25px;
 }
 .titleCont {
   border-bottom: solid 1px rgb(148, 148, 148);
@@ -21,12 +22,12 @@
 }
 .title {
   text-transform: uppercase;
-  color: #555;
+  color: rgb(255, 255, 255);
   letter-spacing: 2px;
-  font-weight: 400;
+  font-weight: 500;
   position: relative;
   top: 20px;
-  font-size: 16px;
+  font-size: 20px;
 }
 .cartContainer {
   position: absolute;
@@ -36,8 +37,8 @@
   border: solid 1px rgb(148, 148, 148);
   border-right: none;
   padding: 30px;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   height: 60vh;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -45,6 +46,7 @@
   width: 90%;
   margin-left: 30px;
   margin-bottom: 10px;
+  background-color: #fafafa;
 }
 
 .clearBtn {
@@ -82,7 +84,7 @@
 }
 .total {
   font-size: 20px;
-  color: rgb(148, 148, 148);
+  color: rgb(248, 241, 241);
   position: relative;
   left: 40px;
 }
@@ -94,6 +96,7 @@
   height: 50px;
   z-index: 600;
   position: absolute;
+  text-align: center;
   bottom: 0px;
 }
 .startShopping:hover {
