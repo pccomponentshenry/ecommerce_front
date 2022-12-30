@@ -89,7 +89,7 @@
   left: 40px;
 }
 .startShopping {
-  background-color: rgb(148, 148, 148);
+  background-color: #2af2b2;
   width: 100%;
   justify-content: center;
   cursor: pointer;
@@ -100,14 +100,16 @@
   bottom: 0px;
 }
 .startShopping:hover {
-  background-color: rgb(110, 109, 109);
+  background-color: #11c58c;
   transition: 0.1s ease-in-out;
 }
 .startShopping span {
-  color: #fff;
   position: relative;
   font-size: 20px;
   top: 5px;
+}
+.startShopping button {
+  color: #000;
 }
 .imgCont {
   width: 100%;
@@ -134,15 +136,29 @@
   color: #fff;
 }
 .emptyCart {
-  justify-content: center;
-  text-align: center;
+  border-radius: 25px;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.400);
+    flex-wrap: nowrap;
+    position: relative;
+    margin-bottom: 250px;
+    flex-direction: column;
 }
 .emptyCart span {
-  color: #555;
+  color: rgb(209, 209, 209);
   position: relative;
   top: 30px;
+  font-size: 18px;
+}
+.emptyCart h3 {
+  color: rgb(209, 209, 209);
+  position: relative;
 }
 .emptyCart span:hover {
-  color: #f44336;
+  color: #34d383;
   transition: 0.15s ease-in-out;
 }
