@@ -41,19 +41,33 @@
   width: 100%;
 }
 .postalAdressContainer {
-  margin-top: 50px;
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 .title {
   color: #fff;
   font-size: 18px;
   text-align: center;
 }
-
+.adressCont {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
 .adressCont h3 {
   color: #fff;
   font-size: 12px;
   font-weight: 200;
   text-align: center;
+}
+.defaultTag {
+  color: #fff;
+  font-size: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: rgb(128, 39, 155);
 }
 .editBtn {
   color: #fff;
@@ -62,6 +76,19 @@
   top: 15px;
   cursor: pointer;
 }
+.addAddress {
+  margin-top: 10px;
+  font-size: 14px;
+  background-color: rgb(128, 39, 155);
+  color: #fff;
+  border: none;
+}
+.addAddress:hover {
+  background-color: rgb(76, 19, 94);
+  transition: 0.15s ease-in-out;
+}
+
+/* FORM */
 
 @media screen and (max-width: 500px) {
   .container {

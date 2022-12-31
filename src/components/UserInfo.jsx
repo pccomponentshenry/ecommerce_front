@@ -2,47 +2,68 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import U from "../styles/UserInfo.module.css";
 import { useSelector } from "react-redux";
+import AddressForm from "./AddressForm";
+import { useState } from "react";
 
-export default function UserInfo() {
+export default function UserInfo({ form, handleExit, handleOpen }) {
   const { isLoading, user } = useAuth0();
-  // const user = useSelector(state => state.user);
-  const profileData = {
-    adress: "Calle falsa 123",
-    city: "San Clemente del Tuyú",
-    province: "Buenos Aires",
-    country: "Argentina",
-    postalCode: "7105",
-  };
+  const addresses = useSelector(state => state.addresses);
+  const isDefault = addresses.find(el => el.isDefault === true);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
   return (
-    <div className={U.container}>
-      <div className={U.authContainer}>
-        <div className={U.imgContainer}>
-          <img src={user.picture} alt={user.name} />
+    <>
+      {form === true && <AddressForm handleExit={handleExit} />}
+
+      <div className={U.container}>
+        <div className={U.authContainer}>
+          <div className={U.imgContainer}>
+            <img src={user.picture} alt={user.name} />
+          </div>
+          <div className={U.nameContainer}>
+            <h3 className={U.name}>{user.name}</h3>
+            <h3 className={U.email}>{user.email}</h3>
+          </div>
+          <hr className={U.profileLine} />
         </div>
-        <div className={U.nameContainer}>
-          <h3 className={U.name}>{user.name}</h3>
-          <h3 className={U.email}>{user.email}</h3>
+
+        <div className={U.postalAdressContainer}>
+          <span className={U.editBtn}>✎</span>
+          <h3 className={U.title}>Default postal address</h3>
+
+          <div className={U.adressCont}>
+            {addresses.length > 0 ? (
+              <>
+                <h3>{`${isDefault.streetName} n° ${isDefault.streetNumber}, apartment ${isDefault.apartment}`}</h3>
+                <h3>{`Zip Code n° ${isDefault.zipCode}. ${
+                  isDefault.additionalDetails && isDefault.additionalDetails
+                } `}</h3>
+
+                <h3>
+                  {
+                    isDefault[
+                      Object.keys(isDefault)[Object.keys(isDefault).length - 1]
+                    ]
+                  }
+                  , Argentina
+                </h3>
+                <button className={U.addAddress} onClick={handleExit}>
+                  Add a new address
+                </button>
+              </>
+            ) : (
+              <>
+                <h3>You don't have any address loaded yet</h3>
+                <button className={U.addAddress} onClick={handleOpen}>
+                  Add a new address
+                </button>
+              </>
+            )}
+          </div>
         </div>
-        <hr className={U.profileLine} />
       </div>
-
-      <div className={U.postalAdressContainer}>
-        <span className={U.editBtn}>✎</span>
-        <h3 className={U.title}>Postal address</h3>
-
-        <div className={U.adressCont}>
-          <h3>{profileData.adress}</h3>
-          <h3>{profileData.city}</h3>
-          <h3>
-            {profileData.province}, {profileData.country}
-          </h3>
-
-          <h3>CP: {profileData.postalCode}</h3>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

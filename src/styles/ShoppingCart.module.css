@@ -6,7 +6,7 @@
   top: 70px;
   right: 0px;
   z-index: 900;
-  background-color: #212121;
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -27,6 +27,7 @@
   position: relative;
   top: 20px;
   font-size: 16px;
+  text-shadow: -1px 1px 7px rgba(0, 0, 0, 0.5);
 }
 .cartContainer {
   position: absolute;
@@ -48,19 +49,20 @@
 }
 
 .clearBtn {
-  background-color: #f44336;
+  background-color: #2bfab7;
   border: none;
   height: 30px;
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 3px;
   border-radius: 20px;
-  color: #fff;
+  color: #000;
   position: relative;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 .clearBtn:hover {
-  background-color: rgb(161, 35, 35);
+  background-color: #179b71;
+  color: #fff;
   transition: 0.15s ease-in-out;
 }
 .clearCont {
@@ -81,13 +83,13 @@
   cursor: pointer;
 }
 .total {
-  font-size: 20px;
+  font-size: 18px;
   color: #fff;
   position: relative;
   left: 40px;
 }
 .startShopping {
-  background-color: rgb(148, 148, 148);
+  background-color: rgb(110, 109, 109);
   width: 100%;
   justify-content: center;
   cursor: pointer;
@@ -98,7 +100,7 @@
   display: flex;
 }
 .startShopping:hover {
-  background-color: rgb(110, 109, 109);
+  background-color: rgb(78, 78, 78);
   transition: 0.1s ease-in-out;
 }
 .startShopping span {

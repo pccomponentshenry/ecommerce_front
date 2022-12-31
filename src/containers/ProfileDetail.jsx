@@ -12,6 +12,11 @@ export default function ProfileDetail() {
     sales: false,
     purchases: false,
   });
+  const [popUp, setPopUp] = useState({
+    success: false,
+    form: false,
+    addresses: false,
+  });
 
   const handleClick = e => {
     if (e.target.id === "sales") {
@@ -23,20 +28,28 @@ export default function ProfileDetail() {
     if (e.target.id === "fav") {
       return setActive({ fav: true, sales: false, purchases: false });
     }
-    if (e.target.id === "addresses") {
-      return setActive({
-        fav: false,
-        sales: false,
-        purchases: false,
-        addresses: true,
-      });
-    }
   };
 
+  const handleExit = () => {
+    setPopUp({
+      ...popUp,
+      form: false,
+    });
+  };
+  const handleOpen = () => {
+    setPopUp({
+      ...popUp,
+      form: true,
+    });
+  };
   return (
     <div>
       <div className={U.infoContainer}>
-        <UserInfo />
+        <UserInfo
+          form={popUp.form}
+          handleExit={handleExit}
+          handleOpen={handleOpen}
+        />
       </div>
 
       <div className={U.SwitchContainer}>
@@ -86,10 +99,8 @@ export default function ProfileDetail() {
             <UserFav />
           ) : active.sales ? (
             <ForSale />
-          ) : active.purchases ? (
-            <Purchases />
           ) : (
-            <ProfileAddresses />
+            <Purchases />
           )}
         </div>
       </div>
