@@ -146,7 +146,7 @@ export default function OrderForm() {
         </div>
       </div>
 
-      {addresses.length > 0 && (
+      {addresses.length > 0 ? (
         <>
           <h2 className={O.yourAddress}>Send to:</h2>
           <div className={O.addressBox}>
@@ -170,6 +170,17 @@ export default function OrderForm() {
             </div>
           </div>
         </>
+      ) : (
+        <div className={O.noAddresses}>
+          <div className={O.headerText}>
+            <h3>No more waiting</h3>
+            <h1>Same-Day Shipping & Delivery</h1>
+          </div>
+          <img
+            src="https://res.cloudinary.com/dbtekd33p/image/upload/v1672512330/cqws5x8n/blog-tw-Shipping-2_2x_t4qeom.webp"
+            alt=""
+          />
+        </div>
       )}
 
       <div className={O.newAddressCont}>
