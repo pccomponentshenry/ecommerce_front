@@ -245,3 +245,8 @@
   margin-top: 5px;
   margin-left: 5px;
 }
+.payment {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+}

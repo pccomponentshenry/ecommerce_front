@@ -4,7 +4,6 @@ import { checkout, postOrder } from "../redux/actions";
 import P from "../styles/Payment.module.css";
 
 function Payment({ addressId }) {
-
   const cart = useSelector(state => state.cart);
   const user = useSelector(state => state.user);
   const order = [];
@@ -37,29 +36,13 @@ function Payment({ addressId }) {
       order.push(orderItem);
     });
     dispatch(postOrder(user.id, addressId, order));
-  }
+  };
 
   return (
     <div className={P.container}>
-      <button className={P.btn} role="link" onClick={handleCheckout} />
-      <div>
-        <button
-          style={{
-            border: "none",
-            background: "none",
-            color: "black",
-            position: "relative",
-            top: "10px",
-            fontSize: "18px",
-            fontWeight: "500",
-            width: "700px",
-          }}
-          role="link"
-          onClick={handleCheckout}
-        >
-          Checkout
-        </button>
-      </div>
+      <button role="link" onClick={handleCheckout}>
+        Checkout
+      </button>
     </div>
   );
 }
