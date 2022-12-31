@@ -8,7 +8,6 @@ import { clearCart, setFromStripe } from "../redux/actions/index.js";
 import { LoginButton } from "../components/Login";
 
 export default function ShoppingCart() {
-
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
@@ -20,7 +19,9 @@ export default function ShoppingCart() {
   };
 
   useEffect(() => {
-    setTotalPrice(cart.reduce((acc, item) => acc + item.price * item.quantity, 0));
+    setTotalPrice(
+      cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+    );
     dispatch(setFromStripe());
   }, [cart]);
 
@@ -67,10 +68,9 @@ export default function ShoppingCart() {
               <LoginButton />{" "}
             </>
           ) : (
-            <Link to="/order" >
-              {" "}
+            <Link to="/order" style={{ textDecoration: "none" }}>
               <div className={S.payment}>
-                Start shopping {/* <Payment /> */}
+                <h3> Start shopping </h3>
               </div>
             </Link>
           )}

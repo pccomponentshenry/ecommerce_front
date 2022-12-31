@@ -6,7 +6,7 @@
   top: 70px;
   right: 0px;
   z-index: 900;
-  background-color: #fafafa;
+  background-color: #212121;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -21,7 +21,7 @@
 }
 .title {
   text-transform: uppercase;
-  color: #555;
+  color: #fff;
   letter-spacing: 2px;
   font-weight: 400;
   position: relative;
@@ -82,7 +82,7 @@
 }
 .total {
   font-size: 20px;
-  color: rgb(148, 148, 148);
+  color: #fff;
   position: relative;
   left: 40px;
 }
@@ -95,6 +95,7 @@
   z-index: 600;
   position: absolute;
   bottom: 0px;
+  display: flex;
 }
 .startShopping:hover {
   background-color: rgb(110, 109, 109);
@@ -134,12 +135,25 @@
   justify-content: center;
   text-align: center;
 }
+.emptyCart h3 {
+  color: #fff;
+}
 .emptyCart span {
-  color: #555;
+  color: #fff;
   position: relative;
   top: 30px;
 }
 .emptyCart span:hover {
   color: #f44336;
   transition: 0.15s ease-in-out;
+}
+.payment {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.payment h3 {
+  font-size: 16px;
+  margin-top: 10px;
 }
