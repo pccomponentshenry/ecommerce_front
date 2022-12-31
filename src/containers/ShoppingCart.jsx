@@ -1,33 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import CartItem from "../components/CartItem";
-import S from "../styles/ShoppingCart.module.css";
-import { useState } from "react";
-import { clearCart } from "../redux/actions/index.js";
-import Payment from "../stripe/Payment";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import CartItem from "../components/CartItem";
+import S from "../styles/ShoppingCart.module.css";
+import { clearCart, setFromStripe } from "../redux/actions/index.js";
 import { LoginButton } from "../components/Login";
 
 export default function ShoppingCart() {
+
   const cart = useSelector(state => state.cart);
-  const userId = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
   const { user, isAuthenticated } = useAuth0();
-  var guest = "default";
-  {
-    user ? (guest = user.nickname) : (guest = "default");
-  }
+  let guest = user ? user.nickname : "default";
 
   const handleClearCart = () => {
     isAuthenticated ? dispatch(clearCart(user.email)) : dispatch(clearCart());
   };
 
   useEffect(() => {
-    setTotalPrice(
-      cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
-    );
+    setTotalPrice(cart.reduce((acc, item) => acc + item.price * item.quantity, 0));
+    dispatch(setFromStripe());
   }, [cart]);
 
   return (
@@ -73,7 +67,7 @@ export default function ShoppingCart() {
               <LoginButton />{" "}
             </>
           ) : (
-            <Link to="/order">
+            <Link to="/order" >
               {" "}
               <div className={S.payment}>
                 Start shopping {/* <Payment /> */}

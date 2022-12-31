@@ -1,18 +1,15 @@
 import React from "react";
 import Swal from "sweetalert2";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { changeOrderStatus, clearCart } from "../redux/actions";
 
 export default function OrderConfirmed() {
 
-  const cart = useSelector(state => state.cart);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
-  const { user } = useAuth0();
-
-  const order = () => {
-    dispatch(createOrder(cart, user.email));
-    dispatch(clearCart(user.email));
-  }
+  dispatch(changeOrderStatus(user.id, "completed"));
+  dispatch(clearCart(user.email));
 
   const successAlert = () => {
     const navigate = useNavigate();
