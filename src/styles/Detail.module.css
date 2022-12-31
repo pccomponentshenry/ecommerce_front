@@ -1,6 +1,6 @@
 .imageContainer {
   width: 30%;
-  background-color: #FFF;
+  background-color: #fff;
   height: 89vh;
   float: left;
   position: relative;
@@ -136,7 +136,7 @@
   width: 30%;
   display: flex;
   border: solid 1px #2bfab7;
-  border-bottom: solid 1px gray;
+  border-bottom: none;
   /* border-right: none; */
   padding: 10px;
   padding-right: none;
@@ -147,8 +147,8 @@
 
 .owner:hover {
   border: solid 1px #fff;
-  border-bottom: solid 1px gray;
-  transition: 0.15s ease-in-out;
+  border-bottom: none;
+  transition: 0.2s ease-in-out;
 }
 
 .ownerText {
@@ -188,12 +188,11 @@
   bottom: 0px;
   right: 0px;
   width: 70%;
-  height: 48vh;
+  height: 38vh;
   padding-top: 20px;
   padding-left: 50px;
   padding-right: 50px;
   overflow-y: scroll;
-
 }
 
 .reviewsContainer h3 {
