@@ -161,6 +161,10 @@ export default function OrderForm() {
                     onClick={setAddress}
                   />
                   <span>{`Address n° ${i + 1}`}</span>
+                  <p>{`${el.streetName} n° ${el.streetNumber}, apartment ${el.apartment}, Zip Code n° ${el.zipCode}. ${el.additionalDetails}`}</p>
+                  <span className={O.default}>
+                    {el.isDefault === true && `Default`}
+                  </span>
                 </div>
               ))}
             </div>
