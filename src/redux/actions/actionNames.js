@@ -26,10 +26,13 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ADD_TO_FAV = "ADD_TO_FAV";
 export const POST_CART_ITEM = "POST_CART_ITEM";
 export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
+export const GET_ORDERS = "GET_ORDERS";
+
+export const SET_FROM_STRIPE = "SET_FROM_STRIPE";
 //actions User
 export const POST_USER = "POST_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_USER = "GET_USER";
 //actions address
 export const POST_ADDRESS = "POST_ADDRESS";
-export const GET_ADDRESS = "GET_ADDRESS";
+export const GET_ADDRESSES = "GET_ADDRESSES";

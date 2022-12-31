@@ -1,26 +1,25 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAddress, getLocations } from "../redux/actions";
+import { getAddresses } from "../redux/actions";
 import O from "../styles/OrderForm.module.css";
 
 export default function Addresses({ id }) {
   const dispatch = useDispatch();
+  const addresses = useSelector(state => state.addresses);
 
   React.useEffect(() => {
-    dispatch(getAddress(id));
+    dispatch(getAddresses(id));
   }, [dispatch]);
-
-  const address = useSelector(state => state.address);
 
   return (
     <div>
-      {address.length > 0 && (
+      {addresses.length && (
         <>
           <h2 className={O.yourAddress}>Your addresses</h2>
           <div className={O.addressBox}>
             <div className={O.addressContainer}>
-              {address.length > 0 &&
-                address.map((el, i) => (
+              {addresses.length &&
+                addresses.map((el, i) => (
                   <div className={O.address} key={i}>
                     <input type="radio" />
                     <span>{`Address n° ${i + 1}`}</span>
