@@ -6,11 +6,10 @@
   top: 70px;
   right: 0px;
   z-index: 900;
-  background-color: #fafafa12;
+  background-color: #fafafa;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border-radius: 25px;
 }
 .titleCont {
   border-bottom: solid 1px rgb(148, 148, 148);
@@ -22,12 +21,12 @@
 }
 .title {
   text-transform: uppercase;
-  color: rgb(255, 255, 255);
+  color: #555;
   letter-spacing: 2px;
-  font-weight: 500;
+  font-weight: 400;
   position: relative;
   top: 20px;
-  font-size: 20px;
+  font-size: 16px;
 }
 .cartContainer {
   position: absolute;
@@ -37,8 +36,8 @@
   border: solid 1px rgb(148, 148, 148);
   border-right: none;
   padding: 30px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
   height: 60vh;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -46,7 +45,6 @@
   width: 90%;
   margin-left: 30px;
   margin-bottom: 10px;
-  background-color: #fafafa;
 }
 
 .clearBtn {
@@ -84,32 +82,29 @@
 }
 .total {
   font-size: 20px;
-  color: rgb(248, 241, 241);
+  color: rgb(148, 148, 148);
   position: relative;
   left: 40px;
 }
 .startShopping {
-  background-color: #2af2b2;
+  background-color: rgb(148, 148, 148);
   width: 100%;
   justify-content: center;
   cursor: pointer;
   height: 50px;
   z-index: 600;
   position: absolute;
-  text-align: center;
   bottom: 0px;
 }
 .startShopping:hover {
-  background-color: #11c58c;
+  background-color: rgb(110, 109, 109);
   transition: 0.1s ease-in-out;
 }
 .startShopping span {
+  color: #fff;
   position: relative;
   font-size: 20px;
   top: 5px;
-}
-.startShopping button {
-  color: #000;
 }
 .imgCont {
   width: 100%;
@@ -136,29 +131,15 @@
   color: #fff;
 }
 .emptyCart {
-  border-radius: 25px;
-    padding: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.400);
-    flex-wrap: nowrap;
-    position: relative;
-    margin-bottom: 250px;
-    flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 .emptyCart span {
-  color: rgb(209, 209, 209);
+  color: #555;
   position: relative;
   top: 30px;
-  font-size: 18px;
-}
-.emptyCart h3 {
-  color: rgb(209, 209, 209);
-  position: relative;
 }
 .emptyCart span:hover {
-  color: #34d383;
+  color: #f44336;
   transition: 0.15s ease-in-out;
 }
