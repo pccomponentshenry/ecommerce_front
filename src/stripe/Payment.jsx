@@ -1,17 +1,18 @@
 import React from "react";
-import { loadStripe } from "@stripe/stripe-js";
+import { useDispatch, useSelector } from "react-redux";
+import { checkout, postOrder } from "../redux/actions";
 import P from "../styles/Payment.module.css";
-import { useSelector } from "react-redux";
 
-const stripePromese = loadStripe(
-  "pk_test_51MCUPjIxZNdfrxaORwUsMY8yxCPm4xhLtIsruiYWFCGr2xN6NzNOR984Z0gGfM8l8u2blkELjULUs1rbClLtmW9A00QbQXD9FC"
-);
+function Payment({ addressId }) {
 
-function Payment() {
   const cart = useSelector(state => state.cart);
+  const user = useSelector(state => state.user);
+  const order = [];
+  const dispatch = useDispatch();
 
-  const handleClick = async e => {
+  const handleCheckout = e => {
     e.preventDefault();
+    createOrder();
     const product = [];
     cart.map(e => {
       let line = {
@@ -23,29 +24,24 @@ function Payment() {
       product.push(line);
     });
 
-    const productObj = {
-      products: product,
-    };
-    const stripe = await stripePromese;
-    const response = await fetch("http://localhost:3001/order/checkout", {
-      method: "POST",
-      body: JSON.stringify(productObj),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const session = await response.json();
-    const result = await stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
-    if (result.error) {
-      alert(result.error.message);
-    }
+    const productObj = { products: product };
+    dispatch(checkout(productObj));
   };
+
+  const createOrder = () => {
+    cart.map(item => {
+      const orderItem = {};
+      orderItem.productId = item.id;
+      orderItem.price = item.price;
+      orderItem.quantity = item.quantity;
+      order.push(orderItem);
+    });
+    dispatch(postOrder(user.id, addressId, order));
+  }
 
   return (
     <div className={P.container}>
-      <button className={P.btn} role="link" onClick={e => handleClick(e)} />
+      <button className={P.btn} role="link" onClick={handleCheckout} />
       <div>
         <button
           style={{
@@ -59,9 +55,9 @@ function Payment() {
             width: "700px",
           }}
           role="link"
-          onClick={e => handleClick(e)}
+          onClick={handleCheckout}
         >
-          Start shopping
+          Checkout
         </button>
       </div>
     </div>

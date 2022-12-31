@@ -3,6 +3,7 @@
   width: 100vw;
   height: 100vh;
 }
+
 .cartItem {
   background-color: rgb(247, 247, 247);
   display: flex;
@@ -11,6 +12,15 @@
   margin-bottom: 5px;
   position: relative;
 }
+
+.total {
+  font-size: 16px;
+  color: rgb(248, 241, 241);
+  /* position: relative; */
+  margin-top: 20px;
+  left: 40px;
+}
+
 .imgContainer {
   width: 90px;
   height: 90px;
@@ -20,9 +30,11 @@
   align-items: center;
   border-radius: 5px;
 }
+
 .imgContainer img {
   width: 90px;
 }
+
 .cartContainer {
   border-left: solid 1px rgb(185, 185, 185);
   height: 89vh;
@@ -32,6 +44,7 @@
   right: 0px;
   background-color: #212121;
 }
+
 .getAddress {
   font-size: 14px;
   color: rgb(128, 39, 155);
@@ -47,12 +60,14 @@
   font-weight: 600;
   margin-left: 20px;
 }
+
 .cartContainer h5 {
   position: absolute;
   top: 55px;
   font-size: 12px;
   left: 120px;
 }
+
 .cartContainer h6 {
   position: absolute;
   bottom: 10px;
@@ -60,11 +75,13 @@
   font-size: 12px;
   font-weight: 600;
 }
+
 .cartContainer h1 {
   font-weight: 600;
   font-size: 20px;
   color: #fff;
 }
+
 .addressContainer {
   display: flex;
   width: 90%;
@@ -72,6 +89,7 @@
   padding-top: 30px;
   overflow-x: scroll;
 }
+
 .yourAddress {
   font-size: 18px;
   font-weight: 600;
@@ -80,6 +98,7 @@
   bottom: 170px;
   color: rgb(128, 39, 155);
 }
+
 .address {
   /* border: solid 1px gray; */
   padding: 10px;
@@ -90,6 +109,7 @@
   background-color: rgb(247, 247, 247);
   margin-right: 30px;
 }
+
 .addressBox {
   border-top: solid 1px rgb(185, 185, 185);
   width: 63%;
@@ -102,11 +122,13 @@
   justify-content: center;
   padding-bottom: 10px;
 }
+
 .address p {
   width: 150px;
   font-size: 12px;
   margin-top: 10px;
 }
+
 .address input {
   margin-right: 10px;
 }
@@ -119,6 +141,7 @@
   font-weight: 600;
   float: right;
 }
+
 .newAddressCont {
   /* display: flex; */
   position: absolute;
@@ -127,15 +150,18 @@
   padding: 20px;
   padding-left: 50px;
 }
+
 .newAddressCont h1 {
   font-size: 18px;
   font-weight: 600;
 }
+
 .formContainer {
   display: flex;
   width: 60%;
   flex-wrap: wrap;
 }
+
 .formContainer textarea {
   height: 50px;
   width: 100%;
@@ -143,18 +169,21 @@
   padding: 5px;
   margin-bottom: 20px;
 }
+
 .formContainer input {
   font-size: 14px;
   margin-bottom: 25px;
   margin-right: 10px;
   padding-left: 5px;
 }
+
 .formContainer select {
   color: #212121;
   position: relative;
   top: -7px;
   margin-bottom: 10px;
 }
+
 .enabled {
   border: none;
   background-color: #212121;
@@ -164,6 +193,7 @@
   border-radius: 10px;
   font-size: 14px;
 }
+
 .disabled {
   border: none;
   background-color: #aaaaaa;
@@ -173,19 +203,23 @@
   border-radius: 10px;
   font-size: 14px;
 }
+
 .enabled:hover {
   transition: 0.1s ease-in-out;
   background-color: #555;
 }
+
 .darkNav {
   height: 11vh;
   background-color: #161616;
 }
+
 .formContainer span {
   font-size: 11px;
   color: rgb(226, 73, 73);
   position: absolute;
 }
+
 .street,
 .number,
 .apartment,
@@ -194,16 +228,19 @@
   width: fit-content;
   display: inline;
 }
+
 .errorName,
 .errorApartment {
   left: 50px;
   margin-top: 25px;
 }
+
 .errorNumber,
 .errorZipCode {
   left: 250px;
   margin-top: 25px;
 }
+
 .errorLocation {
   margin-top: 5px;
   margin-left: 5px;

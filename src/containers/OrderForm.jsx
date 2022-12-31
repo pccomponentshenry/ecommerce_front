@@ -1,73 +1,48 @@
-import React from "react";
-import O from "../styles/OrderForm.module.css";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { getLocations, postAddress, getAddress } from "../redux/actions";
-import { useEffect } from "react";
+import { changeOrderStatus, getLocations, postAddress } from "../redux/actions";
 import Payment from "../stripe/Payment";
+import O from "../styles/OrderForm.module.css";
 
 export default function OrderForm() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getLocations());
-  }, [dispatch]);
-  const address = useSelector(state => state.address);
+
+  const addresses = useSelector(state => state.addresses);
   const user = useSelector(state => state.user);
-  const defaultAdress = address.find(el => el.isDefault === true);
-  const [order, setOrder] = useState({
-    address: defaultAdress,
-  }); /// Acá recolecta cart, userId y la dirección seleccionada
-  const [click, setClick] = useState(false);
-
-  React.useEffect(() => {
-    dispatch(getAddress(user.id));
-  }, [dispatch]);
-
-  React.useEffect(() => {
-    dispatch(getAddress(user.id));
-  }, [click]);
-
-  const initialState = {
-    streetName: "",
-    streetNumber: "",
-    apartment: "",
-    zipCode: "",
-    locationId: "",
-    additionalDetails: "",
-  };
-
-  const [input, setInput] = useState({
-    userId: "",
-    streetName: "",
-    streetNumber: "",
-    apartment: "",
-    zipCode: "",
-    locationId: "",
-    additionalDetails: "",
-  });
+  const cart = useSelector(state => state.cart);
+  const locations = useSelector(state => state.locations);
+  const fromStripe = useSelector(state => state.fromStripe);
 
   const [error, setError] = useState({});
   const [disable, setDisable] = useState(true);
+  const [address, setAddress] = useState();
+  const [input, setInput] = useState({ userId: "", streetName: "", streetNumber: "", apartment: "", zipCode: "", locationId: "", additionalDetails: "" });
+  const initialState = { streetName: "", streetNumber: "", apartment: "", zipCode: "", locationId: "", additionalDetails: "" };
+  const dispatch = useDispatch();
+
+  if (fromStripe) {
+    dispatch(changeOrderStatus(user.id, "cancelled"));
+  }
+
+  useEffect(() => {
+    dispatch(getLocations());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (addresses.length) {
+      setAddress(addresses.find(a => a.isDefault).id);
+    }
+  }, [addresses])
 
   const handleChange = e => {
     if (e.target.id === "locationId") {
-      setInput({
-        ...input,
-        locationId: Number(e.target.value),
-        userId: user.id,
-      });
+      setInput({ ...input, locationId: Number(e.target.value), userId: user.id });
     } else {
       setInput({ ...input, [e.target.name]: e.target.value, userId: user.id });
     }
   };
-  const locations = useSelector(state => state.locations);
+
   const errorSetting = e => {
-    setError(
-      handleValidate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
+    setError(handleValidate({ ...input, [e.target.name]: e.target.value }));
   };
 
   const handleValidate = input => {
@@ -106,13 +81,12 @@ export default function OrderForm() {
     return errors;
   };
 
-  const cart = useSelector(state => state.cart);
-
   const clearForm = () => {
     setInput({ ...initialState });
   };
 
   const handleSubmit = e => {
+    e.preventDefault();
     if (
       !error.streetName &&
       !error.streetNumber &&
@@ -120,26 +94,12 @@ export default function OrderForm() {
       !error.location &&
       !error.apartment
     ) {
-      e.preventDefault();
-      console.log(input);
       dispatch(postAddress(input));
       setDisable(true);
       clearForm();
-      dispatch(getAddress(user.id));
     } else {
       alert("Something went wrong, try again!");
     }
-    setClick(!click);
-    dispatch(getAddress(user.id));
-  };
-
-  const handleOrder = e => {
-    setOrder({
-      ...order,
-      userId: user.id,
-      cart: cart,
-      address: address[e.target.value],
-    });
   };
 
   return (
@@ -157,33 +117,35 @@ export default function OrderForm() {
             <h6>Total: ${el.price}</h6>
           </div>
         ))}
+        <h3 className={O.total}>
+          Cart Total: ${parseFloat(cart.reduce((acc, item) => acc + item.price * item.quantity, 0)).toFixed(2)}
+        </h3>
         <div className={O.payment}>
-          <Payment />
+          <Payment addressId={address} />
         </div>
       </div>
 
-      {address.length > 0 && (
+      {addresses.length > 0 && (
         <>
-          <h2 className={O.yourAddress}>Your addresses</h2>
+          <h2 className={O.yourAddress}>Send to:</h2>
           <div className={O.addressBox}>
             <div className={O.addressContainer}>
-              {address.length > 0 &&
-                address.map((el, i) => (
-                  <div className={O.address} key={i}>
-                    <input
-                      defaultChecked={el.isDefault === true ? "checked" : null}
-                      type="radio"
-                      name="address"
-                      value={i}
-                      onClick={e => handleOrder(e)}
-                    />
-                    <span>{`Address n° ${i + 1}`}</span>
-                    <p>{`${el.streetName} n° ${el.streetNumber}, apartment ${el.apartment}, Zip Code n° ${el.zipCode}. ${el.additionalDetails}`}</p>
-                    <span className={O.default}>
-                      {el.isDefault === true && `Default`}
-                    </span>
-                  </div>
-                ))}
+              {addresses.map((el, i) => (
+                <div className={O.address} key={i}>
+                  <input
+                    defaultChecked={el.isDefault ? "checked" : null}
+                    type="radio"
+                    name="address"
+                    value={el.id}
+                    onClick={setAddress}
+                  />
+                  <span>{`Address n° ${i + 1}`}</span>
+                  <p>{`${el.streetName} n° ${el.streetNumber}, apartment ${el.apartment}, Zip Code n° ${el.zipCode}. ${el.additionalDetails}`}</p>
+                  <span className={O.default}>
+                    {el.isDefault === true && `Default`}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </>
@@ -191,16 +153,16 @@ export default function OrderForm() {
 
       <div className={O.newAddressCont}>
         <h1>Add a new address</h1>{" "}
-        {address.length === 0 && (
+        {/* {addresses.length === 0 && (
           <span
             className={O.getAddress}
             onClick={() => dispatch(getAddress(user.id))}
           >
             ⚠ Already have an address? Click here
           </span>
-        )}
+        )} */}
         <div className={O.formContainer}>
-          <form onSubmit={e => handleSubmit(e)} autoComplete="off">
+          <form onSubmit={handleSubmit} autoComplete="off">
             <div className={O.street}>
               <input
                 type="text"

@@ -2,15 +2,13 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getUserCartItem, postCartItem, postUser, getUser, getAddresses } from "../redux/actions";
 import L from "../styles/LoginContainer.module.css";
-import {
-  getUserCartItem,
-  postCartItem,
-  postUser,
-  getUser,
-} from "../redux/actions";
+
 export const Profile = () => {
+
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const loggedUser = useSelector(state => state.user);
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const shouldUpdate = useRef(true);
@@ -20,6 +18,7 @@ export const Profile = () => {
     email: user.email,
     image: user.picture,
   };
+
   const postUserWithCartToDB = () => {
     dispatch(postUser(dbUser)).then(postCartToDB);
   };
@@ -49,13 +48,18 @@ export const Profile = () => {
 
   useEffect(() => {
     dispatch(getUser(user.email));
+    if (isAuthenticated) {
+      dispatch(getUserCartItem(user.email));
+      // dispatch(getAddresses(loggedUser.id));
+    }
   }, [dispatch]);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(getUserCartItem(user.email));
+    if (loggedUser.id) {
+      dispatch(getAddresses(loggedUser.id));
     }
-  }, [dispatch]);
+  }, [loggedUser]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }

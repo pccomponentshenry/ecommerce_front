@@ -13,6 +13,7 @@ import {
   REMOVE_ONE_FROM_CART,
   REMOVE_ITEM_FROM_CART,
   REMOVE_ALL_FROM_CART,
+  GET_ORDERS,
   CLEAR_ERROR,
   ADD_TO_FAV,
   POST_USER,
@@ -22,7 +23,8 @@ import {
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
-  GET_ADDRESS,
+  GET_ADDRESSES,
+  SET_FROM_STRIPE
 } from "../actions/actionNames";
 
 const initialState = {
@@ -37,7 +39,9 @@ const initialState = {
   fav: [],
   locations: [],
   user: {},
-  address: [],
+  addresses: [],
+  orders: [],
+  fromStripe: true
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -68,16 +72,16 @@ function rootReducer(state = initialState, action) {
         products: [...state.products, action.payload],
       };
     }
-    case GET_ADDRESS: {
+    case GET_ADDRESSES: {
       return {
         ...state,
-        address: action.payload,
+        addresses: action.payload,
       };
     }
     case POST_ADDRESS: {
       return {
         ...state,
-        address: state.address.concat(action.payload),
+        addresses: [...state.addresses, action.payload],
       };
     }
     case PUT_PRODUCT: {
@@ -195,6 +199,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         cart: state.cart.filter(item => item.id !== action.payload.id),
       };
+
+    case GET_ORDERS:
+      return {
+        ...state,
+        orders: action.payload,
+      };
+
+    case SET_FROM_STRIPE: {
+      return { ...state, fromStripe: false };
+    };
 
     case ADD_TO_FAV:
       return {

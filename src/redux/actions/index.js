@@ -1,4 +1,5 @@
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 
 import {
   GET_PRODUCT,
@@ -25,7 +26,9 @@ import {
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
-  GET_ADDRESS,
+  GET_ADDRESSES,
+  SET_FROM_STRIPE,
+  GET_ORDERS,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -60,6 +63,7 @@ export function getCategories() {
     return dispatch({ type: GET_CATEGORIES, payload: res.data });
   };
 }
+
 export function getLocations() {
   return async dispatch => {
     const res = await axios.get(`${URL}/locations`);
@@ -110,7 +114,6 @@ export const postProduct = payload => async dispatch => {
 };
 
 export function putProduct(id, payload) {
-  console.log(id, payload);
   return async dispatch => {
     const res = await axios.put(`${URL}/products/${id}`, payload);
     return dispatch({ type: PUT_PRODUCT, payload: res.data });
@@ -195,9 +198,9 @@ export const removeFromCart = (item, removeItem) => dispatch => {
 };
 
 export const clearCart = email => async dispatch => {
+  dispatch({ type: REMOVE_ALL_FROM_CART });
   if (localStorage.cart) {
     localStorage.setItem("cart", []);
-    dispatch({ type: REMOVE_ALL_FROM_CART });
   }
   else {
     try {
@@ -224,7 +227,6 @@ export const checkout = products => async () => {
       },
     });
     const session = await response.json();
-
     await stripe.redirectToCheckout({
       sessionId: session.id,
     });
@@ -234,8 +236,37 @@ export const checkout = products => async () => {
   }
 }
 
-export const createOrder = (cart, email) => {
+export const postOrder = (userId, addressId, items) => async () => {
+  try {
+    const order = await axios.post(`${URL}/order`, { userId, addressId });
+    const postOrderItem = async (orderId, item) => {
+      await axios.post(`${URL}/order/item`, { orderId, item })
+    }
+    items.forEach(item => postOrderItem(order.data.id, item));
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
 
+export const changeOrderStatus = (userId, status) => async () => {
+  try {
+    await axios.put(`${URL}/order/`, { userId, status });
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export function getOrders(userId) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order/${userId}`);
+    return dispatch({ type: GET_ORDERS, payload: res.data });
+  };
+}
+
+export const setFromStripe = () => dispatch => {
+  return dispatch({ type: SET_FROM_STRIPE });
 }
 
 //////////FAVORITES////////
@@ -268,9 +299,7 @@ export const addToFav = item => dispatch => {
 };
 
 export const clearError = () => {
-  return {
-    type: CLEAR_ERROR,
-  };
+  return { type: CLEAR_ERROR };
 };
 
 //////////USERS////////
@@ -295,17 +324,17 @@ export const logoutUser = () => dispatch => {
 };
 
 //////ADDRESS///
-export function getAddress(id) {
+export function getAddresses(id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/address/${id}`);
-    return dispatch({ type: GET_ADDRESS, payload: res.data });
+    return dispatch({ type: GET_ADDRESSES, payload: res.data });
   };
 }
 
 export const postAddress = payload => async dispatch => {
   try {
     const res = await axios.post(`${URL}/address`, payload);
-    return dispatch({ tyoe: POST_ADDRESS, payload: res.data });
+    return dispatch({ type: POST_ADDRESS, payload: res.data });
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
   }
