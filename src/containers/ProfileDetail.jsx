@@ -5,6 +5,7 @@ import U from "../styles/ProfileInfo.module.css";
 import { useState } from "react";
 import ForSale from "../components/ForSale";
 import Purchases from "../components/Purchases";
+import ProfileAddresses from "../components/profileAddresses";
 export default function ProfileDetail() {
   const [active, setActive] = useState({
     fav: true,
@@ -21,6 +22,14 @@ export default function ProfileDetail() {
     }
     if (e.target.id === "fav") {
       return setActive({ fav: true, sales: false, purchases: false });
+    }
+    if (e.target.id === "addresses") {
+      return setActive({
+        fav: false,
+        sales: false,
+        purchases: false,
+        addresses: true,
+      });
     }
   };
 
@@ -59,6 +68,15 @@ export default function ProfileDetail() {
           >
             Purchases
           </button>
+          <button
+            onClick={e => handleClick(e)}
+            id="addresses"
+            className={`${active.addresses ? U.active : U.inactive} ${
+              U.addressesBtn
+            }`}
+          >
+            Addresses
+          </button>
         </div>
 
         <div
@@ -68,8 +86,10 @@ export default function ProfileDetail() {
             <UserFav />
           ) : active.sales ? (
             <ForSale />
-          ) : (
+          ) : active.purchases ? (
             <Purchases />
+          ) : (
+            <ProfileAddresses />
           )}
         </div>
       </div>
