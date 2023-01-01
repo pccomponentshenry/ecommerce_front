@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import A from "../styles/AddressForm.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { changeOrderStatus, getLocations, postAddress } from "../redux/actions";
-import Payment from "../stripe/Payment";
-import O from "../styles/OrderForm.module.css";
+import { getLocations, postAddress } from "../redux/actions";
+import { useState, useEffect } from "react";
 
-export default function OrderForm() {
-  const addresses = useSelector(state => state.addresses);
+export default function AddressForm({ handleExit, handleShowAddresses }) {
   const user = useSelector(state => state.user);
-  const cart = useSelector(state => state.cart);
   const locations = useSelector(state => state.locations);
-  const fromStripe = useSelector(state => state.fromStripe);
-
   const [error, setError] = useState({});
   const [disable, setDisable] = useState(true);
-  const [address, setAddress] = useState();
   const [input, setInput] = useState({
     userId: "",
     streetName: "",
@@ -32,20 +27,9 @@ export default function OrderForm() {
     additionalDetails: "",
   };
   const dispatch = useDispatch();
-
-  if (fromStripe) {
-    dispatch(changeOrderStatus(user.id, "cancelled"));
-  }
-
   useEffect(() => {
     dispatch(getLocations());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (addresses.length) {
-      setAddress(addresses.find(a => a.isDefault).id);
-    }
-  }, [addresses]);
 
   const handleChange = e => {
     if (e.target.id === "locationId") {
@@ -58,7 +42,6 @@ export default function OrderForm() {
       setInput({ ...input, [e.target.name]: e.target.value, userId: user.id });
     }
   };
-
   const errorSetting = e => {
     setError(handleValidate({ ...input, [e.target.name]: e.target.value }));
   };
@@ -114,88 +97,21 @@ export default function OrderForm() {
     ) {
       dispatch(postAddress(input));
       setDisable(true);
-      clearForm();
+      handleExit();
+      handleShowAddresses();
     } else {
       alert("Something went wrong, try again!");
     }
   };
-
   return (
-    <div className={O.container}>
-      <div className={O.darkNav}></div>
-      <div className={O.cartContainer}>
-        <h1>Shopping cart</h1>
-        {cart.map((el, i) => (
-          <div key={i} className={O.cartItem}>
-            <div className={O.imgContainer}>
-              <img src={el.img} alt="" />
-            </div>
-            <h4>{el.title}</h4>
-            <h5>Quantity: {el.quantity} unit</h5>
-            <h6>Total: ${el.price}</h6>
-          </div>
-        ))}
-        <h3 className={O.total}>
-          Cart Total: $
-          {parseFloat(
-            cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
-          ).toFixed(2)}
-        </h3>
-        <div className={O.payment}>
-          <Payment addressId={address} />
-        </div>
-      </div>
+    <>
+      <div className={A.container}>
+        <div className={A.formContainer}>
+          <label onClick={() => handleExit()}>╳</label>
+          <h4>Add a new address</h4>
 
-      {addresses.length > 0 ? (
-        <>
-          <h2 className={O.yourAddress}>Send to:</h2>
-          <div className={O.addressBox}>
-            <div className={O.addressContainer}>
-              {addresses.map((el, i) => (
-                <div className={O.address} key={i}>
-                  <input
-                    defaultChecked={el.isDefault ? "checked" : null}
-                    type="radio"
-                    name="address"
-                    value={el.id}
-                    onClick={setAddress}
-                  />
-                  <span>{`Address n° ${i + 1}`}</span>
-                  <p>{`${el.streetName} n° ${el.streetNumber}, apartment ${el.apartment}, Zip Code n° ${el.zipCode}. ${el.additionalDetails}`}</p>
-                  <span className={O.default}>
-                    {el.isDefault === true && `Default`}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className={O.noAddresses}>
-          <div className={O.headerText}>
-            <h3>No more waiting</h3>
-            <h1>Same-Day Shipping & Delivery</h1>
-          </div>
-          <img
-            src="https://res.cloudinary.com/dbtekd33p/image/upload/v1672512330/cqws5x8n/blog-tw-Shipping-2_2x_t4qeom.webp"
-            alt=""
-          />
-        </div>
-      )}
-
-      <div className={O.newAddressCont}>
-        <h1>Add a new address</h1>{" "}
-        {/* {addresses.length === 0 && (
-          <span
-            className={O.getAddress}
-            onClick={() => dispatch(getAddress(user.id))}
-          >
-            ⚠ Already have an address? Click here
-          </span>
-        )} */}
-        <div className={O.formContainer}>
           <form onSubmit={handleSubmit} autoComplete="off">
-            <div className={O.street}>
+            <div className={A.street}>
               <input
                 type="text"
                 name="streetName"
@@ -204,14 +120,13 @@ export default function OrderForm() {
                 onChange={e => handleChange(e)}
                 onBlur={e => {
                   errorSetting(e);
-                  console.log(error);
                 }}
               />
+              {error.streetName && (
+                <span className={A.errorName}>{error.streetName}</span>
+              )}
             </div>
-            {error.streetName && (
-              <span className={O.errorName}>{error.streetName}</span>
-            )}
-            <div className={O.number}>
+            <div className={A.number}>
               <input
                 type="number"
                 name="streetNumber"
@@ -220,11 +135,11 @@ export default function OrderForm() {
                 onChange={e => handleChange(e)}
                 onBlur={e => errorSetting(e)}
               />
+              {error.streetNumber && (
+                <span className={A.errorNumber}>{error.streetNumber}</span>
+              )}
             </div>
-            {error.streetNumber && (
-              <span className={O.errorNumber}>{error.streetNumber}</span>
-            )}
-            <div className={O.apartment}>
+            <div className={A.apartment}>
               <input
                 type="text"
                 name="apartment"
@@ -234,10 +149,10 @@ export default function OrderForm() {
                 onBlur={e => errorSetting(e)}
               />
               {error.apartment && (
-                <span className={O.errorApartment}>{error.apartment}</span>
+                <span className={A.errorApartment}>{error.apartment}</span>
               )}
             </div>
-            <div className={O.zipCode}>
+            <div className={A.zipCode}>
               <input
                 type="zipCode"
                 name="zipCode"
@@ -246,11 +161,11 @@ export default function OrderForm() {
                 onChange={e => handleChange(e)}
                 onBlur={e => errorSetting(e)}
               />
+              {error.zipCode && (
+                <span className={A.errorZipCode}>{error.zipCode}</span>
+              )}
             </div>
-            {error.zipCode && (
-              <span className={O.errorZipCode}>{error.zipCode}</span>
-            )}
-            <div className={O.location}>
+            <div className={A.location}>
               <select
                 name="locationId"
                 id="locationId"
@@ -266,7 +181,7 @@ export default function OrderForm() {
               </select>
 
               {error.location && (
-                <span className={O.errorLocation}>{error.location}</span>
+                <span className={A.errorLocation}>{error.location}</span>
               )}
             </div>
             <textarea
@@ -284,13 +199,15 @@ export default function OrderForm() {
               onClick={e => {
                 disable && e.preventDefault();
               }}
-              className={disable ? O.disabled : O.enabled}
+              className={disable ? A.disabled : A.enabled}
             >
               Submit address
             </button>{" "}
           </form>
         </div>
       </div>
-    </div>
+
+      <div className={A.background}></div>
+    </>
   );
 }

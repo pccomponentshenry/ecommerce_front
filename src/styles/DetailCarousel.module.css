@@ -1,6 +1,9 @@
 .imgCont {
-  height: 50vh;
+  height: 89vh;
+  width: 30vw;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .image {

@@ -24,7 +24,9 @@ import {
   POST_ADDRESS,
   GET_USER,
   GET_ADDRESSES,
-  SET_FROM_STRIPE
+  SET_FROM_STRIPE,
+  GET_ADDRESS,
+  UPDATE_ADDRESS,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -40,8 +42,9 @@ const initialState = {
   locations: [],
   user: {},
   addresses: [],
+  address: [],
   orders: [],
-  fromStripe: true
+  fromStripe: true,
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -76,6 +79,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         addresses: action.payload,
+      };
+    }
+    case GET_ADDRESS: {
+      return {
+        ...state,
+        address: action.payload,
       };
     }
     case POST_ADDRESS: {
@@ -208,7 +217,7 @@ function rootReducer(state = initialState, action) {
 
     case SET_FROM_STRIPE: {
       return { ...state, fromStripe: false };
-    };
+    }
 
     case ADD_TO_FAV:
       return {
@@ -235,6 +244,11 @@ function rootReducer(state = initialState, action) {
         user: {},
       };
     }
+    case UPDATE_ADDRESS:
+      return {
+        ...state,
+        address: action.payload,
+      };
 
     default:
       return state;

@@ -36,13 +36,13 @@
 }
 
 .cartContainer {
-  border-left: solid 1px rgb(185, 185, 185);
   height: 89vh;
   padding: 30px;
   position: absolute;
   top: 11vh;
   right: 0px;
   background-color: #212121;
+  z-index: 200;
 }
 
 .getAddress {
@@ -95,7 +95,7 @@
   font-weight: 600;
   position: absolute;
   left: 50px;
-  bottom: 170px;
+  top: 15vh;
   color: rgb(128, 39, 155);
 }
 
@@ -111,13 +111,12 @@
 }
 
 .addressBox {
-  border-top: solid 1px rgb(185, 185, 185);
   width: 63%;
   display: flex;
   height: 210px;
   position: absolute;
-  bottom: 0px;
-  left: 0px;
+  top: 13vh;
+  left: 0;
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
@@ -145,10 +144,11 @@
 .newAddressCont {
   /* display: flex; */
   position: absolute;
-  top: 13vh;
+  bottom: 0;
   width: 63vw;
   padding: 20px;
   padding-left: 50px;
+  border-top: solid 1px rgb(185, 185, 185);
 }
 
 .newAddressCont h1 {
@@ -161,7 +161,34 @@
   width: 60%;
   flex-wrap: wrap;
 }
-
+.noAddresses {
+  height: 241px;
+  width: 65%;
+  overflow: hidden;
+  position: absolute;
+  top: 11vh;
+  display: flex;
+  justify-content: center;
+}
+.headerText {
+  position: absolute;
+  top: 15vh;
+  z-index: 400;
+  color: #fff;
+  text-align: center;
+}
+.headerText h3 {
+  font-weight: 600;
+  font-size: 25px;
+}
+.headerText h1 {
+  font-size: 25px;
+}
+.noAddresses img {
+  width: 100%;
+  height: fit-content;
+  filter: brightness(50%);
+}
 .formContainer textarea {
   height: 50px;
   width: 100%;
@@ -244,4 +271,9 @@
 .errorLocation {
   margin-top: 5px;
   margin-left: 5px;
+}
+.payment {
+  display: flex;
+  justify-content: center;
+  height: 30px;
 }

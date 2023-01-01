@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart, postCartItem } from "../redux/actions";
 import C from "../styles/CartItem.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from 'react-router-dom';
+import deleteItem from "../Images/delete.png";
 
 export default function CartItem({ item }) {
   const { id, title, img, price, quantity, stock } = item;
@@ -59,17 +59,14 @@ export default function CartItem({ item }) {
               setClicked(!clicked);
             }}
           >
-            <img
-              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670819389/cqws5x8n/iconmonstr-trash-can-27-240_gtmmpc.png"
-              alt=""
-            />
+            <img src={deleteItem} alt="" />
           </button>
         </div>
         <div className={C.container}>
           <div className={C.imgCont}>
-            <Link to={'/detail/'+id}><img className={C.imageItem} src={img} alt="" /></Link>
+            <img src={img} alt="" />
           </div>
-          <Link to={'/detail/'+id}><h4 className={C.link}>{title.substr(0, 30) + "..."}</h4></Link>
+          <h4>{title.substr(0, 30) + "..."}</h4>
         </div>
 
         {/* <h5 className={C.price}>Unit Price ${price}</h5> */}

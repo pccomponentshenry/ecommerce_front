@@ -11,16 +11,19 @@
   font-size: 16px;
   font-weight: 400;
   position: relative;
-  right: 20px;
+  right: 0px;
+  left: 5px;
   top: 35px;
   width: 350px;
   float: left;
+  color: #fff;
+  text-shadow: -1px 1px 7px rgba(0, 0, 0, 0.5);
 }
-
 .container h5 {
   font-size: 14px;
   position: relative;
   top: 35px;
+  color: #fff;
 }
 
 .container img {
@@ -40,87 +43,63 @@
   font-size: 26px;
   z-index: 600;
 }
-
 .btnCont img {
   height: 18px;
   position: relative;
+  width: 100%;
 }
-.btnCont img:hover {
-  height: 22px;
-  position: relative;
-}
-
 .btnCont button {
-  color: #555;
+  color: #fff;
 }
-
 
 .imgCont {
-  height: 18vh;
-  width: 180px;
+  height: 16vh;
+  width: 100px;
   display: flex;
   overflow: hidden;
   float: left;
+  justify-content: center;
+  background-color: #fff;
   position: relative;
   top: 10px;
-  align-items: center;
-  justify-content: center;
-  margin-right: 50px;
-  
+  margin-right: 10px;
+  border-radius: 10px;
 }
-
-.imageItem {
-  width: 95%;
-  height: 15vh;
-  margin: 10px;
-}
-
 .counterContainer {
   position: absolute;
-  margin-top: 70px;
-  left: 240px;
+  margin-top: 60px;
+  left: 145px;
 }
-
 .counter {
-  border: solid 1px rgb(199, 199, 199);
+  border: solid 1px #fff;
   position: relative;
   height: 25px;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-top: 1px;
   border-radius: 6px;
   display: flex;
   justify-content: space-between;
+  margin-top: -10px;
 }
-
 .counter button {
-  font-size: 22px;
+  font-size: 20px;
   position: relative;
   bottom: 5px;
-  padding-left: 8px;
-  padding-right: 8px;
-  color: #555;
-}
-.counter button:hover {
-   color: rgb(0, 140, 56);
+  color: #fff;
+  text-shadow: -1px 1px 7px rgba(0, 0, 0, 0.7);
 }
 
 .counter span {
-  font-size: 15px;
-  color: #555;
+  font-size: 14px;
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
 }
-
 .price {
   position: absolute;
   right: 40px;
   font-size: 16px;
   margin-top: -70px;
-}
-
-.link{
-  color: rgb(56, 56, 56);
-  text-decoration: none;
-}
-.link:hover{
-  color: #20b485;
+  color: #fff;
 }

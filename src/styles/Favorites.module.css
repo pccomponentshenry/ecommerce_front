@@ -28,7 +28,6 @@
   right: 6%;
   margin-top: 100px;
   justify-items: center;
-
 }
 
 .container h5 {
@@ -52,11 +51,13 @@
   position: fixed;
   bottom: 0px;
   margin: 0 40%;
-  background-color: rgba(0, 0, 0, 0.500);
+  background-color: #0b0b0b;
   padding: 15px;
   border-radius: 20px 20px 0px 0px;
 }
-
+.BtnContainer h5 {
+  font-size: 16px;
+}
 .active {
   background-color: transparent;
   border: solid 1px #2bfab7;
@@ -88,7 +89,6 @@
 
 .noProducts h5 {
   color: #fff;
-
 }
 
 .noProducts p {

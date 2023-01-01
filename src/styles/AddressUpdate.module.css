@@ -1,0 +1,200 @@
+.formContainer {
+  z-index: 900;
+  background-color: #fafafa;
+  width: 40%;
+  padding: 50px;
+  border-radius: 20px;
+  height: fit-content;
+}
+.formContainer h4 {
+  position: relative;
+  bottom: 15px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.success label {
+  position: absolute;
+  right: 40px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.oldAddress {
+  font-size: 12px;
+  margin-top: -20px;
+  width: 70%;
+  color: rgb(128, 39, 155);
+}
+/* ////// FORM ////// */
+
+.formContainer textarea {
+  height: 50px;
+  width: 100%;
+  font-size: 14px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.formContainer input {
+  font-size: 14px;
+  margin-bottom: 25px;
+  margin-right: 10px;
+  padding-left: 5px;
+}
+
+.formContainer select {
+  color: #212121;
+  position: relative;
+  top: -7px;
+  margin-bottom: 10px;
+}
+
+.enabled {
+  border: none;
+  background-color: #212121;
+  color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.disabled {
+  border: none;
+  background-color: #aaaaaa;
+  color: rgb(77, 77, 77);
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.enabled:hover {
+  transition: 0.1s ease-in-out;
+  background-color: #555;
+}
+
+.darkNav {
+  height: 11vh;
+  background-color: #161616;
+}
+
+.formContainer span {
+  font-size: 11px;
+  color: rgb(226, 73, 73);
+  position: absolute;
+}
+
+.street,
+.number,
+.apartment,
+.zipCode,
+.location {
+  width: fit-content;
+  display: inline;
+}
+
+.errorName,
+.errorApartment {
+  left: 460px;
+  margin-top: 25px;
+}
+
+.errorNumber,
+.errorZipCode {
+  left: 660px;
+  margin-top: 25px;
+}
+
+.errorLocation {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.success {
+  z-index: 900;
+  background-color: #fafafa;
+  width: 40%;
+  padding: 50px;
+  padding-top: 30px;
+  border-radius: 20px;
+  height: 60%;
+  position: absolute;
+}
+.success h4 {
+  font-size: 14px;
+  font-weight: 600;
+  display: inline;
+}
+
+.addressContainer {
+  border-bottom: solid 1px gray;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.addressContainer p {
+  display: inline;
+  font-size: 12px;
+}
+.addressBox {
+  height: 280px;
+  overflow-y: scroll;
+}
+.default {
+  background-color: rgb(128, 39, 155);
+  width: fit-content;
+  display: inline;
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.defaultInput {
+  position: relative;
+  bottom: 20px;
+}
+.defaultInput label {
+  font-size: 12px;
+}
+.exit {
+  position: relative;
+  left: 430px;
+  bottom: 20px;
+  cursor: pointer;
+}
+.message {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: solid 1px;
+  overflow: hidden;
+}
+.message h1 {
+  font-weight: 600;
+  font-size: 25px;
+  z-index: 200;
+  position: absolute;
+  color: #fff;
+}
+.message p {
+  position: absolute;
+  z-index: 201;
+  color: #fff;
+  margin-top: 75px;
+}
+.message img {
+  width: 100vw;
+  opacity: 0.3;
+}
