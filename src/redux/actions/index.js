@@ -29,6 +29,8 @@ import {
   GET_ADDRESSES,
   SET_FROM_STRIPE,
   GET_ORDERS,
+  GET_ADDRESS,
+  UPDATE_ADDRESS,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -201,12 +203,10 @@ export const clearCart = email => async dispatch => {
   dispatch({ type: REMOVE_ALL_FROM_CART });
   if (localStorage.cart) {
     localStorage.setItem("cart", []);
-  }
-  else {
+  } else {
     try {
       await axios.put(`${URL}/cartItem/${email}`);
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
   }
@@ -230,33 +230,30 @@ export const checkout = products => async () => {
     await stripe.redirectToCheckout({
       sessionId: session.id,
     });
-  }
-  catch (error) {
+  } catch (error) {
     alert(error);
   }
-}
+};
 
 export const postOrder = (userId, addressId, items) => async () => {
   try {
     const order = await axios.post(`${URL}/order`, { userId, addressId });
     const postOrderItem = async (orderId, item) => {
-      await axios.post(`${URL}/order/item`, { orderId, item })
-    }
+      await axios.post(`${URL}/order/item`, { orderId, item });
+    };
     items.forEach(item => postOrderItem(order.data.id, item));
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const changeOrderStatus = (userId, status) => async () => {
   try {
     await axios.put(`${URL}/order/`, { userId, status });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
-}
+};
 
 export function getOrders(userId) {
   return async dispatch => {
@@ -267,7 +264,7 @@ export function getOrders(userId) {
 
 export const setFromStripe = () => dispatch => {
   return dispatch({ type: SET_FROM_STRIPE });
-}
+};
 
 //////////FAVORITES////////
 export const addToFav = item => dispatch => {
@@ -331,6 +328,13 @@ export function getAddresses(id) {
   };
 }
 
+export function getAddressById(id, userId) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/address/${userId}/${id}`);
+    return dispatch({ type: GET_ADDRESS, payload: res.data });
+  };
+}
+
 export const postAddress = payload => async dispatch => {
   try {
     const res = await axios.post(`${URL}/address`, payload);
@@ -339,3 +343,8 @@ export const postAddress = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+export function updateAddress(payload) {
+  return async () => {
+    await axios.put(`${URL}/address`, payload);
+  };
+}

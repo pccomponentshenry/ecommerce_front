@@ -17,6 +17,7 @@ import DashBoard from "./containers/DashBoard";
 import DashBoardSales from "./containers/DashBoardSales";
 import DashBoardUsers from "./containers/DashBoardUsers";
 import OrderConfirmed from "./components/OrderConfirmed";
+import AddressUpdate from "./components/AddressUpdate";
 
 function App() {
   populateDB();
@@ -27,7 +28,11 @@ function App() {
         <Nav />
         <Routes>
           <Route exact path="/" element={<Home />} />
-
+          <Route
+            exact
+            path="/address/:userId/:id"
+            element={<AddressUpdate />}
+          />
           <Route
             exact
             path="/sell"
@@ -46,6 +51,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route exact path="/favorites" element={<Favorites />} />
           <Route exact path="/order" element={<OrderForm />} />
           <Route exact path="/dashboard" element={<DashBoard />} />

@@ -4,14 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { getLocations, postAddress } from "../redux/actions";
 import { useState, useEffect } from "react";
 
-export default function AddressForm({ handleExit }) {
-  const addresses = useSelector(state => state.addresses);
+export default function AddressForm({ handleExit, handleShowAddresses }) {
   const user = useSelector(state => state.user);
   const locations = useSelector(state => state.locations);
   const [error, setError] = useState({});
   const [disable, setDisable] = useState(true);
-
-  const [address, setAddress] = useState();
   const [input, setInput] = useState({
     userId: "",
     streetName: "",
@@ -100,7 +97,8 @@ export default function AddressForm({ handleExit }) {
     ) {
       dispatch(postAddress(input));
       setDisable(true);
-      clearForm();
+      handleExit();
+      handleShowAddresses();
     } else {
       alert("Something went wrong, try again!");
     }
@@ -208,6 +206,7 @@ export default function AddressForm({ handleExit }) {
           </form>
         </div>
       </div>
+
       <div className={A.background}></div>
     </>
   );

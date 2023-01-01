@@ -36,3 +36,5 @@ export const GET_USER = "GET_USER";
 //actions address
 export const POST_ADDRESS = "POST_ADDRESS";
 export const GET_ADDRESSES = "GET_ADDRESSES";
+export const GET_ADDRESS = "GET_ADDRESS";
+export const UPDATE_ADDRESS = "UPDATE_ADDRESS";

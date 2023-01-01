@@ -3,19 +3,32 @@ import { useAuth0 } from "@auth0/auth0-react";
 import U from "../styles/UserInfo.module.css";
 import { useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
-import { useState } from "react";
+import SuccessAddress from "./SuccessAddress";
 
-export default function UserInfo({ form, handleExit, handleOpen }) {
+export default function UserInfo({
+  form,
+  handleExit,
+  handleOpen,
+  addresses,
+  handleShowAddresses,
+  handleReset,
+}) {
   const { isLoading, user } = useAuth0();
-  const addresses = useSelector(state => state.addresses);
-  const isDefault = addresses.find(el => el.isDefault === true);
+  const allAddresses = useSelector(state => state.addresses);
+  const isDefault = allAddresses.find(el => el.isDefault === true);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
   return (
     <>
-      {form === true && <AddressForm handleExit={handleExit} />}
+      {form && (
+        <AddressForm
+          handleExit={handleExit}
+          handleShowAddresses={handleShowAddresses}
+        />
+      )}
+      {addresses && <SuccessAddress handleReset={handleReset} />}
 
       <div className={U.container}>
         <div className={U.authContainer}>
@@ -30,11 +43,10 @@ export default function UserInfo({ form, handleExit, handleOpen }) {
         </div>
 
         <div className={U.postalAdressContainer}>
-          <span className={U.editBtn}>✎</span>
           <h3 className={U.title}>Default postal address</h3>
 
           <div className={U.adressCont}>
-            {addresses.length > 0 ? (
+            {allAddresses.length > 0 ? (
               <>
                 <h3>{`${isDefault.streetName} n° ${isDefault.streetNumber}, apartment ${isDefault.apartment}`}</h3>
                 <h3>{`Zip Code n° ${isDefault.zipCode}. ${
@@ -49,7 +61,7 @@ export default function UserInfo({ form, handleExit, handleOpen }) {
                   }
                   , Argentina
                 </h3>
-                <button className={U.addAddress} onClick={handleExit}>
+                <button className={U.addAddress} onClick={handleOpen}>
                   Add a new address
                 </button>
               </>

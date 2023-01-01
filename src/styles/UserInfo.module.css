@@ -48,7 +48,7 @@
 }
 .title {
   color: #fff;
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
 }
 .adressCont {
@@ -87,7 +87,10 @@
   background-color: rgb(76, 19, 94);
   transition: 0.15s ease-in-out;
 }
-
+.postalAdressContainer {
+  position: relative;
+  top: 30px;
+}
 /* FORM */
 
 @media screen and (max-width: 500px) {
