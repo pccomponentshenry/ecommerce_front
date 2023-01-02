@@ -57,9 +57,6 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
     } else if (!regexNumber.test(input.streetNumber)) {
       errors.streetNumber = "*Street number must be an integer number";
     }
-    if (!input.apartment) {
-      errors.apartment = "*Apartment is required";
-    }
     if (!input.zipCode) {
       errors.zipCode = "*Zip code is required";
     }
@@ -69,7 +66,6 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
     if (
       !error.streetName &&
       !error.streetNumber &&
-      !error.apartment &&
       !error.location &&
       !error.zipCode &&
       !error.location
@@ -92,8 +88,7 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
       !error.streetName &&
       !error.streetNumber &&
       !error.zipCode &&
-      !error.location &&
-      !error.apartment
+      !error.location
     ) {
       dispatch(postAddress(input));
       setDisable(true);

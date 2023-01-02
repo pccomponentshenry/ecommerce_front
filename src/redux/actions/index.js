@@ -343,8 +343,15 @@ export const postAddress = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+
 export function updateAddress(payload) {
   return async () => {
     await axios.put(`${URL}/address`, payload);
+  };
+}
+
+export function deleteAddress(id) {
+  return async () => {
+    await axios.put(`${URL}/address/${id}`);
   };
 }
