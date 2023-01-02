@@ -31,6 +31,7 @@ import {
   GET_ORDERS,
   GET_ADDRESS,
   UPDATE_ADDRESS,
+  POST_REVIEW,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -348,3 +349,11 @@ export function updateAddress(payload) {
     await axios.put(`${URL}/address`, payload);
   };
 }
+////REVIEWS/////
+export const postReview = payload => async dispatch => {
+  try {
+    return await axios.post(`${URL}/review`, payload);
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};
