@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   padding: 20px;
 }
+
 .container {
   display: flex;
   background-color: #c9c9c9;
@@ -13,6 +14,7 @@
   z-index: 300;
   padding-left: 30px;
 }
+
 .container h5 {
   color: rgb(17, 17, 17);
   font-weight: 400;
@@ -20,6 +22,7 @@
   position: relative;
   top: 5px;
 }
+
 .noProducts {
   text-align: center;
   height: 30%;
@@ -28,16 +31,18 @@
 
   width: 100%;
 }
-.noProducts h5 {
+
+/* .noProducts h5 {
   color: #fff;
 }
 .noProducts p {
   color: #fff;
-}
+} */
 .noProducts p:hover {
   color: #2bfab7;
   transition: 0.15s ease-in-out;
 }
+
 @media screen and (max-width: 500px) {
   .container {
     width: 100%;
@@ -46,10 +51,12 @@
     padding: 5px;
     justify-content: center;
   }
+
   .container h5 {
     font-size: 10px;
     overflow: hidden;
   }
+
   .favContainer {
     width: 100%;
     display: flex;
