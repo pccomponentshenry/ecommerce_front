@@ -16,7 +16,6 @@
 }
 
 .container h5 {
-  color: rgb(17, 17, 17);
   font-weight: 400;
   font-size: 15px;
   position: relative;
@@ -32,12 +31,6 @@
   width: 100%;
 }
 
-/* .noProducts h5 {
-  color: #fff;
-}
-.noProducts p {
-  color: #fff;
-} */
 .noProducts p:hover {
   color: #2bfab7;
   transition: 0.15s ease-in-out;

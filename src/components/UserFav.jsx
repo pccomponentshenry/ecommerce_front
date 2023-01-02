@@ -33,7 +33,7 @@ export default function UserFav() {
             favList.map((el, i) => (
               <HorizontalCard
                 key={i}
-                title={el.title.substr(0, 18) + "..."}
+                title={el.title}
                 price={el.price}
                 img={el.img}
                 id={el.id}
