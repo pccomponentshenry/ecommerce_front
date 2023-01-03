@@ -15,8 +15,6 @@ export default function Detail() {
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
   const { user, isAuthenticated } = useAuth0();
-  let guest = "default";
-  user ? (guest = user.nickname) : (guest = "default");
 
   const handleAddToCart = () => {
     if (isAuthenticated) {
@@ -56,14 +54,6 @@ export default function Detail() {
     });
   };
 
-  const owner = [
-    {
-      name: "Usuario 1",
-      profilePic: [
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
-      ],
-    },
-  ];
   const imgs = [];
   imgs.push(product.img);
   imgs.push(product.img);
@@ -75,8 +65,6 @@ export default function Detail() {
       </div>
       <DetailInfo
         handleAddToCart={handleAddToCart}
-        owner={owner}
-        guest={guest}
       />
       <div className={D.reviewsContainer}>
         <h3>Product reviews</h3>
