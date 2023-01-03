@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
@@ -8,9 +8,20 @@ export default function OrderConfirmed() {
 
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
-  dispatch(updateProductsStock(user.id));
-  dispatch(changeOrderStatus(user.id, "completed"));
-  dispatch(clearCart(user.email));
+  const shouldUpdate = useRef(true);
+
+  const updateDataBase = () => {
+    dispatch(updateProductsStock(user.id));
+    dispatch(changeOrderStatus(user.id, "completed"));
+    dispatch(clearCart(user.email));
+  }
+
+  useEffect(() => {
+    if (shouldUpdate.current && user.id) {
+      shouldUpdate.current = false;
+      updateDataBase();
+    }
+  }, [user]);
 
   const successAlert = () => {
     const navigate = useNavigate();
@@ -34,5 +45,7 @@ export default function OrderConfirmed() {
       }
     });
   };
-  return <div>{successAlert()}</div>;
+  return (
+    <div>{successAlert()}</div>
+  );
 }

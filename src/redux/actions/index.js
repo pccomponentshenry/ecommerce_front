@@ -131,6 +131,7 @@ export function deleteProduct(id) {
 };
 
 export const updateProductsStock = userId => async dispatch => {
+
   try {
     const res = await axios.put(`${URL}/products/stock/${userId}`);
     dispatch({ type: UPDATE_STOCK, payload: res.data });
