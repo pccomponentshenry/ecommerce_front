@@ -4,29 +4,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands, getCategories, postProduct } from "../redux/actions/index";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Form() {
-  const { user } = useAuth0();
-  const creator = user.nickname;
-  const initialState = {
-    name: "",
-    brand: "",
-    stock: "",
-    price: "",
-    description: "",
-    img: [],
-    category: "",
-    creator: creator,
-  };
-  //console.log(creator)
-  //console.log(user.email)
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getBrands());
-    dispatch(getCategories());
-  }, []);
 
+  const user = useSelector(state => state.user);
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
   const [image, setImage] = useState([]);
@@ -43,12 +24,30 @@ export default function Form() {
     description: "",
     img: [],
     category: "",
-    creator: creator,
+    userId: user.id,
   });
+
+  const initialState = {
+    name: "",
+    brand: "",
+    stock: "",
+    price: "",
+    description: "",
+    img: [],
+    category: "",
+    userId: user.id,
+  };
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+  }, []);
 
   function clearForm() {
     setInput({ ...initialState });
   }
+
   const handleValidate = input => {
     const errors = {};
     if (!input.name) {
@@ -144,6 +143,7 @@ export default function Form() {
   const handleChange = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
+
   const loadImage = e => {
     if (image.name) {
       handleChangeImg(e);
@@ -151,7 +151,7 @@ export default function Form() {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     loadImage(event);
   }, [image]);
 

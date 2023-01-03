@@ -1,21 +1,19 @@
 import React from "react";
-import S from "../styles/ForSale.module.css";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { deleteProduct } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import S from "../styles/ForSale.module.css";
 
 export default function ForSale() {
   const products = useSelector(state => state.products);
-  const { user } = useAuth0();
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  const myProducts = products.filter(p => p.creator === user.nickname);
+  const myProducts = products.filter(p => p.userId === user.id);
 
   function handleDelete(e) {
     dispatch(deleteProduct(e));
-    alert("Product has been removed succesfully");
+    alert("Product has been removed successfully");
   }
 
   return (

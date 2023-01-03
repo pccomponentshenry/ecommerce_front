@@ -1,45 +1,16 @@
 import React from "react";
-import F from "../styles/Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands, getCategories, putProduct } from "../redux/actions/index";
 import { Link, useParams } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { getBrands, getCategories, putProduct } from "../redux/actions/index";
 import { getProductDetail } from "../redux/actions";
+import F from "../styles/Form.module.css";
 
 export default function Form() {
-  const { user } = useAuth0();
-  const creator = user.nickname;
+  const user = useSelector(state => state.user);
+  const product = useSelector(state => state.product);
   const params = useParams();
   const dispatch = useDispatch();
-  const product = useSelector(state => state.product);
-  
-  useEffect(() => {
-    dispatch(getProductDetail(params.id));
-  }, [dispatch]);
-//console.log(input)
-
-  const initialState = {
-    name: product.title,
-    brand: product.brand,
-    stock: product.stock,
-    price: product.price,
-    description: product.description,
-    img: product.img,
-    category: product.category,
-    creator: creator,
-  };
-  //console.log(initialState)
-  //console.log(user.email)
-  
-  /* useEffect(() => {
-    dispatch(getProductDetail(params.id));
-  }, [dispatch]); */
-  useEffect(() => {
-    dispatch(getBrands());
-    dispatch(getCategories());
-  }, []);
-
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
   const [image, setImage] = useState([]);
@@ -56,16 +27,37 @@ export default function Form() {
     description: "",
     img: [],
     category: "",
-    creator: creator,
+    userId: user.id,
   });
-//console.log(input, "en el estado")
+
+  const initialState = {
+    name: product.title,
+    brand: product.brand,
+    stock: product.stock,
+    price: product.price,
+    description: product.description,
+    img: product.img,
+    category: product.category,
+    userId: user.id,
+  };
+
+  useEffect(() => {
+    dispatch(getProductDetail(params.id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+  }, []);
+
   function clearForm() {
     setInput({ ...initialState });
   }
+
   const handleValidate = input => {
     const errors = {};
-   
-     if (Number(input.stock) < 0) {
+
+    if (Number(input.stock) < 0) {
       errors.stock = "*Stock must be a positive number";
     } else if (input.stock && Number(input.stock) !== parseInt(input.stock, 10)) {
       errors.stock = "*Stock must be an integer number";
@@ -75,7 +67,7 @@ export default function Form() {
     }
     if (
       !error.price &&
-      !error.stock 
+      !error.stock
     ) {
       setDisable(false);
     } else {
@@ -193,9 +185,9 @@ export default function Form() {
           <h6>Add images of your product</h6>
         </div>
 
-        <div 
-        className={F.container}
-        style={{backgroundImage: `url(${product.img})`}}>
+        <div
+          className={F.container}
+          style={{ backgroundImage: `url(${product.img})` }}>
           <h5>Upload an image</h5>
           <input
             type="file"

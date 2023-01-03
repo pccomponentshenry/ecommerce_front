@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import D from "../styles/Detail.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { addToFav } from "../redux/actions";
 
-export default function DetailInfo({ handleAddToCart, owner, creator, guest }) {
+export default function DetailInfo({ handleAddToCart, owner, guest }) {
   const product = useSelector(state => state.product);
   const fav = localStorage.getItem(product.id)
     ? JSON.parse(localStorage.getItem(product.id))
@@ -14,7 +14,7 @@ export default function DetailInfo({ handleAddToCart, owner, creator, guest }) {
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     setActive(fav);
   }, [clicked]);
 
@@ -53,7 +53,7 @@ export default function DetailInfo({ handleAddToCart, owner, creator, guest }) {
           </div>
           <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
             <div className={D.ownerText}>
-              <h3>{product.creator}</h3>
+              <h3>{product.user.username}</h3>
               <p>See the seller's profile</p>
             </div>
           </Link>

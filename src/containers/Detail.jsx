@@ -3,19 +3,18 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import D from "../styles/Detail.module.css";
+import Swal from "sweetalert2";
 import Carousel from "../components/DetailCarousel";
 import Reviews from "../components/Reviews";
 import DetailInfo from "../components/DetailInfo";
-import Swal from "sweetalert2";
 import { addToCart, getProductDetail, postCartItem } from "../redux/actions";
+import D from "../styles/Detail.module.css";
 
 export default function Detail() {
   const params = useParams();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
   const { user, isAuthenticated } = useAuth0();
-  const creator = product.creator;
   let guest = "default";
   user ? (guest = user.nickname) : (guest = "default");
 
@@ -76,7 +75,6 @@ export default function Detail() {
       </div>
       <DetailInfo
         handleAddToCart={handleAddToCart}
-        creator={creator}
         owner={owner}
         guest={guest}
       />
