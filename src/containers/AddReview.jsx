@@ -52,6 +52,7 @@ export default function AddReview() {
   };
   const handleSubmit = () => {
     dispatch(postReview(input));
+    alert("Review added successfully");
   };
 
   const [hover, setHover] = useState(null);
@@ -67,6 +68,7 @@ export default function AddReview() {
             onBlur={e => errorSetting(e)}
             onChange={e => handleChange(e)}
           />
+          {error.title && <span className={R.errorSpan}>{error.title}</span>}
           <textarea
             name="message"
             id=""
@@ -76,8 +78,11 @@ export default function AddReview() {
             placeholder="Message"
             onChange={e => handleChange(e)}
           />
+          {error.message && (
+            <span className={R.errorSpan}>{error.message}</span>
+          )}
           <div className={R.ratingCont}>
-            <span>Rating: </span>
+            <span>Score: </span>
 
             {[...Array(5)].map((star, i) => {
               const ratingValue = i + 1;
@@ -99,7 +104,9 @@ export default function AddReview() {
                 </label>
               );
             })}
-            <button type="submit">Post review</button>
+            <button type="submit" className={disable ? R.disabled : R.active}>
+              Post review
+            </button>
           </div>
         </form>
       </div>
