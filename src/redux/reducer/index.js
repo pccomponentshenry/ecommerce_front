@@ -21,7 +21,7 @@ import {
   PUT_PRODUCT,
   DELETE_PRODUCT,
   GET_REVIEWS,
-  POST_REVIEWS,
+  POST_REVIEW,
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
@@ -252,7 +252,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews:action.payload
     }
-    case POST_REVIEWS:
+    case POST_REVIEW:
       return{
         ...state,
         reviews:[...state.reviews, action.payload]

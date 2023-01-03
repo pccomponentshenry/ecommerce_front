@@ -22,7 +22,6 @@ import {
   LOGOUT_USER,
   POST_CART_ITEM,
   GET_REVIEWS,
-  POST_REVIEWS,
   PUT_PRODUCT,
   DELETE_PRODUCT,
   GET_LOCATIONS,
@@ -33,6 +32,7 @@ import {
   GET_ORDERS,
   GET_ADDRESS,
   UPDATE_ADDRESS,
+  POST_REVIEW,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -350,6 +350,7 @@ export function updateAddress(payload) {
     await axios.put(`${URL}/address`, payload);
   };
 }
+
 //REVIEWS
 export function getReviews() {
   console.log('entraaa');
@@ -358,11 +359,12 @@ export function getReviews() {
     return dispatch({ type: GET_REVIEWS, payload: res.data });
   };
 }
-export const postReviews = payload => async dispatch => {
+export const postReview = payload => async dispatch => {
   try {
     const res = await axios.post(`${URL}/review`, payload);
-    return dispatch({ type: POST_REVIEWS, payload: res.data });
+    return dispatch({ type: POST_REVIEW, payload: res.data });
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+
