@@ -2,7 +2,7 @@
   width: 40vw;
   height: 20vh;
   align-items: center;
-  border-bottom: solid 1px rgb(148, 148, 148);
+  border-bottom: solid 1px rgb(202 201 201);
   position: relative;
   bottom: 20px;
 }
@@ -19,6 +19,7 @@
   color: #fff;
   text-shadow: -1px 1px 7px rgba(0, 0, 0, 0.5);
 }
+
 .container h5 {
   font-size: 14px;
   position: relative;
@@ -43,18 +44,20 @@
   font-size: 26px;
   z-index: 600;
 }
+
 .btnCont img {
   height: 18px;
   position: relative;
   width: 100%;
 }
+
 .btnCont button {
   color: #fff;
 }
 
 .imgCont {
   height: 16vh;
-  width: 100px;
+  width: 180px;
   display: flex;
   overflow: hidden;
   float: left;
@@ -63,13 +66,16 @@
   position: relative;
   top: 10px;
   margin-right: 10px;
+  padding: 8px;
   border-radius: 10px;
 }
+
 .counterContainer {
   position: absolute;
   margin-top: 60px;
-  left: 145px;
+  left: 225px;
 }
+
 .counter {
   border: solid 1px #fff;
   position: relative;
@@ -82,6 +88,7 @@
   justify-content: space-between;
   margin-top: -10px;
 }
+
 .counter button {
   font-size: 20px;
   position: relative;
@@ -96,6 +103,7 @@
   padding-left: 5px;
   padding-right: 5px;
 }
+
 .price {
   position: absolute;
   right: 40px;
