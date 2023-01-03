@@ -1,4 +1,5 @@
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 
 import {
   GET_PRODUCT,
@@ -23,6 +24,14 @@ import {
   GET_REVIEWS,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+  GET_LOCATIONS,
+  POST_ADDRESS,
+  GET_USER,
+  GET_ADDRESSES,
+  SET_FROM_STRIPE,
+  GET_ORDERS,
+  GET_ADDRESS,
+  UPDATE_ADDRESS,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -57,6 +66,14 @@ export function getCategories() {
     return dispatch({ type: GET_CATEGORIES, payload: res.data });
   };
 }
+
+export function getLocations() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/locations`);
+    return dispatch({ type: GET_LOCATIONS, payload: res.data });
+  };
+}
+
 export function clearState() {
   return { type: CLEAR_STATE };
 }
@@ -100,7 +117,6 @@ export const postProduct = payload => async dispatch => {
 };
 
 export function putProduct(id, payload) {
-  console.log(id, payload);
   return async dispatch => {
     const res = await axios.put(`${URL}/products/${id}`, payload);
     return dispatch({ type: PUT_PRODUCT, payload: res.data });
@@ -185,15 +201,70 @@ export const removeFromCart = (item, removeItem) => dispatch => {
 };
 
 export const clearCart = email => async dispatch => {
-  localStorage.setItem("cart", []);
   dispatch({ type: REMOVE_ALL_FROM_CART });
-  if (email) {
+  if (localStorage.cart) {
+    localStorage.setItem("cart", []);
+  } else {
     try {
       await axios.put(`${URL}/cartItem/${email}`);
     } catch (error) {
       console.log(error);
     }
   }
+};
+
+//////////CHECKOUT-ORDER////////
+export const checkout = products => async () => {
+  try {
+    const stripePromise = loadStripe(
+      "pk_test_51MCUPjIxZNdfrxaORwUsMY8yxCPm4xhLtIsruiYWFCGr2xN6NzNOR984Z0gGfM8l8u2blkELjULUs1rbClLtmW9A00QbQXD9FC"
+    );
+    const stripe = await stripePromise;
+    const response = await fetch(`${URL}/order/checkout`, {
+      method: "POST",
+      body: JSON.stringify(products),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const session = await response.json();
+    await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+  } catch (error) {
+    alert(error);
+  }
+};
+
+export const postOrder = (userId, addressId, items) => async () => {
+  try {
+    const order = await axios.post(`${URL}/order`, { userId, addressId });
+    const postOrderItem = async (orderId, item) => {
+      await axios.post(`${URL}/order/item`, { orderId, item });
+    };
+    items.forEach(item => postOrderItem(order.data.id, item));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeOrderStatus = (userId, status) => async () => {
+  try {
+    await axios.put(`${URL}/order/`, { userId, status });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export function getOrders(userId) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order/${userId}`);
+    return dispatch({ type: GET_ORDERS, payload: res.data });
+  };
+}
+
+export const setFromStripe = () => dispatch => {
+  return dispatch({ type: SET_FROM_STRIPE });
 };
 
 //////////FAVORITES////////
@@ -226,9 +297,7 @@ export const addToFav = item => dispatch => {
 };
 
 export const clearError = () => {
-  return {
-    type: CLEAR_ERROR,
-  };
+  return { type: CLEAR_ERROR };
 };
 
 //////////USERS////////
@@ -241,9 +310,45 @@ export const postUser = payload => async dispatch => {
   }
 };
 
+export function getUser(email) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/users/${email}`);
+    return dispatch({ type: GET_USER, payload: res.data });
+  };
+}
+
 export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
+
+//////ADDRESS///
+export function getAddresses(id) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/address/${id}`);
+    return dispatch({ type: GET_ADDRESSES, payload: res.data });
+  };
+}
+
+export function getAddressById(id, userId) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/address/${userId}/${id}`);
+    return dispatch({ type: GET_ADDRESS, payload: res.data });
+  };
+}
+
+export const postAddress = payload => async dispatch => {
+  try {
+    const res = await axios.post(`${URL}/address`, payload);
+    return dispatch({ type: POST_ADDRESS, payload: res.data });
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};
+export function updateAddress(payload) {
+  return async () => {
+    await axios.put(`${URL}/address`, payload);
+  };
+}
 //REVIEWS
 export function getReviews() {
   console.log('entraaa');

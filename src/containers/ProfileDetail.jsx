@@ -5,11 +5,17 @@ import U from "../styles/ProfileInfo.module.css";
 import { useState } from "react";
 import ForSale from "../components/ForSale";
 import Purchases from "../components/Purchases";
+import { Link } from "react-router-dom";
+
 export default function ProfileDetail() {
   const [active, setActive] = useState({
     fav: true,
     sales: false,
     purchases: false,
+  });
+  const [popUp, setPopUp] = useState({
+    form: false,
+    addresses: false,
   });
 
   const handleClick = e => {
@@ -23,18 +29,56 @@ export default function ProfileDetail() {
       return setActive({ fav: true, sales: false, purchases: false });
     }
   };
+  const handleReset = () => {
+    setPopUp({ form: false, addresses: false });
+  };
+  const handleExit = () => {
+    setPopUp({
+      ...popUp,
+      form: false,
+    });
+  };
+  const handleOpen = () => {
+    setPopUp({
+      ...popUp,
+      form: true,
+    });
+  };
+  const handleShowAddresses = () => {
+    setPopUp({
+      ...popUp,
+      addresses: true,
+    });
+  };
+  const handleCloseAddresses = () => {
+    setPopUp({
+      ...popUp,
+      addresses: false,
+    });
+  };
 
   return (
     <div>
       <div className={U.infoContainer}>
-        <UserInfo />
+        <UserInfo
+          form={popUp.form}
+          addresses={popUp.addresses}
+          update={popUp.update}
+          handleExit={handleExit}
+          handleOpen={handleOpen}
+          handleCloseAddresses={handleCloseAddresses}
+          handleShowAddresses={handleShowAddresses}
+          handleReset={handleReset}
+        />
       </div>
 
       <div className={U.SwitchContainer}>
-        <div className={U.addProduct}>
-          <h4>+</h4>
-          <h5>New product</h5>
-        </div>
+        <Link to="/sell">
+          <div className={U.addProduct}>
+            <h4>+</h4>
+            <h5>New product</h5>
+          </div>
+        </Link>
         <div className={U.BtnContainer}>
           <button
             onClick={e => handleClick(e)}
@@ -58,6 +102,15 @@ export default function ProfileDetail() {
             }`}
           >
             Purchases
+          </button>
+          <button
+            onClick={e => setPopUp({ ...popUp, addresses: true })}
+            id="addresses"
+            className={`${active.addresses ? U.active : U.inactive} ${
+              U.addressesBtn
+            }`}
+          >
+            Addresses
           </button>
         </div>
 

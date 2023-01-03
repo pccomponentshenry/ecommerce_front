@@ -4,6 +4,7 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const GET_BRANDS = "GET_BRANDS";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_LOCATIONS = "GET_LOCATIONS";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const SET_ERROR = " SET_ERROR";
@@ -24,9 +25,18 @@ export const CLEAR_CART = "CLEAR_CART";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ADD_TO_FAV = "ADD_TO_FAV";
 export const POST_CART_ITEM = "POST_CART_ITEM";
+export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
+export const GET_ORDERS = "GET_ORDERS";
+
+export const SET_FROM_STRIPE = "SET_FROM_STRIPE";
 //actions User
 export const POST_USER = "POST_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
-export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
+export const GET_USER = "GET_USER";
+//actions address
+export const POST_ADDRESS = "POST_ADDRESS";
+export const GET_ADDRESSES = "GET_ADDRESSES";
+export const GET_ADDRESS = "GET_ADDRESS";
+export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
 //action reviews
 export const GET_REVIEWS='GET_REVIEWS';

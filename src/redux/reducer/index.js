@@ -13,13 +13,21 @@ import {
   REMOVE_ONE_FROM_CART,
   REMOVE_ITEM_FROM_CART,
   REMOVE_ALL_FROM_CART,
+  GET_ORDERS,
   CLEAR_ERROR,
   ADD_TO_FAV,
   POST_USER,
   LOGOUT_USER,
   PUT_PRODUCT,
   DELETE_PRODUCT,
-  GET_REVIEWS
+  GET_REVIEWS,
+  GET_LOCATIONS,
+  POST_ADDRESS,
+  GET_USER,
+  GET_ADDRESSES,
+  SET_FROM_STRIPE,
+  GET_ADDRESS,
+  UPDATE_ADDRESS,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -32,14 +40,18 @@ const initialState = {
   filtered: [],
   cart: [],
   fav: [],
+  locations: [],
   user: {},
-  reviews:[]
+  reviews:[],
+  addresses: [],
+  address: [],
+  orders: [],
+  fromStripe: true,
 };
 
 initialState.cart = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : (initialState.cart = []);
-
 initialState.fav = localStorage.getItem("fav")
   ? JSON.parse(localStorage.getItem("fav"))
   : (initialState.fav = []);
@@ -64,14 +76,36 @@ function rootReducer(state = initialState, action) {
         products: [...state.products, action.payload],
       };
     }
-
+    case GET_ADDRESSES: {
+      return {
+        ...state,
+        addresses: action.payload,
+      };
+    }
+    case GET_ADDRESS: {
+      return {
+        ...state,
+        address: action.payload,
+      };
+    }
+    case POST_ADDRESS: {
+      return {
+        ...state,
+        addresses: [...state.addresses, action.payload],
+      };
+    }
     case PUT_PRODUCT: {
       return {
         ...state,
         product: action.payload,
       };
     }
-
+    case GET_LOCATIONS: {
+      return {
+        ...state,
+        locations: action.payload,
+      };
+    }
     case DELETE_PRODUCT: {
       return {
         ...state,
@@ -176,6 +210,16 @@ function rootReducer(state = initialState, action) {
         cart: state.cart.filter(item => item.id !== action.payload.id),
       };
 
+    case GET_ORDERS:
+      return {
+        ...state,
+        orders: action.payload,
+      };
+
+    case SET_FROM_STRIPE: {
+      return { ...state, fromStripe: false };
+    }
+
     case ADD_TO_FAV:
       return {
         ...state,
@@ -183,13 +227,18 @@ function rootReducer(state = initialState, action) {
       };
 
     ////// USERS /////
-    case POST_USER: {
+    // case POST_USER: {
+    //   return {
+    //     ...state,
+    //     user: action.payload,
+    //   };
+    // }
+    case GET_USER: {
       return {
         ...state,
         user: action.payload,
       };
     }
-
     case LOGOUT_USER: {
       return {
         ...state,
@@ -202,6 +251,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews:action.payload
       }
+    case UPDATE_ADDRESS:
+      return {
+        ...state,
+        address: action.payload,
+      };
 
     default:
       return state;

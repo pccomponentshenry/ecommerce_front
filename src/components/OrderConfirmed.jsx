@@ -1,16 +1,24 @@
 import React from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { changeOrderStatus, clearCart } from "../redux/actions";
 
-export default function Sell() {
+export default function OrderConfirmed() {
+
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  dispatch(changeOrderStatus(user.id, "completed"));
+  dispatch(clearCart(user.email));
 
   const successAlert = () => {
     const navigate = useNavigate();
+
     Swal.fire({
       title: "Successful Purchase!",
-      confirmButtonText: "Les't buy more products",
+      confirmButtonText: "Home",
       showDenyButton: true,
-      denyButtonText: `Post a Review`,
+      denyButtonText: "My Profile",
       icon: "success",
       confirmButtonColor: "rgb(55, 172, 135)",
       denyButtonColor: "#d83dd0",
@@ -21,7 +29,7 @@ export default function Sell() {
       if (result.isConfirmed) {
         navigate("/");
       } else if (result.isDenied) {
-        navigate("/cart");
+        navigate("/profile");
       }
     });
   };

@@ -53,18 +53,14 @@ export default function Nav() {
             </div>
           </Link>
           <ul className={N.notResponsiveNav}>
-            <Link to="/categories" style={{ textDecoration: "none" }}>
-              <li>Categories</li>
-            </Link>
-            <Link to="/latest" style={{ textDecoration: "none" }}>
-              <li>Latest</li>
-            </Link>
-
             <Link to="/sell" style={{ textDecoration: "none" }}>
               {isAuthenticated ? <li>Sell</li> : <></>}
             </Link>
             <Link to="/favorites" style={{ textDecoration: "none" }}>
               <li>Favorites</li>
+            </Link>
+            <Link to="/dashboard" style={{ textDecoration: "none" }}>
+              <li>Dashboard</li>
             </Link>
           </ul>
           {activeNav === true && (
@@ -109,7 +105,7 @@ export default function Nav() {
                 >
                   Favorites
                 </li>
-              </Link>
+              </Link>             
             </ul>
           )}
         </div>

@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import CartItem from "../components/CartItem";
-import S from "../styles/ShoppingCart.module.css";
-import { useState } from "react";
-import { clearCart } from "../redux/actions/index.js";
-import Payment from "../stripe/Payment";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import CartItem from "../components/CartItem";
+import S from "../styles/ShoppingCart.module.css";
+import { clearCart, setFromStripe } from "../redux/actions/index.js";
 import { LoginButton } from "../components/Login";
 
 export default function ShoppingCart() {
@@ -14,10 +12,7 @@ export default function ShoppingCart() {
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
   const { user, isAuthenticated } = useAuth0();
-  var guest = "default";
-  {
-    user ? (guest = user.nickname) : (guest = "default");
-  }
+  let guest = user ? user.nickname : "default";
 
   const handleClearCart = () => {
     isAuthenticated ? dispatch(clearCart(user.email)) : dispatch(clearCart());
@@ -27,6 +22,7 @@ export default function ShoppingCart() {
     setTotalPrice(
       cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
     );
+    dispatch(setFromStripe());
   }, [cart]);
 
   return (
@@ -54,7 +50,7 @@ export default function ShoppingCart() {
           </div>
         ) : (
           <div className={S.emptyCart}>
-            <h3>There are no products in your cart</h3>
+            <h3>There are no products in your cart!</h3>
             <Link
               to="/"
               style={{
@@ -72,7 +68,11 @@ export default function ShoppingCart() {
               <LoginButton />{" "}
             </>
           ) : (
-            <Payment />
+            <Link to="/order" style={{ textDecoration: "none" }}>
+              <div className={S.payment}>
+                <h3> Start shopping </h3>
+              </div>
+            </Link>
           )}
         </div>
       </div>
