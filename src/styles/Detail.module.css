@@ -27,12 +27,7 @@
 }
 
 .dataContainer {
-<<<<<<< HEAD
-  border-bottom: solid 1px gray;
-  height: 45vh;
-=======
   height: 50vh;
->>>>>>> 1d2e47b0acf36694aeb694fe320285514dda98ea
   padding-left: 50px;
   padding-top: 30px;
 }

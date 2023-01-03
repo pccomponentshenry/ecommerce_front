@@ -79,6 +79,7 @@ export default function Reviews({ id }) {
                 review={el.message}
                 score={el.score}
                 profilePic= {user ? user.picture:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU"}
+                username={el.username}
               />
             ))}
           </div>

@@ -22,6 +22,7 @@ import {
   LOGOUT_USER,
   POST_CART_ITEM,
   GET_REVIEWS,
+  POST_REVIEWS,
   PUT_PRODUCT,
   DELETE_PRODUCT,
   GET_LOCATIONS,
@@ -357,3 +358,11 @@ export function getReviews() {
     return dispatch({ type: GET_REVIEWS, payload: res.data });
   };
 }
+export const postReviews = payload => async dispatch => {
+  try {
+    const res = await axios.post(`${URL}/review`, payload);
+    return dispatch({ type: POST_REVIEWS, payload: res.data });
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};

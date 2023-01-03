@@ -1,6 +1,8 @@
 import React from "react";
 import R from "../styles/AddReview.module.css";
 import { useState } from "react";
+import { postReviews } from "../redux/actions";
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function AddReview() {
   //   const [rating, setRating] = useState(null);
