@@ -4,6 +4,7 @@ import ReviewCard from "../components/ReviewCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { getReviews } from "../redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Reviews({ id }) {
   // const reviews = [
@@ -65,7 +66,7 @@ export default function Reviews({ id }) {
   const reviewsFiltered = reviewsFromReducer.filter(
     el => el.productId === parseInt(id)
   );
-  console.log("estas son las filtradas", reviewsFiltered);
+  const { user} = useAuth0();
   return (
     <>
       {reviewsFiltered.length > 0 ? (
@@ -77,7 +78,7 @@ export default function Reviews({ id }) {
                 name={el.title}
                 review={el.message}
                 score={el.score}
-                profilePic="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU"
+                profilePic= {user ? user.picture:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU"}
               />
             ))}
           </div>
