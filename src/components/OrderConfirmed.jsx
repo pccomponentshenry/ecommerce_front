@@ -1,13 +1,14 @@
 import React from "react";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { changeOrderStatus, clearCart } from "../redux/actions";
+import Swal from "sweetalert2";
+import { changeOrderStatus, clearCart, updateProductsStock } from "../redux/actions";
 
 export default function OrderConfirmed() {
 
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+  dispatch(updateProductsStock(user.id));
   dispatch(changeOrderStatus(user.id, "completed"));
   dispatch(clearCart(user.email));
 

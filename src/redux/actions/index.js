@@ -23,6 +23,7 @@ import {
   POST_CART_ITEM,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+  UPDATE_STOCK,
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
@@ -127,7 +128,16 @@ export function deleteProduct(id) {
     const res = await axios.delete(`${URL}/products/${id}`);
     return dispatch({ type: DELETE_PRODUCT, payload: res.data });
   };
-}
+};
+
+export const updateProductsStock = userId => async dispatch => {
+  try {
+    const res = await axios.put(`${URL}/products/stock/${userId}`);
+    dispatch({ type: UPDATE_STOCK, payload: res.data });
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};
 
 //////////CART////////
 export const postCartItem = payload => async dispatch => {
