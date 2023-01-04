@@ -21,6 +21,7 @@ import {
   POST_USER,
   LOGOUT_USER,
   POST_CART_ITEM,
+  GET_PRODUCTS_FOR_SALE,
   PUT_PRODUCT,
   DELETE_PRODUCT,
   UPDATE_STOCK,
@@ -87,7 +88,16 @@ export function getProductDetail(id) {
     const res = await axios.get(`${URL}/products/${id}`);
     return dispatch({ type: GET_PRODUCT, payload: res.data });
   };
-}
+};
+
+export function getProductsByUser(id) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/products/user/${id}`);
+    console.log('payload', res.data);
+
+    return dispatch({ type: GET_PRODUCTS_FOR_SALE, payload: res.data });
+  };
+};
 
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
@@ -131,7 +141,6 @@ export function deleteProduct(id) {
 };
 
 export const updateProductsStock = userId => async dispatch => {
-
   try {
     const res = await axios.put(`${URL}/products/stock/${userId}`);
     dispatch({ type: UPDATE_STOCK, payload: res.data });
