@@ -9,12 +9,53 @@
   display: inline;
   margin-right: 200px;
 }
+
+.containerUpdate {
+  position: relative;
+  top: 160px;
+  left: 100px;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  height: 60vh;
+  display: inline;
+  margin-right: 200px;
+}
 .container h5 {
   color: #fff;
   font-size: 16px;
   position: relative;
 }
+.labelCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.labelCont h1 {
+  position: absolute;
+  z-index: 600;
+  font-size: 120px;
+  font-weight: 200;
+}
+.prevImageCont {
+  background-color: #fff;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  filter: brightness(0.3);
+}
 
+.prevImage {
+  width: 100%;
+}
+
+.containerUpdate h5 {
+  color: #fff;
+  font-size: 16px;
+  position: relative;
+}
 .inputCont {
   cursor: pointer;
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%232BFAB7FF' stroke-width='3' stroke-dasharray='50%25%2c 13%25' stroke-dashoffset='86' stroke-linecap='butt'/%3e%3c/svg%3e");

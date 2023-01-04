@@ -82,8 +82,7 @@ export default function Form() {
     if (!input.img || input.img === []) {
       errors.img = "*You must upload at least one image ";
     }
-    console.log(input);
-    console.log(input.img);
+
     if (
       !error.name &&
       !error.brand &&
