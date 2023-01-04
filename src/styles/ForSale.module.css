@@ -1,0 +1,88 @@
+.cardContainer {
+  padding: 10px;
+}
+.container {
+  width: 95%;
+  background-color: #fff;
+  border-bottom: 1px solid rgb(161, 161, 161);
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow: hidden;
+  height: fit-content;
+}
+.noProductsCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+.imgCont {
+  width: 100px;
+  height: 150px;
+  background-color: #fff;
+  overflow: hidden;
+  float: left;
+}
+.imgCont img {
+  width: 95%;
+  cursor: pointer;
+}
+
+.titleCont {
+  position: relative;
+  left: 10px;
+  top: 10px;
+  padding-right: 200px;
+  width: 100%;
+}
+.titleCont h4 {
+  font-size: 16px;
+}
+.titleCont h5 {
+  font-size: 14px;
+  color: rgb(153, 97, 160);
+}
+.titleCont span {
+  font-size: 12px;
+  background-color: rgb(132, 47, 143);
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.titleCont p {
+  /* display: inline; */
+  position: relative;
+  bottom: 5px;
+}
+.titleCont label {
+  float: right;
+  font-size: 12px;
+  position: relative;
+  right: 15px;
+  background-color: rgb(132, 47, 143);
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
+  padding-top: 2px;
+  margin-left: 10px;
+}
+.stockAndStatus {
+  position: absolute;
+  right: 0px;
+  margin-top: -10px;
+}
+.btnContainer {
+  position: relative;
+  top: -15px;
+}
+.btnContainer button {
+  background-color: transparent;
+  border: none;
+  color: rgb(132, 47, 143);
+  margin-right: 15px;
+  font-size: 14px;
+}
+.btnContainer button:hover {
+  transition: 0.15s ease-in-out;
+  color: #212121;
+}

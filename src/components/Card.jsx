@@ -1,23 +1,48 @@
-import C from "../styles/Card.module.css";
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import { addToCart, addToFav } from "../redux/actions";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
+import { addToCart, addToFav, postCartItem } from "../redux/actions";
+import C from "../styles/Card.module.css";
 
 function CardComponent(props) {
   const fav = localStorage.getItem(props.id)
     ? JSON.parse(localStorage.getItem(props.id))
     : [];
-
+  const { isAuthenticated, user } = useAuth0();
   const [active, setActive] = useState(fav);
   const [clicked, setClicked] = useState(false);
+  const favs = JSON.parse(localStorage.getItem("fav"));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // const handleAddToCart = () => {
+  //   if (isAuthenticated) {
+  //     const post = {
+  //       id: props.product.id,
+  //       quantity: 1,
+  //       email: user.email,
+  //       add: true,
+  //     };
+  //     dispatch(postCartItem(post));
+  //   }
+  //   dispatch(addToCart(props.product, isAuthenticated));
+  //   successAlert();
+  // };
+
   const handleAddToCart = () => {
-    dispatch(addToCart(props.product));
+    if (isAuthenticated) {
+      const post = {
+        id: props.product.id,
+        quantity: 1,
+        email: user.email,
+        add: true,
+      };
+      dispatch(postCartItem(post));
+    }
+    dispatch(addToCart(props.product, isAuthenticated));
     successAlert();
   };
 

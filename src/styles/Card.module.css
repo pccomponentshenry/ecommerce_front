@@ -1,7 +1,7 @@
 .cardContainer {
   border-radius: 7px;
   padding: 10px;
-  width: 25%;
+  width: 70%;
   display: flex;
   flex-direction: column;
 }
@@ -9,52 +9,64 @@
 .imgContainer {
   background-color: white;
   width: 230px;
-  height: 170px;
+  height: 180px;
   align-items: center;
   display: flex;
   justify-content: center;
+  border: solid 3px #2bfab7;
   border-radius: 10px 10px 0px 0px;
   overflow: hidden;
 }
+
 .image {
   height: fit-content;
-  width: 180px;
+  width: 120px;
   cursor: pointer;
   border-radius: 10px 10px 0px 0px;
 }
+
 .square {
   border-radius: 0px 0px 10px 10px;
   border: solid 1px #2bfab7;
   border-top: none;
-  padding: 5px;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   width: 230px;
   justify-content: center;
-  height: 120px;
+  height: 130px;
   cursor: pointer;
 }
+
 .square:hover {
   box-shadow: -1px 10px 21px -6px rgba(0, 0, 0, 0.91);
   border-top: none;
   transition: 0.2s ease-in-out;
 }
+
 .name {
   color: #fff;
   font-weight: 600;
 }
+
 .nameCont {
   width: 90%;
   float: left;
   display: flex;
 }
+
 .brand {
   color: #fff;
   font-weight: 200;
-  font-size: 14px;
+  font-size: 13px;
   position: relative;
   bottom: 5px;
+  height: 25px;
+  z-index: 600;
 }
+
 .price {
   font-weight: 600;
   color: #fff;
@@ -83,9 +95,12 @@
   color: #2d574a;
   transition: 0.15s ease-in-out;
 }
+
 .btnAndFav {
   display: flex;
   height: 25px;
+  width: 100%;
+  justify-content: center;
 }
 
 .bottomCont {
@@ -102,6 +117,7 @@
   margin-left: 10px;
   text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff;
 }
+
 .fav:hover {
   color: #fff;
   transition: 0.15s ease-in-out;
@@ -113,4 +129,105 @@
   margin-left: 10px;
   position: relative;
   bottom: 4px;
+}
+
+@media screen and (max-width: 500px) {
+  .cardContainer {
+    position: relative;
+    right: 0px;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .brandCont {
+    height: 50px;
+    overflow: hidden;
+    margin-top: -15px;
+  }
+
+  .brand {
+    font-size: 12px;
+    margin-top: -20px;
+    overflow: hidden;
+  }
+
+  .btnAndFav {
+    height: 95px;
+    margin-top: 15px;
+    overflow: hidden;
+    height: 60px;
+  }
+
+  .cardBtn {
+    position: relative;
+    height: 20px;
+    font-size: 10px;
+    margin-top: -3px;
+  }
+
+  .heartCont {
+    overflow: hidden;
+    width: 20px;
+  }
+
+  .fav {
+    font-size: 18px;
+    top: 10px;
+    overflow: hidden;
+  }
+
+  .active {
+    font-size: 22px;
+  }
+
+  .nameCont {
+    width: 100%;
+    height: 70px;
+    float: left;
+    display: flex;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .name {
+    font-size: 14px;
+    overflow: hidden;
+    height: 30px;
+    text-align: center;
+  }
+
+  .bottomCont {
+    margin-top: -10px;
+  }
+
+  .price {
+    height: 50px;
+    position: relative;
+    top: 15px;
+  }
+
+  .fav {
+    width: 30px;
+    text-align: center;
+  }
+
+  .imgContainer {
+    height: 140px;
+  }
+
+  .square {
+    height: 120px;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .fav:hover {
+    margin-left: 10px;
+    color: rgb(43, 43, 43);
+    transition: 0.15s ease-in-out;
+  }
 }

@@ -1,76 +1,139 @@
-.infoContainer {
-  width: 25%;
-  height: 90vh;
-  border: solid 1px red;
-  float: left;
-  position: absolute;
-  bottom: 0px;
-}
-.SwitchContainer {
-  width: 70%;
-  height: 90vh;
-  right: 40px;
-  position: absolute;
-  bottom: 0px;
-}
-
-.cardsContainer {
-  width: 95%;
-  height: 70vh;
-  border: solid 1px #555;
-  border-radius: 10px;
-  margin-top: 60px;
-}
-.BtnContainer {
-  width: 90%;
-  position: relative;
-  top: 55px;
+.container {
   display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  padding-top: 50px;
+  align-items: center;
 }
-
-.inactive {
-  background-color: transparent;
-  border: solid 1px rgb(204, 204, 204);
-  border-radius: 5px;
-  color: #fff;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 10px;
-  font-weight: 400;
+.imgContainer {
+  border-radius: 100px;
+  overflow: hidden;
+  width: fit-content;
 }
-.inactive:hover {
-  transition: 0.15s ease-in-out;
-  background-color: rgb(204, 204, 204);
-  color: #000;
-}
-.active {
-  background-color: rgb(204, 204, 204);
-  border: solid 1px rgb(204, 204, 204);
-  border-radius: 5px;
-  color: #000;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 10px;
-  font-weight: 400;
-}
-
-.addProduct {
-  position: absolute;
-  right: 10px;
+.authContainer {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  flex-direction: column;
 }
-.addProduct h4 {
-  margin-right: 5px;
-  border: solid 1px #fff;
-  border-radius: 30px;
+.nameContainer {
+  justify-content: center;
+  position: relative;
+  top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.name {
   color: #fff;
   font-size: 18px;
-  padding-left: 4px;
-  padding-right: 4px;
+  text-align: center;
 }
-.addProduct h5 {
+
+.email {
   color: #fff;
-  font-size: 16px;
+  font-weight: 200;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+}
+.profileLine {
+  margin-top: -40px;
+  width: 100%;
+}
+.postalAdressContainer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.title {
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+}
+.adressCont {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.adressCont h3 {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+  text-align: center;
+}
+.defaultTag {
+  color: #fff;
+  font-size: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: rgb(128, 39, 155);
+}
+.editBtn {
+  color: #fff;
+  position: relative;
+  left: 145px;
+  top: 15px;
+  cursor: pointer;
+}
+.addAddress {
+  margin-top: 10px;
+  font-size: 14px;
+  background-color: rgb(128, 39, 155);
+  color: #fff;
+  border: none;
+}
+.addAddress:hover {
+  background-color: rgb(76, 19, 94);
+  transition: 0.15s ease-in-out;
+}
+.postalAdressContainer {
+  position: relative;
+  top: 30px;
+}
+/* FORM */
+
+@media screen and (max-width: 500px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    padding-top: 50px;
+    align-items: center;
+    border-bottom: solid 1px gray;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+  .imgContainer {
+    border-radius: 100px;
+    overflow: hidden;
+
+    width: 80px;
+    margin-right: 0px;
+    margin-top: 10px;
+  }
+
+  .authContainer {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .profileLine {
+    display: none;
+  }
+  .name {
+    color: #fff;
+    font-size: 18px;
+    overflow: hidden;
+  }
+  .email {
+    height: 20px;
+    font-size: 12px;
+    overflow: hidden;
+  }
+  .postalAdressContainer {
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
 }

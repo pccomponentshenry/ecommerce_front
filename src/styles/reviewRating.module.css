@@ -1,0 +1,12 @@
+.ratingCont h5 {
+  color: #fff;
+  font-weight: 200;
+  font-size: 12px;
+}
+.starsCont {
+  position: absolute;
+  right: 0px;
+  margin-top: -20px;
+  border: solid 1px blue;
+  padding: 20px;
+}

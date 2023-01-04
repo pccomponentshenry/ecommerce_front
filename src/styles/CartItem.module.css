@@ -2,7 +2,7 @@
   width: 40vw;
   height: 20vh;
   align-items: center;
-  border-bottom: solid 1px rgb(148, 148, 148);
+  border-bottom: solid 1px rgb(202 201 201);
   position: relative;
   bottom: 20px;
 }
@@ -11,15 +11,20 @@
   font-size: 16px;
   font-weight: 400;
   position: relative;
-  right: 20px;
+  right: 0px;
+  left: 5px;
   top: 35px;
   width: 350px;
   float: left;
+  color: #fff;
+  text-shadow: -1px 1px 7px rgba(0, 0, 0, 0.5);
 }
+
 .container h5 {
   font-size: 14px;
   position: relative;
   top: 35px;
+  color: #fff;
 }
 
 .container img {
@@ -39,53 +44,70 @@
   font-size: 26px;
   z-index: 600;
 }
+
 .btnCont img {
   height: 18px;
   position: relative;
+  width: 100%;
 }
+
 .btnCont button {
-  color: #555;
+  color: #fff;
 }
 
 .imgCont {
   height: 16vh;
-  width: 130px;
+  width: 180px;
   display: flex;
   overflow: hidden;
   float: left;
+  justify-content: center;
+  background-color: #fff;
   position: relative;
   top: 10px;
   margin-right: 10px;
+  padding: 8px;
+  border-radius: 10px;
 }
+
 .counterContainer {
   position: absolute;
   margin-top: 60px;
-  left: 150px;
+  left: 225px;
 }
+
 .counter {
-  border: solid 1px rgb(199, 199, 199);
+  border: solid 1px #fff;
   position: relative;
   height: 25px;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-top: 1px;
   border-radius: 6px;
   display: flex;
   justify-content: space-between;
+  margin-top: -10px;
 }
+
 .counter button {
   font-size: 20px;
   position: relative;
   bottom: 5px;
-  color: #555;
+  color: #fff;
+  text-shadow: -1px 1px 7px rgba(0, 0, 0, 0.7);
 }
+
 .counter span {
   font-size: 14px;
-  color: #555;
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
 }
+
 .price {
   position: absolute;
   right: 40px;
   font-size: 16px;
   margin-top: -70px;
+  color: #fff;
 }

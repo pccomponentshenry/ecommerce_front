@@ -1,0 +1,11 @@
+.Container {
+  text-align: center;
+ 
+}
+.link{
+  color: #FFF;
+  text-decoration: none;
+}
+.link:hover{
+  color: #2bfab7;
+}

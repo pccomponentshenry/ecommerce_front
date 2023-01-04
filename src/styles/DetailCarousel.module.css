@@ -1,8 +1,32 @@
-.imgCont{
-    height: 90vh;
-    overflow: hidden;
-}
-.image{
-    height: 100%;
+.imgCont {
+  height: 89vh;
+  width: 30vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.image {
+  height: fit-content;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  .imgCont {
+    height: 60vh;
+    background-color: #fff;
+    position: relative;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .image {
+    width: fit-content;
+    height: 50vh;
+    overflow: hidden;
+  }
+}

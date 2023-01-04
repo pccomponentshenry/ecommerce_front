@@ -1,47 +1,62 @@
 .container {
   align-items: center;
-  width: 90%;
+  width: 100%;
   text-align: center;
   position: relative;
   top: 110px;
 }
+
 .favContainer {
-  padding-top: 20px;
+  padding-top: 40px;
+  padding-left: 10px;
+  padding-right: 20px;
   width: 90%;
-  height: 55vh;
+  min-height: 440px;
   border-top: solid 1px #2bfab7;
   border-left: solid 1px #2bfab7;
   border-right: solid 1px #2bfab7;
+  border-bottom: solid 1px #2bfab7;
   border-radius: 10px;
   position: relative;
   top: 50px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  text-align: center;
   overflow-x: scroll;
   position: absolute;
-  right: 5%;
+  right: 6%;
   margin-top: 100px;
-  max-height: 400px;
+  justify-items: center;
 }
+
 .container h5 {
   color: #fff;
   font-size: 18px;
   font-weight: 200;
 }
+
 .favContainer::-webkit-scrollbar {
   border-radius: 10px;
-  background-color: #000;
 }
 
 .favContainer::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #2bfab7;
 }
+
 .BtnContainer {
-  align-items: center;
-  width: 100%;
+  width: 20%;
   text-align: center;
-  position: absolute;
-  bottom: 50px;
+  position: fixed;
+  bottom: 0px;
+  margin: 0 40%;
+  background-color: #0b0b0b;
+  padding: 15px;
+  border-radius: 20px 20px 0px 0px;
+}
+.BtnContainer h5 {
+  font-size: 16px;
 }
 .active {
   background-color: transparent;
@@ -51,24 +66,31 @@
   padding-right: 30px;
   border-radius: 30px;
 }
+
 .active:hover {
   transition: 0.15s ease-in-out;
   background: #2bfab7;
   color: #000;
 }
+
 .BtnContainer h5 {
   color: #fff;
   font-weight: 200;
 }
+
 .noProducts {
   text-align: center;
   height: 30%;
   position: relative;
   top: 80px;
+  grid-column-start: 3;
+  grid-column-end: 4;
 }
+
 .noProducts h5 {
   color: #fff;
 }
+
 .noProducts p {
   color: #fff;
 }

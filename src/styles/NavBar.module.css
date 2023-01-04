@@ -2,28 +2,55 @@
   display: flex;
   width: 100%;
   position: fixed;
-  z-index: 900;
+  z-index: 999;
+  justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.650);
+  align-items: center;
+  height: 70px;
+  border-bottom: solid 1px gray;
+  padding-bottom: 10px;
 }
-.container.active {
+/* .active {
   background-color: #1b1b1b;
-  z-index: 900;
+  z-index: 999;
+  position: fixed;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  justify-content: space-around;
   transition: 0.15s ease-in-out;
+  height: 70px;
+} */
+.active {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+  justify-content: space-around;
+  align-items: center;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.650);
+  padding-bottom: 10px;
+}
+.cross {
+  display: none;
 }
 .logoAndMenu {
   display: flex;
-  height: 70px;
+  height: 60px;
   position: relative;
   float: left;
   top: 10px;
-  right: 30px;
 }
-
+.menuCont {
+  display: none;
+}
 .navList {
   display: flex;
   align-items: center;
 }
 
-.navList li {
+.notAuthenticated {
   list-style: none;
   margin-left: 10px;
   margin-right: 10px;
@@ -36,7 +63,39 @@
   cursor: pointer;
   background-color: transparent;
 }
-.navList li:hover {
+.authenticated {
+  list-style: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  background-color: transparent;
+}
+.notResponsiveNav {
+  display: flex;
+  align-items: center;
+}
+.notResponsiveNav li {
+  list-style: none;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.notResponsiveNav li:hover {
   color: #2bfab7;
   transition: 0.15s ease-in-out;
 }
@@ -45,77 +104,58 @@
   display: flex;
   align-items: center;
   position: relative;
-  left: 60px;
+  /* left: 60px; */
+  display: none;
 }
-.searchBar {
-  border: solid 1px gray;
-  padding: 3px;
-  padding-left: 10px;
-  padding-right: 5px;
-  border-radius: 5px;
-}
+
 .searchBar input {
   color: #fff;
   outline: none;
 }
 .loginText {
-  color: #fff;
-  font-weight: 200;
-  font-size: 12px;
-  margin-left: 15px;
-  margin-top: 20px;
+  margin-top: 25px;
+  margin-left: 200px;
+
   cursor: pointer;
+  display: flex;
+  /* height: 60px; */
+  z-index: 600;
 }
-.cart {
-  margin-left: 15px;
-  margin-top: 20px;
-  cursor: pointer;
-}
+
 .cartNumber {
   color: #2bfab7;
   font-size: 12px;
   position: relative;
-  bottom: 5px;
-  left: 30px;
+  bottom: 15px;
+  left: 15px;
   cursor: pointer;
   z-index: 600;
 }
 .mode {
   height: 15px;
   position: relative;
-  top: 7px;
-  left: 20px;
+  top: 2px;
+  margin-left: 20px;
   cursor: pointer;
 }
 switch {
   rotate: 180deg;
 }
-
-.searchIcon,
+.tinyBtns {
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 5px;
+}
 .cart {
   width: 25px;
   padding-left: 5px;
   position: relative;
-  bottom: 3px;
-}
-.searchIcon {
-  border-left: solid 1px gray;
-  bottom: 0px;
-}
-.searchBar button {
-  background-color: transparent;
-  border: none;
-}
-.searchAndCart input {
-  background-color: transparent;
-  border: none;
-  height: 15px;
 }
 .line {
   width: 100%;
   position: absolute;
   margin-top: 3px;
-  z-index: -999;
 }
 hr {
   position: relative;
@@ -127,4 +167,173 @@ hr {
   height: 120px;
   position: relative;
   bottom: 38px;
+}
+
+@media screen and (max-width: 500px) {
+  .sideMenu {
+    width: 0%;
+    height: 300px;
+    position: absolute;
+    z-index: 900;
+    margin-top: 70px;
+    overflow: hidden;
+  }
+
+  .navList {
+    display: block;
+    background-color: #000;
+    width: 150px;
+    height: 100%;
+    margin-top: 10px;
+    padding-top: 150px;
+    position: fixed;
+    padding-left: 20px;
+    overflow: hidden;
+  }
+
+  .authNavList {
+    display: block;
+    background-color: #000;
+    width: 150px;
+    height: 100%;
+    margin-top: 10px;
+    padding-top: 80px;
+    position: fixed;
+    padding-left: 30px;
+    overflow: hidden;
+  }
+  .notResponsiveNav {
+    display: none;
+  }
+  .navList li {
+    margin-left: 0px;
+    margin-right: 0px;
+    border-radius: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .notAuthenticated {
+    font-size: 12px;
+    margin-left: -20px;
+    font-weight: 200;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .authenticated {
+    font-size: 12px;
+    margin-left: -20px;
+    font-weight: 200;
+    margin-top: 5px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .logoAndMenu {
+    display: block;
+    flex-direction: column;
+    width: 100%;
+    top: 0px;
+    justify-content: center;
+    position: absolute;
+    overflow: hidden;
+  }
+  .logo {
+    position: absolute;
+    top: 0px;
+    margin-top: -30px;
+    margin-left: 30%;
+    overflow: hidden;
+  }
+  .menuCont {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    left: 30px;
+    margin-top: 35px;
+    z-index: 800;
+    overflow: hidden;
+  }
+  .menuCont img {
+    width: 25px;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    border-bottom: solid 1px rgb(114, 114, 114);
+    padding-bottom: 10px;
+    height: 100vh;
+    width: 100%;
+    border: none;
+    background-color: rgb(0, 0, 0, 0.7);
+    overflow: hidden;
+    align-items: unset;
+  }
+
+  .containerSmall {
+    display: flex;
+    justify-content: center;
+    border-bottom: solid 1px rgb(114, 114, 114);
+    padding-bottom: 10px;
+    height: 70px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    overflow: hidden;
+    background-color: rgb(7, 7, 7);
+    align-items: unset;
+  }
+  .searchAndCart {
+    position: absolute;
+    height: 300px;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .loginText {
+    left: 0px;
+    position: absolute;
+    margin-left: 0px;
+    left: 20px;
+    margin-top: 30px;
+    overflow: hidden;
+  }
+  .authLoginText {
+    left: 0px;
+    position: absolute;
+    margin-left: 0px;
+    left: 20px;
+    margin-top: 100px;
+    overflow: hidden;
+  }
+  .line {
+    position: absolute;
+
+    height: 70px;
+  }
+
+  .tinyBtns {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    height: 70px;
+  }
+
+  .logo {
+    width: fit-content;
+    height: 130%;
+    margin-top: -7px;
+    margin-left: 35%;
+  }
+  .logoCont {
+    height: 60px;
+    width: 100%;
+    display: flex;
+  }
 }

@@ -1,23 +1,40 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../redux/actions";
+import { addToCart, removeFromCart, postCartItem } from "../redux/actions";
 import C from "../styles/CartItem.module.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import deleteItem from "../Images/delete.png";
 
 export default function CartItem({ item }) {
-  const { title, img, price, quantity } = item;
+  const { id, title, img, price, quantity, stock } = item;
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
+  const { isAuthenticated, user } = useAuth0();
 
   const handleAddToCart = () => {
-    dispatch(addToCart(item));
+    if (quantity !== stock) {
+      if (isAuthenticated) {
+        const post = { id, quantity: 1, email: user.email, add: true };
+        dispatch(postCartItem(post));
+      }
+      dispatch(addToCart(item, isAuthenticated));
+    }
   };
 
-  const handleDeleteFromCart = () => {
+  const handleRemoveItemFromCart = () => {
+    if (isAuthenticated) {
+      const post = { id, quantity, email: user.email };
+      dispatch(postCartItem(post));
+    }
     dispatch(removeFromCart(item, true));
   };
 
   const handleRemoveOneFromCart = () => {
+    if (isAuthenticated) {
+      const post = { id, quantity: 1, email: user.email, del: true };
+      dispatch(postCartItem(post));
+    }
     dispatch(removeFromCart(item, false));
   };
 
@@ -38,14 +55,11 @@ export default function CartItem({ item }) {
         <div className={C.btnCont}>
           <button
             onClick={() => {
-              handleDeleteFromCart();
+              handleRemoveItemFromCart();
               setClicked(!clicked);
             }}
           >
-            <img
-              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670819389/cqws5x8n/iconmonstr-trash-can-27-240_gtmmpc.png"
-              alt=""
-            />
+            <img src={deleteItem} alt="" />
           </button>
         </div>
         <div className={C.container}>

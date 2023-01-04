@@ -10,6 +10,7 @@ export default function Reviews() {
       ],
       name: "Usuario 1",
       review: "A really good product!",
+      rating: 3,
     },
     {
       profilePic: [
@@ -17,6 +18,7 @@ export default function Reviews() {
       ],
       name: "Usuario 2",
       review: "Can't wait to try it out!",
+      rating: 5,
     },
     {
       profilePic: [
@@ -24,6 +26,7 @@ export default function Reviews() {
       ],
       name: "Usuario 3",
       review: "A really good product!",
+      rating: 1,
     },
     {
       profilePic: [
@@ -31,6 +34,7 @@ export default function Reviews() {
       ],
       name: "Usuario 4",
       review: "Can't wait to try it out!",
+      rating: 2,
     },
     {
       profilePic: [
@@ -38,6 +42,7 @@ export default function Reviews() {
       ],
       name: "Usuario 5",
       review: "A really good product!",
+      rating: 3,
     },
     {
       profilePic: [
@@ -45,12 +50,12 @@ export default function Reviews() {
       ],
       name: "Usuario 6",
       review: "Can't wait to try it out!",
+      rating: 4,
     },
   ];
   return (
     <>
       <div className={R.reviews}>
-        <h6>Reviews</h6>
         <div className={R.container}>
           {reviews.length > 0 &&
             reviews.map((el, i) => (
@@ -59,6 +64,7 @@ export default function Reviews() {
                 name={reviews[i].name}
                 profilePic={reviews[i].profilePic}
                 review={reviews[i].review}
+                rating={reviews[i].rating}
               />
             ))}
         </div>

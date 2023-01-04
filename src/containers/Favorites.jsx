@@ -6,15 +6,15 @@ import CardComponent from "../components/Card";
 import { Link } from "react-router-dom";
 
 export default function Favorites() {
-  const favs = JSON.parse(localStorage.getItem("fav"));
-  const [favorites, setFavorites] = useState(favs);
-  const [clicked, setClicked] = useState(false);
   const favList = useSelector(state => state.fav);
   const cart = useSelector(state => state.cart);
+  const favs = JSON.parse(localStorage.getItem("fav"));
+  const [favorites, setFavorites] = useState(favs ? favs : favList);
+  const [clicked, setClicked] = useState(false);
 
   React.useEffect(() => {
-    setFavorites(favs);
-  }, [favList]);
+    setFavorites(favs ? favs : favList);
+  }, [favs]);
 
   return (
     <>
@@ -23,8 +23,8 @@ export default function Favorites() {
           {favorites.length === 1
             ? `This is your top favorite product`
             : favorites.length > 1
-            ? `These are your top ${favorites.length} favorite products`
-            : null}
+              ? `These are your top ${favorites.length} favorite products`
+              : null}
         </h5>
       </div>
       <div className={F.itemsContainer}>
@@ -45,13 +45,15 @@ export default function Favorites() {
             ))
           ) : (
             <div className={F.noProducts}>
-              <h5>You haven't any favorite products yet!</h5>
+              <h5>You don't have any favorite products yet!</h5>
               <Link to="/" style={{ textDecoration: "none" }}>
                 <p>Choose your favorites!</p>
               </Link>
             </div>
           )}
         </div>
+
+
       </div>
 
       <div className={F.BtnContainer}>
@@ -60,8 +62,8 @@ export default function Favorites() {
           {cart.length === 0
             ? `no items`
             : cart.length === 1
-            ? ` item`
-            : ` items`}{" "}
+              ? ` item`
+              : ` items`}{" "}
           in cart
         </h5>
         <Link to="/cart" style={{ textDecoration: "none" }}>

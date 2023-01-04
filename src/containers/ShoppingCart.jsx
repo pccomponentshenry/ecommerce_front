@@ -1,25 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import CartItem from "../components/CartItem";
 import S from "../styles/ShoppingCart.module.css";
-import { useState } from "react";
-import { clearCart } from "../redux/actions/index.js";
-import Payment from "../stripe/Payment";
-import { Link } from "react-router-dom";
+import { clearCart, setFromStripe } from "../redux/actions/index.js";
+import { LoginButton } from "../components/Login";
 
 export default function ShoppingCart() {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
+  const { user, isAuthenticated } = useAuth0();
+  let guest = user ? user.nickname : "default";
 
   const handleClearCart = () => {
-    dispatch(clearCart());
+    isAuthenticated ? dispatch(clearCart(user.email)) : dispatch(clearCart());
   };
 
   useEffect(() => {
     setTotalPrice(
       cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
     );
+    dispatch(setFromStripe());
   }, [cart]);
 
   return (
@@ -30,7 +33,7 @@ export default function ShoppingCart() {
         </div>
 
         {cart.length > 0 ? (
-          <div>
+          <div className={S.cartContainer}>
             <div className={S.clearCont}>
               <button className={S.clearBtn} onClick={handleClearCart}>
                 Clean Cart
@@ -44,13 +47,10 @@ export default function ShoppingCart() {
             <h3 className={S.total}>
               Total: ${parseFloat(totalPrice).toFixed(2)}
             </h3>
-            <div className={S.startShopping}>
-              <Payment />
-            </div>
           </div>
         ) : (
           <div className={S.emptyCart}>
-            <h3>There isn't any product in your cart</h3>
+            <h3>There are no products in your cart!</h3>
             <Link
               to="/"
               style={{
@@ -61,7 +61,22 @@ export default function ShoppingCart() {
             </Link>
           </div>
         )}
+        <div className={S.startShopping}>
+          {guest === "default" ? (
+            <>
+              Login to buy
+              <LoginButton />{" "}
+            </>
+          ) : (
+            <Link to="/order" style={{ textDecoration: "none" }}>
+              <div className={S.payment}>
+                <h3> Start shopping </h3>
+              </div>
+            </Link>
+          )}
+        </div>
       </div>
+
       <div className={S.imgCont}>
         <h1>Just one step to become a pro</h1>
         <p>Customize your PC and level up!</p>
