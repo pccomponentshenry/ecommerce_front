@@ -62,9 +62,6 @@ export default function AddressUpdate() {
     } else if (!regexNumber.test(input.streetNumber)) {
       errors.streetNumber = "*Street number must be an integer number";
     }
-    if (!input.apartment) {
-      errors.apartment = "*Apartment is required";
-    }
     if (!input.zipCode) {
       errors.zipCode = "*Zip code is required";
     }
@@ -74,7 +71,6 @@ export default function AddressUpdate() {
     if (
       !error.streetName &&
       !error.streetNumber &&
-      !error.apartment &&
       !error.location &&
       !error.zipCode &&
       !error.location
@@ -93,8 +89,7 @@ export default function AddressUpdate() {
       !error.streetName &&
       !error.streetNumber &&
       !error.zipCode &&
-      !error.location &&
-      !error.apartment
+      !error.location
     ) {
       dispatch(updateAddress(input));
       setDisable(true);
@@ -133,13 +128,10 @@ export default function AddressUpdate() {
               ╳
             </label>
             <h4>Edit your address</h4>
-            <p className={A.oldAddress}>{` ${address.streetName} n° ${
-              address.streetNumber
-            }, apartment ${address.apartment}, Zip Code n° ${
-              address.zipCode
-            }. ${address.additionalDetails && address.additionalDetails}, ${
-              address[Object.keys(address)[Object.keys(address).length - 1]]
-            }, Argentina`}</p>
+            <p className={A.oldAddress}>{` ${address.streetName} n° ${address.streetNumber
+              }, apartment ${address.apartment}, Zip Code n° ${address.zipCode
+              }. ${address.additionalDetails && address.additionalDetails}, ${address[Object.keys(address)[Object.keys(address).length - 1]]
+              }, Argentina`}</p>
 
             <form onSubmit={handleSubmit} autoComplete="off">
               <div className={A.street}>

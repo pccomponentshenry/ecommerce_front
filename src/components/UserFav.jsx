@@ -23,8 +23,8 @@ export default function UserFav() {
           {favList.length > 0 && favList.length === 1
             ? `This is your top favorite product`
             : favList.length > 1
-            ? `These are your top ${favList.length} favorite products`
-            : null}
+              ? `These are your top ${favList.length} favorite products`
+              : null}
         </h5>
       </div>
       <div className={U.itemsContainer}>
@@ -33,7 +33,7 @@ export default function UserFav() {
             favList.map((el, i) => (
               <HorizontalCard
                 key={i}
-                title={el.title.substr(0, 18) + "..."}
+                title={el.title}
                 price={el.price}
                 img={el.img}
                 id={el.id}
@@ -45,7 +45,7 @@ export default function UserFav() {
             ))
           ) : (
             <div className={U.noProducts}>
-              <h5>You haven't any favorite products yet!</h5>
+              <h5>You don't have any favorite products yet!</h5>
               <Link to="/" style={{ textDecoration: "none" }}>
                 <p>Choose your favorites!</p>
               </Link>

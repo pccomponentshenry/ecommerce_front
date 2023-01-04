@@ -6,12 +6,14 @@ import { useState } from "react";
 import ForSale from "../components/ForSale";
 import Purchases from "../components/Purchases";
 import { Link } from "react-router-dom";
+import ProfileAddresses from "../components/ProfileAddresses";
 
 export default function ProfileDetail() {
   const [active, setActive] = useState({
     fav: true,
     sales: false,
     purchases: false,
+    addresses: false
   });
   const [popUp, setPopUp] = useState({
     form: false,
@@ -20,13 +22,16 @@ export default function ProfileDetail() {
 
   const handleClick = e => {
     if (e.target.id === "sales") {
-      return setActive({ fav: false, sales: true, purchases: false });
+      return setActive({ fav: false, sales: true, purchases: false, addresses: false });
     }
     if (e.target.id === "purchases") {
-      return setActive({ fav: false, sales: false, purchases: true });
+      return setActive({ fav: false, sales: false, purchases: true, addresses: false });
     }
     if (e.target.id === "fav") {
-      return setActive({ fav: true, sales: false, purchases: false });
+      return setActive({ fav: true, sales: false, purchases: false, addresses: false });
+    }
+    if (e.target.id === "addresses") {
+      return setActive({ fav: false, sales: false, purchases: false, addresses: true });
     }
   };
   const handleReset = () => {
@@ -81,49 +86,46 @@ export default function ProfileDetail() {
         </Link>
         <div className={U.BtnContainer}>
           <button
-            onClick={e => handleClick(e)}
+            onClick={handleClick}
             id="fav"
             className={`${active.fav ? U.active : U.inactive} ${U.favBtn}`}
           >
             Favorites
           </button>
           <button
-            onClick={e => handleClick(e)}
+            onClick={handleClick}
             id="sales"
             className={`${active.sales ? U.active : U.inactive} ${U.salesBtn}`}
           >
             For sale
           </button>
           <button
-            onClick={e => handleClick(e)}
+            onClick={handleClick}
             id="purchases"
-            className={`${active.purchases ? U.active : U.inactive} ${
-              U.purchasesBtn
-            }`}
+            className={`${active.purchases ? U.active : U.inactive} ${U.purchasesBtn}`}
           >
             Purchases
           </button>
           <button
-            onClick={e => setPopUp({ ...popUp, addresses: true })}
+            onClick={handleClick}
             id="addresses"
-            className={`${active.addresses ? U.active : U.inactive} ${
-              U.addressesBtn
-            }`}
+            className={`${active.addresses ? U.active : U.inactive} ${U.addressesBtn}`}
           >
             Addresses
           </button>
         </div>
 
         <div
-          className={active.sales ? U.cardsContainerWhite : U.cardsContainer}
+          className={U.cardsContainerWhite}
         >
           {active.fav ? (
             <UserFav />
           ) : active.sales ? (
             <ForSale />
-          ) : (
+          ) : active.purchases ? (
             <Purchases />
-          )}
+          ) :
+            <ProfileAddresses />}
         </div>
       </div>
     </div>
