@@ -1,17 +1,20 @@
-import React from "react";
-import S from "../styles/ForSale.module.css";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector } from "react-redux";
-import { deleteProduct } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteProduct, getProductsByUser } from "../redux/actions";
+import S from "../styles/ForSale.module.css";
 
 export default function ForSale() {
-  const products = useSelector(state => state.products);
-  const { user } = useAuth0();
-  const dispatch = useDispatch();
 
-  const myProducts = products.filter(p => p.creator === user.nickname);
+  const productsForSale = useSelector(state => state.productsForSale);
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(getProductsByUser(user.id));
+    setIsLoading(false);
+  }, [user])
 
   function handleDelete(e) {
     dispatch(deleteProduct(e));
@@ -20,8 +23,8 @@ export default function ForSale() {
 
   return (
     <div>
-      {myProducts.length > 0 ? (
-        myProducts.map((el, i) => (
+      {isLoading ? <div>Loading...</div> : productsForSale.length > 0 ? (
+        productsForSale.map((el, i) => (
           <div className={S.cardContainer} key={i}>
             <div className={S.container}>
               <div className={S.imgCont}>
