@@ -59,7 +59,7 @@ export default function Form() {
     }
     if (!input.stock) {
       errors.stock = "*Stock is required";
-    } else if (Number(input.stock) < 0) {
+    } else if (Number(input.stock) <= 0) {
       errors.stock = "*Stock must be a positive number";
     } else if (Number(input.stock) !== parseInt(input.stock, 10)) {
       errors.stock = "*Stock must be an integer number";
