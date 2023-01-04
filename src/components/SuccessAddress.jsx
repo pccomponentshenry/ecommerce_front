@@ -40,15 +40,11 @@ export default function SuccessAddress({ handleReset }) {
                   >
                     <div className={A.addressContainer}>
                       {el.isDefault && <p className={A.default}>Default</p>}
-                      <p value={i} className={A.addressText}>{` ${
-                        el.streetName
-                      } n° ${el.streetNumber}, apartment ${
-                        el.apartment
-                      }, Zip Code n° ${el.zipCode}. ${
-                        el.additionalDetails && el.additionalDetails
-                      }, ${
-                        el[Object.keys(el)[Object.keys(el).length - 1]]
-                      }, Argentina`}</p>
+                      <p value={i} className={A.addressText}>{` ${el.streetName
+                        } n° ${el.streetNumber}, apartment ${el.apartment
+                        }, Zip Code n° ${el.zipCode}. ${el.additionalDetails && el.additionalDetails
+                        }, ${el[Object.keys(el)[Object.keys(el).length - 1]]
+                        }, Argentina`}</p>
                     </div>
                   </Link>
                 ))}

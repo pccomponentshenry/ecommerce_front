@@ -23,6 +23,7 @@ import {
   POST_CART_ITEM,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+  UPDATE_STOCK,
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
@@ -128,7 +129,17 @@ export function deleteProduct(id) {
     const res = await axios.delete(`${URL}/products/${id}`);
     return dispatch({ type: DELETE_PRODUCT, payload: res.data });
   };
-}
+};
+
+export const updateProductsStock = userId => async dispatch => {
+
+  try {
+    const res = await axios.put(`${URL}/products/stock/${userId}`);
+    dispatch({ type: UPDATE_STOCK, payload: res.data });
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};
 
 //////////CART////////
 export const postCartItem = payload => async dispatch => {
@@ -344,11 +355,13 @@ export const postAddress = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+
 export function updateAddress(payload) {
   return async () => {
     await axios.put(`${URL}/address`, payload);
   };
 }
+<<<<<<< HEAD
 ////REVIEWS/////
 export const postReview = payload => async dispatch => {
   try {
@@ -357,3 +370,11 @@ export const postReview = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+=======
+
+export function deleteAddress(id) {
+  return async () => {
+    await axios.put(`${URL}/address/${id}`);
+  };
+}
+>>>>>>> 0cc373a8a88833740beb83e1302e3f85c54ac51c

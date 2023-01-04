@@ -1,15 +1,27 @@
-import React from "react";
-import Swal from "sweetalert2";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { changeOrderStatus, clearCart } from "../redux/actions";
+import Swal from "sweetalert2";
+import { changeOrderStatus, clearCart, getUserCartItem, updateProductsStock } from "../redux/actions";
 
 export default function OrderConfirmed() {
 
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
-  dispatch(changeOrderStatus(user.id, "completed"));
-  dispatch(clearCart(user.email));
+  const shouldUpdate = useRef(true);
+
+  const updateDataBase = () => {
+    dispatch(updateProductsStock(user.id));
+    dispatch(changeOrderStatus(user.id, "completed"));
+    dispatch(clearCart(user.email));
+  }
+
+  useEffect(() => {
+    if (shouldUpdate.current && user.id) {
+      shouldUpdate.current = false;
+      updateDataBase();
+    }
+  }, [user]);
 
   const successAlert = () => {
     const navigate = useNavigate();
@@ -28,10 +40,13 @@ export default function OrderConfirmed() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         navigate("/");
+        dispatch(getUserCartItem());
       } else if (result.isDenied) {
         navigate("/profile");
       }
     });
   };
-  return <div>{successAlert()}</div>;
+  return (
+    <div>{successAlert()}</div>
+  );
 }

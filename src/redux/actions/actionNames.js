@@ -26,6 +26,7 @@ export const CLEAR_ERROR = "CLEAR_ERROR";
 export const ADD_TO_FAV = "ADD_TO_FAV";
 export const POST_CART_ITEM = "POST_CART_ITEM";
 export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
+export const UPDATE_STOCK = "UPDATE_STOCK";
 export const GET_ORDERS = "GET_ORDERS";
 
 export const SET_FROM_STRIPE = "SET_FROM_STRIPE";
