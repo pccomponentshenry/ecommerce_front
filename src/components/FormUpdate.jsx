@@ -7,6 +7,7 @@ import { getProductDetail } from "../redux/actions";
 import F from "../styles/Form.module.css";
 
 export default function Form() {
+
   const user = useSelector(state => state.user);
   const product = useSelector(state => state.product);
   const params = useParams();
@@ -20,18 +21,18 @@ export default function Form() {
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState({});
   const [input, setInput] = useState({
-    name: "",
+    title: "",
     brand: "",
     stock: "",
     price: null,
     description: "",
     img: [],
     category: "",
-    userId: user.id,
+    userId: "",
   });
 
   const initialState = {
-    name: product.title,
+    title: product.title,
     brand: product.brand,
     stock: product.stock,
     price: product.price,
@@ -44,6 +45,10 @@ export default function Form() {
   useEffect(() => {
     dispatch(getProductDetail(params.id));
   }, [dispatch]);
+
+  useEffect(() => {
+    setInput(prev => ({ ...prev, userId: user.id }));
+  }, [user]);
 
   useEffect(() => {
     dispatch(getBrands());
@@ -71,7 +76,6 @@ export default function Form() {
     ) {
       setDisable(false);
     } else {
-      console.log(error);
       setDisable(true);
     }
 
@@ -118,9 +122,9 @@ export default function Form() {
   };
 
   const handleChange = e => {
-    setInput({ ...initialState, [e.target.name]: e.target.value });
-    console.log(input)
+    setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
   const loadImage = e => {
     if (image.name) {
       handleChangeImg(e);
@@ -133,14 +137,12 @@ export default function Form() {
   }, [image]);
 
   const handleSubmit = e => {
-    console.log("entré");
     if (
       !error.price &&
       !error.stock
     ) {
       e.preventDefault();
       setActive(true);
-      console.log(input)
       dispatch(putProduct(product.id, input));
       setDisable(true);
       clearForm();
@@ -219,14 +221,14 @@ export default function Form() {
             <div className={F.name}>
               <label>Name of the product: </label>
               <input
-                value={input.name || ""}
+                value={input.title || ""}
                 type="text"
-                name="name"
+                name="title"
                 placeholder={product.title}
                 onBlur={e => errorSetting(e)}
                 onChange={e => handleChange(e)}
               />
-              <div>{error.name && <span>{error.name}</span>}</div>
+              <div>{error.title && <span>{error.title}</span>}</div>
             </div>
           </div>
           <div className={F.brandAndCatContainer}>

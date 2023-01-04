@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Form() {
 
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
@@ -17,32 +18,35 @@ export default function Form() {
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState({});
   const [input, setInput] = useState({
-    name: "",
+    title: "",
     brand: "",
     stock: 0,
     price: null,
     description: "",
     img: [],
     category: "",
-    userId: user.id,
+    userId: "",
   });
 
   const initialState = {
-    name: "",
+    title: "",
     brand: "",
     stock: "",
     price: "",
     description: "",
     img: [],
     category: "",
-    userId: user.id,
+    userId: "",
   };
 
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBrands());
     dispatch(getCategories());
   }, []);
+
+  useEffect(() => {
+    setInput(prev => ({ ...prev, userId: user.id }));
+  }, [user]);
 
   function clearForm() {
     setInput({ ...initialState });
@@ -50,8 +54,8 @@ export default function Form() {
 
   const handleValidate = input => {
     const errors = {};
-    if (!input.name) {
-      errors.name = "*Name is required";
+    if (!input.title) {
+      errors.title = "*Name is required";
     }
     if (!input.brand) {
       errors.brand = "*Brand is required";
@@ -82,7 +86,7 @@ export default function Form() {
       errors.img = "*You must upload at least one image ";
     }
     if (
-      !error.name &&
+      !error.title &&
       !error.brand &&
       !error.price &&
       !error.stock &&
@@ -94,7 +98,6 @@ export default function Form() {
     ) {
       setDisable(false);
     } else {
-      console.log(error);
       setDisable(true);
     }
 
@@ -105,7 +108,7 @@ export default function Form() {
     setError(
       handleValidate({
         ...input,
-        [e.target.name]: e.target.value,
+        [e.target.title]: e.target.value,
       })
     );
   };
@@ -141,7 +144,7 @@ export default function Form() {
   };
 
   const handleChange = e => {
-    setInput({ ...input, [e.target.name]: e.target.value });
+    setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const loadImage = e => {
@@ -157,7 +160,7 @@ export default function Form() {
 
   const handleSubmit = e => {
     if (
-      !error.name &&
+      !error.title &&
       !error.brand &&
       !error.price &&
       !error.stock &&
@@ -173,8 +176,6 @@ export default function Form() {
       setDisable(true);
       clearForm();
       setError({});
-    } else {
-      console.log(error);
     }
   };
 
@@ -244,14 +245,14 @@ export default function Form() {
             <div className={F.name}>
               <label>Name of the product: </label>
               <input
-                value={input.name || ""}
+                value={input.title || ""}
                 type="text"
-                name="name"
+                name="title"
                 placeholder=""
                 onBlur={e => errorSetting(e)}
                 onChange={e => handleChange(e)}
               />
-              <div>{error.name && <span>{error.name}</span>}</div>
+              <div>{error.title && <span>{error.title}</span>}</div>
             </div>
           </div>
           <div className={F.brandAndCatContainer}>

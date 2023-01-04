@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteProduct } from "../redux/actions";
 import S from "../styles/ForSale.module.css";
 
 export default function ForSale() {
+
   const products = useSelector(state => state.products);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+  let myProducts = [];
 
-  const myProducts = products.filter(p => p.userId === user.id);
+  useEffect(() => {
+    if (user && products.length) {
+      myProducts = products.filter(p => p.userId === user.id);
+      setIsLoading(false);
+    }
+  }, [user])
 
   function handleDelete(e) {
     dispatch(deleteProduct(e));

@@ -2,7 +2,7 @@ import React from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { changeOrderStatus, clearCart } from "../redux/actions";
+import { changeOrderStatus, clearCart, getUserCartItem } from "../redux/actions";
 
 export default function OrderConfirmed() {
 
@@ -28,6 +28,7 @@ export default function OrderConfirmed() {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         navigate("/");
+        dispatch(getUserCartItem());
       } else if (result.isDenied) {
         navigate("/profile");
       }
