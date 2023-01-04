@@ -57,6 +57,7 @@
   color: gray;
   cursor: pointer;
 }
+
 @media screen and (max-width: 500px) {
   .ProfilePicCont {
     height: 20%;
