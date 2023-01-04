@@ -35,8 +35,8 @@ import {
   POST_REVIEW,
 } from "../actions/actionNames";
 
-const URL = "http://localhost:3001";
-// const URL = "https://pfbackend-production.up.railway.app";
+// const URL = "http://localhost:3001";
+const URL = "https://playexpertback-production.up.railway.app";
 
 export function allProducts() {
   return function (dispatch) {
@@ -359,6 +359,7 @@ export function updateAddress(payload) {
   return async () => {
     await axios.put(`${URL}/address`, payload);
   };
+  ñ;
 }
 ////REVIEWS/////
 export const postReview = payload => async dispatch => {
