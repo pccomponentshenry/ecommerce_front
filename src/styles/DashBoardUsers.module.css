@@ -23,7 +23,9 @@
 }
 
 .userContainer {
-    padding: 40px;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 40px;
     width: 70%;
     border-top: solid 1px #2bfab7;
     border-left: solid 1px #2bfab7;
@@ -31,7 +33,6 @@
     border-right: solid 1px #2bfab7;
     border-radius: 10px;
     top: 50px;
-    display: flex;
     align-items: top;
     margin: 0 auto;
     justify-content: center;
