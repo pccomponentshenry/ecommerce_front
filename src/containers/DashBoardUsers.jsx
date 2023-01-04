@@ -37,7 +37,6 @@ export default function DashBoardUsers() {
     setValidationErrors({});
   };
   
-
   const getCommonEditTextFieldProps = useCallback(
     (cell) => {
       return {
@@ -96,7 +95,10 @@ export default function DashBoardUsers() {
       {
         accessorKey: 'isAdmin',
         header: 'Admin',
-        size: 0,
+        size: 20,
+        Cell: ({ cell }) => (
+           <span>{cell.getValue().toLocaleString() === "true" ? "YES" : "NO"} </span>
+          )        
       },   
      
     ],
@@ -104,23 +106,22 @@ export default function DashBoardUsers() {
   );
 
  
-
-
   return (
 
 
     <div className={s.content}>
       <div className={s.sideContainer}><SideDash /></div>
       <div className={s.userContainer}>
-      <MaterialReactTable
+      <MaterialReactTable className={s.tabla}
         columns={columns}
         data={tableData}
         enableTopToolbar={true}
-        initialState={{ columnVisibility: { isAdmin: false } }} //hide firstName column by default
+        // initialState={{ columnVisibility: { isAdmin: false } }} //hide firstName column by default
         editingMode="modal" //default
         enableEditing
         onEditingRowSave={handleSaveRowEdits}
         onEditingRowCancel={handleCancelRowEdits}
+        positionActionsColumn='last'
         renderRowActions={({ row, table }) => (
           <Box sx={{ display: 'flex', gap: '1rem' }}>
             <Tooltip arrow placement="right" title="Edit User">

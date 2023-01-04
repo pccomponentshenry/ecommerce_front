@@ -41,8 +41,8 @@
     flex-wrap: wrap;
     align-content: flex-start;
 }
-.listaUsuarios{
-    width:100%;
+.tabla{
+    width:40%;
     align-items: center;
     margin: 0 auto;
     justify-content: center;
