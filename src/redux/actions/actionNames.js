@@ -40,3 +40,6 @@ export const POST_ADDRESS = "POST_ADDRESS";
 export const GET_ADDRESSES = "GET_ADDRESSES";
 export const GET_ADDRESS = "GET_ADDRESS";
 export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
+//action reviews
+export const GET_REVIEWS='GET_REVIEWS';
+export const POST_REVIEW = "POST_REVIEW";

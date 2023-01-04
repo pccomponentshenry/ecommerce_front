@@ -6,15 +6,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function UserFav() {
-  // const fav = JSON.parse(localStorage.getItem("fav"));
   const favList = useSelector(state => state.fav);
-  // const [favorites, setFavorites] = useState(fav);
   const [clicked, setClicked] = useState(false);
-
-  // React.useEffect(() => {
-  //   setFavorites(favs);
-  //   console.log(favs);
-  // }, [clicked]);
 
   return (
     <div>
