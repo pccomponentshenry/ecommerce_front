@@ -12,7 +12,6 @@ export default function ForSale() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-
     dispatch(getProductsByUser(user.id));
     setIsLoading(false);
   }, [user])
