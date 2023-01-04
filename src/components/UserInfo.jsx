@@ -28,8 +28,6 @@ export default function UserInfo({
           handleShowAddresses={handleShowAddresses}
         />
       )}
-      {addresses && <SuccessAddress handleReset={handleReset} />}
-
       <div className={U.container}>
         <div className={U.authContainer}>
           <div className={U.imgContainer}>
@@ -49,14 +47,13 @@ export default function UserInfo({
             {allAddresses.length > 0 ? (
               <>
                 <h3>{`${isDefault.streetName} n° ${isDefault.streetNumber}, apartment ${isDefault.apartment}`}</h3>
-                <h3>{`Zip Code n° ${isDefault.zipCode}. ${
-                  isDefault.additionalDetails && isDefault.additionalDetails
-                } `}</h3>
+                <h3>{`Zip Code n° ${isDefault.zipCode}. ${isDefault.additionalDetails && isDefault.additionalDetails
+                  } `}</h3>
 
                 <h3>
                   {
                     isDefault[
-                      Object.keys(isDefault)[Object.keys(isDefault).length - 1]
+                    Object.keys(isDefault)[Object.keys(isDefault).length - 1]
                     ]
                   }
                   , Argentina
@@ -67,7 +64,7 @@ export default function UserInfo({
               </>
             ) : (
               <>
-                <h3>You don't have any address loaded yet</h3>
+                <h3>You don't have any addresses yet</h3>
                 <button className={U.addAddress} onClick={handleOpen}>
                   Add a new address
                 </button>

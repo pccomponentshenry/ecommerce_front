@@ -15,7 +15,7 @@ export default function ForSale() {
 
   function handleDelete(e) {
     dispatch(deleteProduct(e));
-    alert("Product has been removed succesfully");
+    alert("Product has been removed successfully");
   }
 
   const productsForSale = [
