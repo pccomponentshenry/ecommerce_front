@@ -3,45 +3,23 @@ import R from "../styles/AddReview.module.css";
 import { useState } from "react";
 import { postReview } from "../redux/actions/";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams , useNavigate } from "react-router-dom";
+import { useParams , Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import Swal from "sweetalert2";
+
 
 export default function AddReview() {
   const dispatch = useDispatch();
-  //const user = useSelector(state => state.user);
+  //const users = useSelector(state => state.user);
   const params = useParams();
   const { user} = useAuth0();
 
-  const successAlert = () => {
-    const navigate = useNavigate();
-
-    Swal.fire({
-      title: "Successful Review!",
-      confirmButtonText: "Go Home",
-      showDenyButton: true,
-      denyButtonText: "Post new Review",
-      icon: "success",
-      confirmButtonColor: "rgb(55, 172, 135)",
-      denyButtonColor: "#d83dd0",
-      background: "#272727",
-      color: "#fff",
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        navigate("/");
-      } else if (result.isDenied) {
-        navigate("/profile");
-      }
-    });
-  };
   const [input, setInput] = useState({
     id: params.id,
     title: "",
     message: "",
     score: null,
-    picprofile:user.picture,
-    username:user.nickname,
+    picprofile: user ? user.picture : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU" ,
+    username: user ? user.nickname : "Anónimo",
   });
   const [error, setError] = useState({});
   const [disable, setDisable] = useState(true);
@@ -79,7 +57,7 @@ export default function AddReview() {
   };
   const handleSubmit = () => {
     dispatch(postReview(input));
-    successAlert();
+    alert("Review succesfully posted")
   };
 
   const [hover, setHover] = useState(null);
@@ -136,6 +114,9 @@ export default function AddReview() {
             </button>
           </div>
         </form>
+        <Link to="/profile">
+            <p>Back to Profile</p>
+        </Link>
       </div>
 
       <div className={R.imgCont}>
