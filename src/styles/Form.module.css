@@ -348,6 +348,11 @@ input::-webkit-inner-spin-button {
   color: #2bfab7;
   cursor: pointer;
 }
+.imgError {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+}
 .successPic span:hover {
   transition: 0.15s ease-in-out;
   color: #fff;

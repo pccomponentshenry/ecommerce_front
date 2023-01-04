@@ -79,9 +79,11 @@ export default function Form() {
     if (!input.description || input.description === "") {
       errors.description = "*A description is required";
     }
-    if (!input.img) {
+    if (!input.img || input.img === []) {
       errors.img = "*You must upload at least one image ";
     }
+    console.log(input);
+    console.log(input.img);
     if (
       !error.name &&
       !error.brand &&
@@ -107,6 +109,7 @@ export default function Form() {
       handleValidate({
         ...input,
         [e.target.name]: e.target.value,
+        img: e.target.files,
       })
     );
   };
@@ -143,6 +146,7 @@ export default function Form() {
 
   const handleChange = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
+    handleValidate(input);
   };
   const loadImage = e => {
     if (image.name) {
@@ -153,7 +157,7 @@ export default function Form() {
 
   React.useEffect(() => {
     loadImage(event);
-  }, [image]);
+  }, [image, input]);
 
   const handleSubmit = e => {
     if (
@@ -236,7 +240,7 @@ export default function Form() {
               <img src={input.img} alt="" />
             </div>
           )}
-          {error.img && <span>{error.img}</span>}
+          {error.img && <span className={F.imgError}>{error.img}</span>}
         </div>
 
         <div className={F.formContainer}>
@@ -330,7 +334,10 @@ export default function Form() {
                 name="stock"
                 min="0"
                 onBlur={e => errorSetting(e)}
-                onChange={e => handleChange(e)}
+                onChange={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
               />
               <div>{error.stock && <span>{error.stock}</span>}</div>
             </div>
@@ -346,7 +353,10 @@ export default function Form() {
                   errorSetting(e);
                   handleValidate(input);
                 }}
-                onChange={e => handleChange(e)}
+                onChange={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
               />
               <div className={F.errorPrice}>
                 {error.price && <span>{error.price}</span>}
