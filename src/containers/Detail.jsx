@@ -8,10 +8,12 @@ import Carousel from "../components/DetailCarousel";
 import Reviews from "../components/Reviews";
 import DetailInfo from "../components/DetailInfo";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { addToCart, getProductDetail, postCartItem } from "../redux/actions";
 
 export default function Detail() {
   const params = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
   const { user, isAuthenticated } = useAuth0();
