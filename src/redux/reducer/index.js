@@ -41,6 +41,7 @@ const initialState = {
   fav: [],
   locations: [],
   user: {},
+  reviews: [],
   addresses: [],
   address: [],
   orders: [],
