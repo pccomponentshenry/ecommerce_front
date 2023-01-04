@@ -22,6 +22,22 @@
     z-index: 999;
     color: #FFF;
 }
+.side{
+    width: 300px;
+    display: grid;
+    grid-template-rows: repeat(12, 80px);
+    height: 85vh;
+    position: relative;
+    visibility: hidden;
+    top: 100px;
+    left: 0;
+    padding-top: 70px;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    z-index: 999;
+    color: #FFF;
+}
 
 .dashContainer {
     padding: 40px;
@@ -43,10 +59,33 @@
     color: #FFF;
 }
 
-.link{
+.notAdmin {
+    padding-top: 120px;
+    width: 80%;
+    height: 50vh;
+    border-top: solid 1px #2bfab7;
+    border-left: solid 1px #2bfab7;
+    border-bottom: solid 1px #2bfab7;
+    border-right: solid 1px #2bfab7;
+    border-radius: 10px;
+    top: 50px;
+    display: grid;
+    align-items: top;
+    justify-content: center;
+    text-align: center;
+    max-height: 500px;
     color: #FFF;
+}
+
+.notAdminSide{
+    margin-top: 180px;
+}
+
+.link {
+    color: rgb(37, 179, 218);
     text-decoration: none;
-  }
-  .link:hover{
+}
+
+.link:hover {
     color: #2bfab7;
-  }
+}
