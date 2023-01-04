@@ -1,7 +1,10 @@
-import { useState } from "react";
+import React, { useEffect } from "react";
+// import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../redux/actions";
 import SideDash from "../components/SideDash"
 import s from "../styles/DashBoardUsers.module.css"
-import { Users } from "../Data";
+// import { Users } from "../Data";
 import DataTable from "react-data-table-component";
 
 
@@ -12,13 +15,8 @@ const columnas =[
     sortable: true
   },
   {
-    name:'Nombre',
-    selector: 'nombre',
-    sortable: true
-  },
-  {
-    name:'Apellido',
-    selector: 'apellido',
+    name:'Username',
+    selector: 'username',
     sortable: true
   },
   {
@@ -26,10 +24,27 @@ const columnas =[
     selector: 'email',
     sortable: true
   },
+  {
+    name:'Status',
+    selector: 'status',
+    sortable: true
+  },
+  {
+    name:'Role',
+    selector: 'isAdmin',
+    sortable: true
+  },
 
 ]
 
 export default function DashBoardUsers() {
+
+  const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
 
 
   return (
@@ -40,7 +55,7 @@ export default function DashBoardUsers() {
 
          <DataTable className={s.listaUsuarios}
           columns={columnas}
-          data={Users}
+          data={users}
           />
 
         
