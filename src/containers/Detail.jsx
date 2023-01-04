@@ -63,13 +63,13 @@ export default function Detail() {
       <div className={D.imageContainer}>
         <Carousel img={imgs} />
       </div>
+
       <DetailInfo
         handleAddToCart={handleAddToCart}
       />
-      <div className={D.reviewsContainer}>
-        <h3>Product reviews</h3>
-        <Reviews />
-      </div>
+
+      <Reviews id={params.id} />
     </div>
   );
 }
+

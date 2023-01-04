@@ -20,10 +20,13 @@ import {
   LOGOUT_USER,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+  GET_REVIEWS,
+  POST_REVIEW,
   GET_PRODUCTS_FOR_SALE,
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
+  GET_USERS,
   GET_ADDRESSES,
   SET_FROM_STRIPE,
   GET_ADDRESS,
@@ -43,6 +46,8 @@ const initialState = {
   fav: [],
   locations: [],
   user: {},
+  reviews:[],
+  users: [],
   addresses: [],
   address: [],
   orders: [],
@@ -52,7 +57,6 @@ const initialState = {
 initialState.cart = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : (initialState.cart = []);
-
 initialState.fav = localStorage.getItem("fav")
   ? JSON.parse(localStorage.getItem("fav"))
   : (initialState.fav = []);
@@ -247,11 +251,28 @@ function rootReducer(state = initialState, action) {
         user: action.payload,
       };
     }
+    case GET_USERS: {
+      return {
+        ...state,
+        users: action.payload,
+      };
+    }
     case LOGOUT_USER: {
       return {
         ...state,
         user: {},
       };
+    }
+    ////REVIEWS////
+    case GET_REVIEWS:
+      return{
+        ...state,
+        reviews:action.payload
+    }
+    case POST_REVIEW:
+      return{
+        ...state,
+        reviews:[...state.reviews, action.payload]
     }
     case UPDATE_ADDRESS:
       return {

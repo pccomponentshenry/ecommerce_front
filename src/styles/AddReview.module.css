@@ -64,7 +64,7 @@
   position: relative;
   bottom: 3px;
 }
-.ratingCont button {
+.active {
   position: absolute;
   bottom: 20px;
   right: 30px;
@@ -75,7 +75,23 @@
   padding-right: 10px;
   color: #fff;
 }
-.ratingCont button:hover {
+.active:hover {
   background-color: #3a4f94;
   transition: color 200ms;
+}
+.disabled {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  border: none;
+  background-color: #888888;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: rgb(196, 196, 196);
+  pointer-events: none;
+}
+.errorSpan {
+  font-size: 12px;
+  color: #3a4f94;
 }

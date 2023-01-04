@@ -15,6 +15,8 @@ export default function Nav() {
   const [activeNav, setActiveNav] = useState(false);
   const cart = useSelector(state => state.cart);
   const { isAuthenticated } = useAuth0();
+  const loggedUser = useSelector(state => state.user);
+
 
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -60,7 +62,7 @@ export default function Nav() {
               <li>Favorites</li>
             </Link>
             <Link to="/dashboard" style={{ textDecoration: "none" }}>
-              <li>Dashboard</li>
+              {loggedUser.isAdmin === true ? <li>Dashboard</li> : <></>}
             </Link>
           </ul>
           {activeNav === true && (

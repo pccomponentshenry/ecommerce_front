@@ -61,7 +61,7 @@ function App() {
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />
           <Route exact path="/success" element={<OrderConfirmed />} />
-          <Route exact path="/addreview" element={<AddReview />} />
+          <Route exact path="/addreview/:userId/:id" element={<AddReview />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

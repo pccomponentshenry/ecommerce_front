@@ -21,6 +21,7 @@ import {
   POST_USER,
   LOGOUT_USER,
   POST_CART_ITEM,
+  GET_REVIEWS,
   GET_PRODUCTS_FOR_SALE,
   PUT_PRODUCT,
   DELETE_PRODUCT,
@@ -28,11 +29,13 @@ import {
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
+  GET_USERS,
   GET_ADDRESSES,
   SET_FROM_STRIPE,
   GET_ORDERS,
   GET_ADDRESS,
   UPDATE_ADDRESS,
+  POST_REVIEW,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -334,6 +337,13 @@ export function getUser(email) {
   };
 }
 
+export function getUsers() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/users/`);
+    return dispatch({ type: GET_USERS, payload: res.data });
+  };
+}
+
 export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
@@ -373,3 +383,21 @@ export function deleteAddress(id) {
     await axios.put(`${URL}/address/${id}`);
   };
 }
+
+//REVIEWS
+export function getReviews() {
+  console.log('entraaa');
+  return async dispatch => {
+    const res = await axios.get(`${URL}/review`);
+    return dispatch({ type: GET_REVIEWS, payload: res.data });
+  };
+}
+export const postReview = payload => async dispatch => {
+  try {
+    const res = await axios.post(`${URL}/review`, payload);
+    return dispatch({ type: POST_REVIEW, payload: res.data });
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};
+

@@ -1,0 +1,46 @@
+.orderBox {
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #fafafa;
+  height: 65vh;
+}
+.orderCard {
+  display: flex;
+  border-bottom: solid 1px gray;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+.imageCont {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #fff;
+}
+.imageCont img {
+  width: 80px;
+  height: fit-content;
+}
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  color: #555;
+  margin-left: 15px;
+}
+.cardInfo h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.cardInfo h5 {
+  font-size: 14px;
+}
+.cardInfo button {
+  width: 110px;
+  font-size: 14px;
+  border: none;
+  color: rgb(128, 39, 155);
+  background-color: transparent;
+}
