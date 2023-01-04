@@ -93,8 +93,6 @@ export function getProductDetail(id) {
 export function getProductsByUser(id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/products/user/${id}`);
-    console.log('payload', res.data);
-
     return dispatch({ type: GET_PRODUCTS_FOR_SALE, payload: res.data });
   };
 };

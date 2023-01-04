@@ -143,8 +143,6 @@ export default function Form() {
     ) {
       e.preventDefault();
       setActive(true);
-      console.log('input', input);
-
       dispatch(putProduct(product.id, input));
       setDisable(true);
       clearForm();
