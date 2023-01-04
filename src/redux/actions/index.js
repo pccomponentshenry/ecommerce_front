@@ -28,6 +28,7 @@ import {
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
+  GET_USERS,
   GET_ADDRESSES,
   SET_FROM_STRIPE,
   GET_ORDERS,
@@ -326,6 +327,13 @@ export function getUser(email) {
   return async dispatch => {
     const res = await axios.get(`${URL}/users/${email}`);
     return dispatch({ type: GET_USER, payload: res.data });
+  };
+}
+
+export function getUsers() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/users/`);
+    return dispatch({ type: GET_USERS, payload: res.data });
   };
 }
 

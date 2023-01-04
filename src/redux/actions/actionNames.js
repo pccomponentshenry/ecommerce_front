@@ -34,6 +34,7 @@ export const SET_FROM_STRIPE = "SET_FROM_STRIPE";
 export const POST_USER = "POST_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_USER = "GET_USER";
+export const GET_USERS = "GET_USERS";
 //actions address
 export const POST_ADDRESS = "POST_ADDRESS";
 export const GET_ADDRESSES = "GET_ADDRESSES";

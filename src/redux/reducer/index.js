@@ -25,6 +25,7 @@ import {
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
+  GET_USERS,
   GET_ADDRESSES,
   SET_FROM_STRIPE,
   GET_ADDRESS,
@@ -44,6 +45,7 @@ const initialState = {
   locations: [],
   user: {},
   reviews:[],
+  users: [],
   addresses: [],
   address: [],
   orders: [],
@@ -238,6 +240,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+      };
+    }
+    case GET_USERS: {
+      return {
+        ...state,
+        users: action.payload,
       };
     }
     case LOGOUT_USER: {
