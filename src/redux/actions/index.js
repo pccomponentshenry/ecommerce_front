@@ -376,7 +376,6 @@ export function updateAddress(payload) {
   return async () => {
     await axios.put(`${URL}/address`, payload);
   };
-  ñ;
 }
 
 export function deleteAddress(id) {

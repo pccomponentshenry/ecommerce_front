@@ -11,27 +11,6 @@ export default function Form() {
   const product = useSelector(state => state.product);
   const params = useParams();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProductDetail(params.id));
-  }, [dispatch]);
-
-  const initialState = {
-    name: product.title,
-    brand: product.brand,
-    stock: product.stock,
-    price: product.price,
-    description: product.description,
-    img: product.img,
-    category: product.category,
-    creator: creator,
-  };
-
-  useEffect(() => {
-    dispatch(getBrands());
-    dispatch(getCategories());
-  }, []);
-
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
   const [image, setImage] = useState([]);
@@ -50,6 +29,30 @@ export default function Form() {
     category: "",
     userId: "",
   });
+  const initialState = {
+    name: product.title,
+    brand: product.brand,
+    stock: product.stock,
+    price: product.price,
+    description: product.description,
+    img: product.img,
+    category: product.category,
+    userId: user.id,
+  };
+
+  useEffect(() => {
+    dispatch(getProductDetail(params.id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+  }, []);
+
+  useEffect(() => {
+    setInput(prev => ({ ...prev, userId: user.id }));
+  }, [user]);
+
   //console.log(input, "en el estado")
   function clearForm() {
     setInput({ ...initialState });
@@ -119,8 +122,7 @@ export default function Form() {
   };
 
   const handleChange = e => {
-    setInput({ ...initialState, [e.target.name]: e.target.value });
-    console.log(input);
+    setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const loadImage = e => {
