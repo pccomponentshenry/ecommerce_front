@@ -6,7 +6,7 @@ export const ProtectedAdmin = ({children}) =>{
     const {user} = useAuth0();
     const loggedUser = useSelector(state => state.user);
 
-    if(loggedUser.isAdmin === false){
+    if(loggedUser.isAdmin === true){
         return <Navigate to="/" />
     }
     return children

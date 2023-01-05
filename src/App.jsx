@@ -15,6 +15,7 @@ import Favorites from "./containers/Favorites";
 import UpdateProduct from "./containers/UpdateProduct";
 import AddReview from "./containers/AddReview";
 import DashBoard from "./containers/DashBoard";
+import DashBoardStats from "./containers/DashBoardStats";
 import DashBoardSales from "./containers/DashBoardSales";
 import DashBoardUsers from "./containers/DashBoardUsers";
 import OrderConfirmed from "./components/OrderConfirmed";
@@ -56,20 +57,25 @@ function App() {
           <Route exact path="/favorites" element={<Favorites />} />
           <Route exact path="/order" element={<OrderForm />} />
           <Route exact path="/dashboard" element={
-              <ProtectedAdmin>
-                <DashBoard />
-              </ProtectedAdmin>
-            } />
+            <ProtectedAdmin>
+              <DashBoard />
+            </ProtectedAdmin>
+          } />
+          <Route exact path="/dashboard/stats" element={
+            <ProtectedAdmin>
+              <DashBoardStats />
+            </ProtectedAdmin>
+          } />
           <Route exact path="/dashboard/sales" element={
-              <ProtectedAdmin>
-                <DashBoardSales />
-              </ProtectedAdmin>
-            } />
+            <ProtectedAdmin>
+              <DashBoardSales />
+            </ProtectedAdmin>
+          } />
           <Route exact path="/dashboard/users" element={
-              <ProtectedAdmin>
-                <DashBoardUsers />
-              </ProtectedAdmin>
-            } />
+            <ProtectedAdmin>
+              <DashBoardUsers />
+            </ProtectedAdmin>
+          } />
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />

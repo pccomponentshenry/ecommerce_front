@@ -128,7 +128,6 @@ export default function DashBoardUsers() {
  
   return (
 
-
     <div className={s.content}>
       <div className={s.sideContainer}><SideDash /></div>
       <div className={s.userContainer}>
@@ -170,7 +169,6 @@ export default function DashBoardUsers() {
        
       />
       </div>
-     
     </div>
   );
 };

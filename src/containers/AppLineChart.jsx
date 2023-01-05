@@ -1,12 +1,10 @@
 import { useState } from "react";
-import s from "../styles/BarChart.module.css";
-import BarChart from "../components/BarChart";
+import s from "../styles/LineChart.module.css";
 import LineChart from "../components/LineChart";
-import PieChart from "../components/PieChart";
 import { UserData } from "../Data";
 import "chart.js/auto";
 
-function AppBarChart() {
+function AppLineChart() {
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.description),
     datasets: [
@@ -26,21 +24,15 @@ function AppBarChart() {
     ],
   });
 
-  // console.log(userData);
-
   return (
     <div className={s.contentChart}>
-      <h5 className={s.titleChart}>Lastest Sales</h5>
-      <div style={{ width: 500, textAlign:'center' }}>
-        <BarChart chartData={userData} />
-      </div>
-      {/* <div style={{ width: 400 }}>
+      <div style={{ width: 400, textAlign: "center" }}>
+      <h5 className={s.titleChart}>Best Sales</h5>
+
         <LineChart chartData={userData} />
       </div>
-      <div style={{ width: 400 }}>
-        <PieChart chartData={userData} />
-      </div> */}
+     
     </div>
   );
 }
-export default AppBarChart;
+export default AppLineChart;
