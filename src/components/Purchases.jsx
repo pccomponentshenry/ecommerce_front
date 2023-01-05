@@ -37,7 +37,6 @@ export default function Purchases() {
                 <Link
                   style={{ textDecoration: "none", color: "#212121" }}
                   to={`/detail/${el.product.id}`}
-                  key={el.id}
                 >
                   <h3>{el.product.title}</h3>
                 </Link>
@@ -47,7 +46,6 @@ export default function Purchases() {
                 <Link
                   style={{ textDecoration: "none", color: "#212121" }}
                   to={`/addreview/${user.id}/${el.product.id}`}
-                  key={el.id}
                 >
                   {" "}
                   <button>Leave a review</button>{" "}
