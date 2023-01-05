@@ -35,8 +35,8 @@ import {
   POST_REVIEW,
 } from "../actions/actionNames";
 
-// const URL = "http://localhost:3001";
-const URL = "https://playexpertback-production.up.railway.app";
+const URL = "http://localhost:3001";
+// const URL = "https://playexpertback-production.up.railway.app";
 
 export function allProducts() {
   return function (dispatch) {

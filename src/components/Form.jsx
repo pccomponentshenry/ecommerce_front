@@ -79,7 +79,7 @@ export default function Form() {
     if (!input.description || input.description === "") {
       errors.description = "*A description is required";
     }
-    if (!input.img || input.img === []) {
+    if (!input.img) {
       errors.img = "*You must upload at least one image ";
     }
 
