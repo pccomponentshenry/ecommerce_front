@@ -183,6 +183,7 @@ input::-webkit-inner-spin-button {
   font-weight: 200;
   position: relative;
   top: 5px;
+  overflow: hidden;
 }
 .descriptionCont {
   margin-top: 20px;
@@ -430,4 +431,83 @@ input::-webkit-inner-spin-button {
 .algo {
   position: absolute;
   margin-top: 400px;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    position: relative;
+    top: 160px;
+    left: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container h5 {
+    display: none;
+  }
+  .titleCont {
+    position: relative;
+    top: 130px;
+    padding: 0;
+    text-align: center;
+  }
+  .formContainer {
+    padding-left: 30px;
+    padding-right: 30px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 170px;
+  }
+  .name {
+    left: 0px;
+  }
+  .name input {
+    margin-top: 10px;
+    margin-left: -3px;
+  }
+  .brandAndCatContainer {
+    width: 100%;
+  }
+  .category {
+    width: 100px;
+    left: 20px;
+    margin-left: 10px;
+    height: 100px;
+    overflow: hidden;
+  }
+  .errorStock {
+    height: 100px;
+    overflow: hidden;
+    line-height: 100%;
+    margin-top: 5px;
+  }
+
+  .brand {
+    width: 100px;
+    margin-right: 10px;
+    height: 100px;
+  }
+
+  .description {
+    margin-bottom: 20px;
+    margin-top: 0px;
+    height: 110px;
+    position: relative;
+  }
+  .description textarea {
+    height: 60px;
+    background-color: transparent;
+    border: solid 1px #2bfab7;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px;
+    padding-top: 5px;
+    font-weight: 200;
+    overflow: hidden;
+  }
 }
