@@ -39,7 +39,7 @@ import {
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
-// const URL = "https://pfbackend-production.up.railway.app";
+// const URL = "https://playexpertback-production.up.railway.app";
 
 export function allProducts() {
   return function (dispatch) {
@@ -91,14 +91,14 @@ export function getProductDetail(id) {
     const res = await axios.get(`${URL}/products/${id}`);
     return dispatch({ type: GET_PRODUCT, payload: res.data });
   };
-};
+}
 
 export function getProductsByUser(id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/products/user/${id}`);
     return dispatch({ type: GET_PRODUCTS_FOR_SALE, payload: res.data });
   };
-};
+}
 
 export async function populateDB() {
   await axios.get(`${URL}/populateDB`);
@@ -139,7 +139,7 @@ export function deleteProduct(id) {
     const res = await axios.delete(`${URL}/products/${id}`);
     return dispatch({ type: DELETE_PRODUCT, payload: res.data });
   };
-};
+}
 
 export const updateProductsStock = userId => async dispatch => {
   try {
@@ -399,4 +399,3 @@ export const postReview = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
-

@@ -7,11 +7,13 @@ import Swal from "sweetalert2";
 import Carousel from "../components/DetailCarousel";
 import Reviews from "../components/Reviews";
 import DetailInfo from "../components/DetailInfo";
+import { useNavigate } from "react-router-dom";
 import { addToCart, getProductDetail, postCartItem } from "../redux/actions";
 import D from "../styles/Detail.module.css";
 
 export default function Detail() {
   const params = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
   const { user, isAuthenticated } = useAuth0();
@@ -63,13 +65,13 @@ export default function Detail() {
       <div className={D.imageContainer}>
         <Carousel img={imgs} />
       </div>
+      <div className={D.infoContainer}>
+        <DetailInfo handleAddToCart={handleAddToCart} />
+      </div>
 
-      <DetailInfo
-        handleAddToCart={handleAddToCart}
-      />
-
-      <Reviews id={params.id} />
+      <div className={D.Reviews}>
+        <Reviews id={params.id} />
+      </div>
     </div>
   );
 }
-

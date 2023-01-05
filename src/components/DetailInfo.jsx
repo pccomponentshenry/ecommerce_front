@@ -6,7 +6,6 @@ import { useState } from "react";
 import { addToFav } from "../redux/actions";
 
 export default function DetailInfo({ handleAddToCart }) {
-
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
   const user = useSelector(state => state.user);
@@ -16,7 +15,8 @@ export default function DetailInfo({ handleAddToCart }) {
     : [];
   const [active, setActive] = useState(fav);
 
-  const profilePic = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU";
+  const profilePic =
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU";
 
   useEffect(() => {
     setActive(fav);
