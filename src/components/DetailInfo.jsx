@@ -34,14 +34,6 @@ export default function DetailInfo({ handleAddToCart }) {
         <div className={D.titleContainer}>
           <h3 className={D.name}>{product.title}</h3>
         </div>
-        {creator === guest ? (
-          <div className={D.editBtn}>
-            <button class>update</button>
-            <button>delete</button>
-          </div>
-        ) : (
-          <></>
-        )}
         <h3 className={D.brand}>Brand: {product.brand}</h3>
         <span className={D.stock}>{product.stock} units</span>
         <div className={D.priceAndDescription}>
@@ -68,6 +60,14 @@ export default function DetailInfo({ handleAddToCart }) {
             </div>
           </Link>
         </div>
+        {product.user === user.id ? (
+          <div className={D.editBtn}>
+            <button>update</button>
+            <button>delete</button>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
