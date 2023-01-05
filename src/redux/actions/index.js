@@ -386,7 +386,6 @@ export function deleteAddress(id) {
 
 //REVIEWS
 export function getReviews() {
-  console.log('entraaa');
   return async dispatch => {
     const res = await axios.get(`${URL}/review`);
     return dispatch({ type: GET_REVIEWS, payload: res.data });

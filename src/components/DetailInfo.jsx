@@ -60,7 +60,7 @@ export default function DetailInfo({ handleAddToCart }) {
             </div>
           </Link>
         </div>
-        {product.userId === user.id ? (
+        {product.user === user.id ? (
           <div className={D.editBtn}>
             <button>update</button>
             <button>delete</button>
