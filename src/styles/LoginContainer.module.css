@@ -35,7 +35,8 @@
 .loginBtn {
   background-color: transparent;
   height: 30px;
-  color: #2bfab7;
+  /* color: #2bfab7; */
+  color: #fff;
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -43,7 +44,8 @@
   margin-top: 10px;
 }
 .loginBtn:hover {
-  color: #fff;
+  /* color: #fff; */
+  color: #2bfab7;
   transition: 0.15s ease-in-out;
 }
 
