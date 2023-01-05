@@ -34,7 +34,9 @@
   font-weight: 200;
   margin-left: 10px;
 }
-
+.reviewCont {
+  width: 60%;
+}
 .rating {
   position: absolute;
   right: 30px;

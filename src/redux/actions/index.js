@@ -21,12 +21,15 @@ import {
   POST_USER,
   LOGOUT_USER,
   POST_CART_ITEM,
+  GET_REVIEWS,
+  GET_PRODUCTS_FOR_SALE,
   PUT_PRODUCT,
   DELETE_PRODUCT,
   UPDATE_STOCK,
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
+  GET_USERS,
   GET_ADDRESSES,
   SET_FROM_STRIPE,
   GET_ORDERS,
@@ -87,6 +90,13 @@ export function getProductDetail(id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/products/${id}`);
     return dispatch({ type: GET_PRODUCT, payload: res.data });
+  };
+}
+
+export function getProductsByUser(id) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/products/user/${id}`);
+    return dispatch({ type: GET_PRODUCTS_FOR_SALE, payload: res.data });
   };
 }
 
@@ -327,6 +337,13 @@ export function getUser(email) {
   };
 }
 
+export function getUsers() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/users/`);
+    return dispatch({ type: GET_USERS, payload: res.data });
+  };
+}
+
 export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
@@ -361,17 +378,25 @@ export function updateAddress(payload) {
   };
   ñ;
 }
-////REVIEWS/////
-export const postReview = payload => async dispatch => {
-  try {
-    return await axios.post(`${URL}/review`, payload);
-  } catch (e) {
-    return dispatch({ type: SET_ERROR, payload: e });
-  }
-};
 
 export function deleteAddress(id) {
   return async () => {
     await axios.put(`${URL}/address/${id}`);
   };
 }
+
+//REVIEWS
+export function getReviews() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/review`);
+    return dispatch({ type: GET_REVIEWS, payload: res.data });
+  };
+}
+export const postReview = payload => async dispatch => {
+  try {
+    const res = await axios.post(`${URL}/review`, payload);
+    return dispatch({ type: POST_REVIEW, payload: res.data });
+  } catch (e) {
+    return dispatch({ type: SET_ERROR, payload: e });
+  }
+};

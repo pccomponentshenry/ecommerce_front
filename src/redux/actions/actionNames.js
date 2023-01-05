@@ -15,6 +15,7 @@ export const FILTER_BRANDS = "FILTER_BRANDS";
 export const INCREASE_CART = "INCREASE_CART";
 export const PUT_PRODUCT = "PUT_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const GET_PRODUCTS_FOR_SALE = "GET_PRODUCTS_FOR_SALE";
 //actions Cart
 export const ADD_ONE_TO_CART = "ADD_ONE_TO_CART";
 export const UPDATE_CART = "UPDATE_CART";
@@ -34,10 +35,12 @@ export const SET_FROM_STRIPE = "SET_FROM_STRIPE";
 export const POST_USER = "POST_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_USER = "GET_USER";
+export const GET_USERS = "GET_USERS";
 //actions address
 export const POST_ADDRESS = "POST_ADDRESS";
 export const GET_ADDRESSES = "GET_ADDRESSES";
 export const GET_ADDRESS = "GET_ADDRESS";
 export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
-//actions review
+//action reviews
+export const GET_REVIEWS='GET_REVIEWS';
 export const POST_REVIEW = "POST_REVIEW";

@@ -207,7 +207,6 @@ export default function OrderForm() {
                 }}
                 onBlur={e => {
                   errorSetting(e);
-                  console.log(error);
                 }}
               />
             </div>

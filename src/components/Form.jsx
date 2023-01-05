@@ -4,29 +4,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands, getCategories, postProduct } from "../redux/actions/index";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Form() {
-  const { user } = useAuth0();
-  const creator = user.nickname;
-  const initialState = {
-    name: "",
-    brand: "",
-    stock: "",
-    price: "",
-    description: "",
-    img: [],
-    category: "",
-    creator: creator,
-  };
-  //console.log(creator)
-  //console.log(user.email)
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getBrands());
-    dispatch(getCategories());
-  }, []);
-
+  const user = useSelector(state => state.user);
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
   const [image, setImage] = useState([]);
@@ -36,23 +17,44 @@ export default function Form() {
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState({});
   const [input, setInput] = useState({
-    name: "",
+    title: "",
     brand: "",
     stock: 0,
     price: null,
     description: "",
     img: [],
     category: "",
-    creator: creator,
+    userId: "",
   });
+
+  const initialState = {
+    title: "",
+    brand: "",
+    stock: "",
+    price: "",
+    description: "",
+    img: [],
+    category: "",
+    userId: "",
+  };
+
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+  }, []);
+
+  useEffect(() => {
+    setInput(prev => ({ ...prev, userId: user.id }));
+  }, [user]);
 
   function clearForm() {
     setInput({ ...initialState });
   }
+
   const handleValidate = input => {
     const errors = {};
-    if (!input.name) {
-      errors.name = "*Name is required";
+    if (!input.title) {
+      errors.title = "*Name is required";
     }
     if (!input.brand) {
       errors.brand = "*Brand is required";
@@ -84,7 +86,7 @@ export default function Form() {
     }
 
     if (
-      !error.name &&
+      !error.title &&
       !error.brand &&
       !error.price &&
       !error.stock &&
@@ -96,7 +98,6 @@ export default function Form() {
     ) {
       setDisable(false);
     } else {
-      console.log(error);
       setDisable(true);
     }
 
@@ -147,6 +148,7 @@ export default function Form() {
     setInput({ ...input, [e.target.name]: e.target.value });
     handleValidate(input);
   };
+
   const loadImage = e => {
     if (image.name) {
       handleChangeImg(e);
@@ -154,13 +156,13 @@ export default function Form() {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     loadImage(event);
   }, [image, input]);
 
   const handleSubmit = e => {
     if (
-      !error.name &&
+      !error.title &&
       !error.brand &&
       !error.price &&
       !error.stock &&
@@ -176,8 +178,6 @@ export default function Form() {
       setDisable(true);
       clearForm();
       setError({});
-    } else {
-      console.log(error);
     }
   };
 
@@ -247,14 +247,14 @@ export default function Form() {
             <div className={F.name}>
               <label>Name of the product: </label>
               <input
-                value={input.name || ""}
+                value={input.title || ""}
                 type="text"
-                name="name"
+                name="title"
                 placeholder=""
                 onBlur={e => errorSetting(e)}
                 onChange={e => handleChange(e)}
               />
-              <div>{error.name && <span>{error.name}</span>}</div>
+              <div>{error.title && <span>{error.title}</span>}</div>
             </div>
           </div>
           <div className={F.brandAndCatContainer}>

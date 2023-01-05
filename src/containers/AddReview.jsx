@@ -3,18 +3,23 @@ import R from "../styles/AddReview.module.css";
 import { useState } from "react";
 import { postReview } from "../redux/actions/";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 export default function AddReview() {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  //const users = useSelector(state => state.user);
   const params = useParams();
+  const { user } = useAuth0();
 
   const [input, setInput] = useState({
     id: params.id,
     title: "",
     message: "",
     score: null,
+    picprofile: user ? user.picture : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
+    username: user ? user.nickname : "Anónimo",
   });
   const [error, setError] = useState({});
   const [disable, setDisable] = useState(true);
@@ -25,7 +30,7 @@ export default function AddReview() {
       errors.title = "*Title is required";
     }
     if (!input.message) {
-      errors.message = "*Title is required";
+      errors.message = "*Message is required";
     }
     if (!input.score || !input.score === 0) {
       errors.score = "*Rating is required";
@@ -35,7 +40,6 @@ export default function AddReview() {
     } else {
       setDisable(true);
     }
-    console.log(input);
     return errors;
   };
 
@@ -52,7 +56,7 @@ export default function AddReview() {
   };
   const handleSubmit = () => {
     dispatch(postReview(input));
-    alert("Review added successfully");
+    alert("Review succesfully posted")
   };
 
   const [hover, setHover] = useState(null);
@@ -109,6 +113,9 @@ export default function AddReview() {
             </button>
           </div>
         </form>
+        <Link to="/profile">
+          <p>Back to Profile</p>
+        </Link>
       </div>
 
       <div className={R.imgCont}>

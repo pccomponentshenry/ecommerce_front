@@ -1,18 +1,16 @@
 import React from "react";
-import F from "../styles/Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands, getCategories, putProduct } from "../redux/actions/index";
 import { Link, useParams } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { getBrands, getCategories, putProduct } from "../redux/actions/index";
 import { getProductDetail } from "../redux/actions";
+import F from "../styles/Form.module.css";
 
 export default function Form() {
-  const { user } = useAuth0();
-  const creator = user.nickname;
+  const user = useSelector(state => state.user);
+  const product = useSelector(state => state.product);
   const params = useParams();
   const dispatch = useDispatch();
-  const product = useSelector(state => state.product);
 
   useEffect(() => {
     dispatch(getProductDetail(params.id));
@@ -43,19 +41,20 @@ export default function Form() {
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState({});
   const [input, setInput] = useState({
-    name: "",
+    title: "",
     brand: "",
     stock: "",
     price: null,
     description: "",
     img: [],
     category: "",
-    creator: creator,
+    userId: "",
   });
   //console.log(input, "en el estado")
   function clearForm() {
     setInput({ ...initialState });
   }
+
   const handleValidate = input => {
     const errors = {};
 
@@ -73,7 +72,6 @@ export default function Form() {
     if (!error.price && !error.stock) {
       setDisable(false);
     } else {
-      console.log(error);
       setDisable(true);
     }
 
@@ -124,6 +122,7 @@ export default function Form() {
     setInput({ ...initialState, [e.target.name]: e.target.value });
     console.log(input);
   };
+
   const loadImage = e => {
     if (image.name) {
       handleChangeImg(e);
@@ -224,9 +223,9 @@ export default function Form() {
             <div className={F.name}>
               <label>Name of the product: </label>
               <input
-                value={input.name || ""}
+                value={input.title || ""}
                 type="text"
-                name="name"
+                name="title"
                 placeholder={product.title}
                 onBlur={e => errorSetting(e)}
                 onChange={e => {
@@ -234,7 +233,7 @@ export default function Form() {
                   errorSetting(e);
                 }}
               />
-              <div>{error.name && <span>{error.name}</span>}</div>
+              <div>{error.title && <span>{error.title}</span>}</div>
             </div>
           </div>
           <div className={F.brandAndCatContainer}>
