@@ -1,12 +1,11 @@
-.content {
+.content{
     display: grid;
     grid-template-columns: 1fr 9fr;
     justify-content: center;
     padding-top: 100px;
 }
-
 .sideContainer {
-    width: 200px;
+    width:200px;
     display: grid;
     grid-template-rows: repeat(12, 80px);
     height: 85vh;
@@ -21,33 +20,18 @@
     align-items: center;
     z-index: 999;
     color: #FFF;
-}
+  }
 
-.userContainer {
-    padding: 25px;
-    width: 70%;
-    border-top: solid 1px #2bfab7;
-    border-left: solid 1px #2bfab7;
-    border-bottom: solid 1px #2bfab7;
-    border-right: solid 1px #2bfab7;
-    border-radius: 23px;
+  .statsContainer {
+    padding-top: 80px;
+    width: 80%;
     top: 0px;
     display: flex;
-    background-color: #FFF;
     height: fit-content;
-    margin: 0 auto;
-    margin-top: 30px;
     color: #FFF;
-    align-content: center;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-.tabla{
-    width:40%;
-    align-items: center;
     margin: 0 auto;
-    justify-content: center;
-    margin-top: 20px;
-    color: #FFF;
-    background-color: #2bfab7;
+    text-align: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: flex-start;
 }
