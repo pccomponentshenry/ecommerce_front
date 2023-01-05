@@ -1,67 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import P from "../styles/Purchases.module.css";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrders } from "../redux/actions";
 
 export default function Purchases() {
   const user = useSelector(state => state.user);
-  const order = {
-    data: [
-      {
-        productId: 1,
-        title: "Corsair Air Series SP120 Quiet Edition Single Fan",
-        quantity: 2,
-        price: 129.9,
-        img: "https://images-na.ssl-images-amazon.com/images/I/41F7S5TOiTL._SL600_.jpg",
-      },
-      {
-        productId: 2,
-        title: "Noctua NF-A14 FLX, Premium Quiet Fan, 3-Pin (140mm, Brown)",
-        quantity: 1,
-        price: 22.99,
-        img: "https://images-na.ssl-images-amazon.com/images/I/41Ya7lO5TAL._SL600_.jpg",
-      },
-      {
-        productId: 5,
-        title: "Be Quiet! Pure Wings 2 120mm, BL046, Cooling Fan",
-        quantity: 5,
-        price: 15.94,
-        img: "https://images-na.ssl-images-amazon.com/images/I/41j1dWoCY0L._SL600_.jpg",
-      },
-    ],
-  };
+  const purchases = useSelector(state => state.purchases);
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(getOrders(user.id));
+    setIsLoading(false);
+  }, [user])
 
   return (
     <div>
-      <div className={P.orderBox}>
-        {order.data.map((el, i) => (
-          <div className={P.orderCard}>
-            <div className={P.imageCont}>
-              <img src={el.img} alt="" />
+      {isLoading ? <div>Loading...</div> : purchases.map(p => (
+        <div className={P.orderBox} key={p.id}>
+          <h4>
+            Order PE000{p.id}
+          </h4>
+          <span className={`${p.status === "completed" ? P.completed : {}} ${p.status === "cancelled" ? P.cancelled : {}}`}>
+            {p.status.charAt(0).toUpperCase() + p.status.slice(1)}
+          </span>
+          <h6 className={`${p.status === "completed" ? P.dateCompleted : {}} ${p.status === "cancelled" ? P.dateCancelled : {}}`}>
+            {p.status === "completed" ? "Purchase Date:" : "Date:"} {p.purchaseDate.substr(0, 10)}
+          </h6>
+          {p.orderItems.map(el => (
+            <div className={P.orderCard} key={el.id}>
+              <div className={P.imageCont}>
+                <img src={el.product.img} alt="" />
+              </div>
+              <div className={P.cardInfo}>
+                <Link
+                  style={{ textDecoration: "none", color: "#212121" }}
+                  to={`/detail/${el.product.id}`}
+                >
+                  <h3>{el.product.title}</h3>
+                </Link>
+                <h5>
+                  {el.quantity} Units - ${el.price}
+                </h5>
+                <Link
+                  style={{ textDecoration: "none", color: "#212121" }}
+                  to={`/addreview/${user.id}/${el.product.id}`}
+                >
+                  {" "}
+                  <button>Leave a review</button>{" "}
+                </Link>
+              </div>
             </div>
-            <div className={P.cardInfo}>
-              <Link
-                style={{ textDecoration: "none", color: "#212121" }}
-                to={`/detail/${el.productId}`}
-                key={i}
-              >
-                <h3>{el.title}</h3>
-              </Link>
-              <h5>
-                {el.quantity} Units - ${el.price}
-              </h5>
-              <Link
-                style={{ textDecoration: "none", color: "#212121" }}
-                to={`/addreview/${user.id}/${el.productId}`}
-                key={i}
-              >
-                {" "}
-                <button>Leave a review</button>{" "}
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
