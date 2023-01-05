@@ -9,3 +9,7 @@
 .link:hover{
   color: #2bfab7;
 }
+
+.contentLink{
+  margin: 15px;
+}

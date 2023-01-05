@@ -23,23 +23,23 @@
 }
 
 .userContainer {
-    padding-left: 120px;
-    padding-right: 120px;
-    padding-top: 40px;
+    padding: 25px;
     width: 70%;
     border-top: solid 1px #2bfab7;
     border-left: solid 1px #2bfab7;
     border-bottom: solid 1px #2bfab7;
     border-right: solid 1px #2bfab7;
-    border-radius: 10px;
+    border-radius: 23px;
     top: 50px;
-    align-items: top;
+    display: flex;
+    background-color: #FFF;
+    height: fit-content;
     margin: 0 auto;
-    justify-content: center;
     margin-top: 150px;
     color: #FFF;
-    flex-wrap: wrap;
-    align-content: flex-start;
+    align-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 .tabla{
     width:40%;
