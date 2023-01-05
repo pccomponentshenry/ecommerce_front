@@ -30,7 +30,7 @@ export default function Form() {
     userId: "",
   });
   const initialState = {
-    name: product.title,
+    title: product.title,
     brand: product.brand,
     stock: product.stock,
     price: product.price,
