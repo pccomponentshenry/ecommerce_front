@@ -204,7 +204,6 @@ export default function OrderForm() {
                 onChange={e => handleChange(e)}
                 onBlur={e => {
                   errorSetting(e);
-                  console.log(error);
                 }}
               />
             </div>

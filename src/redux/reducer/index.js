@@ -22,6 +22,7 @@ import {
   DELETE_PRODUCT,
   GET_REVIEWS,
   POST_REVIEW,
+  GET_PRODUCTS_FOR_SALE,
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
@@ -34,6 +35,7 @@ import {
 
 const initialState = {
   products: [],
+  productsForSale: [],
   product: [],
   brands: [],
   categories: [],
@@ -112,6 +114,13 @@ function rootReducer(state = initialState, action) {
     case DELETE_PRODUCT: {
       return {
         ...state,
+      };
+    }
+
+    case GET_PRODUCTS_FOR_SALE: {
+      return {
+        ...state,
+        productsForSale: action.payload,
       };
     }
 

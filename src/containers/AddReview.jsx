@@ -3,7 +3,7 @@ import R from "../styles/AddReview.module.css";
 import { useState } from "react";
 import { postReview } from "../redux/actions/";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams , Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -11,14 +11,14 @@ export default function AddReview() {
   const dispatch = useDispatch();
   //const users = useSelector(state => state.user);
   const params = useParams();
-  const { user} = useAuth0();
+  const { user } = useAuth0();
 
   const [input, setInput] = useState({
     id: params.id,
     title: "",
     message: "",
     score: null,
-    picprofile: user ? user.picture : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU" ,
+    picprofile: user ? user.picture : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
     username: user ? user.nickname : "Anónimo",
   });
   const [error, setError] = useState({});
@@ -40,7 +40,6 @@ export default function AddReview() {
     } else {
       setDisable(true);
     }
-    console.log(input);
     return errors;
   };
 
@@ -115,7 +114,7 @@ export default function AddReview() {
           </div>
         </form>
         <Link to="/profile">
-            <p>Back to Profile</p>
+          <p>Back to Profile</p>
         </Link>
       </div>
 
