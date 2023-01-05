@@ -36,6 +36,7 @@ import {
   GET_ADDRESS,
   UPDATE_ADDRESS,
   POST_REVIEW,
+  GET_TOTAL_ORDERS
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -397,6 +398,13 @@ export const postReview = payload => async dispatch => {
     return dispatch({ type: POST_REVIEW, payload: res.data });
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
-  }
-};
+  };
+}
+///////////DASHBORAD ADMIN
+export function getAllOrders() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order/products`);
+    return dispatch({ type: GET_TOTAL_ORDERS, payload: res.data });
+  };
+}
 
