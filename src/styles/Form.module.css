@@ -9,12 +9,53 @@
   display: inline;
   margin-right: 200px;
 }
+
+.containerUpdate {
+  position: relative;
+  top: 160px;
+  left: 100px;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  height: 60vh;
+  display: inline;
+  margin-right: 200px;
+}
 .container h5 {
   color: #fff;
   font-size: 16px;
   position: relative;
 }
+.labelCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.labelCont h1 {
+  position: absolute;
+  z-index: 600;
+  font-size: 120px;
+  font-weight: 200;
+}
+.prevImageCont {
+  background-color: #fff;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  filter: brightness(0.3);
+}
 
+.prevImage {
+  width: 100%;
+}
+
+.containerUpdate h5 {
+  color: #fff;
+  font-size: 16px;
+  position: relative;
+}
 .inputCont {
   cursor: pointer;
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%232BFAB7FF' stroke-width='3' stroke-dasharray='50%25%2c 13%25' stroke-dashoffset='86' stroke-linecap='butt'/%3e%3c/svg%3e");
@@ -32,14 +73,22 @@
   position: relative;
   z-index: 600;
 }
-
-.imgCont img {
-  cursor: pointer;
+.imgCont {
   height: 250px;
+  width: 250px;
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  background-color: #fff;
+}
+.imgCont img {
+  cursor: pointer;
+  height: fit-content;
+  width: 100%;
   position: relative;
+  border-radius: 10px;
 }
 
 .titleCont {
@@ -134,6 +183,7 @@ input::-webkit-inner-spin-button {
   font-weight: 200;
   position: relative;
   top: 5px;
+  overflow: hidden;
 }
 .descriptionCont {
   margin-top: 20px;
@@ -348,6 +398,11 @@ input::-webkit-inner-spin-button {
   color: #2bfab7;
   cursor: pointer;
 }
+.imgError {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 200;
+}
 .successPic span:hover {
   transition: 0.15s ease-in-out;
   color: #fff;
@@ -376,4 +431,83 @@ input::-webkit-inner-spin-button {
 .algo {
   position: absolute;
   margin-top: 400px;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    position: relative;
+    top: 160px;
+    left: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container h5 {
+    display: none;
+  }
+  .titleCont {
+    position: relative;
+    top: 130px;
+    padding: 0;
+    text-align: center;
+  }
+  .formContainer {
+    padding-left: 30px;
+    padding-right: 30px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 170px;
+  }
+  .name {
+    left: 0px;
+  }
+  .name input {
+    margin-top: 10px;
+    margin-left: -3px;
+  }
+  .brandAndCatContainer {
+    width: 100%;
+  }
+  .category {
+    width: 100px;
+    left: 20px;
+    margin-left: 10px;
+    height: 100px;
+    overflow: hidden;
+  }
+  .errorStock {
+    height: 100px;
+    overflow: hidden;
+    line-height: 100%;
+    margin-top: 5px;
+  }
+
+  .brand {
+    width: 100px;
+    margin-right: 10px;
+    height: 100px;
+  }
+
+  .description {
+    margin-bottom: 20px;
+    margin-top: 0px;
+    height: 110px;
+    position: relative;
+  }
+  .description textarea {
+    height: 60px;
+    background-color: transparent;
+    border: solid 1px #2bfab7;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px;
+    padding-top: 5px;
+    font-weight: 200;
+    overflow: hidden;
+  }
 }

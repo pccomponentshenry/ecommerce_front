@@ -14,3 +14,22 @@
   background-color: #000522;
   display: flex;
 }
+@media screen and (max-width: 500px) {
+  .formCont {
+    z-index: 600;
+    width: 100%;
+  }
+
+  .formBackground {
+    width: 100vw;
+    position: absolute;
+    bottom: 0px;
+    display: none;
+  }
+  .container {
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000522;
+    display: flex;
+  }
+}

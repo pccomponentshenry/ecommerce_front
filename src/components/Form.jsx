@@ -6,7 +6,6 @@ import { getBrands, getCategories, postProduct } from "../redux/actions/index";
 import { Link } from "react-router-dom";
 
 export default function Form() {
-
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const brands = useSelector(state => state.brands);
@@ -62,7 +61,7 @@ export default function Form() {
     }
     if (!input.stock) {
       errors.stock = "*Stock is required";
-    } else if (Number(input.stock) < 0) {
+    } else if (Number(input.stock) <= 0) {
       errors.stock = "*Stock must be a positive number";
     } else if (Number(input.stock) !== parseInt(input.stock, 10)) {
       errors.stock = "*Stock must be an integer number";
@@ -85,6 +84,7 @@ export default function Form() {
     if (!input.img) {
       errors.img = "*You must upload at least one image ";
     }
+
     if (
       !error.title &&
       !error.brand &&
@@ -94,11 +94,13 @@ export default function Form() {
       !error.img &&
       !error.category &&
       !error.brand &&
-      input.description.length > 0
+      input.description.length > 0 &&
+      input.img.length > 0
     ) {
       setDisable(false);
     } else {
       setDisable(true);
+      console.log(errors);
     }
 
     return errors;
@@ -108,7 +110,7 @@ export default function Form() {
     setError(
       handleValidate({
         ...input,
-        [e.target.title]: e.target.value,
+        [e.target.name]: e.target.value,
       })
     );
   };
@@ -157,6 +159,10 @@ export default function Form() {
   useEffect(() => {
     loadImage(event);
   }, [image]);
+
+  useEffect(() => {
+    handleValidate(input);
+  }, [input]);
 
   const handleSubmit = e => {
     if (
@@ -207,166 +213,176 @@ export default function Form() {
           <div className={F.darkBg}></div>
         </>
       )}
-
-      <form onSubmit={e => handleSubmit(e)} autoComplete="off">
-        <div className={F.titleCont}>
-          <h5>New product</h5>
-          <h6>Add images of your product</h6>
-        </div>
-
-        <div className={F.container}>
-          <h5>Upload an image</h5>
-          <input
-            type="file"
-            name="uploadfile"
-            multiple="multiple"
-            id="img"
-            style={{ display: "none" }}
-            onChange={e => {
-              setImage(e.target.files[0]);
-              setEvent(e);
-            }}
-          />
-
-          {!input.img.length ? (
-            <label className={F.inputCont} htmlFor="img">
-              +
-            </label>
-          ) : (
-            <div className={F.imgCont}>
-              <img src={input.img} alt="" />
-            </div>
-          )}
-          {error.img && <span>{error.img}</span>}
-        </div>
-
-        <div className={F.formContainer}>
-          <div>
-            <div className={F.name}>
-              <label>Name of the product: </label>
-              <input
-                value={input.title || ""}
-                type="text"
-                name="title"
-                placeholder=""
-                onBlur={e => errorSetting(e)}
-                onChange={e => handleChange(e)}
-              />
-              <div>{error.title && <span>{error.title}</span>}</div>
-            </div>
+      <div className={F.form}>
+        <form onSubmit={e => handleSubmit(e)} autoComplete="off">
+          <div className={F.titleCont}>
+            <h5>New product</h5>
+            <h6>Add images of your product</h6>
           </div>
-          <div className={F.brandAndCatContainer}>
-            <div className={F.brand}>
-              <select
-                name="brand"
-                value={input.brand}
-                id="Brand"
-                onBlur={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
-                onChange={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
-              >
-                <option defaultValue={"DEFAULT"}>Brand</option>
-                {brands.map((el, i) => (
-                  <option key={i}>{el.name}</option>
-                ))}
-              </select>
-              {error.brand && <span>{error.brand}</span>}
-            </div>
 
-            <div className={F.category}>
-              <select
-                name="category"
-                id="Category"
-                value={input.category}
-                onBlur={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
-                onChange={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
-              >
-                <option defaultValue={"DEFAULT"}>Category</option>
-                {cat.map((el, i) => (
-                  <option key={i}>{el.name}</option>
-                ))}
-              </select>
-              <div className={F.errorStock}>
-                {error.category && <span>{error.category}</span>}
-              </div>
-            </div>
-          </div>
-          <div className={F.descriptionCont}>
-            <div className={F.description}>
-              <label>Description: </label>
-              <textarea
-                name="description"
-                value={input.description}
-                id="description"
-                cols="30"
-                rows="10"
-                onBlur={e => {
-                  errorSetting(e);
-                }}
-                onChange={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
-              ></textarea>
-              {error.brand && <span>{error.description}</span>}
-            </div>
-          </div>
-          <div className={F.stockAndPrice}>
-            <div className={F.stock}>
-              <label>Stock: </label>
-              <input
-                value={input.stock || ""}
-                type="number"
-                name="stock"
-                min="0"
-                onBlur={e => errorSetting(e)}
-                onChange={e => handleChange(e)}
-              />
-              <div>{error.stock && <span>{error.stock}</span>}</div>
-            </div>
-
-            <div className={F.price}>
-              <label>Price: </label>
-              <input
-                value={input.price || ""}
-                type="float"
-                name="price"
-                min="0"
-                onBlur={e => {
-                  errorSetting(e);
-                  handleValidate(input);
-                }}
-                onChange={e => handleChange(e)}
-              />
-              <div className={F.errorPrice}>
-                {error.price && <span>{error.price}</span>}
-              </div>
-            </div>
-          </div>
-          <div className={F.formBtn}>
-            <button
-              type="submit"
-              className={disable === false ? F.activeBtn : F.disabledBtn}
-              onClick={e => {
-                disable && e.preventDefault();
+          <div className={F.container}>
+            <h5>Upload an image</h5>
+            <input
+              type="file"
+              name="uploadfile"
+              multiple="multiple"
+              id="img"
+              style={{ display: "none" }}
+              onChange={e => {
+                setImage(e.target.files[0]);
+                setEvent(e);
               }}
-            >
-              Publish product
-            </button>
+            />
+
+            {!input.img.length ? (
+              <label className={F.inputCont} htmlFor="img">
+                +
+              </label>
+            ) : (
+              <div className={F.imgCont}>
+                <img src={input.img} alt="" />
+              </div>
+            )}
+            {error.img && <span className={F.imgError}>{error.img}</span>}
           </div>
-        </div>
-      </form>
+
+          <div className={F.formContainer}>
+            <div>
+              <div className={F.name}>
+                <label>Name of the product: </label>
+                <input
+                  value={input.title || ""}
+                  type="text"
+                  name="title"
+                  placeholder=""
+                  onBlur={e => errorSetting(e)}
+                  onChange={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                />
+                <div>{error.title && <span>{error.title}</span>}</div>
+              </div>
+            </div>
+            <div className={F.brandAndCatContainer}>
+              <div className={F.brand}>
+                <select
+                  name="brand"
+                  value={input.brand}
+                  id="Brand"
+                  onBlur={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                  onChange={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                >
+                  <option defaultValue={"DEFAULT"}>Brand</option>
+                  {brands.map((el, i) => (
+                    <option key={i}>{el.name}</option>
+                  ))}
+                </select>
+                {error.brand && <span>{error.brand}</span>}
+              </div>
+
+              <div className={F.category}>
+                <select
+                  name="category"
+                  id="Category"
+                  value={input.category}
+                  onBlur={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                  onChange={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                >
+                  <option defaultValue={"DEFAULT"}>Category</option>
+                  {cat.map((el, i) => (
+                    <option key={i}>{el.name}</option>
+                  ))}
+                </select>
+                <div className={F.errorStock}>
+                  {error.category && <span>{error.category}</span>}
+                </div>
+              </div>
+            </div>
+            <div className={F.descriptionCont}>
+              <div className={F.description}>
+                <label>Description: </label>
+                <textarea
+                  name="description"
+                  value={input.description}
+                  id="description"
+                  cols="30"
+                  rows="10"
+                  onBlur={e => {
+                    errorSetting(e);
+                  }}
+                  onChange={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                ></textarea>
+                {error.brand && <span>{error.description}</span>}
+              </div>
+            </div>
+            <div className={F.stockAndPrice}>
+              <div className={F.stock}>
+                <label>Stock: </label>
+                <input
+                  value={input.stock || ""}
+                  type="number"
+                  name="stock"
+                  min="0"
+                  onBlur={e => errorSetting(e)}
+                  onChange={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                />
+                <div>{error.stock && <span>{error.stock}</span>}</div>
+              </div>
+
+              <div className={F.price}>
+                <label>Price: </label>
+                <input
+                  value={input.price || ""}
+                  type="float"
+                  name="price"
+                  min="0"
+                  onBlur={e => {
+                    errorSetting(e);
+                    handleValidate(input);
+                  }}
+                  onChange={e => {
+                    handleChange(e);
+                    errorSetting(e);
+                  }}
+                />
+                <div className={F.errorPrice}>
+                  {error.price && <span>{error.price}</span>}
+                </div>
+              </div>
+            </div>
+            <div className={F.formBtn}>
+              <button
+                type="submit"
+                className={disable === false ? F.activeBtn : F.disabledBtn}
+                onClick={e => {
+                  disable && e.preventDefault();
+                }}
+              >
+                Publish product
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

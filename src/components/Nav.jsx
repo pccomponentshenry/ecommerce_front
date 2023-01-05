@@ -67,15 +67,6 @@ export default function Nav() {
           </ul>
           {activeNav === true && (
             <ul className={isAuthenticated ? N.navList : N.authNavList}>
-              <Link to="/categories" style={{ textDecoration: "none" }}>
-                <li
-                  className={
-                    isAuthenticated ? N.authenticated : N.notAuthenticated
-                  }
-                >
-                  Categories
-                </li>
-              </Link>
               <Link to="/latest" style={{ textDecoration: "none" }}>
                 <li
                   className={
@@ -107,7 +98,7 @@ export default function Nav() {
                 >
                   Favorites
                 </li>
-              </Link>             
+              </Link>
             </ul>
           )}
         </div>
