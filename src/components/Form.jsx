@@ -145,8 +145,7 @@ export default function Form() {
   };
 
   const handleChange = e => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-    handleValidate(input);
+    setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const loadImage = e => {
@@ -158,7 +157,11 @@ export default function Form() {
 
   useEffect(() => {
     loadImage(event);
-  }, [image, input]);
+  }, [image]);
+
+  useEffect(() => {
+    handleValidate(input);
+  }, [input]);
 
   const handleSubmit = e => {
     if (
