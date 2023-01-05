@@ -94,11 +94,13 @@ export default function Form() {
       !error.img &&
       !error.category &&
       !error.brand &&
-      input.description.length > 0
+      input.description.length > 0 &&
+      input.img.length > 0
     ) {
       setDisable(false);
     } else {
       setDisable(true);
+      console.log(errors);
     }
 
     return errors;
@@ -109,7 +111,6 @@ export default function Form() {
       handleValidate({
         ...input,
         [e.target.name]: e.target.value,
-        img: e.target.files,
       })
     );
   };
@@ -255,7 +256,10 @@ export default function Form() {
                 name="title"
                 placeholder=""
                 onBlur={e => errorSetting(e)}
-                onChange={e => handleChange(e)}
+                onChange={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
               />
               <div>{error.title && <span>{error.title}</span>}</div>
             </div>
