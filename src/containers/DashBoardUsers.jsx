@@ -8,6 +8,9 @@ import {
   Box, 
   IconButton,
   Tooltip,
+  Radio,
+  FormControlLabel,
+  MenuItem,
 } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 
@@ -16,8 +19,10 @@ export default function DashBoardUsers() {
   const users = useSelector(state => state.users);
   const [tableData, setTableData] = useState(() => users);
   const [validationErrors, setValidationErrors] = useState({});
- 
   const dispatch = useDispatch();
+  const optionsAdmin = [{id:0, text:'Yes', value:true }, {id:1, text:'No', value:false }];
+  const optionsStatus = [{id:0, text:'Active', value:'active' }, {id:1, text:'Inactive', value:'inactive' }];
+
 
   useEffect(() => {
     dispatch(getUsers());
@@ -73,31 +78,46 @@ export default function DashBoardUsers() {
         header: 'ID',
         enableColumnOrdering: false,
         enableEditing: false, //disable editing on this column
-        enableSorting: false,
-        size: 100,
+        enableSorting: false,        
       },
       {
         accessorKey: 'username',
-        header: 'UserName',
-        size: 180,
+        header: 'UserName',      
       },
       {
         accessorKey: 'email',
-        header: 'Email',
-        size: 210,
+        header: 'Email',       
       },
       {
         accessorKey: 'status',
-        header: 'Status',
-        size: 10,
-       
+        header: 'Status',   
+        muiTableBodyCellEditTextFieldProps: {
+          select: true, //change to select for a dropdown
+          children: optionsStatus.map((o) => (
+            <MenuItem key={o.id} value={o.value}>
+              {o.text}
+            </MenuItem>
+          )),
+        },     
+        Cell: ({ cell }) => (
+         cell.getValue() === "active" ?  <FormControlLabel control={<Radio defaultChecked color="success"/>} label="Active" />
+           : <FormControlLabel control={<Radio color="secondary" defaultChecked/>} label="Inactive" />
+          )    
       },   
       {
         accessorKey: 'isAdmin',
-        header: 'Admin',
-        size: 20,
+        header: 'Admin', 
+        muiTableBodyCellEditTextFieldProps: {
+          select: true, //change to select for a dropdown
+          children: optionsAdmin.map((o) => (
+            <MenuItem key={o.id} value={o.value}>
+              {o.text}
+            </MenuItem>
+          )),
+        },     
         Cell: ({ cell }) => (
-           <span>{cell.getValue().toLocaleString() === "true" ? "YES" : "NO"} </span>
+           cell.getValue().toLocaleString() === "true" ? <FormControlLabel control={<Radio defaultChecked color="success"/>} label="Yes" /> : 
+           <FormControlLabel control={<Radio color="secondary" defaultChecked/>} label="No" />
           )        
       },   
      
@@ -113,10 +133,17 @@ export default function DashBoardUsers() {
       <div className={s.sideContainer}><SideDash /></div>
       <div className={s.userContainer}>
       <MaterialReactTable className={s.tabla}
+        enableHiding={false}
+        enableColumnFilters={false}
+        enableDensityToggle={false}
+        enableFullScreenToggle={false}
+        enableGlobalFilter={true}
+        initialState={{
+          showGlobalFilter:true,          
+        }}        
         columns={columns}
         data={tableData}
         enableTopToolbar={true}
-        // initialState={{ columnVisibility: { isAdmin: false } }} //hide firstName column by default
         editingMode="modal" //default
         enableEditing
         onEditingRowSave={handleSaveRowEdits}
@@ -131,6 +158,15 @@ export default function DashBoardUsers() {
             </Tooltip>
           </Box>
         )}
+        muiTablePaperProps={{
+          elevation: 0, //change the mui box shadow
+          //customize paper styles
+          sx: {
+            borderRadius: '5px',
+            border: '2px solid #e0e0e0',
+            boxShadow: '0px 0px 3px 0px #000'
+          },
+        }}
        
       />
       </div>
