@@ -64,7 +64,7 @@ export default function ShoppingCart() {
         <div className={S.startShopping}>
           {guest === "default" ? (
             <>
-              Login to buy
+              {/* Login to buy */}
               <LoginButton />{" "}
             </>
           ) : (
