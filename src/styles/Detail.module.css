@@ -238,7 +238,7 @@
 
   .imageContainer {
     width: 100%;
-    height: 80vh;
+    height: 70vh;
     float: none;
     position: relative;
     top: 11vh;
@@ -246,16 +246,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  .topContainer {
-    position: absolute;
-    margin-top: 20px;
-    width: 100%;
-    right: 0px;
-    padding-left: 30px;
-    padding-right: 30px;
-    height: fit-content;
   }
 
   .dataContainer {
@@ -403,5 +393,35 @@
     top: 3px;
     right: 2px;
     cursor: pointer;
+  }
+  .Reviews {
+    border-top: solid 1px gray;
+    margin-top: 10px;
+    height: fit-content;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0px;
+  }
+
+  .Reviews h6 {
+    font-size: 14px;
+    width: 80%;
+    overflow: hidden;
+  }
+
+  .topContainer {
+    position: relative;
+    margin-top: 70px;
+    width: 100%;
+    right: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: fit-content;
+  }
+  .Container {
+    width: 100%;
+    overflow: hidden;
+    display: inline;
   }
 }
