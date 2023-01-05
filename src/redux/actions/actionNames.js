@@ -28,7 +28,7 @@ export const ADD_TO_FAV = "ADD_TO_FAV";
 export const POST_CART_ITEM = "POST_CART_ITEM";
 export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
 export const UPDATE_STOCK = "UPDATE_STOCK";
-export const GET_ORDERS = "GET_ORDERS";
+export const GET_PURCHASES = "GET_PURCHASES";
 
 export const SET_FROM_STRIPE = "SET_FROM_STRIPE";
 //actions User
@@ -42,5 +42,5 @@ export const GET_ADDRESSES = "GET_ADDRESSES";
 export const GET_ADDRESS = "GET_ADDRESS";
 export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
 //action reviews
-export const GET_REVIEWS='GET_REVIEWS';
+export const GET_REVIEWS = 'GET_REVIEWS';
 export const POST_REVIEW = "POST_REVIEW";

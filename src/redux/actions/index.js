@@ -32,7 +32,7 @@ import {
   GET_USERS,
   GET_ADDRESSES,
   SET_FROM_STRIPE,
-  GET_ORDERS,
+  GET_PURCHASES,
   GET_ADDRESS,
   UPDATE_ADDRESS,
   POST_REVIEW,
@@ -279,7 +279,7 @@ export const changeOrderStatus = (userId, status) => async () => {
 export function getOrders(userId) {
   return async dispatch => {
     const res = await axios.get(`${URL}/order/${userId}`);
-    return dispatch({ type: GET_ORDERS, payload: res.data });
+    return dispatch({ type: GET_PURCHASES, payload: res.data });
   };
 }
 
