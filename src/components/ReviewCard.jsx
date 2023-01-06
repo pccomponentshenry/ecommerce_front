@@ -10,7 +10,6 @@ export default function ReviewCard(props) {
       <div className={R.reviewCont}>
         <span className={R.name}>{props.name}</span>
         <p className={R.review}>{props.review}</p>
-        <p className={R.name}>{props.user}</p>
       </div>
       <div className={R.rating}>
         <label className={R.ratingTitle}>Rating: </label>
@@ -18,7 +17,7 @@ export default function ReviewCard(props) {
           const ratingValue = i + 1;
           return (
             <label
-              className={props.score >= ratingValue ? R.fullStar : R.emptyStar}
+              className={props.rating >= ratingValue ? R.fullStar : R.emptyStar}
             >
               ★
             </label>

@@ -34,9 +34,7 @@
   font-weight: 200;
   margin-left: 10px;
 }
-.reviewCont {
-  width: 60%;
-}
+
 .rating {
   position: absolute;
   right: 30px;
@@ -59,7 +57,6 @@
   color: gray;
   cursor: pointer;
 }
-
 @media screen and (max-width: 500px) {
   .ProfilePicCont {
     height: 20%;

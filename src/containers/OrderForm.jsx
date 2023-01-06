@@ -201,12 +201,10 @@ export default function OrderForm() {
                 name="streetName"
                 value={input.streetName || ""}
                 placeholder="Street name"
-                onChange={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
+                onChange={e => handleChange(e)}
                 onBlur={e => {
                   errorSetting(e);
+                  console.log(error);
                 }}
               />
             </div>
@@ -219,10 +217,7 @@ export default function OrderForm() {
                 name="streetNumber"
                 value={input.streetNumber || ""}
                 placeholder="Street number"
-                onChange={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
+                onChange={e => handleChange(e)}
                 onBlur={e => errorSetting(e)}
               />
             </div>
@@ -235,10 +230,7 @@ export default function OrderForm() {
                 name="apartment"
                 value={input.apartment || ""}
                 placeholder="Apartment"
-                onChange={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
+                onChange={e => handleChange(e)}
                 onBlur={e => errorSetting(e)}
               />
               {error.apartment && (
@@ -251,10 +243,7 @@ export default function OrderForm() {
                 name="zipCode"
                 value={input.zipCode || ""}
                 placeholder="Zip Code"
-                onChange={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
+                onChange={e => handleChange(e)}
                 onBlur={e => errorSetting(e)}
               />
             </div>
@@ -265,10 +254,7 @@ export default function OrderForm() {
               <select
                 name="locationId"
                 id="locationId"
-                onChange={e => {
-                  handleChange(e);
-                  errorSetting(e);
-                }}
+                onChange={e => handleChange(e)}
                 onBlur={e => errorSetting(e)}
               >
                 <option defaultValue={"DEFAULT"}>Location</option>
@@ -290,10 +276,7 @@ export default function OrderForm() {
               cols="30"
               rows="10"
               placeholder="Additional information"
-              onChange={e => {
-                handleChange(e);
-                errorSetting(e);
-              }}
+              onChange={e => handleChange(e)}
               onBlur={e => errorSetting(e)}
             />
             <button

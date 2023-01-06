@@ -1,27 +1,18 @@
-import { useState, useEffect } from "react";
-import s from "../styles/BarChart.module.css";
+import { useState } from "react";
+import F from "../styles/BarChart.module.css";
 import BarChart from "../components/BarChart";
 import LineChart from "../components/LineChart";
 import PieChart from "../components/PieChart";
-//import { UserData } from "../Data";
-import {getAllOrders} from "../redux/actions/index"
-import { useDispatch, useSelector } from "react-redux";
+import { UserData } from "../Data";
 import "chart.js/auto";
 
 function AppBarChart() {
-  const dispatch = useDispatch()
-  
-  const allOrders = useSelector(state => state.allOrders);
-  useEffect(() => {
-    dispatch(getAllOrders());
-  }, []);
-  console.log(allOrders)
   const [userData, setUserData] = useState({
-    labels: allOrders.map((data) => data.title.substr(0, 10) + "..."),
+    labels: UserData.map((data) => data.description),
     datasets: [
       {
         label: "Ventas",
-        data: allOrders.map((data) => data.total),
+        data: UserData.map((data) => data.stock),
         backgroundColor: [
           "rgba(75,192,192,1)",
           "#ecf0f1",
@@ -35,12 +26,10 @@ function AppBarChart() {
     ],
   });
 
-   console.log(userData);
-
+  console.log(userData);
   return (
-    <div className={s.contentChart}>
-      <h5 className={s.titleChart}>Lastest Sales</h5>
-      <div style={{ width: 500, textAlign:'center' }}>
+    <div className={F.favContainer}>
+      <div style={{ width: 800 }}>
         <BarChart chartData={userData} />
       </div>
       {/* <div style={{ width: 400 }}>

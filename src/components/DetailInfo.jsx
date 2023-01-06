@@ -1,30 +1,28 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import D from "../styles/Detail.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { addToFav } from "../redux/actions";
 
-export default function DetailInfo({ handleAddToCart }) {
-  const dispatch = useDispatch();
+export default function DetailInfo({ handleAddToCart, owner, creator, guest }) {
   const product = useSelector(state => state.product);
-  const user = useSelector(state => state.user);
-  const [clicked, setClicked] = useState(false);
   const fav = localStorage.getItem(product.id)
     ? JSON.parse(localStorage.getItem(product.id))
     : [];
   const [active, setActive] = useState(fav);
+  const [clicked, setClicked] = useState(false);
+  const dispatch = useDispatch();
 
-  const profilePic =
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU";
-
-  useEffect(() => {
+  React.useEffect(() => {
     setActive(fav);
   }, [clicked]);
 
   const handleAddToFav = () => {
     dispatch(addToFav(product));
     setClicked(!clicked);
+    console.log(fav);
+    console.log(active);
   };
 
   return (
@@ -51,18 +49,18 @@ export default function DetailInfo({ handleAddToCart }) {
         </div>
         <div className={D.owner}>
           <div className={D.ProfilePicCont}>
-            <img src={profilePic} alt="" className={D.profilePic} />
+            <img src={owner[0].profilePic} alt="" className={D.profilePic} />
           </div>
           <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
             <div className={D.ownerText}>
-              <h3>{product?.user?.username}</h3>
+              <h3>{product.creator}</h3>
               <p>See the seller's profile</p>
             </div>
           </Link>
         </div>
-        {product.user === user.id ? (
+        {creator === guest ? (
           <div className={D.editBtn}>
-            <button>update</button>
+            <button class>update</button>
             <button>delete</button>
           </div>
         ) : (

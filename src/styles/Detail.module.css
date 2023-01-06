@@ -188,7 +188,7 @@
   bottom: 0px;
   right: 0px;
   width: 70%;
-  height: 38vh;
+  height: 48vh;
   padding-top: 15px;
   padding-left: 50px;
   padding-right: 50px;
@@ -201,17 +201,15 @@
   font-weight: 600;
   overflow: hidden;
 }
-.editBtn {
-  width: fit-content;
-  margin-top: -70px;
-  margin-bottom: 20px;
-}
+
 .editBtn button {
   border: none;
   background-color: transparent;
   color: #2bfab7;
-  font-size: 14px;
   margin-right: 15px;
+  font-size: 14px;
+  position: relative;
+  bottom: 10px;
 }
 
 .editBtn button:hover {
@@ -238,14 +236,21 @@
 
   .imageContainer {
     width: 100%;
-    height: 70vh;
+    height: 100vh;
     float: none;
     position: relative;
     top: 11vh;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  }
+
+  .topContainer {
+    position: absolute;
+    margin-top: 20px;
+    width: 100%;
+    right: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: fit-content;
   }
 
   .dataContainer {
@@ -393,35 +398,5 @@
     top: 3px;
     right: 2px;
     cursor: pointer;
-  }
-  .Reviews {
-    border-top: solid 1px gray;
-    margin-top: 10px;
-    height: fit-content;
-    text-align: center;
-    width: 100%;
-    position: relative;
-    bottom: 0px;
-  }
-
-  .Reviews h6 {
-    font-size: 14px;
-    width: 80%;
-    overflow: hidden;
-  }
-
-  .topContainer {
-    position: relative;
-    margin-top: 70px;
-    width: 100%;
-    right: 0px;
-    padding-left: 30px;
-    padding-right: 30px;
-    height: fit-content;
-  }
-  .Container {
-    width: 100%;
-    overflow: hidden;
-    display: inline;
   }
 }
