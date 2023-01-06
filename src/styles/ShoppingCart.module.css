@@ -166,3 +166,65 @@
   font-size: 16px;
   margin-top: 10px;
 }
+@media screen and (max-width: 500px) {
+  .container {
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+    position: fixed;
+    top: 70px;
+    right: 0px;
+    z-index: 900;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .imgCont {
+    display: none;
+  }
+  .cartContainer {
+    position: absolute;
+    top: 60px;
+    overflow: hidden;
+    width: 90%;
+  }
+  .cartArea {
+    border: solid 1px rgb(46, 46, 46);
+    padding: 10px;
+    padding-top: 0px;
+    border-radius: 10px;
+    position: relative;
+    width: 95%;
+    margin-left: 0px;
+  }
+
+  .clearCont {
+    width: 50%;
+    left: -10px;
+    float: left;
+  }
+  .clearBtn {
+    background-color: #2bfab7;
+    border: none;
+    height: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 20px;
+    color: #000;
+    position: relative;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .total {
+    font-size: 14px;
+    float: right;
+    top: 0px;
+    left: -20px;
+    overflow: hidden;
+  }
+  .titleCont {
+    overflow: hidden;
+    border-bottom: solid 1px rgb(46, 46, 46);
+  }
+}
