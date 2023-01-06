@@ -203,8 +203,9 @@
 }
 .editBtn {
   width: fit-content;
-  margin-top: -70px;
-  margin-bottom: 20px;
+
+  position: absolute;
+  top: 115px;
 }
 .editBtn button {
   border: none;
