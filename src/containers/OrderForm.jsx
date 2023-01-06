@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeOrderStatus, getLocations, postAddress } from "../redux/actions";
+import { capitalizeEachLetter } from "../utils/functions";
 import Payment from "../stripe/Payment";
 import O from "../styles/OrderForm.module.css";
 
@@ -10,6 +11,7 @@ export default function OrderForm() {
   const cart = useSelector(state => state.cart);
   const locations = useSelector(state => state.locations);
   const fromStripe = useSelector(state => state.fromStripe);
+  const [checkoutEnable, setCheckoutEnable] = useState(false);
 
   const [error, setError] = useState({});
   const [disable, setDisable] = useState(true);
@@ -148,7 +150,7 @@ export default function OrderForm() {
 
       {addresses.length > 0 ? (
         <>
-          <h2 className={O.yourAddress}>Send to:</h2>
+          <h2 className={O.yourAddress}>Select your shipping address:</h2>
           <div className={O.addressBox}>
             <div className={O.addressContainer}>
               {addresses.map((el, i) => (
@@ -160,8 +162,10 @@ export default function OrderForm() {
                     value={el.id}
                     onClick={setAddress}
                   />
-                  <span>{`Address n° ${i + 1}`}</span>
-                  <p>{`${el.streetName} n° ${el.streetNumber}, apartment ${el.apartment}, Zip Code n° ${el.zipCode}. ${el.additionalDetails}`}</p>
+                  <span>{`Address N° ${i + 1}`}</span>
+                  <p>{capitalizeEachLetter(el.streetName)} {el.streetNumber}{el.apartment && `, ${el.apartment.toUpperCase()}`}</p>
+                  <p>Zip Code: {el.zipCode.toUpperCase()}</p>
+                  <p>{`${el[Object.keys(el)[Object.keys(el).length - 1]]}, Argentina`}</p>
                   <span className={O.default}>
                     {el.isDefault === true && `Default`}
                   </span>
@@ -171,15 +175,18 @@ export default function OrderForm() {
           </div>
         </>
       ) : (
-        <div className={O.noAddresses}>
-          <div className={O.headerText}>
-            <h3>No more waiting</h3>
-            <h1>Same-Day Shipping & Delivery</h1>
+        <div>
+          <div className={O.noAddresses}>
+            <div className={O.headerText}>
+              <h3>No more waiting</h3>
+              <h1>Same-Day Shipping & Delivery</h1>
+            </div>
+            <img
+              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1672512330/cqws5x8n/blog-tw-Shipping-2_2x_t4qeom.webp"
+              alt=""
+            />
           </div>
-          <img
-            src="https://res.cloudinary.com/dbtekd33p/image/upload/v1672512330/cqws5x8n/blog-tw-Shipping-2_2x_t4qeom.webp"
-            alt=""
-          />
+          <h5 className={O.addText}>Please add a shipping address below to continue with your purchase</h5>
         </div>
       )}
 
