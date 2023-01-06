@@ -29,7 +29,7 @@
   border-radius: 10px;
   margin-top: 60px;
   overflow-y: scroll;
-  background-color: #fff;
+  background-color: rgb(15, 15, 15);
 }
 
 .BtnContainer {
@@ -106,6 +106,7 @@
     height: fit-content;
     float: left;
     top: 11vh;
+    overflow: hidden;
   }
   .SwitchContainer {
     position: relative;
@@ -155,10 +156,31 @@
     width: 100%;
   }
   .addProduct h5 {
-    font-size: 10px;
+    font-size: 12px;
     overflow: hidden;
+    margin-top: 5px;
   }
   .addProduct h4 {
     overflow: hidden;
+    margin-top: 5px;
+  }
+  .inactive {
+    margin-right: 0px;
+    overflow: hidden;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .active {
+    margin-right: 0px;
+    overflow: hidden;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .BtnContainer {
+    width: 100%;
+    padding-right: 10px;
+    margin-top: 5px;
   }
 }
