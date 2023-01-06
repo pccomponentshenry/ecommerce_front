@@ -78,6 +78,7 @@
 
 .disabled {
   border: none;
+  pointer-events: none;
   background-color: #aaaaaa;
   color: rgb(77, 77, 77);
   padding-left: 10px;

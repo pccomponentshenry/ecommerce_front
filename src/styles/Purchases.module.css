@@ -1,0 +1,85 @@
+.orderBox {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-top: solid 15px rgb(221, 221, 221);
+  background-color: #fafafa;
+  /* height: 65vh; */
+}
+
+.completed {
+  font-size: 14px;
+  background-color: rgb(132, 47, 143);
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.cancelled {
+  font-size: 14px;
+  background-color: rgb(155, 155, 155);
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.dateCompleted {
+  font-size: 13px;
+  color: rgb(153, 97, 160);
+}
+
+.dateCancelled {
+  font-size: 13px;
+  color: rgb(155, 155, 155);
+}
+
+.orderBox h4 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.orderCard {
+  display: flex;
+  border-bottom: solid 1px gray;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.imageCont {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.imageCont img {
+  width: 80px;
+  height: fit-content;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  color: #555;
+  margin-left: 15px;
+}
+
+.cardInfo h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cardInfo h5 {
+  font-size: 14px;
+}
+
+.cardInfo button {
+  width: 110px;
+  font-size: 14px;
+  border: none;
+  color: rgb(128, 39, 155);
+  background-color: transparent;
+}

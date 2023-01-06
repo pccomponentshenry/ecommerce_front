@@ -3,21 +3,20 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import D from "../styles/Detail.module.css";
+import Swal from "sweetalert2";
 import Carousel from "../components/DetailCarousel";
 import Reviews from "../components/Reviews";
 import DetailInfo from "../components/DetailInfo";
-import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { addToCart, getProductDetail, postCartItem } from "../redux/actions";
+import D from "../styles/Detail.module.css";
 
 export default function Detail() {
   const params = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
   const { user, isAuthenticated } = useAuth0();
-  const creator = product.creator;
-  let guest = "default";
-  user ? (guest = user.nickname) : (guest = "default");
 
   const handleAddToCart = () => {
     if (isAuthenticated) {
@@ -57,14 +56,6 @@ export default function Detail() {
     });
   };
 
-  const owner = [
-    {
-      name: "Usuario 1",
-      profilePic: [
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
-      ],
-    },
-  ];
   const imgs = [];
   imgs.push(product.img);
   imgs.push(product.img);
@@ -74,15 +65,12 @@ export default function Detail() {
       <div className={D.imageContainer}>
         <Carousel img={imgs} />
       </div>
-      <DetailInfo
-        handleAddToCart={handleAddToCart}
-        creator={creator}
-        owner={owner}
-        guest={guest}
-      />
-      <div className={D.reviewsContainer}>
-        <h3>Product reviews</h3>
-        <Reviews />
+      <div className={D.infoContainer}>
+        <DetailInfo handleAddToCart={handleAddToCart} />
+      </div>
+
+      <div className={D.Reviews}>
+        <Reviews id={params.id} />
       </div>
     </div>
   );

@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
-import s from "../styles/BarChart.module.css";
+import s from "../styles/StatsChart.module.css";
 import BarChart from "../components/BarChart";
-import LineChart from "../components/LineChart";
-import PieChart from "../components/PieChart";
 //import { UserData } from "../Data";
+import "chart.js/auto";
 import {getAllOrders} from "../redux/actions/index"
 import { useDispatch, useSelector } from "react-redux";
-import "chart.js/auto";
 
-function AppBarChart() {
+function AppStatsChart() {
+
   const dispatch = useDispatch()
   
   const allOrders = useSelector(state => state.allOrders);
   useEffect(() => {
     dispatch(getAllOrders());
   }, []);
-  console.log(allOrders)
+
   const [userData, setUserData] = useState({
     labels: allOrders.map((data) => data.title.substr(0, 10) + "..."),
     datasets: [
@@ -35,21 +34,14 @@ function AppBarChart() {
     ],
   });
 
-   console.log(userData);
+  // console.log(userData);
 
   return (
     <div className={s.contentChart}>
-      <h5 className={s.titleChart}>Lastest Sales</h5>
-      <div style={{ width: 500, textAlign:'center' }}>
+       <div style={{ width: 500, textAlign:'center' }}>
         <BarChart chartData={userData} />
       </div>
-      {/* <div style={{ width: 400 }}>
-        <LineChart chartData={userData} />
-      </div>
-      <div style={{ width: 400 }}>
-        <PieChart chartData={userData} />
-      </div> */}
-    </div>
+   </div>
   );
 }
-export default AppBarChart;
+export default AppStatsChart;

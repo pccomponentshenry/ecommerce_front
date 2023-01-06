@@ -3,6 +3,7 @@
     grid-template-columns: 1fr 9fr;
     justify-content: center;
     align-items: center;
+    padding-top: 100px;
 }
 
 .sideContainer {
@@ -12,7 +13,7 @@
     height: 85vh;
     background-color: rgba(0, 0, 0, 0.1);
     position: relative;
-    top: 100px;
+    top: 20px;
     left: 0;
     padding-top: 70px;
     border-right: solid 2px #fdfdfd;
@@ -23,30 +24,73 @@
     color: #FFF;
 }
 
-.dashContainer {
-    padding: 40px;
-    width: 40%;
-    height: 70vh;
-    border-top: solid 1px #2bfab7;
-    border-left: solid 1px #2bfab7;
-    border-bottom: solid 1px #2bfab7;
-    border-right: solid 1px #2bfab7;
-    border-radius: 10px;
-    top: 50px;
+.side {
+    width: 300px;
     display: grid;
-    grid-template-columns: 3fr, 3fr;
-    align-items: top;
+    grid-template-rows: repeat(12, 80px);
+    height: 85vh;
+    position: relative;
+    visibility: hidden;
+    top: 100px;
+    left: 0;
+    padding-top: 70px;
     justify-content: center;
-    text-align: center;
-    margin: 0 auto;
-    max-height: 500px;
+    justify-items: center;
+    align-items: center;
+    z-index: 999;
     color: #FFF;
 }
 
-.link{
+.dashContainer {
+    width: 80%;
+    height: fit-content;
+    border-top: solid 1px #0097676f;
+    border-left: solid 1px #0097676f;
+    border-bottom: solid 1px #0097676f;
+    border-right: solid 1px #0097676f;
+    border-radius: 10px;
+    top: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 50px;
+    margin: 0 auto;
     color: #FFF;
+}
+
+.div1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.div2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.div3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.div4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.link {
+    color: rgb(37, 179, 218);
     text-decoration: none;
-  }
-  .link:hover{
+    text-align: center;
+}
+
+.link:hover {
     color: #2bfab7;
-  }
+}
+

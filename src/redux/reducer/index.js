@@ -13,24 +13,31 @@ import {
   REMOVE_ONE_FROM_CART,
   REMOVE_ITEM_FROM_CART,
   REMOVE_ALL_FROM_CART,
-  GET_ORDERS,
+  GET_PURCHASES,
   CLEAR_ERROR,
   ADD_TO_FAV,
   POST_USER,
   LOGOUT_USER,
   PUT_PRODUCT,
   DELETE_PRODUCT,
+  GET_REVIEWS,
+  POST_REVIEW,
+  GET_PRODUCTS_FOR_SALE,
   GET_LOCATIONS,
   POST_ADDRESS,
   GET_USER,
+  GET_USERS,
   GET_ADDRESSES,
   SET_FROM_STRIPE,
   GET_ADDRESS,
   UPDATE_ADDRESS,
+  GET_TOTAL_ORDERS,
+  GET_ALL_ORDERS
 } from "../actions/actionNames";
 
 const initialState = {
   products: [],
+  productsForSale: [],
   product: [],
   brands: [],
   categories: [],
@@ -41,16 +48,19 @@ const initialState = {
   fav: [],
   locations: [],
   user: {},
+  reviews: [],
+  users: [],
   addresses: [],
   address: [],
-  orders: [],
+  purchases: [],
   fromStripe: true,
+  allOrders:[],
+  allOrdersOneByOne:[],
 };
 
 initialState.cart = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : (initialState.cart = []);
-
 initialState.fav = localStorage.getItem("fav")
   ? JSON.parse(localStorage.getItem("fav"))
   : (initialState.fav = []);
@@ -108,6 +118,13 @@ function rootReducer(state = initialState, action) {
     case DELETE_PRODUCT: {
       return {
         ...state,
+      };
+    }
+
+    case GET_PRODUCTS_FOR_SALE: {
+      return {
+        ...state,
+        productsForSale: action.payload,
       };
     }
 
@@ -209,10 +226,10 @@ function rootReducer(state = initialState, action) {
         cart: state.cart.filter(item => item.id !== action.payload.id),
       };
 
-    case GET_ORDERS:
+    case GET_PURCHASES:
       return {
         ...state,
-        orders: action.payload,
+        purchases: action.payload,
       };
 
     case SET_FROM_STRIPE: {
@@ -238,17 +255,45 @@ function rootReducer(state = initialState, action) {
         user: action.payload,
       };
     }
+    case GET_USERS: {
+      return {
+        ...state,
+        users: action.payload,
+      };
+    }
     case LOGOUT_USER: {
       return {
         ...state,
         user: {},
       };
     }
+    ////REVIEWS////
+    case GET_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload
+      }
+    case POST_REVIEW:
+      return {
+        ...state,
+        reviews: [...state.reviews, action.payload]
+      }
     case UPDATE_ADDRESS:
       return {
         ...state,
         address: action.payload,
       };
+      ///////////dashboard////////
+      case GET_TOTAL_ORDERS:
+        return {
+          ...state,
+          allOrders: action.payload,
+        };
+        case GET_ALL_ORDERS:
+          return {
+            ...state,
+            allOrdersOneByOne: action.payload,
+          };
 
     default:
       return state;

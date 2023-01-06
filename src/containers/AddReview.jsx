@@ -1,34 +1,105 @@
 import React from "react";
 import R from "../styles/AddReview.module.css";
 import { useState } from "react";
+import { postReview } from "../redux/actions/";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 export default function AddReview() {
-  //   const [rating, setRating] = useState(null);
+  const dispatch = useDispatch();
+  //const users = useSelector(state => state.user);
+  const params = useParams();
+  const { user } = useAuth0();
+
   const [input, setInput] = useState({
+    id: params.id,
     title: "",
     message: "",
-    rating: null,
+    score: null,
+    picprofile: user ? user.picture : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
+    username: user ? user.nickname : "Anónimo",
   });
+  const [error, setError] = useState({});
+  const [disable, setDisable] = useState(true);
+
+  const handleValidate = input => {
+    let errors = {};
+    if (!input.title) {
+      errors.title = "*Title is required";
+    }
+    if (!input.message) {
+      errors.message = "*Message is required";
+    }
+    if (!input.score || !input.score === 0) {
+      errors.score = "*Rating is required";
+    }
+    if (!error.title && !error.message && !error.score) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+    return errors;
+  };
+
+  const errorSetting = e => {
+    setError(
+      handleValidate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
+  };
+  const handleChange = e => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = () => {
+    dispatch(postReview(input));
+    alert("Review succesfully posted")
+  };
+
   const [hover, setHover] = useState(null);
   return (
     <div className={R.container}>
       <div className={R.formContainer}>
         <h1>Leave a review</h1>
-        <form action="">
-          <input type="text" placeholder="Title" />
-          <textarea name="" id="" cols="30" rows="10" placeholder="Message" />
+        <form action="" onSubmit={() => handleSubmit()}>
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            onBlur={e => errorSetting(e)}
+            onChange={e => handleChange(e)}
+          />
+          {error.title && <span className={R.errorSpan}>{error.title}</span>}
+          <textarea
+            name="message"
+            id=""
+            cols="30"
+            rows="10"
+            onBlur={e => errorSetting(e)}
+            placeholder="Message"
+            onChange={e => handleChange(e)}
+          />
+          {error.message && (
+            <span className={R.errorSpan}>{error.message}</span>
+          )}
           <div className={R.ratingCont}>
-            <span>Rating: </span>
+            <span>Score: </span>
 
             {[...Array(5)].map((star, i) => {
               const ratingValue = i + 1;
               return (
                 <label
-                  onClick={() => setInput({ ...input, rating: ratingValue })}
+                  onClick={e => {
+                    setInput({ ...input, score: ratingValue });
+                    errorSetting(e);
+                  }}
                   onMouseEnter={() => setHover(ratingValue)}
                   onMouseLeave={() => setHover(null)}
                   className={
-                    ratingValue <= (hover || input.rating)
+                    ratingValue <= (hover || input.score)
                       ? R.fullStar
                       : R.emptyStar
                   }
@@ -37,9 +108,14 @@ export default function AddReview() {
                 </label>
               );
             })}
-            <button type="submit">Post review</button>
+            <button type="submit" className={disable ? R.disabled : R.active}>
+              Post review
+            </button>
           </div>
         </form>
+        <Link to="/profile">
+          <p>Back to Profile</p>
+        </Link>
       </div>
 
       <div className={R.imgCont}>

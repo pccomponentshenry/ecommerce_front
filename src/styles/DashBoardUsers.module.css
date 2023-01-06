@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 9fr;
     justify-content: center;
+    padding-top: 100px;
 }
 
 .sideContainer {
@@ -11,7 +12,7 @@
     height: 85vh;
     background-color: rgba(0, 0, 0, 0.1);
     position: relative;
-    top: 100px;
+    top: 20px;
     left: 0;
     padding-top: 70px;
     border-right: solid 2px #fdfdfd;
@@ -23,25 +24,26 @@
 }
 
 .userContainer {
-    padding: 40px;
+    padding: 25px;
     width: 70%;
     border-top: solid 1px #2bfab7;
     border-left: solid 1px #2bfab7;
     border-bottom: solid 1px #2bfab7;
     border-right: solid 1px #2bfab7;
-    border-radius: 10px;
-    top: 50px;
+    border-radius: 23px;
+    top: 0px;
     display: flex;
-    align-items: top;
+    background-color: #FFF;
+    height: fit-content;
     margin: 0 auto;
-    justify-content: center;
-    margin-top: 150px;
+    margin-top: 30px;
     color: #FFF;
-    flex-wrap: wrap;
-    align-content: flex-start;
+    align-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
 }
-.listaUsuarios{
-    width:100%;
+.tabla{
+    width:40%;
     align-items: center;
     margin: 0 auto;
     justify-content: center;

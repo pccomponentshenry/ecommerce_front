@@ -1,45 +1,16 @@
 import React from "react";
-import F from "../styles/Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands, getCategories, putProduct } from "../redux/actions/index";
 import { Link, useParams } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { getBrands, getCategories, putProduct } from "../redux/actions/index";
 import { getProductDetail } from "../redux/actions";
+import F from "../styles/Form.module.css";
 
 export default function Form() {
-  const { user } = useAuth0();
-  const creator = user.nickname;
+  const user = useSelector(state => state.user);
+  const product = useSelector(state => state.product);
   const params = useParams();
   const dispatch = useDispatch();
-  const product = useSelector(state => state.product);
-  
-  useEffect(() => {
-    dispatch(getProductDetail(params.id));
-  }, [dispatch]);
-//console.log(input)
-
-  const initialState = {
-    name: product.title,
-    brand: product.brand,
-    stock: product.stock,
-    price: product.price,
-    description: product.description,
-    img: product.img,
-    category: product.category,
-    creator: creator,
-  };
-  //console.log(initialState)
-  //console.log(user.email)
-  
-  /* useEffect(() => {
-    dispatch(getProductDetail(params.id));
-  }, [dispatch]); */
-  useEffect(() => {
-    dispatch(getBrands());
-    dispatch(getCategories());
-  }, []);
-
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
   const [image, setImage] = useState([]);
@@ -49,37 +20,61 @@ export default function Form() {
   const [disable, setDisable] = useState(true);
   const [error, setError] = useState({});
   const [input, setInput] = useState({
-    name: "",
+    title: "",
     brand: "",
     stock: "",
     price: null,
     description: "",
     img: [],
     category: "",
-    creator: creator,
+    userId: "",
   });
-//console.log(input, "en el estado")
+  const initialState = {
+    title: product.title,
+    brand: product.brand,
+    stock: product.stock,
+    price: product.price,
+    description: product.description,
+    img: product.img,
+    category: product.category,
+    userId: user.id,
+  };
+
+  useEffect(() => {
+    dispatch(getProductDetail(params.id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+  }, []);
+
+  useEffect(() => {
+    setInput(prev => ({ ...prev, userId: user.id }));
+  }, [user]);
+
+  //console.log(input, "en el estado")
   function clearForm() {
     setInput({ ...initialState });
   }
+
   const handleValidate = input => {
     const errors = {};
-   
-     if (Number(input.stock) < 0) {
+
+    if (Number(input.stock) < 0) {
       errors.stock = "*Stock must be a positive number";
-    } else if (input.stock && Number(input.stock) !== parseInt(input.stock, 10)) {
+    } else if (
+      input.stock &&
+      Number(input.stock) !== parseInt(input.stock, 10)
+    ) {
       errors.stock = "*Stock must be an integer number";
     }
     if (Number(input.price) < 0) {
       errors.price = "*Price must be a positive number";
     }
-    if (
-      !error.price &&
-      !error.stock 
-    ) {
+    if (!error.price && !error.stock) {
       setDisable(false);
     } else {
-      console.log(error);
       setDisable(true);
     }
 
@@ -91,6 +86,7 @@ export default function Form() {
       handleValidate({
         ...input,
         [e.target.name]: e.target.value,
+        img: e.target.files,
       })
     );
   };
@@ -126,9 +122,9 @@ export default function Form() {
   };
 
   const handleChange = e => {
-    setInput({ ...initialState, [e.target.name]: e.target.value });
-    console.log(input)
+    setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
   const loadImage = e => {
     if (image.name) {
       handleChangeImg(e);
@@ -141,14 +137,10 @@ export default function Form() {
   }, [image]);
 
   const handleSubmit = e => {
-    console.log("entré");
-    if (
-      !error.price &&
-      !error.stock
-    ) {
+    if (!error.price && !error.stock) {
       e.preventDefault();
       setActive(true);
-      console.log(input)
+      console.log(input);
       dispatch(putProduct(product.id, input));
       setDisable(true);
       clearForm();
@@ -193,15 +185,13 @@ export default function Form() {
           <h6>Add images of your product</h6>
         </div>
 
-        <div 
-        className={F.container}
-        style={{backgroundImage: `url(${product.img})`}}>
+        <div className={F.containerUpdate}>
           <h5>Upload an image</h5>
           <input
             type="file"
             name="uploadfile"
             multiple="multiple"
-            placeholder={product.img}
+            // placeholder={product.img}
             id="img"
             style={{ display: "none" }}
             onChange={e => {
@@ -212,11 +202,19 @@ export default function Form() {
 
           {!input.img.length ? (
             <label className={F.inputCont} htmlFor="img">
-              +
+              <div className={F.labelCont}>
+                <h1>+</h1>
+                <div className={F.prevImageCont}>
+                  <img className={F.prevImage} src={product.img} />
+                </div>
+              </div>
             </label>
           ) : (
             <div className={F.imgCont}>
-              <img src={input.img} alt="" />
+              <img
+                src={input.img.length > 0 ? input.img : product.img}
+                alt=""
+              />
             </div>
           )}
           {error.img && <span>{error.img}</span>}
@@ -227,14 +225,17 @@ export default function Form() {
             <div className={F.name}>
               <label>Name of the product: </label>
               <input
-                value={input.name || ""}
+                value={input.title || ""}
                 type="text"
-                name="name"
+                name="title"
                 placeholder={product.title}
                 onBlur={e => errorSetting(e)}
-                onChange={e => handleChange(e)}
+                onChange={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
               />
-              <div>{error.name && <span>{error.name}</span>}</div>
+              <div>{error.title && <span>{error.title}</span>}</div>
             </div>
           </div>
           <div className={F.brandAndCatContainer}>
@@ -318,7 +319,10 @@ export default function Form() {
                 min="0"
                 placeholder={product.stock}
                 onBlur={e => errorSetting(e)}
-                onChange={e => handleChange(e)}
+                onChange={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
               />
               <div>{error.stock && <span>{error.stock}</span>}</div>
             </div>
@@ -335,7 +339,10 @@ export default function Form() {
                   errorSetting(e);
                   handleValidate(input);
                 }}
-                onChange={e => handleChange(e)}
+                onChange={e => {
+                  handleChange(e);
+                  errorSetting(e);
+                }}
               />
               <div className={F.errorPrice}>
                 {error.price && <span>{error.price}</span>}
