@@ -87,7 +87,7 @@
   width: 90%;
   height: 210px;
   padding-top: 30px;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
 }
 
 .yourAddress {
@@ -115,7 +115,7 @@
   display: flex;
   height: 210px;
   position: absolute;
-  top: 13vh;
+  top: 15vh;
   left: 0;
   display: flex;
   justify-content: center;
@@ -123,9 +123,10 @@
 }
 
 .address p {
-  width: 150px;
+  width: 180px;
   font-size: 12px;
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 .address input {
@@ -135,8 +136,8 @@
 .default {
   font-size: 12px;
   color: rgb(128, 39, 155);
-  position: relative;
-  bottom: 10px;
+  position: absolute;
+  left: 70%;
   font-weight: 600;
   float: right;
 }
@@ -161,6 +162,7 @@
   width: 60%;
   flex-wrap: wrap;
 }
+
 .noAddresses {
   height: 241px;
   width: 65%;
@@ -170,6 +172,13 @@
   display: flex;
   justify-content: center;
 }
+
+.addText {
+  position: absolute;
+  top: 40vh;
+  padding-left: 50px;
+}
+
 .headerText {
   position: absolute;
   top: 15vh;
@@ -177,18 +186,22 @@
   color: #fff;
   text-align: center;
 }
+
 .headerText h3 {
   font-weight: 600;
   font-size: 25px;
 }
+
 .headerText h1 {
   font-size: 25px;
 }
+
 .noAddresses img {
   width: 100%;
   height: fit-content;
   filter: brightness(50%);
 }
+
 .formContainer textarea {
   height: 50px;
   width: 100%;
@@ -272,6 +285,7 @@
   margin-top: 5px;
   margin-left: 5px;
 }
+
 .payment {
   display: flex;
   justify-content: center;

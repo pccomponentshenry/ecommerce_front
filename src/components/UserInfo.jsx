@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import U from "../styles/UserInfo.module.css";
 import { useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
-import SuccessAddress from "./SuccessAddress";
+import { capitalizeEachLetter } from "../utils/functions";
 
 export default function UserInfo({
   form,
@@ -15,7 +15,7 @@ export default function UserInfo({
 }) {
   const { isLoading, user } = useAuth0();
   const allAddresses = useSelector(state => state.addresses);
-  const isDefault = allAddresses.find(el => el.isDefault === true);
+  const defaultAddress = allAddresses.find(el => el.isDefault === true);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -41,23 +41,14 @@ export default function UserInfo({
         </div>
 
         <div className={U.postalAdressContainer}>
-          <h3 className={U.title}>Default postal address</h3>
+          <h3 className={U.title}>Default shipping address</h3>
 
           <div className={U.adressCont}>
-            {allAddresses.length > 0 ? (
+            {defaultAddress ? (
               <>
-                <h3>{`${isDefault.streetName} n° ${isDefault.streetNumber}, apartment ${isDefault.apartment}`}</h3>
-                <h3>{`Zip Code n° ${isDefault.zipCode}. ${isDefault.additionalDetails && isDefault.additionalDetails
-                  } `}</h3>
-
-                <h3>
-                  {
-                    isDefault[
-                    Object.keys(isDefault)[Object.keys(isDefault).length - 1]
-                    ]
-                  }
-                  , Argentina
-                </h3>
+                <h3>{`${capitalizeEachLetter(defaultAddress.streetName)} ${defaultAddress.streetNumber}, ${capitalizeEachLetter(defaultAddress.apartment)}`}</h3>
+                <h3>{`Zip Code: ${defaultAddress.zipCode}`}</h3>
+                <h3>{defaultAddress.locationName}, Argentina</h3>
                 <button className={U.addAddress} onClick={handleOpen}>
                   Add a new address
                 </button>

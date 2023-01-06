@@ -41,6 +41,9 @@ export const POST_ADDRESS = "POST_ADDRESS";
 export const GET_ADDRESSES = "GET_ADDRESSES";
 export const GET_ADDRESS = "GET_ADDRESS";
 export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
+export const CHANGE_ADDRESS = "CHANGE_ADDRESS";
+export const CHANGE_DEFAULT_ADDRESS = "CHANGE_DEFAULT_ADDRESS";
+export const DELETE_ADDRESS = "DELETE_ADDRESS";
 //action reviews
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const POST_REVIEW = "POST_REVIEW";

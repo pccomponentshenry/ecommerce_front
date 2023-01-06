@@ -24,13 +24,16 @@ import {
   POST_REVIEW,
   GET_PRODUCTS_FOR_SALE,
   GET_LOCATIONS,
-  POST_ADDRESS,
   GET_USER,
   GET_USERS,
-  GET_ADDRESSES,
   SET_FROM_STRIPE,
+  GET_ADDRESSES,
   GET_ADDRESS,
+  POST_ADDRESS,
   UPDATE_ADDRESS,
+  CHANGE_ADDRESS,
+  CHANGE_DEFAULT_ADDRESS,
+  DELETE_ADDRESS
 } from "../actions/actionNames";
 
 const initialState = {
@@ -63,6 +66,7 @@ initialState.fav = localStorage.getItem("fav")
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
     case ALL_PRODUCTS:
       return {
         ...state,
@@ -75,42 +79,26 @@ function rootReducer(state = initialState, action) {
         product: action.payload,
       };
 
+    case SEARCH_PRODUCT:
+      return {
+        ...state,
+        product: action.payload,
+      };
+
     case POST_PRODUCT: {
       return {
         ...state,
         products: [...state.products, action.payload],
       };
     }
-    case GET_ADDRESSES: {
-      return {
-        ...state,
-        addresses: action.payload,
-      };
-    }
-    case GET_ADDRESS: {
-      return {
-        ...state,
-        address: action.payload,
-      };
-    }
-    case POST_ADDRESS: {
-      return {
-        ...state,
-        addresses: [...state.addresses, action.payload],
-      };
-    }
+
     case PUT_PRODUCT: {
       return {
         ...state,
         product: action.payload,
       };
     }
-    case GET_LOCATIONS: {
-      return {
-        ...state,
-        locations: action.payload,
-      };
-    }
+
     case DELETE_PRODUCT: {
       return {
         ...state,
@@ -121,6 +109,73 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         productsForSale: action.payload,
+      };
+    }
+
+    //////////ADDRESSES////////
+    case GET_ADDRESSES: {
+      return {
+        ...state,
+        addresses: action.payload,
+      };
+    }
+
+    case GET_ADDRESS: {
+      return {
+        ...state,
+        address: action.payload,
+      };
+    }
+
+    case POST_ADDRESS: {
+      return {
+        ...state,
+        addresses: [...state.addresses, action.payload],
+      };
+    }
+
+    case UPDATE_ADDRESS:
+      return {
+        ...state,
+        address: action.payload,
+      };
+
+    case CHANGE_DEFAULT_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.map(a => {
+          if (a.id === action.payload.id) {
+            return { ...a, isDefault: true };
+          }
+          else {
+            return { ...a, isDefault: false };
+          }
+        })
+      };
+
+    case CHANGE_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.map(a => {
+          if (Number(a.id) === Number(action.payload.id)) {
+            return { ...a, ...action.payload };
+          }
+          else {
+            return { ...a }
+          }
+        }),
+      };
+
+    case DELETE_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.filter(a => a.id !== action.payload),
+      };
+
+    case GET_LOCATIONS: {
+      return {
+        ...state,
+        locations: action.payload,
       };
     }
 
@@ -135,12 +190,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtered: action.payload,
-      };
-
-    case SEARCH_PRODUCT:
-      return {
-        ...state,
-        product: action.payload,
       };
 
     case GET_BRANDS:
@@ -239,12 +288,13 @@ function rootReducer(state = initialState, action) {
       };
 
     ////// USERS /////
-    // case POST_USER: {
-    //   return {
-    //     ...state,
-    //     user: action.payload,
-    //   };
-    // }
+    case POST_USER: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+
     case GET_USER: {
       return {
         ...state,
@@ -274,11 +324,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews: [...state.reviews, action.payload]
       }
-    case UPDATE_ADDRESS:
-      return {
-        ...state,
-        address: action.payload,
-      };
 
     default:
       return state;

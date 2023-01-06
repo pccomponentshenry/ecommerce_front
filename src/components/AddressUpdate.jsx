@@ -1,51 +1,46 @@
-import React from "react";
-import A from "../styles/AddressUpdate.module.css";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAddressById, getLocations, updateAddress } from "../redux/actions";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import A from "../styles/AddressUpdate.module.css";
 
 export default function AddressUpdate() {
+
   const params = useParams();
   const navigate = useNavigate();
-  const user = useSelector(state => state.user);
-  const address = useSelector(state => state.address);
+  const dispatch = useDispatch();
+  const addresses = useSelector(state => state.addresses);
   const locations = useSelector(state => state.locations);
   const [error, setError] = useState({});
   const [disable, setDisable] = useState(true);
+  const [address, setAddress] = useState(addresses.find(a => a.id === params.id));
   const [success, setSuccess] = useState(false);
-  const [input, setInput] = useState({
-    id: "",
-    streetName: "",
-    streetNumber: "",
-    apartment: "",
-    zipCode: "",
-    locationId: "",
-    additionalDetails: "",
-    isDefault: false,
-  });
-
-  const dispatch = useDispatch();
+  const [input, setInput] = useState({});
 
   useEffect(() => {
     dispatch(getLocations());
+    setAddress(addresses.find(a => a.id === Number(params.id)));
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getAddressById(params.id, params.userId));
-  }, [dispatch]);
+    if (address) {
+      setInput(prev => ({
+        ...prev,
+        id: address.id,
+        streetName: address.streetName,
+        streetNumber: address.streetNumber,
+        apartment: address.apartment,
+        zipCode: address.zipCode,
+        locationName: address.locationName,
+        additionalDetails: address.additionalDetails,
+        isDefault: address.isDefault,
+      }));
+    }
+
+  }, [address]);
 
   const handleChange = e => {
-    if (e.target.id === "locationId") {
-      setInput({
-        ...input,
-        locationId: Number(e.target.value),
-        id: user.id,
-      });
-    } else {
-      setInput({ ...input, [e.target.name]: e.target.value, id: params.id });
-    }
+    setInput({ ...input, [e.target.name]: e.target.value, id: params.id });
   };
   const errorSetting = e => {
     setError(handleValidate({ ...input, [e.target.name]: e.target.value }));
@@ -65,7 +60,7 @@ export default function AddressUpdate() {
     if (!input.zipCode) {
       errors.zipCode = "*Zip code is required";
     }
-    if (!input.locationId) {
+    if (!input.locationName) {
       errors.location = "*Location is required";
     }
     if (
@@ -94,9 +89,7 @@ export default function AddressUpdate() {
       dispatch(updateAddress(input));
       setDisable(true);
       setSuccess(true);
-      setTimeout(() => {
-        navigate("/profile");
-      }, 1500);
+      navigate("/profile");
     } else {
       alert("Something went wrong, try again!");
     }
@@ -117,7 +110,7 @@ export default function AddressUpdate() {
             </div>
           </div>
         )}
-        {success === false && (
+        {success === false && address?.id && (
           <div className={A.formContainer}>
             <label
               className={A.exit}
@@ -128,11 +121,6 @@ export default function AddressUpdate() {
               ╳
             </label>
             <h4>Edit your address</h4>
-            <p className={A.oldAddress}>{` ${address.streetName} n° ${address.streetNumber
-              }, apartment ${address.apartment}, Zip Code n° ${address.zipCode
-              }. ${address.additionalDetails && address.additionalDetails}, ${address[Object.keys(address)[Object.keys(address).length - 1]]
-              }, Argentina`}</p>
-
             <form onSubmit={handleSubmit} autoComplete="off">
               <div className={A.street}>
                 <input
@@ -190,14 +178,14 @@ export default function AddressUpdate() {
               </div>
               <div className={A.location}>
                 <select
-                  name="locationId"
-                  id="locationId"
+                  name="locationName"
+                  id="location"
                   onChange={e => handleChange(e)}
                   onBlur={e => errorSetting(e)}
                 >
-                  <option defaultValue={"DEFAULT"}>Location</option>
+                  <option defaultValue="DEFAULT">{address.locationName}</option>
                   {locations.map((el, i) => (
-                    <option key={i} value={el.id}>
+                    <option key={i} value={el.name}>
                       {el.name}
                     </option>
                   ))}
@@ -213,20 +201,10 @@ export default function AddressUpdate() {
                 id="information"
                 cols="30"
                 rows="10"
-                placeholder="Additional information"
+                placeholder={address.additionalDetails}
                 onChange={e => handleChange(e)}
                 onBlur={e => errorSetting(e)}
               />
-              <div className={A.defaultInput}>
-                <input
-                  id="default"
-                  type="checkbox"
-                  onClick={() =>
-                    setInput({ ...input, isDefault: !input.isDefault })
-                  }
-                />
-                <label htmlFor="default">Set as default address</label>
-              </div>
               <button
                 type="submit"
                 onClick={e => {
@@ -234,8 +212,8 @@ export default function AddressUpdate() {
                 }}
                 className={disable ? A.disabled : A.enabled}
               >
-                Submit address
-              </button>{" "}
+                Change
+              </button>
             </form>
           </div>
         )}

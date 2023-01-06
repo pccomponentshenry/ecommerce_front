@@ -5,17 +5,18 @@ import { getLocations, postAddress } from "../redux/actions";
 import { useState, useEffect } from "react";
 
 export default function AddressForm({ handleExit, handleShowAddresses }) {
+
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const locations = useSelector(state => state.locations);
   const [error, setError] = useState({});
   const [disable, setDisable] = useState(true);
   const [input, setInput] = useState({
-    userId: "",
     streetName: "",
     streetNumber: "",
     apartment: "",
     zipCode: "",
-    locationId: "",
+    location: "",
     additionalDetails: "",
   });
   const initialState = {
@@ -23,25 +24,18 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
     streetNumber: "",
     apartment: "",
     zipCode: "",
-    locationId: "",
+    location: "",
     additionalDetails: "",
   };
-  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getLocations());
   }, [dispatch]);
 
   const handleChange = e => {
-    if (e.target.id === "locationId") {
-      setInput({
-        ...input,
-        locationId: Number(e.target.value),
-        userId: user.id,
-      });
-    } else {
-      setInput({ ...input, [e.target.name]: e.target.value, userId: user.id });
-    }
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
+
   const errorSetting = e => {
     setError(handleValidate({ ...input, [e.target.name]: e.target.value }));
   };
@@ -60,7 +54,7 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
     if (!input.zipCode) {
       errors.zipCode = "*Zip code is required";
     }
-    if (!input.locationId) {
+    if (!input.location) {
       errors.location = "*Location is required";
     }
     if (
@@ -74,7 +68,6 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
     } else {
       setDisable(true);
     }
-
     return errors;
   };
 
@@ -83,29 +76,27 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
     if (
       !error.streetName &&
       !error.streetNumber &&
       !error.zipCode &&
       !error.location
     ) {
-      dispatch(postAddress(input));
+      dispatch(postAddress({ ...input, userId: user.id }));
       setDisable(true);
-      handleExit();
       handleShowAddresses();
     } else {
       alert("Something went wrong, try again!");
     }
   };
+
   return (
     <>
       <div className={A.container}>
         <div className={A.formContainer}>
-          <label onClick={() => handleExit()}>╳</label>
+          <label onClick={handleExit}>╳</label>
           <h4>Add a new address</h4>
-
-          <form onSubmit={handleSubmit} autoComplete="off">
+          <form onSubmit={() => { handleSubmit(); handleExit() }} autoComplete="off">
             <div className={A.street}>
               <input
                 type="text"
@@ -162,14 +153,14 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
             </div>
             <div className={A.location}>
               <select
-                name="locationId"
-                id="locationId"
+                name="location"
+                id="location"
                 onChange={e => handleChange(e)}
                 onBlur={e => errorSetting(e)}
               >
                 <option defaultValue={"DEFAULT"}>Location</option>
                 {locations.map((el, i) => (
-                  <option key={i} value={el.id}>
+                  <option key={i} value={el.name}>
                     {el.name}
                   </option>
                 ))}
