@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import s from "../styles/StatsChart.module.css";
 import BarChart from "../components/BarChart";
-import { UserData } from "../Data";
+//import { UserData } from "../Data";
 import "chart.js/auto";
+import {getAllOrders} from "../redux/actions/index"
+import { useDispatch, useSelector } from "react-redux";
 
 function AppStatsChart() {
+
+  const dispatch = useDispatch()
+  
+  const allOrders = useSelector(state => state.allOrders);
+  useEffect(() => {
+    dispatch(getAllOrders());
+  }, []);
+
   const [userData, setUserData] = useState({
-    labels: UserData.map((data) => data.description),
+    labels: allOrders.map((data) => data.title.substr(0, 10) + "..."),
     datasets: [
       {
         label: "Ventas",
-        data: UserData.map((data) => data.stock),
+        data: allOrders.map((data) => data.total),
         backgroundColor: [
           "rgba(75,192,192,1)",
           "#ecf0f1",
