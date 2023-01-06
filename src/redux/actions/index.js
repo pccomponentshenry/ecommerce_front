@@ -37,6 +37,7 @@ import {
   UPDATE_ADDRESS,
   POST_REVIEW,
   GET_TOTAL_ORDERS,
+  GET_ALL_ORDERS
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -405,5 +406,11 @@ export function getAllOrders() {
   return async dispatch => {
     const res = await axios.get(`${URL}/order/products`);
     return dispatch({ type: GET_TOTAL_ORDERS, payload: res.data });
+  };
+}
+export function getAllOrdersOneByOne() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order`);
+    return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
   };
 }

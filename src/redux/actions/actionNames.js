@@ -45,4 +45,5 @@ export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const POST_REVIEW = "POST_REVIEW";
 //actions dashboard
-export const GET_TOTAL_ORDERS = "GET_TOTAL_ORDERS"
+export const GET_TOTAL_ORDERS = "GET_TOTAL_ORDERS";
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS"
