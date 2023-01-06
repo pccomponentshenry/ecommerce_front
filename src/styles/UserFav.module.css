@@ -24,10 +24,14 @@
 
 .noProducts {
   text-align: center;
-  height: 30%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   position: relative;
-  top: 80px;
   width: 100%;
+  color: #fff;
 }
 
 .noProducts p:hover {
@@ -65,5 +69,11 @@
     font-size: 14px;
     overflow: hidden;
     margin-top: -5px;
+  }
+  .noProducts {
+    overflow: hidden;
+  }
+  .noProducts h5 {
+    overflow: hidden;
   }
 }
