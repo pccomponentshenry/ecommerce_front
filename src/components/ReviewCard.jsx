@@ -8,9 +8,9 @@ export default function ReviewCard(props) {
         <img src={props.profilePic} className={R.profilePic} alt="" />
       </div>
       <div className={R.reviewCont}>
-        <span className={R.name}>{props.name}</span>
-        <p className={R.review}>{props.review}</p>
         <p className={R.name}>{props.user}</p>
+        <span className={R.title}>{props.name}</span>
+        <p className={R.review}>{props.review}</p>
       </div>
       <div className={R.rating}>
         <label className={R.ratingTitle}>Rating: </label>
