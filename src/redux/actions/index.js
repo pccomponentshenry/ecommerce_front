@@ -39,6 +39,9 @@ import {
   CHANGE_ADDRESS,
   CHANGE_DEFAULT_ADDRESS,
   DELETE_ADDRESS
+  POST_REVIEW,
+  GET_TOTAL_ORDERS,
+  GET_ALL_ORDERS
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -417,3 +420,16 @@ export const postReview = payload => async dispatch => {
     return dispatch({ type: SET_ERROR, payload: e });
   }
 };
+///////////DASHBOARD/////
+export function getAllOrders() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order/products`);
+    return dispatch({ type: GET_TOTAL_ORDERS, payload: res.data });
+  };
+}
+export function getAllOrdersOneByOne() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order`);
+    return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
+  };
+}
