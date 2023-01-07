@@ -51,3 +51,15 @@
     color: #FFF;
     background-color: #2bfab7;
 }
+
+.loadingCont {
+    display: flex;
+    position: absolute;
+    left: 28%;
+    right: 45%;
+    margin-top: 150px;
+  }
+  .loadingBackground {
+    height: 100vh;
+    background-color: black;
+  }
