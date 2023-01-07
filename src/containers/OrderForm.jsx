@@ -6,6 +6,8 @@ import Payment from "../stripe/Payment";
 import O from "../styles/OrderForm.module.css";
 
 export default function OrderForm() {
+
+  const dispatch = useDispatch();
   const addresses = useSelector(state => state.addresses);
   const user = useSelector(state => state.user);
   const cart = useSelector(state => state.cart);
@@ -22,18 +24,18 @@ export default function OrderForm() {
     streetNumber: "",
     apartment: "",
     zipCode: "",
-    locationId: "",
+    location: "",
     additionalDetails: "",
   });
+
   const initialState = {
     streetName: "",
     streetNumber: "",
     apartment: "",
     zipCode: "",
-    locationId: "",
+    location: "",
     additionalDetails: "",
   };
-  const dispatch = useDispatch();
 
   if (fromStripe) {
     dispatch(changeOrderStatus(user.id, "cancelled"));
@@ -50,15 +52,7 @@ export default function OrderForm() {
   }, [addresses]);
 
   const handleChange = e => {
-    if (e.target.id === "locationId") {
-      setInput({
-        ...input,
-        locationId: Number(e.target.value),
-        userId: user.id,
-      });
-    } else {
-      setInput({ ...input, [e.target.name]: e.target.value, userId: user.id });
-    }
+    setInput({ ...input, [e.target.name]: e.target.value, userId: user.id });
   };
 
   const errorSetting = e => {
@@ -82,7 +76,7 @@ export default function OrderForm() {
     if (!input.zipCode) {
       errors.zipCode = "*Zip code is required";
     }
-    if (!input.locationId) {
+    if (!input.location) {
       errors.location = "*Location is required";
     }
     if (
@@ -103,6 +97,7 @@ export default function OrderForm() {
 
   const clearForm = () => {
     setInput({ ...initialState });
+    document.querySelectorAll('select')[0].selectedIndex = 0;
   };
 
   const handleSubmit = e => {
@@ -143,9 +138,9 @@ export default function OrderForm() {
             cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
           ).toFixed(2)}
         </h3>
-        <div className={O.payment}>
+        {<div className={O.payment}>
           <Payment addressId={address} />
-        </div>
+        </div>}
       </div>
 
       {addresses.length > 0 ? (
@@ -160,12 +155,12 @@ export default function OrderForm() {
                     type="radio"
                     name="address"
                     value={el.id}
-                    onClick={setAddress}
+                    onClick={() => setAddress(el.id)}
                   />
                   <span>{`Address N° ${i + 1}`}</span>
                   <p>{capitalizeEachLetter(el.streetName)} {el.streetNumber}{el.apartment && `, ${el.apartment.toUpperCase()}`}</p>
                   <p>Zip Code: {el.zipCode.toUpperCase()}</p>
-                  <p>{`${el[Object.keys(el)[Object.keys(el).length - 1]]}, Argentina`}</p>
+                  <p>{`${el.locationName}, Argentina`}</p>
                   <span className={O.default}>
                     {el.isDefault === true && `Default`}
                   </span>
@@ -270,17 +265,18 @@ export default function OrderForm() {
             )}
             <div className={O.location}>
               <select
-                name="locationId"
-                id="locationId"
+                name="location"
+                id="location"
                 onChange={e => {
                   handleChange(e);
                   errorSetting(e);
                 }}
                 onBlur={e => errorSetting(e)}
+                defaultValue="default"
               >
-                <option defaultValue={"DEFAULT"}>Location</option>
+                <option className={O.defaultLocation} value="default" disabled> Location </option>
                 {locations.map((el, i) => (
-                  <option key={i} value={el.id}>
+                  <option key={i} value={el.name}>
                     {el.name}
                   </option>
                 ))}

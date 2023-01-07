@@ -50,9 +50,6 @@ export default function ProfileAddresses() {
       ) : (
         <div className={S.noProductsCont}>
           <h5>You don't have any addresses yet</h5>
-          <Link to="/sell" style={{ textDecoration: "none", color: "#fff" }}>
-            <span>Add a New Address</span>{" "}
-          </Link>
         </div>
       )}
     </div>

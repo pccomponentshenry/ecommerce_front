@@ -13,10 +13,11 @@
 }
 
 .noProductsCont {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
+  text-align: center;
+  height: 30%;
+  position: relative;
+  top: 80px;
+  width: 100%;
 }
 
 .titleCont {
