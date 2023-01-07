@@ -9,8 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "chart.js/auto";
 
 function AppBarChart() {
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch()  
   const allOrders = useSelector(state => state.allOrders);
   useEffect(() => {
     dispatch(getAllOrders());

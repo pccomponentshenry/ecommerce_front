@@ -23,7 +23,7 @@
     color: #FFF;
 }
 
-.userContainer {
+.salesContainer {
     padding: 25px;
     width: 70%;
     border-top: solid 1px #2bfab7;
@@ -32,22 +32,31 @@
     border-right: solid 1px #2bfab7;
     border-radius: 23px;
     top: 0px;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
     background-color: #FFF;
     height: fit-content;
     margin: 0 auto;
     margin-top: 30px;
-    color: #FFF;
+    color: rgb(0, 0, 0);
     align-content: center;
     flex-direction: column;
     justify-content: flex-start;
 }
-.tabla{
-    width:40%;
+
+.tabla {
+    width: 40%;
     align-items: center;
     margin: 0 auto;
     justify-content: center;
     margin-top: 20px;
     color: #FFF;
     background-color: #2bfab7;
+}
+.imageList{
+    max-width: 100px;
+    max-height: 100px;
 }
