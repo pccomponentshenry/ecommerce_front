@@ -61,6 +61,7 @@ const initialState = {
   allOrders:[],
   allOrdersOneByOne:[],
   detailsOrders: []
+
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -336,6 +337,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         address: action.payload,
       };
+
       ///////////dashboard////////
       case GET_TOTAL_ORDERS:
         return {
@@ -352,6 +354,7 @@ function rootReducer(state = initialState, action) {
             ...state,
             detailsOrders: action.payload,
           };
+
 
 
     default:
