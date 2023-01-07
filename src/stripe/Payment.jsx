@@ -4,6 +4,7 @@ import { checkout, postOrder } from "../redux/actions";
 import P from "../styles/Payment.module.css";
 
 function Payment({ addressId }) {
+
   const cart = useSelector(state => state.cart);
   const user = useSelector(state => state.user);
   const order = [];
