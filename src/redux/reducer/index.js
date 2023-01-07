@@ -36,7 +36,8 @@ import {
   DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
   GET_ALL_ORDERS,
-  GET_DETAIL_PURCHASES
+  GET_DETAIL_PURCHASES,
+  PUT_USER
 } from "../actions/actionNames";
 
 const initialState = {
@@ -354,6 +355,12 @@ function rootReducer(state = initialState, action) {
             ...state,
             detailsOrders: action.payload,
           };
+      case PUT_USER: {
+          return {
+            ...state,
+            user: action.payload,
+          };
+         }
 
 
 
