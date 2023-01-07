@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import UserInfo from "../components/UserInfo";
 import UserFav from "../components/UserFav";
-import U from "../styles/ProfileInfo.module.css";
-import { useState } from "react";
 import ForSale from "../components/ForSale";
 import Purchases from "../components/Purchases";
-import { Link } from "react-router-dom";
 import ProfileAddresses from "../components/ProfileAddresses";
+import U from "../styles/ProfileInfo.module.css";
 
-export default function ProfileDetail() {
+export default function ProfileDetail(props) {
+
   const [active, setActive] = useState({
     fav: true,
     sales: false,
@@ -61,6 +62,25 @@ export default function ProfileDetail() {
       addresses: false,
     });
   };
+
+  useEffect(() => {
+    if (props.purchases) {
+      setActive({ fav: false, sales: false, purchases: true, addresses: false });
+      Swal.fire({
+        title: 'Successful Purchase!',
+        html: `Thank you for your purchase <br><br> Redirecting to your orders...`,
+        background: "#272727",
+        color: "#fff",
+        timer: 2000,
+        showConfirmButton: false,
+        backdrop: `
+          rgba(130,130,130,0.4)
+          left top
+          no-repeat
+        `
+      })
+    }
+  }, [])
 
   return (
     <div>
