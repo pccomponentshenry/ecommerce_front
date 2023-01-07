@@ -34,10 +34,10 @@
   color: #fff;
 }
 
-.noProducts p:hover {
+/* .noProducts p:hover {
   color: #2bfab7;
   transition: 0.15s ease-in-out;
-}
+} */
 
 @media screen and (max-width: 500px) {
   .container {

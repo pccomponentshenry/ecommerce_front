@@ -2,15 +2,21 @@ import React, { useEffect, useState } from "react";
 import P from "../styles/Purchases.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders } from "../redux/actions";
+import { getOrders, getReviews } from "../redux/actions";
 
 export default function Purchases() {
+  const nuevo=[];
+  const usuario=[];
   const user = useSelector(state => state.user);
   const purchases = useSelector(state => state.purchases);
+  const reviews = useSelector(state => state.reviews);
+  reviews.map(i => nuevo.push(i.productId));
+  reviews.map(e => usuario.push(e.username));
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-
+  
   useEffect(() => {
+    dispatch(getReviews());
     dispatch(getOrders(user.id));
     setIsLoading(false);
   }, [user])
@@ -43,6 +49,7 @@ export default function Purchases() {
                 <h5>
                   {el.quantity} Units - ${el.price}
                 </h5>
+                {(!nuevo.includes(el.product.id) || !usuario.includes(user.username)) ?
                 <Link
                   style={{ textDecoration: "none", color: "#212121" }}
                   to={`/addreview/${user.id}/${el.product.id}`}
@@ -50,6 +57,7 @@ export default function Purchases() {
                   {" "}
                   <button>Leave a review</button>{" "}
                 </Link>
+                :<div>Review posted</div>}
               </div>
             </div>
           ))}

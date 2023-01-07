@@ -3,13 +3,13 @@ import R from "../styles/AddReview.module.css";
 import { useState } from "react";
 import { postReview } from "../redux/actions/";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
 export default function AddReview() {
   const dispatch = useDispatch();
-  //const users = useSelector(state => state.user);
+  const navigate = useNavigate();
   const params = useParams();
   const { user } = useAuth0();
 
@@ -56,7 +56,8 @@ export default function AddReview() {
   };
   const handleSubmit = () => {
     dispatch(postReview(input));
-    alert("Review succesfully posted")
+    alert("Review succesfully posted");
+    navigate("/profile");
   };
 
   const [hover, setHover] = useState(null);
