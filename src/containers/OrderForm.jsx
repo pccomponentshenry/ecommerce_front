@@ -70,9 +70,6 @@ export default function OrderForm() {
     } else if (!regexNumber.test(input.streetNumber)) {
       errors.streetNumber = "*Street number must be an integer number";
     }
-    if (!input.apartment) {
-      errors.apartment = "*Apartment is required";
-    }
     if (!input.zipCode) {
       errors.zipCode = "*Zip code is required";
     }
