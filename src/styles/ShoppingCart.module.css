@@ -166,6 +166,19 @@
   font-size: 16px;
   margin-top: 10px;
 }
+.loginBtn {
+  background-color: #212121;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+}
+.loginBtn:hover {
+  background-color: #0f0f0f;
+  transition: 0.15s ease-in-out;
+}
+
 @media screen and (max-width: 500px) {
   .container {
     width: 100%;

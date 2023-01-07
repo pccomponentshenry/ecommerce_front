@@ -1,5 +1,7 @@
 .cardContainer {
   padding: 10px;
+
+  padding-bottom: 0px;
 }
 
 .container {
@@ -10,21 +12,39 @@
   margin-right: 10px;
   overflow: hidden;
   height: fit-content;
+  border-radius: 10px;
+  padding: 20px;
 }
-
+.infoContainer {
+  border: solid 1px red;
+}
+.forSale {
+  background-color: #ebebeb;
+  height: 100%;
+}
 .noProductsCont {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50vh;
+  flex-direction: column;
 }
 
+.noProductsCont h5 {
+  color: #fff;
+}
+.noProductsCont span:hover {
+  transition: 0.15s ease-in-out;
+  color: #2bfab7;
+}
 .imgCont {
   width: 100px;
-  height: 150px;
+  height: 125px;
   background-color: #fff;
   overflow: hidden;
   float: left;
+  position: relative;
+  top: 20px;
 }
 
 .imgCont img {
@@ -42,11 +62,7 @@
 
 .titleCont h4 {
   font-size: 16px;
-}
-
-.titleCont h5 {
-  font-size: 14px;
-  color: rgb(153, 97, 160);
+  font-weight: 600;
 }
 
 .titleCont span {
@@ -57,10 +73,23 @@
   padding-right: 5px;
 }
 
-.titleCont p {
-  /* display: inline; */
+.titleCont h5 {
+  font-size: 12px;
+  color: rgb(153, 97, 160);
+  display: inline;
+  margin-left: 10px;
   position: relative;
-  bottom: 5px;
+  top: 3px;
+}
+.titleCont h6 {
+  font-size: 14px;
+  width: 600px;
+  text-align: left;
+  color: gray;
+}
+
+.titleCont p {
+  font-size: 14px;
 }
 
 .titleCont label {
@@ -78,13 +107,24 @@
 
 .stockAndStatus {
   position: absolute;
-  right: 0px;
-  margin-top: -10px;
+  left: 100px;
+  width: fit-content;
+  display: flex;
 }
-
-.btnContainer {
+.stockAndStatus h3 {
+  font-size: 14px;
+  color: gray;
   position: relative;
-  top: -15px;
+}
+.stockAndStatus h3 {
+  top: 2px;
+  position: relative;
+  margin-left: 10px;
+}
+.btnContainer {
+  position: absolute;
+  right: 0px;
+  bottom: 40px;
 }
 
 .btnContainer button {
@@ -98,4 +138,23 @@
 .btnContainer button:hover {
   transition: 0.15s ease-in-out;
   color: #212121;
+}
+.stock {
+  width: 50px;
+  height: 70px;
+  position: relative;
+  left: 90%;
+  bottom: 20px;
+  background-color: rgb(132, 47, 143);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 10px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+@media screen and (max-width: 500px) {
 }

@@ -5,7 +5,6 @@ import { deleteProduct, getProductsByUser } from "../redux/actions";
 import S from "../styles/ForSale.module.css";
 
 export default function ForSale() {
-
   const productsForSale = useSelector(state => state.productsForSale);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ export default function ForSale() {
   useEffect(() => {
     dispatch(getProductsByUser(user.id));
     setIsLoading(false);
-  }, [user])
+  }, [user]);
 
   function handleDelete(e) {
     dispatch(deleteProduct(e));
@@ -22,23 +21,34 @@ export default function ForSale() {
   }
 
   return (
-    <div>
-      {isLoading ? <div>Loading...</div> : productsForSale.length > 0 ? (
+    <div className={S.forSale}>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : productsForSale.length > 0 ? (
         productsForSale.map((el, i) => (
           <div className={S.cardContainer} key={i}>
             <div className={S.container}>
               <div className={S.imgCont}>
                 <img src={el.img} alt="" />
               </div>
+              <div className={S.infoContainer}>
+                <div className={S.stock}>
+                  <label className={S.number}>
+                    {el.status === "active" ? el.stock : el.status}
+                  </label>
+                  <p className={S.units}>{el.stock === 1 ? "Unit" : "Units"}</p>
+                </div>
 
-              <div className={S.titleCont}>
-                <span>{el.category.name}</span>
-                <h4>{el.title}</h4>
-                <h5>{el.brand.name}</h5>
-                <p>${el.price}</p>
-                <div className={S.stockAndStatus}>
-                  <label>Stock: {el.stock}</label>
-                  <label>{el.status}</label>
+                <div className={S.titleCont}>
+                  <span>{el.category.name}</span>
+                  <h5>Brand: {el.brand.name}</h5>
+                  <h4>{el.title}</h4>
+
+                  <h6>{el.description}</h6>
+
+                  <div className={S.stockAndStatus}>
+                    <p>Price: ${el.price}</p>
+                  </div>
                 </div>
                 <div className={S.btnContainer}>
                   <Link to={"/update/" + el.id}>
@@ -53,7 +63,7 @@ export default function ForSale() {
       ) : (
         <div className={S.noProductsCont}>
           <h5>You don't have any products for sale yet</h5>
-          <Link to="/sell" style={{ textDecoration: "none", color: "#fff" }}>
+          <Link to="/sell" style={{ textDecoration: "none", color: "gray" }}>
             <span>Publish now!</span>{" "}
           </Link>
         </div>
