@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
-import { changeOrderStatus, clearCart, getUserCartItem, updateProductsStock } from "../redux/actions";
+import { changeOrderStatus, clearCart, updateProductsStock } from "../redux/actions";
+import ProfileDetail from "../containers/ProfileDetail";
 
 export default function OrderConfirmed() {
 
@@ -23,30 +22,9 @@ export default function OrderConfirmed() {
     }
   }, [user]);
 
-  const successAlert = () => {
-    const navigate = useNavigate();
-
-    Swal.fire({
-      title: "Successful Purchase!",
-      confirmButtonText: "Home",
-      showDenyButton: true,
-      denyButtonText: "My Profile",
-      icon: "success",
-      confirmButtonColor: "rgb(55, 172, 135)",
-      denyButtonColor: "#d83dd0",
-      background: "#272727",
-      color: "#fff",
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        navigate("/");
-        dispatch(getUserCartItem());
-      } else if (result.isDenied) {
-        navigate("/profile");
-      }
-    });
-  };
   return (
-    <div>{successAlert()}</div>
+    <>
+      <ProfileDetail purchases={true} />
+    </>
   );
 }
