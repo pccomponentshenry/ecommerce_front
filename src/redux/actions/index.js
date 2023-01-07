@@ -38,10 +38,10 @@ import {
   UPDATE_ADDRESS,
   CHANGE_ADDRESS,
   CHANGE_DEFAULT_ADDRESS,
-  DELETE_ADDRESS
-  POST_REVIEW,
+  DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  GET_DETAIL_PURCHASES
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -431,5 +431,11 @@ export function getAllOrdersOneByOne() {
   return async dispatch => {
     const res = await axios.get(`${URL}/order`);
     return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
+  };
+}
+export function getDetailsOrders( id) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order/id/${id}`);
+    return dispatch({ type: GET_DETAIL_PURCHASES, payload: res.data });
   };
 }

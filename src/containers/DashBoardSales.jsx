@@ -11,9 +11,11 @@ import {
   Radio,
   FormControlLabel,
   MenuItem,
+  Link
 } from '@mui/material';
 
 import { Edit } from '@mui/icons-material';
+
 
 
 export default function DashBoardSales() {
@@ -35,6 +37,7 @@ export default function DashBoardSales() {
 
 
   let index = "";
+  let orderId=""
   const columns = useMemo(
     () => [
       {
@@ -44,6 +47,12 @@ export default function DashBoardSales() {
         enableEditing: false, //disable editing on this column
         enableSorting: false,
         size: 10,
+        Cell: ({ cell }) => (
+
+          // console.log(cell.getValue())
+          
+          orderId = cell.getValue()
+        ),
       },
       {
         accessorKey: 'userId',
@@ -69,6 +78,18 @@ export default function DashBoardSales() {
         accessorKey: 'addressId',
         header: 'Address',
       },
+      {
+        accessorKey: 'Detail',
+        header: 'detail',
+        Cell: ({cell}) =>(
+          <Link href={`/dashboard/sales/id/${orderId} `}>
+            <button>detail</button>
+          </Link>
+          
+          
+        )
+      },
+      
       // {
       //   accessorKey: 'addressId',
       //   header: 'Address',
@@ -81,7 +102,7 @@ export default function DashBoardSales() {
 
     ],
   );
-
+console.log(orderId, index)
 
 
 
@@ -115,9 +136,8 @@ export default function DashBoardSales() {
               boxShadow: '0px 0px 3px 0px #000'
             },
           }}
-
+          
         />
-
       </div>
 
     </div>
