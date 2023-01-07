@@ -142,6 +142,10 @@
   float: right;
 }
 
+.defaultLocation {
+  color: rgb(167, 167, 167);
+}
+
 .newAddressCont {
   /* display: flex; */
   position: absolute;

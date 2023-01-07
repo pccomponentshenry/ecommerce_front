@@ -53,8 +53,8 @@ export default function ForSale() {
       ) : (
         <div className={S.noProductsCont}>
           <h5>You don't have any products for sale yet</h5>
-          <Link to="/sell" style={{ textDecoration: "none", color: "#fff" }}>
-            <span>Publish now!</span>{" "}
+          <Link to="/sell" style={{ textDecoration: "none" }}>
+            <p>Publish now!</p>{" "}
           </Link>
         </div>
       )}
