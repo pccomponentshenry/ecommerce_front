@@ -34,15 +34,22 @@ export default function ForSale() {
                 </div>
 
                 <div className={S.titleCont}>
-                  <span>{el.category.name}</span>
-                  <h5>Brand: {el.brand.name}</h5>
-                  <h4>
+                  <div className={S.catAndBrand}>
+                    <span>{el.category.name}</span>
+                    <h5>Brand: {el.brand.name}</h5>
+                  </div>
+
+                  <h4 className={el.productTitle}>
                     {el.title.length < 60
                       ? el.title
                       : el.title.substr(0, 60) + "..."}
                   </h4>
 
-                  <h6>{el.description.substr(0, 200) + "..."}</h6>
+                  <h6>
+                    {el.description.length < 100
+                      ? el.description
+                      : el.description.substr(0, 200) + "..."}
+                  </h6>
                   <div className={S.btnContainer}>
                     <Link to={"/update/" + el.id}>
                       <button>Update</button>
