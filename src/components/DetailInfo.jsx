@@ -49,7 +49,7 @@ export default function DetailInfo({ handleAddToCart }) {
             ❤
           </span>
         </div>
-        <div className={D.owner}>
+        {/* <div className={D.owner}>
           <div className={D.ProfilePicCont}>
             <img src={profilePic} alt="" className={D.profilePic} />
           </div>
@@ -59,15 +59,15 @@ export default function DetailInfo({ handleAddToCart }) {
               <p>See the seller's profile</p>
             </div>
           </Link>
-        </div>
-        {product.user === user.id ? (
+        </div> */}
+        {/* {product.user === user.id ? (
           <div className={D.editBtn}>
             <button>update</button>
             <button>delete</button>
           </div>
         ) : (
           <></>
-        )}
+        )} */}
       </div>
     </div>
   );

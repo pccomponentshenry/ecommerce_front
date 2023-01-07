@@ -10,6 +10,7 @@ import DetailInfo from "../components/DetailInfo";
 import { useNavigate } from "react-router-dom";
 import { addToCart, getProductDetail, postCartItem } from "../redux/actions";
 import D from "../styles/Detail.module.css";
+import back from "../Images/back.png";
 
 export default function Detail() {
   const params = useParams();
@@ -62,6 +63,9 @@ export default function Detail() {
 
   return (
     <div className={D.Container}>
+      <div className={D.back} onClick={() => navigate(-1)}>
+        <img src={back} alt="" />
+      </div>
       <div className={D.imageContainer}>
         <Carousel img={imgs} />
       </div>
