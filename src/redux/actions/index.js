@@ -27,16 +27,21 @@ import {
   DELETE_PRODUCT,
   UPDATE_STOCK,
   GET_LOCATIONS,
-  POST_ADDRESS,
   GET_USER,
   GET_USERS,
-  GET_ADDRESSES,
   SET_FROM_STRIPE,
   GET_PURCHASES,
+  POST_REVIEW,
+  GET_ADDRESSES,
   GET_ADDRESS,
+  POST_ADDRESS,
   UPDATE_ADDRESS,
+  CHANGE_ADDRESS,
+  CHANGE_DEFAULT_ADDRESS,
+  DELETE_ADDRESS
   POST_REVIEW,
   GET_TOTAL_ORDERS,
+  GET_ALL_ORDERS
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -324,8 +329,8 @@ export const clearError = () => {
 //////////USERS////////
 export const postUser = payload => async dispatch => {
   try {
-    dispatch({ type: POST_USER, payload });
-    await axios.post(`${URL}/users`, payload);
+    const res = await axios.post(`${URL}/users`, payload);
+    dispatch({ type: POST_USER, payload: res.data });
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
   }
@@ -349,7 +354,7 @@ export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
 
-//////ADDRESS///
+//////ADDRESSES///
 export function getAddresses(id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/address/${id}`);
@@ -373,25 +378,40 @@ export const postAddress = payload => async dispatch => {
   }
 };
 
-export function updateAddress(payload) {
-  return async () => {
+export const updateAddress = payload => async dispatch => {
+  try {
     await axios.put(`${URL}/address`, payload);
-  };
+    dispatch({ type: CHANGE_ADDRESS, payload });
+    if (payload.isDefault) {
+      return dispatch({ type: CHANGE_DEFAULT_ADDRESS, payload });
+    }
+  }
+  catch (e) {
+    console.error(e);
+  }
 }
 
-export function deleteAddress(id) {
-  return async () => {
-    await axios.put(`${URL}/address/${id}`);
-  };
+export const deleteAddress = id => async dispatch => {
+  try {
+    const res = await axios.put(`${URL}/address/${id}`);
+    dispatch({ type: DELETE_ADDRESS, payload: id });
+    if (res.data?.id) {
+      dispatch({ type: CHANGE_DEFAULT_ADDRESS, payload: res.data });
+    }
+  }
+  catch (e) {
+    console.error(e);
+  }
 }
 
-//REVIEWS
+//////////REVIEWS////////
 export function getReviews() {
   return async dispatch => {
     const res = await axios.get(`${URL}/review`);
     return dispatch({ type: GET_REVIEWS, payload: res.data });
   };
 }
+
 export const postReview = payload => async dispatch => {
   try {
     const res = await axios.post(`${URL}/review`, payload);
@@ -405,5 +425,11 @@ export function getAllOrders() {
   return async dispatch => {
     const res = await axios.get(`${URL}/order/products`);
     return dispatch({ type: GET_TOTAL_ORDERS, payload: res.data });
+  };
+}
+export function getAllOrdersOneByOne() {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order`);
+    return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
   };
 }
