@@ -39,7 +39,6 @@ import {
   CHANGE_ADDRESS,
   CHANGE_DEFAULT_ADDRESS,
   DELETE_ADDRESS,
-  POST_REVIEW,
   GET_TOTAL_ORDERS,
   GET_ALL_ORDERS
 } from "../actions/actionNames";

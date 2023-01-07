@@ -138,10 +138,9 @@ export default function OrderForm() {
             cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
           ).toFixed(2)}
         </h3>
-        {address &&
-          <div className={O.payment}>
-            <Payment addressId={address} />
-          </div>}
+        {<div className={O.payment}>
+          <Payment addressId={address} />
+        </div>}
       </div>
 
       {addresses.length > 0 ? (
@@ -273,8 +272,9 @@ export default function OrderForm() {
                   errorSetting(e);
                 }}
                 onBlur={e => errorSetting(e)}
+                defaultValue="default"
               >
-                <option className={O.defaultLocation} value='default' disabled> Location </option>
+                <option className={O.defaultLocation} value="default" disabled> Location </option>
                 {locations.map((el, i) => (
                   <option key={i} value={el.name}>
                     {el.name}

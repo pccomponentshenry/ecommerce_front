@@ -33,7 +33,7 @@ import {
   UPDATE_ADDRESS,
   CHANGE_ADDRESS,
   CHANGE_DEFAULT_ADDRESS,
-  DELETE_ADDRESS
+  DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
   GET_ALL_ORDERS
 } from "../actions/actionNames";
@@ -57,8 +57,8 @@ const initialState = {
   address: [],
   purchases: [],
   fromStripe: true,
-  allOrders:[],
-  allOrdersOneByOne:[],
+  allOrders: [],
+  allOrdersOneByOne: [],
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -334,17 +334,17 @@ function rootReducer(state = initialState, action) {
         ...state,
         address: action.payload,
       };
-      ///////////dashboard////////
-      case GET_TOTAL_ORDERS:
-        return {
-          ...state,
-          allOrders: action.payload,
-        };
-        case GET_ALL_ORDERS:
-          return {
-            ...state,
-            allOrdersOneByOne: action.payload,
-          };
+    ///////////dashboard////////
+    case GET_TOTAL_ORDERS:
+      return {
+        ...state,
+        allOrders: action.payload,
+      };
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        allOrdersOneByOne: action.payload,
+      };
 
 
     default:
