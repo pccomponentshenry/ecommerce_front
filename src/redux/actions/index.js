@@ -439,3 +439,9 @@ export function getDetailsOrders( id) {
     return dispatch({ type: GET_DETAIL_PURCHASES, payload: res.data });
   };
 }
+export function putUser(id, payload) {
+  return async dispatch => {
+    const res = await axios.put(`${URL}/users/${id}`, payload);
+    return dispatch({ type: PUT_USER, payload: res.data });
+  };
+}
