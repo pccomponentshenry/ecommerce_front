@@ -3,6 +3,7 @@ import { getAllOrdersOneByOne, getUsers } from "../redux/actions";
 import SideDash from "../components/SideDash"
 import s from "../styles/DashBoardSales.module.css"
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import MaterialReactTable from 'material-react-table';
 import {
   Box,
@@ -11,101 +12,70 @@ import {
   Radio,
   FormControlLabel,
   MenuItem,
-  Link
 } from '@mui/material';
 
-import { Edit } from '@mui/icons-material';
-
+import { Edit, Refresh } from '@mui/icons-material';
 
 
 export default function DashBoardSales() {
   const orders = useSelector(state => state.allOrdersOneByOne);
   const user = useSelector(state => state.users);
   const [tableData, setTableData] = useState(() => orders);
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllOrdersOneByOne());
+    dispatch(getAllOrdersOneByOne(), getUsers())
+    
   }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
-
-
-  // console.log(orders)
-
 
   let index = "";
-  let orderId=""
 
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: 'id',
-        header: 'Order ID',
-        enableColumnOrdering: false,
-        enableEditing: false, //disable editing on this column
-        enableSorting: false,
-        size: 10,
+  // const columns = useMemo(
+  //   () => [
+  //     {
+  //       accessorKey: 'id',
+  //       header: 'Order ID',
+  //       enableColumnOrdering: false,
+  //       enableEditing: false, //disable editing on this column
+  //       enableSorting: false,
+  //       size: 10,
+  //     },
+  //     {
+  //       accessorKey: 'userId',
+  //       header: 'User Email',
+  //       size: 350,
+  //       Cell: ({ cell }) => (
 
-        Cell: ({ cell }) => (
+  //         // console.log(cell.getValue())
+  //         user[user.findIndex(users => users.id === cell.getValue())].email
 
-          // console.log(cell.getValue())
-          
-          orderId = cell.getValue()
-        ),
-      },
-      {
-        accessorKey: 'userId',
-        header: 'User Email',
-        size: 350,
-        Cell: ({ cell }) => (
+  //       ),
 
-          // console.log(cell.getValue())
-          user[user.findIndex(users => users.id === cell.getValue())].email
-
-        ),
-
-      },
-      {
-        accessorKey: 'status',
-        header: 'Status',
-      },
-      {
-        accessorKey: 'purchaseDate',
-        header: 'Date',
-      },
-      {
-        accessorKey: 'addressId',
-        header: 'Address',
-      },
-      {
-        accessorKey: 'Detail',
-        header: 'detail',
-        Cell: ({cell}) =>(
-          <Link href={`/dashboard/sales/id/${orderId} `}>
-            <button>detail</button>
-          </Link>
-          
-          
-        )
-      },
-      
-      // {
-      //   accessorKey: 'addressId',
-      //   header: 'Address',
-      //   Cell: ({ cell }) => (
-      //     cell.getValue().toLocaleString() === "true" ? <FormControlLabel control={<Radio defaultChecked color="success" />} label="Yes" /> :
-      //       <FormControlLabel control={<Radio color="secondary" defaultChecked />} label="No" />
-      //   )
-      // },
+  //     },
+  //     {
+  //       accessorKey: 'status',
+  //       header: 'Status',
+  //     },
+  //     {
+  //       accessorKey: 'purchaseDate',
+  //       header: 'Date',
+  //     },
+  //     {
+  //       accessorKey: 'addressId',
+  //       header: 'Address',
+  //     },
+  //     // {
+  //     //   accessorKey: 'addressId',
+  //     //   header: 'Address',
+  //     //   Cell: ({ cell }) => (
+  //     //     cell.getValue().toLocaleString() === "true" ? <FormControlLabel control={<Radio defaultChecked color="success" />} label="Yes" /> :
+  //     //       <FormControlLabel control={<Radio color="secondary" defaultChecked />} label="No" />
+  //     //   )
+  //     // },
 
 
-    ],
-  );
-console.log(orderId, index)
-
+  //   ],
+  // );
 
 
   return (
@@ -113,18 +83,56 @@ console.log(orderId, index)
     <div className={s.content}>
       <div className={s.sideContainer}><SideDash /></div>
       <div className={s.salesContainer}>
+       
+        <table clasName={s.tabla}> 
+       
+          <thead>
+            <tr>
+              <th>ORDER ID</th>
+              <th>USER ID</th>
+              <th>PURCHASE DATE</th>
+              <th>STATUS</th>
+              <th>ADDRESS</th>
+              <th>DETAILS</th>
+            </tr>
+          </thead> 
+          {orders.map((o) => 
+          <tbody>
+            <tr>
+              <td>{o.id}</td>
+              <td>{o.userId}</td>
+              <td>{o.purchaseDate}</td>
+              <td>{o.status}</td>
+              <td>{o.addressId}</td>
+              <td><Link to={`sales/${o.id}`}><button>Details</button></Link></td>
+            </tr>
+          </tbody> 
+          ) }
+        </table>
+   
 
-        <MaterialReactTable className={s.tabla}
+
+
+
+
+
+
+
+
+
+        {/* <MaterialReactTable className={s.tabla}
+          autoResetAll={true}
           enableHiding={false}
           enableColumnFilters={false}
           enableDensityToggle={false}
           enableFullScreenToggle={false}
           enableGlobalFilter={false}
           initialState={{
-            showGlobalFilter: true,
+            showGlobalFilter: true,          
           }}
+          state={ isLoading }
           columns={columns}
-          data={tableData}
+          data={tableData? isLoading === true : false}
           enableTopToolbar={true}
           editingMode="modal" //default
           enableEditing
@@ -139,8 +147,7 @@ console.log(orderId, index)
             },
           }}
 
-
-        />
+        /> */}
 
       </div>
 
