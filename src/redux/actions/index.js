@@ -29,6 +29,7 @@ import {
   GET_LOCATIONS,
   GET_USER,
   GET_USERS,
+  PUT_USER,
   SET_FROM_STRIPE,
   GET_PURCHASES,
   POST_REVIEW,
@@ -347,6 +348,13 @@ export function getUsers() {
   return async dispatch => {
     const res = await axios.get(`${URL}/users/`);
     return dispatch({ type: GET_USERS, payload: res.data });
+  };
+}
+
+export function putUser(id, payload) {
+  return async dispatch => {
+    const res = await axios.put(`${URL}/users/${id}`, payload);
+    return dispatch({ type: PUT_USER, payload: res.data });
   };
 }
 

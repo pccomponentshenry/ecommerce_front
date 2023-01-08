@@ -16,10 +16,10 @@ function AppBarChart() {
   }, []);
   console.log(allOrders)
   const [userData, setUserData] = useState({
-    labels: allOrders.map((data) => data.title.substr(0, 10) + "..."),
+    labels: allOrders.map((data) => data.title.substr(0, 0)),
     datasets: [
       {
-        label: "Ventas",
+        labels:"",
         data: allOrders.map((data) => data.total),
         backgroundColor: [
           "rgba(75,192,192,1)",
@@ -29,7 +29,7 @@ function AppBarChart() {
           "#2a71d0",
         ],
         borderColor: "white",
-        borderWidth: 2,
+        borderWidth: 1,
       },
     ],
   });
@@ -38,7 +38,7 @@ function AppBarChart() {
 
   return (
     <div className={s.contentChart}>
-      <h5 className={s.titleChart}>Lastest Sales</h5>
+      <h5 className={s.titleChart}>Total Sales</h5>
       <div style={{ width: 500, textAlign:'center' }}>
         <BarChart chartData={userData} />
       </div>

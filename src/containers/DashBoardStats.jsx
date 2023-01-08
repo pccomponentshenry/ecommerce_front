@@ -11,7 +11,7 @@ export default function DashBoardStats() {
 
   <div className={s.content}>
   <div className={s.sideContainer}><SideDash/></div>
-    <div className={s.statsContainer}><Graphs/><Lines/><Round/></div>
+    <div className={s.statsContainer}><Graphs/><Lines/></div>
    </div>
    
   );

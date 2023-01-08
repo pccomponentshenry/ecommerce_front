@@ -38,6 +38,7 @@ export default function DashBoardSales() {
 
   let index = "";
   let orderId=""
+
   const columns = useMemo(
     () => [
       {
@@ -47,6 +48,7 @@ export default function DashBoardSales() {
         enableEditing: false, //disable editing on this column
         enableSorting: false,
         size: 10,
+
         Cell: ({ cell }) => (
 
           // console.log(cell.getValue())
@@ -136,8 +138,10 @@ console.log(orderId, index)
               boxShadow: '0px 0px 3px 0px #000'
             },
           }}
-          
+
+
         />
+
       </div>
 
     </div>

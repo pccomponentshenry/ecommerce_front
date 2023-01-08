@@ -21,6 +21,8 @@ import DashBoardUsers from "./containers/DashBoardUsers";
 import DashboardPurchase from "./components/DashboardPurchase"
 import OrderConfirmed from "./components/OrderConfirmed";
 import AddressUpdate from "./components/AddressUpdate";
+import UserFormUpdate from "./components/UserFormUpdate";
+
 
 function App() {
   populateDB();
@@ -77,6 +79,11 @@ function App() {
           <Route exact path="/dashboard/users" element={
             <ProtectedAdmin>
               <DashBoardUsers />
+            </ProtectedAdmin>
+          } />
+          <Route exact path="/dashboard/users/edit/:email" element={
+            <ProtectedAdmin>
+              <UserFormUpdate/>
             </ProtectedAdmin>
           } />
           <Route exact path="/profile" element={<ProfileDetail />} />
