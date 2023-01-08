@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { addToFav } from "../redux/actions";
 import D from "../styles/Detail.module.css";
 
@@ -8,14 +7,22 @@ export default function DetailInfo({ handleAddToCart }) {
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
   const user = useSelector(state => state.user);
+  const [stars, setStars] = useState(0);
   const [clicked, setClicked] = useState(false);
   const fav = localStorage.getItem(product.id)
     ? JSON.parse(localStorage.getItem(product.id))
     : [];
   const [active, setActive] = useState(fav);
 
-  const profilePic = user.image;
-  // "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU";
+  // const URL = "https://playexpertback-production.up.railway.app";
+
+  const profilePic = user.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU";
+
+  useEffect(() => {
+    if (product.id) {
+      setStars(product.avgStars);
+    }
+  }, [product]);
 
   useEffect(() => {
     setActive(fav);
@@ -38,6 +45,20 @@ export default function DetailInfo({ handleAddToCart }) {
         <div className={D.priceAndDescription}>
           <h3 className={D.price}>$ {product.price}</h3>
           <p className={D.description}>{product.description}</p>
+        </div>
+
+        <div className={D.rating}>
+          <div>
+            <label className={D.ratingTitle}><strong>Product Rating: <span style={{ color: "#2bfab7" }}>{stars}</span></strong></label>
+          </div>
+          {[...Array(5)].map((_, i) => {
+            const ratingValue = i + 1;
+            return (
+              <label key={i} className={stars >= ratingValue ? D.fullStar : Math.ceil(stars) >= ratingValue ? D.halfStar : D.emptyStar}>
+                ★
+              </label>
+            );
+          })}
         </div>
         <div className={D.btnCont}>
           <button onClick={handleAddToCart}>Add to cart</button>
@@ -72,6 +93,7 @@ export default function DetailInfo({ handleAddToCart }) {
           <></>
         )} */}
       </div>
-    </div>
+
+    </div >
   );
 }

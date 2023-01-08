@@ -95,8 +95,11 @@ export const setFiltered = payload => {
 
 export function getProductDetail(id) {
   return async dispatch => {
-    const res = await axios.get(`${URL}/products/${id}`);
-    return dispatch({ type: GET_PRODUCT, payload: res.data });
+    const prod = await axios.get(`${URL}/products/${id}`);
+    const rev = await axios.get(`${URL}/review/${id}`);
+    const payload = prod.data;
+    prod.data.avgStars = rev.data.avg;
+    return dispatch({ type: GET_PRODUCT, payload });
   };
 }
 
@@ -236,6 +239,7 @@ export const clearCart = email => async dispatch => {
   } else {
     try {
       await axios.put(`${URL}/cartItem/${email}`);
+      dispatch(getUserCartItem(email));
     } catch (error) {
       console.log(error);
     }
