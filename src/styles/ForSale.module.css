@@ -5,18 +5,6 @@
   background-color: #f1f1f1;
 }
 
-.cardContainer .productDeleted {
-  color: rgb(109, 109, 109);
-}
-
-.titleCont .spanDeleted {
-  background-color: rgb(134, 134, 134);
-}
-
-.titleCont .h5Deleted {
-  color: rgb(109, 109, 109);
-}
-
 .container {
   width: 95%;
   background-color: #fff;

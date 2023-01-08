@@ -83,10 +83,10 @@ export default function ForSale() {
                   <div className={S.stockAndStatus}>
                     <div className={S.stock}>
                       <label className={S.number}>
-                        {el.status !== "deleted" ? el.stock : el.status}
+                        {el.status === "active" ? el.stock : el.status}
                       </label>
                       <p className={S.units}>
-                        {el.stock === 1 && el.status !== "deleted" ? "Unit" : "Units"}
+                        {el.stock === 1 ? "Unit" : "Units"}
                       </p>
                     </div>
                     <div className={S.price}>
