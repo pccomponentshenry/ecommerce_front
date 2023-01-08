@@ -1,174 +1,156 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../redux/actions";
+import { getAllOrdersOneByOne, getUsers } from "../redux/actions";
 import SideDash from "../components/SideDash"
 import s from "../styles/DashBoardSales.module.css"
 import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import MaterialReactTable from 'material-react-table';
 import {
-  Box, 
+  Box,
   IconButton,
   Tooltip,
   Radio,
   FormControlLabel,
   MenuItem,
 } from '@mui/material';
-import { Edit } from '@mui/icons-material';
+
+import { Edit, Refresh } from '@mui/icons-material';
 
 
 export default function DashBoardSales() {
-  const users = useSelector(state => state.users);
-  const [tableData, setTableData] = useState(() => users);
-  const [validationErrors, setValidationErrors] = useState({});
-  const dispatch = useDispatch();
-  const optionsAdmin = [{id:0, text:'Yes', value:true }, {id:1, text:'No', value:false }];
-  const optionsStatus = [{id:0, text:'Active', value:'active' }, {id:1, text:'Inactive', value:'inactive' }];
-
+  const orders = useSelector(state => state.allOrdersOneByOne);
+  const user = useSelector(state => state.users);
+  const [tableData, setTableData] = useState(() => orders);
+   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getAllOrdersOneByOne(), getUsers())
+    
   }, [dispatch]);
-  
 
-  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
-    if (!Object.keys(validationErrors).length) {
-      tableData[row.index] = values;
-      //send/receive api updates here, then refetch or update local table data for re-render
-      setTableData([...tableData]);
-      exitEditingMode(); //required to exit editing mode and close modal
-    }
-  };
+  let index = "";
 
-  const handleCancelRowEdits = () => {
-    setValidationErrors({});
-  };
-  
-  const getCommonEditTextFieldProps = useCallback(
-    (cell) => {
-      return {
-        error: !!validationErrors[cell.id],
-        helperText: validationErrors[cell.id],
-        onBlur: (event) => {
-          const isValid =
-            cell.column.id === 'email'
-              ? validateEmail(event.target.value)
-                : validateRequired(event.target.value);
-          if (!isValid) {
-            //set validation error for cell if invalid
-            setValidationErrors({
-              ...validationErrors,
-              [cell.id]: `${cell.column.columnDef.header} is required`,
-            });
-          } else {
-            //remove validation error for cell if valid
-            delete validationErrors[cell.id];
-            setValidationErrors({
-              ...validationErrors,
-            });
-          }
-        },
-      };
-    },
-    [validationErrors],
-  );
+  // const columns = useMemo(
+  //   () => [
+  //     {
+  //       accessorKey: 'id',
+  //       header: 'Order ID',
+  //       enableColumnOrdering: false,
+  //       enableEditing: false, //disable editing on this column
+  //       enableSorting: false,
+  //       size: 10,
+  //     },
+  //     {
+  //       accessorKey: 'userId',
+  //       header: 'User Email',
+  //       size: 350,
+  //       Cell: ({ cell }) => (
 
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: 'id',
-        header: 'ID',
-        enableColumnOrdering: false,
-        enableEditing: false, //disable editing on this column
-        enableSorting: false,        
-      },
-      {
-        accessorKey: 'username',
-        header: 'UserName',      
-      },
-      {
-        accessorKey: 'email',
-        header: 'Email',       
-      },
-      {
-        accessorKey: 'status',
-        header: 'Status',   
-        muiTableBodyCellEditTextFieldProps: {
-          select: true, //change to select for a dropdown
-          children: optionsStatus.map((o) => (
-            <MenuItem key={o.id} value={o.value}>
-              {o.text}
-            </MenuItem>
-          )),
-        },     
-        Cell: ({ cell }) => (
-         cell.getValue() === "active" ?  <FormControlLabel control={<Radio defaultChecked color="success"/>} label="Active" />
-           : <FormControlLabel control={<Radio color="secondary" defaultChecked/>} label="Inactive" />
-          )    
-      },   
-      {
-        accessorKey: 'isAdmin',
-        header: 'Admin', 
-        muiTableBodyCellEditTextFieldProps: {
-          select: true, //change to select for a dropdown
-          children: optionsAdmin.map((o) => (
-            <MenuItem key={o.id} value={o.value}>
-              {o.text}
-            </MenuItem>
-          )),
-        },     
-        Cell: ({ cell }) => (
-           cell.getValue().toLocaleString() === "true" ? <FormControlLabel control={<Radio defaultChecked color="success"/>} label="Yes" /> : 
-           <FormControlLabel control={<Radio color="secondary" defaultChecked/>} label="No" />
-          )        
-      },   
-     
-    ],
-    [getCommonEditTextFieldProps],
-  );
+  //         // console.log(cell.getValue())
+  //         user[user.findIndex(users => users.id === cell.getValue())].email
 
- 
+  //       ),
+
+  //     },
+  //     {
+  //       accessorKey: 'status',
+  //       header: 'Status',
+  //     },
+  //     {
+  //       accessorKey: 'purchaseDate',
+  //       header: 'Date',
+  //     },
+  //     {
+  //       accessorKey: 'addressId',
+  //       header: 'Address',
+  //     },
+  //     // {
+  //     //   accessorKey: 'addressId',
+  //     //   header: 'Address',
+  //     //   Cell: ({ cell }) => (
+  //     //     cell.getValue().toLocaleString() === "true" ? <FormControlLabel control={<Radio defaultChecked color="success" />} label="Yes" /> :
+  //     //       <FormControlLabel control={<Radio color="secondary" defaultChecked />} label="No" />
+  //     //   )
+  //     // },
+
+
+  //   ],
+  // );
+
+
   return (
 
     <div className={s.content}>
       <div className={s.sideContainer}><SideDash /></div>
-      <div className={s.userContainer}>
-      {/* <MaterialReactTable className={s.tabla}
-        enableHiding={false}
-        enableColumnFilters={false}
-        enableDensityToggle={false}
-        enableFullScreenToggle={false}
-        enableGlobalFilter={true}
-        initialState={{
-          showGlobalFilter:true,          
-        }}        
-        columns={columns}
-        data={tableData}
-        enableTopToolbar={true}
-        editingMode="modal" //default
-        enableEditing
-        onEditingRowSave={handleSaveRowEdits}
-        onEditingRowCancel={handleCancelRowEdits}
-        positionActionsColumn='last'
-        renderRowActions={({ row, table }) => (
-          <Box sx={{ display: 'flex', gap: '1rem' }}>
-            <Tooltip arrow placement="right" title="Edit User">
-              <IconButton onClick={() => table.setEditingRow(row)}>
-                <Edit />
-              </IconButton>
-            </Tooltip>
-          </Box>
-        )}
-        muiTablePaperProps={{
-          elevation: 0, //change the mui box shadow
-          //customize paper styles
-          sx: {
-            borderRadius: '5px',
-            border: '2px solid #e0e0e0',
-            boxShadow: '0px 0px 3px 0px #000'
-          },
-        }}
+      <div className={s.salesContainer}>
        
-      /> */}
+        <table clasName={s.tabla}> 
+       
+          <thead>
+            <tr>
+              <th>ORDER ID</th>
+              <th>USER ID</th>
+              <th>PURCHASE DATE</th>
+              <th>STATUS</th>
+              <th>ADDRESS</th>
+              <th>DETAILS</th>
+            </tr>
+          </thead> 
+          {orders.map((o) => 
+          <tbody>
+            <tr>
+              <td>{o.id}</td>
+              <td>{o.userId}</td>
+              <td>{o.purchaseDate}</td>
+              <td>{o.status}</td>
+              <td>{o.addressId}</td>
+              <td><Link to={`sales/${o.id}`}><button>Details</button></Link></td>
+            </tr>
+          </tbody> 
+          ) }
+        </table>
+   
+
+
+
+
+
+
+
+
+
+
+        {/* <MaterialReactTable className={s.tabla}
+          autoResetAll={true}
+          enableHiding={false}
+          enableColumnFilters={false}
+          enableDensityToggle={false}
+          enableFullScreenToggle={false}
+          enableGlobalFilter={false}
+          initialState={{
+            showGlobalFilter: true,          
+          }}
+          state={ isLoading }
+          columns={columns}
+          data={tableData? isLoading === true : false}
+          enableTopToolbar={true}
+          editingMode="modal" //default
+          enableEditing
+          positionActionsColumn='last'
+          muiTablePaperProps={{
+            elevation: 0, //change the mui box shadow
+            //customize paper styles
+            sx: {
+              borderRadius: '5px',
+              border: '2px solid #e0e0e0',
+              boxShadow: '0px 0px 3px 0px #000'
+            },
+          }}
+
+        /> */}
+
       </div>
+
     </div>
   );
 };

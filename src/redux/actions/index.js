@@ -24,20 +24,25 @@ import {
   GET_REVIEWS,
   GET_PRODUCTS_FOR_SALE,
   PUT_PRODUCT,
-  DELETE_PRODUCT,
+  CHANGE_PRODUCT_STATUS,
   UPDATE_STOCK,
   GET_LOCATIONS,
-  POST_ADDRESS,
   GET_USER,
   GET_USERS,
-  GET_ADDRESSES,
+  PUT_USER,
   SET_FROM_STRIPE,
   GET_PURCHASES,
-  GET_ADDRESS,
-  UPDATE_ADDRESS,
   POST_REVIEW,
+  GET_ADDRESSES,
+  GET_ADDRESS,
+  POST_ADDRESS,
+  UPDATE_ADDRESS,
+  CHANGE_ADDRESS,
+  CHANGE_DEFAULT_ADDRESS,
+  DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  GET_DETAIL_PURCHASES
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -136,10 +141,10 @@ export function putProduct(id, payload) {
   };
 }
 
-export function deleteProduct(id) {
+export function changeProductStatus(payload) {
   return async dispatch => {
-    const res = await axios.delete(`${URL}/products/${id}`);
-    return dispatch({ type: DELETE_PRODUCT, payload: res.data });
+    const res = await axios.put(`${URL}/products/status/`, payload);
+    return dispatch({ type: CHANGE_PRODUCT_STATUS, payload });
   };
 }
 
@@ -325,8 +330,8 @@ export const clearError = () => {
 //////////USERS////////
 export const postUser = payload => async dispatch => {
   try {
-    dispatch({ type: POST_USER, payload });
-    await axios.post(`${URL}/users`, payload);
+    const res = await axios.post(`${URL}/users`, payload);
+    dispatch({ type: POST_USER, payload: res.data });
   } catch (e) {
     return dispatch({ type: SET_ERROR, payload: e });
   }
@@ -346,11 +351,12 @@ export function getUsers() {
   };
 }
 
+
 export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
 
-//////ADDRESS///
+//////ADDRESSES///
 export function getAddresses(id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/address/${id}`);
@@ -374,25 +380,40 @@ export const postAddress = payload => async dispatch => {
   }
 };
 
-export function updateAddress(payload) {
-  return async () => {
+export const updateAddress = payload => async dispatch => {
+  try {
     await axios.put(`${URL}/address`, payload);
-  };
+    dispatch({ type: CHANGE_ADDRESS, payload });
+    if (payload.isDefault) {
+      return dispatch({ type: CHANGE_DEFAULT_ADDRESS, payload });
+    }
+  }
+  catch (e) {
+    console.error(e);
+  }
 }
 
-export function deleteAddress(id) {
-  return async () => {
-    await axios.put(`${URL}/address/${id}`);
-  };
+export const deleteAddress = id => async dispatch => {
+  try {
+    const res = await axios.put(`${URL}/address/${id}`);
+    dispatch({ type: DELETE_ADDRESS, payload: id });
+    if (res.data?.id) {
+      dispatch({ type: CHANGE_DEFAULT_ADDRESS, payload: res.data });
+    }
+  }
+  catch (e) {
+    console.error(e);
+  }
 }
 
-//REVIEWS
+//////////REVIEWS////////
 export function getReviews() {
   return async dispatch => {
     const res = await axios.get(`${URL}/review`);
     return dispatch({ type: GET_REVIEWS, payload: res.data });
   };
 }
+
 export const postReview = payload => async dispatch => {
   try {
     const res = await axios.post(`${URL}/review`, payload);
@@ -412,5 +433,17 @@ export function getAllOrdersOneByOne() {
   return async dispatch => {
     const res = await axios.get(`${URL}/order`);
     return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
+  };
+}
+export function getDetailsOrders(id) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order/id/${id}`);
+    return dispatch({ type: GET_DETAIL_PURCHASES, payload: res.data });
+  };
+}
+export function putUser(id, payload) {
+  return async dispatch => {
+    const res = await axios.put(`${URL}/users/${id}`, payload);
+    return dispatch({ type: PUT_USER, payload: res.data });
   };
 }

@@ -19,20 +19,25 @@ import {
   POST_USER,
   LOGOUT_USER,
   PUT_PRODUCT,
-  DELETE_PRODUCT,
+  CHANGE_PRODUCT_STATUS,
   GET_REVIEWS,
   POST_REVIEW,
   GET_PRODUCTS_FOR_SALE,
   GET_LOCATIONS,
-  POST_ADDRESS,
   GET_USER,
   GET_USERS,
-  GET_ADDRESSES,
   SET_FROM_STRIPE,
+  GET_ADDRESSES,
   GET_ADDRESS,
+  POST_ADDRESS,
   UPDATE_ADDRESS,
+  CHANGE_ADDRESS,
+  CHANGE_DEFAULT_ADDRESS,
+  DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  GET_DETAIL_PURCHASES,
+  PUT_USER
 } from "../actions/actionNames";
 
 const initialState = {
@@ -54,8 +59,10 @@ const initialState = {
   address: [],
   purchases: [],
   fromStripe: true,
-  allOrders:[],
-  allOrdersOneByOne:[],
+  allOrders: [],
+  allOrdersOneByOne: [],
+  detailsOrders: []
+
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -67,6 +74,7 @@ initialState.fav = localStorage.getItem("fav")
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
     case ALL_PRODUCTS:
       return {
         ...state,
@@ -79,45 +87,60 @@ function rootReducer(state = initialState, action) {
         product: action.payload,
       };
 
+    case SEARCH_PRODUCT:
+      return {
+        ...state,
+        product: action.payload,
+      };
+
     case POST_PRODUCT: {
       return {
         ...state,
         products: [...state.products, action.payload],
       };
     }
-    case GET_ADDRESSES: {
-      return {
-        ...state,
-        addresses: action.payload,
-      };
-    }
-    case GET_ADDRESS: {
-      return {
-        ...state,
-        address: action.payload,
-      };
-    }
-    case POST_ADDRESS: {
-      return {
-        ...state,
-        addresses: [...state.addresses, action.payload],
-      };
-    }
+
     case PUT_PRODUCT: {
       return {
         ...state,
         product: action.payload,
       };
     }
-    case GET_LOCATIONS: {
+
+    case CHANGE_PRODUCT_STATUS: {
       return {
         ...state,
-        locations: action.payload,
-      };
-    }
-    case DELETE_PRODUCT: {
-      return {
-        ...state,
+        productsForSale: state.productsForSale.map(prod => {
+          if (Number(prod.id) === Number(action.payload.id)) {
+            return { ...prod, status: action.payload.status };
+          }
+          else {
+            return { ...prod }
+          }
+        }).sort((a, b) => {
+          let fa = a.status,
+            fb = b.status;
+
+          if (fa === "active" && fb === "inactive") {
+            return -1;
+          }
+          if (fa === "inactive" && fb === "active") {
+            return 1;
+          }
+          if (fa === "active" && fb === "deleted") {
+            return -1;
+          }
+          if (fa === "deleted" && fb === "active") {
+            return 1;
+          }
+          if (fa === "inactive" && fb === "deleted") {
+            return -1;
+          }
+          if (fa === "deleted" && fb === "inactive") {
+            return 1;
+          }
+          return 0;
+        })
       };
     }
 
@@ -125,6 +148,73 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         productsForSale: action.payload,
+      };
+    }
+
+    //////////ADDRESSES////////
+    case GET_ADDRESSES: {
+      return {
+        ...state,
+        addresses: action.payload,
+      };
+    }
+
+    case GET_ADDRESS: {
+      return {
+        ...state,
+        address: action.payload,
+      };
+    }
+
+    case POST_ADDRESS: {
+      return {
+        ...state,
+        addresses: [...state.addresses, action.payload],
+      };
+    }
+
+    case UPDATE_ADDRESS:
+      return {
+        ...state,
+        address: action.payload,
+      };
+
+    case CHANGE_DEFAULT_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.map(a => {
+          if (a.id === action.payload.id) {
+            return { ...a, isDefault: true };
+          }
+          else {
+            return { ...a, isDefault: false };
+          }
+        })
+      };
+
+    case CHANGE_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.map(a => {
+          if (Number(a.id) === Number(action.payload.id)) {
+            return { ...a, ...action.payload };
+          }
+          else {
+            return { ...a }
+          }
+        }),
+      };
+
+    case DELETE_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.filter(a => a.id !== action.payload),
+      };
+
+    case GET_LOCATIONS: {
+      return {
+        ...state,
+        locations: action.payload,
       };
     }
 
@@ -139,12 +229,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtered: action.payload,
-      };
-
-    case SEARCH_PRODUCT:
-      return {
-        ...state,
-        product: action.payload,
       };
 
     case GET_BRANDS:
@@ -243,12 +327,13 @@ function rootReducer(state = initialState, action) {
       };
 
     ////// USERS /////
-    // case POST_USER: {
-    //   return {
-    //     ...state,
-    //     user: action.payload,
-    //   };
-    // }
+    case POST_USER: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+
     case GET_USER: {
       return {
         ...state,
@@ -267,6 +352,8 @@ function rootReducer(state = initialState, action) {
         user: {},
       };
     }
+
+
     ////REVIEWS////
     case GET_REVIEWS:
       return {
@@ -278,22 +365,37 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews: [...state.reviews, action.payload]
       }
+
     case UPDATE_ADDRESS:
       return {
         ...state,
         address: action.payload,
       };
-      ///////////dashboard////////
-      case GET_TOTAL_ORDERS:
-        return {
-          ...state,
-          allOrders: action.payload,
-        };
-        case GET_ALL_ORDERS:
-          return {
-            ...state,
-            allOrdersOneByOne: action.payload,
-          };
+
+    ///////////dashboard////////
+    case GET_TOTAL_ORDERS:
+      return {
+        ...state,
+        allOrders: action.payload,
+      };
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        allOrdersOneByOne: action.payload,
+      };
+    case GET_DETAIL_PURCHASES:
+      return {
+        ...state,
+        detailsOrders: action.payload,
+      };
+    case PUT_USER: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+
+
 
     default:
       return state;

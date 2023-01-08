@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from "react";
 import P from "../styles/Purchases.module.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders, getReviews } from "../redux/actions";
+import { getDetailsOrders } from "../redux/actions";
 
 export default function Purchases() {
-  const nuevo=[];
-  const usuario=[];
   const user = useSelector(state => state.user);
-  const purchases = useSelector(state => state.purchases);
-  const reviews = useSelector(state => state.reviews);
-  reviews.map(i => nuevo.push(i.productId));
-  reviews.map(e => usuario.push(e.username));
+  const purchases = useSelector(state => state.detailsOrders);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
+  const params = useParams();
   
+console.log(params)
   useEffect(() => {
-    dispatch(getReviews());
-    dispatch(getOrders(user.id));
-    setIsLoading(false);
-  }, [user])
+    dispatch(getDetailsOrders(params.id));
+  }, [])
 
   return (
     <div>
-      {isLoading ? <div>Loading...</div> : purchases.map(p => (
+      {purchases.map(p => (
         <div className={P.orderBox} key={p.id}>
           <h4>
             Order PE000{p.id}
@@ -49,15 +44,6 @@ export default function Purchases() {
                 <h5>
                   {el.quantity} Units - ${el.price}
                 </h5>
-                {(!nuevo.includes(el.product.id) || !usuario.includes(user.username)) ?
-                <Link
-                  style={{ textDecoration: "none", color: "#212121" }}
-                  to={`/addreview/${user.id}/${el.product.id}`}
-                >
-                  {" "}
-                  <button>Leave a review</button>{" "}
-                </Link>
-                :<div>Review posted</div>}
               </div>
             </div>
           ))}

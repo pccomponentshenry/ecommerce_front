@@ -17,7 +17,6 @@ export default function Nav() {
   const { isAuthenticated } = useAuth0();
   const loggedUser = useSelector(state => state.user);
 
-
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   function switchMode() {
@@ -62,21 +61,11 @@ export default function Nav() {
               <li>Favorites</li>
             </Link>
             <Link to="/dashboard" style={{ textDecoration: "none" }}>
-              {loggedUser.isAdmin === true ? <li>Dashboard</li> : <></>}
+              {loggedUser.isAdmin === "true" ? <li>Dashboard</li> : <></>}
             </Link>
           </ul>
           {activeNav === true && (
             <ul className={isAuthenticated ? N.navList : N.authNavList}>
-              <Link to="/latest" style={{ textDecoration: "none" }}>
-                <li
-                  className={
-                    isAuthenticated ? N.authenticated : N.notAuthenticated
-                  }
-                >
-                  Latest
-                </li>
-              </Link>
-
               <Link to="/sell" style={{ textDecoration: "none" }}>
                 {isAuthenticated ? (
                   <li

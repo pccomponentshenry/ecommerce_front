@@ -7,34 +7,37 @@
 
 .container {
   display: flex;
-  background-color: #c9c9c9;
+  background-color: #2e2e2e;
   height: 30px;
-  /* position: sticky; */
   top: 0px;
   z-index: 300;
   padding-left: 30px;
 }
 
 .container h5 {
-  font-weight: 400;
-  font-size: 15px;
+  font-weight: 200;
+  font-size: 14px;
   position: relative;
-  top: 5px;
+  top: 7px;
+  color: #fff;
 }
 
 .noProducts {
   text-align: center;
-  height: 30%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   position: relative;
-  top: 80px;
-
   width: 100%;
+  color: #fff;
 }
 
-.noProducts p:hover {
+/* .noProducts p:hover {
   color: #2bfab7;
   transition: 0.15s ease-in-out;
-}
+} */
 
 @media screen and (max-width: 500px) {
   .container {
@@ -58,5 +61,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  .container {
+    overflow: hidden;
+  }
+  .container h5 {
+    font-size: 14px;
+    overflow: hidden;
+    margin-top: -5px;
+  }
+  .noProducts {
+    overflow: hidden;
+  }
+  .noProducts h5 {
+    overflow: hidden;
   }
 }
