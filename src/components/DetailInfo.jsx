@@ -46,20 +46,25 @@ export default function DetailInfo({ handleAddToCart }) {
           <h3 className={D.price}>$ {product.price}</h3>
           <p className={D.description}>{product.description}</p>
         </div>
-
-        <div className={D.rating}>
+        {stars ?
+          <div className={D.rating}>
+            <div>
+              <label className={D.ratingTitle}><strong>Product Rating: <span style={{ color: "#2bfab7" }}>{stars}</span></strong></label>
+            </div>
+            {[...Array(5)].map((_, i) => {
+              const ratingValue = i + 1;
+              return (
+                <label key={i} className={stars >= ratingValue ? D.fullStar : Math.ceil(stars) >= ratingValue ? D.halfStar : D.emptyStar}>
+                  ★
+                </label>
+              );
+            })}
+          </div> :
           <div>
-            <label className={D.ratingTitle}><strong>Product Rating: <span style={{ color: "#2bfab7" }}>{stars}</span></strong></label>
+            <label className={D.ratingTitle}><span style={{ color: "#fff", fontSize: "14px" }}>No reviews yet</span></label>
+            <label className={D.emptyStar}>★★★★★</label>
           </div>
-          {[...Array(5)].map((_, i) => {
-            const ratingValue = i + 1;
-            return (
-              <label key={i} className={stars >= ratingValue ? D.fullStar : Math.ceil(stars) >= ratingValue ? D.halfStar : D.emptyStar}>
-                ★
-              </label>
-            );
-          })}
-        </div>
+        }
         <div className={D.btnCont}>
           <button onClick={handleAddToCart}>Add to cart</button>
           <span
