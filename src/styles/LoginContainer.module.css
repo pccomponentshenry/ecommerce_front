@@ -35,13 +35,10 @@
 .loginBtn {
   background-color: transparent;
   height: 30px;
-  /* color: #2bfab7; */
   color: #fff;
   border: none;
   border-radius: 8px;
   font-size: 16px;
-  margin-left: 300px;
-  margin-top: 10px;
 }
 .loginBtn:hover {
   /* color: #fff; */

@@ -26,7 +26,6 @@ import {
   GET_LOCATIONS,
   GET_USER,
   GET_USERS,
-  PUT_USER,
   SET_FROM_STRIPE,
   GET_ADDRESSES,
   GET_ADDRESS,
@@ -36,7 +35,9 @@ import {
   CHANGE_DEFAULT_ADDRESS,
   DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  GET_DETAIL_PURCHASES,
+  PUT_USER
 } from "../actions/actionNames";
 
 const initialState = {
@@ -58,8 +59,10 @@ const initialState = {
   address: [],
   purchases: [],
   fromStripe: true,
-  allOrders: [],
-  allOrdersOneByOne: [],
+  allOrders:[],
+  allOrdersOneByOne:[],
+  detailsOrders: []
+
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -319,12 +322,7 @@ function rootReducer(state = initialState, action) {
       };
     }
     
-    case PUT_USER: {
-      return {
-        ...state,
-        user: action.payload,
-      };
-    }
+   
     ////REVIEWS////
     case GET_REVIEWS:
       return {
@@ -342,17 +340,30 @@ function rootReducer(state = initialState, action) {
         ...state,
         address: action.payload,
       };
-    ///////////dashboard////////
-    case GET_TOTAL_ORDERS:
-      return {
-        ...state,
-        allOrders: action.payload,
-      };
-    case GET_ALL_ORDERS:
-      return {
-        ...state,
-        allOrdersOneByOne: action.payload,
-      };
+
+      ///////////dashboard////////
+      case GET_TOTAL_ORDERS:
+        return {
+          ...state,
+          allOrders: action.payload,
+        };
+        case GET_ALL_ORDERS:
+          return {
+            ...state,
+            allOrdersOneByOne: action.payload,
+          };
+        case GET_DETAIL_PURCHASES:
+          return {
+            ...state,
+            detailsOrders: action.payload,
+          };
+      case PUT_USER: {
+          return {
+            ...state,
+            user: action.payload,
+          };
+         }
+
 
 
     default:

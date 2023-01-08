@@ -61,6 +61,7 @@
     border: 1px solid #6d6d6d;
     height: 40px;
 }
+
 .tabla td {   
     border: 1px solid #6d6d6d;
     padding: 10px ;
@@ -112,3 +113,17 @@
         background-color: #2bfab7;
     }
 }
+
+
+.loadingCont {
+    display: flex;
+    position: absolute;
+    left: 28%;
+    right: 45%;
+    margin-top: 150px;
+  }
+  .loadingBackground {
+    height: 100vh;
+    background-color: black;
+  }
+
