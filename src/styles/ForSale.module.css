@@ -5,6 +5,18 @@
   background-color: #f1f1f1;
 }
 
+.cardContainer .productDeleted {
+  color: rgb(109, 109, 109);
+}
+
+.titleCont .spanDeleted {
+  background-color: rgb(134, 134, 134);
+}
+
+.titleCont .h5Deleted {
+  color: rgb(109, 109, 109);
+}
+
 .container {
   width: 95%;
   background-color: #fff;
@@ -16,13 +28,16 @@
   border-radius: 10px;
   padding: 20px;
 }
+
 .infoContainer {
   display: flex;
 }
+
 .forSale {
   background-color: #ebebeb;
   height: 100%;
 }
+
 .noProductsCont {
   display: flex;
   justify-content: center;
@@ -34,6 +49,7 @@
 .noProductsCont h5 {
   color: #fff;
 }
+
 .noProductsCont span:hover {
   transition: 0.15s ease-in-out;
   color: #2bfab7;
@@ -87,6 +103,7 @@
   position: relative;
   bottom: 3px;
 }
+
 .titleCont h6 {
   font-size: 14px;
   width: 600px;
@@ -123,6 +140,7 @@
   transition: 0.15s ease-in-out;
   color: #212121;
 }
+
 .stock {
   width: 50px;
   height: fit-content;
@@ -152,6 +170,7 @@
 .number {
   text-align: left;
 }
+
 .price {
   display: flex;
   width: 100px;
@@ -170,12 +189,14 @@
     justify-content: center;
     align-items: center;
   }
+
   .infoContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
   .imgCont {
     width: 200px;
     height: fit-content;
@@ -186,11 +207,13 @@
   .imgCont img {
     width: 100%;
   }
+
   .cardContainer {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .container {
     width: 95%;
     background-color: #fff;
@@ -202,10 +225,12 @@
     border-radius: 10px;
     padding: 20px;
   }
+
   .catAndBrand {
     float: left;
     margin-left: -80px;
   }
+
   .titleCont {
     position: relative;
     width: 100%;
@@ -220,6 +245,7 @@
     justify-content: center;
     align-items: center;
   }
+
   .titleCont h6 {
     overflow: hidden;
     display: -webkit-box;
@@ -231,14 +257,17 @@
     font-size: 16px;
     font-weight: 600;
   }
+
   .btnContainer {
     width: 140px;
     display: flex;
     margin-left: -100px;
   }
+
   .btnContainer button {
     margin-right: 10px;
   }
+
   .stockAndStatus {
     overflow: hidden;
 
@@ -248,6 +277,7 @@
     bottom: 0px;
     margin-left: -40px;
   }
+
   .stock {
     width: 100px;
     height: fit-content;
@@ -264,6 +294,7 @@
     float: right;
     overflow: hidden;
   }
+
   .units {
     text-align: left;
     margin-top: 0px;
@@ -271,10 +302,12 @@
     font-size: 14px;
     overflow: hidden;
   }
+
   .number {
     overflow: hidden;
     font-size: 14px;
   }
+
   .price {
     display: flex;
     width: 100px;

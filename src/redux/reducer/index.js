@@ -19,7 +19,7 @@ import {
   POST_USER,
   LOGOUT_USER,
   PUT_PRODUCT,
-  DELETE_PRODUCT,
+  CHANGE_PRODUCT_STATUS,
   GET_REVIEWS,
   POST_REVIEW,
   GET_PRODUCTS_FOR_SALE,
@@ -59,8 +59,8 @@ const initialState = {
   address: [],
   purchases: [],
   fromStripe: true,
-  allOrders:[],
-  allOrdersOneByOne:[],
+  allOrders: [],
+  allOrdersOneByOne: [],
   detailsOrders: []
 
 };
@@ -107,9 +107,17 @@ function rootReducer(state = initialState, action) {
       };
     }
 
-    case DELETE_PRODUCT: {
+    case CHANGE_PRODUCT_STATUS: {
       return {
         ...state,
+        productsForSale: state.productsForSale.map(prod => {
+          if (Number(prod.id) === Number(action.payload.id)) {
+            return { ...prod, status: action.payload.status };
+          }
+          else {
+            return { ...prod }
+          }
+        })
       };
     }
 
@@ -321,8 +329,8 @@ function rootReducer(state = initialState, action) {
         user: {},
       };
     }
-    
-   
+
+
     ////REVIEWS////
     case GET_REVIEWS:
       return {
@@ -341,28 +349,28 @@ function rootReducer(state = initialState, action) {
         address: action.payload,
       };
 
-      ///////////dashboard////////
-      case GET_TOTAL_ORDERS:
-        return {
-          ...state,
-          allOrders: action.payload,
-        };
-        case GET_ALL_ORDERS:
-          return {
-            ...state,
-            allOrdersOneByOne: action.payload,
-          };
-        case GET_DETAIL_PURCHASES:
-          return {
-            ...state,
-            detailsOrders: action.payload,
-          };
-      case PUT_USER: {
-          return {
-            ...state,
-            user: action.payload,
-          };
-         }
+    ///////////dashboard////////
+    case GET_TOTAL_ORDERS:
+      return {
+        ...state,
+        allOrders: action.payload,
+      };
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        allOrdersOneByOne: action.payload,
+      };
+    case GET_DETAIL_PURCHASES:
+      return {
+        ...state,
+        detailsOrders: action.payload,
+      };
+    case PUT_USER: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
 
 
 

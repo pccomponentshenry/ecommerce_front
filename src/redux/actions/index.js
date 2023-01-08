@@ -24,7 +24,7 @@ import {
   GET_REVIEWS,
   GET_PRODUCTS_FOR_SALE,
   PUT_PRODUCT,
-  DELETE_PRODUCT,
+  CHANGE_PRODUCT_STATUS,
   UPDATE_STOCK,
   GET_LOCATIONS,
   GET_USER,
@@ -141,10 +141,10 @@ export function putProduct(id, payload) {
   };
 }
 
-export function deleteProduct(id) {
+export function changeProductStatus(payload) {
   return async dispatch => {
-    const res = await axios.delete(`${URL}/products/${id}`);
-    return dispatch({ type: DELETE_PRODUCT, payload: res.data });
+    const res = await axios.put(`${URL}/products/status/`, payload);
+    return dispatch({ type: CHANGE_PRODUCT_STATUS, payload });
   };
 }
 
@@ -435,7 +435,7 @@ export function getAllOrdersOneByOne() {
     return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
   };
 }
-export function getDetailsOrders( id) {
+export function getDetailsOrders(id) {
   return async dispatch => {
     const res = await axios.get(`${URL}/order/id/${id}`);
     return dispatch({ type: GET_DETAIL_PURCHASES, payload: res.data });
