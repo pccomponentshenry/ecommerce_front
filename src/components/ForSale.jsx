@@ -40,6 +40,7 @@ export default function ForSale() {
       dispatch(changeProductStatus({ id, status }));
     }
   }
+
   return (
     <div className={S.forSale}>
       {isLoading ? (
@@ -49,7 +50,7 @@ export default function ForSale() {
           <div className={S.cardContainer} key={i}>
             <div className={el.status === "deleted" ? S.productDeleted + " " + S.container : S.container}>
               <div className={S.infoContainer}>
-                <div className={el.status === "deleted" ? S.productDeleted + " " + S.imgCont : S.imgCont}>
+                <div className={S.imgCont}>
                   <img src={el.img} alt="" />
                 </div>
 
@@ -70,30 +71,30 @@ export default function ForSale() {
                       ? el.description
                       : el.description.substr(0, 200) + "..."}
                   </h6>
-
                   {el.status !== "deleted" && <div className={S.btnContainer}>
                     <Link to={"/update/" + el.id}>
                       <button>Update</button>
                     </Link>
-                    <button onClick={e => changeStatus(el.id, el.status === "inactive" ? "active" : "inactive")}>{el.status === "active" ? "Pause" : el.status === "inactive" && "Activate"}</button>
                     <button onClick={e => changeStatus(el.id, "deleted")}>Delete</button>
+                    <button onClick={e => changeStatus(el.id, el.status === "inactive" ? "active" : "inactive")}>{el.status === "active" ? "Pause" : el.status === "inactive" && "Unpause"}</button>
                   </div>
                   }
-
+                </div>
+                {el.status !== "deleted" &&
                   <div className={S.stockAndStatus}>
-                    <div className={S.stock}>
-                      <label className={S.number}>
-                        {el.status === "active" ? el.stock : el.status}
-                      </label>
+                    <div className={el.status === "inactive" ? S.inactive : S.stock}>
+                      <label className={el.status === "inactive" ? S.inactive : S.number}>{el.status === "inactive" ? "Paused" : el.stock}</label>
                       <p className={S.units}>
-                        {el.stock === 1 ? "Unit" : "Units"}
+                        {el.status === "active" && (el.stock === 1 ? "Unit" : "Units")}
                       </p>
                     </div>
-                    <div className={S.price}>
-                      <p>Price: ${el.price}</p>
-                    </div>
+                    {el.status === "active" &&
+                      <div className={S.price}>
+                        <p>Price: ${el.price}</p>
+                      </div>
+                    }
                   </div>
-                </div>
+                }
               </div>
             </div>
           </div>

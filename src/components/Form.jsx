@@ -100,9 +100,7 @@ export default function Form() {
       setDisable(false);
     } else {
       setDisable(true);
-      console.log(errors);
     }
-
     return errors;
   };
 

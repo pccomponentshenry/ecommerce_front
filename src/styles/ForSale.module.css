@@ -5,6 +5,28 @@
   background-color: #f1f1f1;
 }
 
+.cardContainer .productDeleted {
+  color: rgb(109, 109, 109);
+}
+
+.titleCont .spanDeleted {
+  background-color: rgb(134, 134, 134);
+}
+
+.titleCont .h5Deleted {
+  color: rgb(109, 109, 109);
+}
+
+.inactive {
+  font-size: 14px;
+  color: #fff;
+  width: 100px;
+  text-align: center;
+  background-color: rgb(134, 134, 134);
+  float: right;
+  margin-left: 50px;
+}
+
 .container {
   width: 95%;
   background-color: #fff;
