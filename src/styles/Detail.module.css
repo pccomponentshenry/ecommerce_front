@@ -142,14 +142,14 @@
   padding-right: none;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
-.owner:hover {
+/* .owner:hover {
   border: solid 1px #fff;
   border-bottom: none;
   transition: 0.2s ease-in-out;
-}
+} */
 
 .ownerText {
   position: relative;
@@ -157,8 +157,16 @@
   top: 10px;
 }
 
+.owner h2 {
+  font-size: 18px;
+  bottom: 5px;
+}
+
 .owner h3 {
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 200;
+  /* position: relative; */
+  bottom: 5px;
 }
 
 .owner p {
@@ -201,11 +209,13 @@
   font-weight: 600;
   overflow: hidden;
 }
+
 .editBtn {
   width: fit-content;
   position: absolute;
   top: 115px;
 }
+
 .editBtn button {
   border: none;
   background-color: transparent;
@@ -394,6 +404,7 @@
     right: 2px;
     cursor: pointer;
   }
+
   .Reviews {
     border-top: solid 1px gray;
     margin-top: 10px;
@@ -419,6 +430,7 @@
     padding-right: 30px;
     height: fit-content;
   }
+
   .Container {
     width: 100%;
     overflow: hidden;

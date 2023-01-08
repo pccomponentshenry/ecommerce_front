@@ -48,8 +48,11 @@ export default function ProfileAddresses() {
           </div>
         ))
       ) : (
-        <div className={S.noProductsCont}>
-          <h5>You don't have any addresses yet</h5>
+        <div className={S.noAddresses}>
+          <h5>You don't have any addresses yet!</h5>
+          <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
+            <p>Choose your favorites!</p>
+          </Link>
         </div>
       )}
     </div>

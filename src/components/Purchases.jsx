@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import P from "../styles/Purchases.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders, getReviews } from "../redux/actions";
+import P from "../styles/Purchases.module.css";
 
 export default function Purchases() {
-  const nuevo=[];
-  const usuario=[];
+  const nuevo = [];
+  const usuario = [];
   const user = useSelector(state => state.user);
   const purchases = useSelector(state => state.purchases);
   const reviews = useSelector(state => state.reviews);
@@ -14,7 +14,7 @@ export default function Purchases() {
   reviews.map(e => usuario.push(e.username));
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     dispatch(getReviews());
     dispatch(getOrders(user.id));
@@ -23,7 +23,7 @@ export default function Purchases() {
 
   return (
     <div>
-      {isLoading ? <div>Loading...</div> : purchases.map(p => (
+      {isLoading ? <div>Loading...</div> : purchases.length ? purchases.map(p => (
         <div className={P.orderBox} key={p.id}>
           <h4>
             Order PE000{p.id}
@@ -50,19 +50,28 @@ export default function Purchases() {
                   {el.quantity} Units - ${el.price}
                 </h5>
                 {(!nuevo.includes(el.product.id) || !usuario.includes(user.username)) ?
-                <Link
-                  style={{ textDecoration: "none", color: "#212121" }}
-                  to={`/addreview/${user.id}/${el.product.id}`}
-                >
-                  {" "}
-                  <button>Leave a review</button>{" "}
-                </Link>
-                :<div>Review posted</div>}
+                  <Link
+                    style={{ textDecoration: "none", color: "#212121" }}
+                    to={`/addreview/${user.id}/${el.product.id}`}
+                  >
+                    {" "}
+                    <button>Leave a review</button>{" "}
+                  </Link>
+                  : <div>Review posted</div>}
               </div>
             </div>
           ))}
         </div>
-      ))}
+      )) :
+        (
+          <div className={P.noProducts}>
+            <h5>You don't have any purchases yet!</h5>
+            <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
+              <p>Choose your favorites!</p>
+            </Link>
+          </div>)
+
+      }
     </div>
   );
 }
