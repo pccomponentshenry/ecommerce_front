@@ -5,6 +5,7 @@ import SideDash from "../components/SideDash"
 import { Link, useParams } from "react-router-dom";
 import { getUser, putUser } from "../redux/actions/index";
 import s from "../styles/UserFormUpdate.module.css";
+import { WindowSharp } from "@mui/icons-material";
 
 export default function UserFormUpdate() {
   const user = useSelector(state => state.user);
@@ -15,7 +16,7 @@ export default function UserFormUpdate() {
     userId: "",
     username: "",   
     status: "",
-    isAdmin: "",   
+    isAdmin: false,   
   });
   const initialState = {
     userId: user.id,
@@ -26,10 +27,11 @@ export default function UserFormUpdate() {
 
   const statusUser = ['active', 'inactive', 'banned', 'deleted']
 
-  if(user.isAdmin == true) {
-     const adminUser = 'Yes'
-  } else {
-    const adminUser = 'No'
+  let adminOp = 'true'
+  if(user.isAdmin === 'true'){
+    adminOp = 'true'
+  }else{
+    adminOp = 'false'
   }
 
   useEffect(() => {
@@ -41,7 +43,7 @@ export default function UserFormUpdate() {
   }, [dispatch]);
 
   useEffect(() => {
-    setInput(prev => ({ ...prev, userId: user.id }));
+    setInput(prev => ({ ...prev, userId: user.id, username: user.username, status: user.status, isAdmin: user.isAdmin }));
   }, [user]);
 
   function clearForm() {
@@ -75,14 +77,12 @@ export default function UserFormUpdate() {
   };
 
   const handleSubmit = e => {
-    
       e.preventDefault();
       dispatch(putUser(user.id, input));
       alert('User updated succesfully!')
-
       clearForm();
       setError({});
-    
+      window.history.back();
   };
 
   return (
@@ -98,7 +98,7 @@ export default function UserFormUpdate() {
             <div className={s.name}>
               <label>Username: </label>
               <input
-                value={input.username || ""}
+                value={input.username}
                 type="text"
                 name="username"
                 placeholder={user.username}
@@ -114,9 +114,9 @@ export default function UserFormUpdate() {
            
           </div>
           <div className={s.status}>
-            <div>
-              <div className={s.brand}>
-                <select
+            <div>Status</div>
+           
+                 <select
                   name="status"
                   value={input.status}
                   id="Status"
@@ -129,53 +129,56 @@ export default function UserFormUpdate() {
                    
                   }}
                 >
-                  <option defaultValue={user.status}>{user.status}</option>
+                  <option value={'DEFAULT'}>Select Status</option>
                   {statusUser.map((el, i) => (
                     <option key={i} value={el}>{el}</option>
                   ))}
                 </select>
-               
-              </div>
+             
             </div>
-
             <div className={s.admin}>
 
+            <div>Admin</div>
            
-           <input 
-            type="checkbox"
-            name="noAdmin"
-            value={input.isAdmin}
-            defaultChecked={user.isAdmin=== true}
-            />        
-            <label value={false} for="isAdmin">Admin</label>
-            
-            <input 
-            type="checkbox"
+           <select
             name="isAdmin"
             value={input.isAdmin}
-            defaultChecked={user.isAdmin=== false}
+            id="Admin"
+            onBlur={e => {
+              handleChange(e);
+             
+            }}
+            onChange={e => {
+              handleChange(e);
+             
+            }}
+          >
+            <option value={'DEFAULT'}>Select Role</option>
+              <option value={'true'}>Yes</option>
+              <option value={'false'}>No</option>
+          
+          </select>
+
+{/* 
+          <label className={s.labelName}> 
+           <input 
+            type="radio"
+            name="isAdmin"
+            value={true}
+            defaultChecked={user.isAdmin === true}
+            />  
+
+           Admin</label>
+             <label>
+            <input 
+            type="radio"
+            name="isAdmin"
+            value={false}
+            defaultChecked={user.isAdmin === false}
             />
-            <label value={true} for="isAdmin">No Admin</label>
+           User</label> */}
 
-
-
-              {/* <select
-                name="isAdmin"              
-                value={input.isAdmin}
-                onBlur={e => {
-                  handleChange(e);                  
-                }}
-                onChange={e => {
-                  handleChange(e);                 
-                }}
-              >
-                <option defaultValue={user.isAdmin}>{user.isAdmin.toString()}</option>
-               
-                    <option>{user.isAdmin.toString() === 'true' ? 'false' : ""}</option>
-                
-              </select>               */}
             </div>
-          </div>
           
           <div className={s.buttonSubmit}>
             <button
