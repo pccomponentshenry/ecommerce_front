@@ -171,41 +171,41 @@ export default function Form() {
     );
   };
 
-  const handleChangeImg = e => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append("file", image);
+  // const handleChangeImg = e => {
+  //   e.preventDefault();
+  //   const data = new FormData();
+  //   data.append("file", image);
 
-    data.append("upload_preset", "cqws5x8n"); // presets de cloudinary. Si querés entrar a ver la web, se accede desde el gmail del PF, con google.
-    data.append("cloud_name", "dbtekd33p"); // presets de Cloudinary
-    data.append("api_key", "226142111813437"); // idem
-    fetch("  https://api.cloudinary.com/v1_1/cqws5x8n/image/upload", {
-      //post a la ruta de cloud. cqws5x8n es el nombre de la nube de la cuenta nuestra
-      method: "post",
-      body: data,
-    })
-      .then(resp => resp.json())
-      .then(data => {
-        setUrl(data.url); //Revisar por qué no se agregan más de una. En algúna llamada de función Onchange en el html habré puesto (e.target.files[0] y por ahí es eso)
-        setInput({ ...input, img: data.url }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
-      })
-      .catch(err => console.log(err));
-  };
+  //   data.append("upload_preset", "cqws5x8n"); // presets de cloudinary. Si querés entrar a ver la web, se accede desde el gmail del PF, con google.
+  //   data.append("cloud_name", "dbtekd33p"); // presets de Cloudinary
+  //   data.append("api_key", "226142111813437"); // idem
+  //   fetch("  https://api.cloudinary.com/v1_1/cqws5x8n/image/upload", {
+  //     //post a la ruta de cloud. cqws5x8n es el nombre de la nube de la cuenta nuestra
+  //     method: "post",
+  //     body: data,
+  //   })
+  //     .then(resp => resp.json())
+  //     .then(data => {
+  //       setUrl(data.url); //Revisar por qué no se agregan más de una. En algúna llamada de función Onchange en el html habré puesto (e.target.files[0] y por ahí es eso)
+  //       setInput({ ...input, img: data.url }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   const handleChange = e => {
     setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const loadImage = e => {
-    if (image.name) {
-      handleChangeImg(e);
-      errorImgSetting(e);
-    }
-  };
+  // const loadImage = e => {
+  //   if (image.name) {
+  //     handleChangeImg(e);
+  //     errorImgSetting(e);
+  //   }
+  // };
 
-  useEffect(() => {
-    loadImage(event);
-  }, [image]);
+  // useEffect(() => {
+  //   loadImage(event);
+  // }, [image]);
 
   useEffect(() => {
     handleValidate(input);

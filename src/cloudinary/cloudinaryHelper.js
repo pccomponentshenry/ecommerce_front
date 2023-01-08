@@ -31,9 +31,7 @@ export const makeUploadRequest = ({
       errorCallback(request.responseText);
     }
   };
-
   request.send(formData);
-
   return () => {
     request.abort();
   };
@@ -45,7 +43,6 @@ export const makeDeleteRequest = ({
   errorCallback,
 }) => {
   const url = `${baseUrl}/delete_by_token`;
-
   const request = new XMLHttpRequest();
   request.open("POST", url);
 

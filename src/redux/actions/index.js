@@ -42,7 +42,7 @@ import {
   DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
   GET_ALL_ORDERS,
-  GET_DETAIL_PURCHASES
+  GET_DETAIL_PURCHASES,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -351,7 +351,6 @@ export function getUsers() {
   };
 }
 
-
 export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
@@ -387,11 +386,10 @@ export const updateAddress = payload => async dispatch => {
     if (payload.isDefault) {
       return dispatch({ type: CHANGE_DEFAULT_ADDRESS, payload });
     }
-  }
-  catch (e) {
+  } catch (e) {
     console.error(e);
   }
-}
+};
 
 export const deleteAddress = id => async dispatch => {
   try {
@@ -400,11 +398,10 @@ export const deleteAddress = id => async dispatch => {
     if (res.data?.id) {
       dispatch({ type: CHANGE_DEFAULT_ADDRESS, payload: res.data });
     }
-  }
-  catch (e) {
+  } catch (e) {
     console.error(e);
   }
-}
+};
 
 //////////REVIEWS////////
 export function getReviews() {
