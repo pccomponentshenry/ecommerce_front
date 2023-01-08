@@ -14,7 +14,7 @@ export const FILTER_CATEGORIES = "FILTER_CATEGORIES";
 export const FILTER_BRANDS = "FILTER_BRANDS";
 export const INCREASE_CART = "INCREASE_CART";
 export const PUT_PRODUCT = "PUT_PRODUCT";
-export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const CHANGE_PRODUCT_STATUS = "CHANGE_PRODUCT_STATUS";
 export const GET_PRODUCTS_FOR_SALE = "GET_PRODUCTS_FOR_SALE";
 //actions Cart
 export const ADD_ONE_TO_CART = "ADD_ONE_TO_CART";
@@ -50,3 +50,5 @@ export const POST_REVIEW = "POST_REVIEW";
 //actions dashboard
 export const GET_TOTAL_ORDERS = "GET_TOTAL_ORDERS";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS"
+export const GET_DETAIL_PURCHASES = "GET_DETAIL_PURCHASES";
+export const PUT_USER = "PUT_USER,"

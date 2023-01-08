@@ -19,7 +19,7 @@ import {
   POST_USER,
   LOGOUT_USER,
   PUT_PRODUCT,
-  DELETE_PRODUCT,
+  CHANGE_PRODUCT_STATUS,
   GET_REVIEWS,
   POST_REVIEW,
   GET_PRODUCTS_FOR_SALE,
@@ -35,7 +35,9 @@ import {
   CHANGE_DEFAULT_ADDRESS,
   DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  GET_DETAIL_PURCHASES,
+  PUT_USER
 } from "../actions/actionNames";
 
 const initialState = {
@@ -59,6 +61,8 @@ const initialState = {
   fromStripe: true,
   allOrders: [],
   allOrdersOneByOne: [],
+  detailsOrders: []
+
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -103,9 +107,40 @@ function rootReducer(state = initialState, action) {
       };
     }
 
-    case DELETE_PRODUCT: {
+    case CHANGE_PRODUCT_STATUS: {
       return {
         ...state,
+        productsForSale: state.productsForSale.map(prod => {
+          if (Number(prod.id) === Number(action.payload.id)) {
+            return { ...prod, status: action.payload.status };
+          }
+          else {
+            return { ...prod }
+          }
+        }).sort((a, b) => {
+          let fa = a.status,
+            fb = b.status;
+
+          if (fa === "active" && fb === "inactive") {
+            return -1;
+          }
+          if (fa === "inactive" && fb === "active") {
+            return 1;
+          }
+          if (fa === "active" && fb === "deleted") {
+            return -1;
+          }
+          if (fa === "deleted" && fb === "active") {
+            return 1;
+          }
+          if (fa === "inactive" && fb === "deleted") {
+            return -1;
+          }
+          if (fa === "deleted" && fb === "inactive") {
+            return 1;
+          }
+          return 0;
+        })
       };
     }
 
@@ -317,6 +352,8 @@ function rootReducer(state = initialState, action) {
         user: {},
       };
     }
+
+
     ////REVIEWS////
     case GET_REVIEWS:
       return {
@@ -334,6 +371,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         address: action.payload,
       };
+
     ///////////dashboard////////
     case GET_TOTAL_ORDERS:
       return {
@@ -345,6 +383,18 @@ function rootReducer(state = initialState, action) {
         ...state,
         allOrdersOneByOne: action.payload,
       };
+    case GET_DETAIL_PURCHASES:
+      return {
+        ...state,
+        detailsOrders: action.payload,
+      };
+    case PUT_USER: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+
 
 
     default:
