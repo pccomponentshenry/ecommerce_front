@@ -26,7 +26,6 @@ import {
   GET_LOCATIONS,
   GET_USER,
   GET_USERS,
-  PUT_USER,
   SET_FROM_STRIPE,
   GET_ADDRESSES,
   GET_ADDRESS,
@@ -323,12 +322,7 @@ function rootReducer(state = initialState, action) {
       };
     }
     
-    case PUT_USER: {
-      return {
-        ...state,
-        user: action.payload,
-      };
-    }
+   
     ////REVIEWS////
     case GET_REVIEWS:
       return {
