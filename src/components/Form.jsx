@@ -4,6 +4,19 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBrands, getCategories, postProduct } from "../redux/actions/index";
 import { Link } from "react-router-dom";
+import { FilePond, registerPlugin } from "react-filepond";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import "filepond/dist/filepond.min.css";
+
+import {
+  makeDeleteRequest,
+  makeUploadRequest,
+} from "../cloudinary/cloudinaryHelper";
+
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 export default function Form() {
   const dispatch = useDispatch();
@@ -38,6 +51,42 @@ export default function Form() {
     userId: "",
   };
 
+  const [files, setFiles] = useState([]);
+
+  const revert = (token, successCallback, errorCallback) => {
+    makeDeleteRequest({
+      token,
+      successCallback,
+      errorCallback,
+    });
+  };
+
+  const process = (
+    fieldName,
+    file,
+    metadata,
+    load,
+    error,
+    progress,
+    abort,
+    transfer,
+    options
+  ) => {
+    const abortRequest = makeUploadRequest({
+      file,
+      fieldName,
+      successCallback: load,
+      errorCallback: error,
+      progressCallback: progress,
+    });
+
+    return {
+      abort: () => {
+        abortRequest();
+        abort();
+      },
+    };
+  };
   useEffect(() => {
     dispatch(getBrands());
     dispatch(getCategories());
@@ -220,7 +269,7 @@ export default function Form() {
             <h6>Add images of your product</h6>
           </div>
 
-          <div className={F.container}>
+          {/* <div className={F.container}>
             <h5>Upload an image</h5>
             <input
               type="file"
@@ -244,7 +293,17 @@ export default function Form() {
               </div>
             )}
             {error.img && <span className={F.imgError}>{error.img}</span>}
-          </div>
+          </div> */}
+
+          <FilePond
+            files={files}
+            acceptedFileTypes="image/*"
+            onupdatefiles={setFiles}
+            allowMultiple={true}
+            server={{ process, revert }}
+            name="file"
+            labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+          />
 
           <div className={F.formContainer}>
             <div>
