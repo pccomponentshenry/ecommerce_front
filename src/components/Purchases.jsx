@@ -49,15 +49,19 @@ export default function Purchases() {
                 <h5>
                   {el.quantity} Units - ${el.price}
                 </h5>
-                {(!nuevo.includes(el.product.id) || !usuario.includes(user.username)) ?
-                  <Link
-                    style={{ textDecoration: "none", color: "#212121" }}
-                    to={`/addreview/${user.id}/${el.product.id}`}
-                  >
-                    {" "}
-                    <button>Leave a review</button>{" "}
-                  </Link>
-                  : <div>Review posted</div>}
+                {p.status !== "cancelled" &&
+                  <div>
+                    {(!nuevo.includes(el.product.id) || !usuario.includes(user.username)) ?
+                      <Link
+                        style={{ textDecoration: "none", color: "#212121" }}
+                        to={`/addreview/${user.id}/${el.product.id}`}
+                      >
+                        {" "}
+                        <button>Leave a review</button>{" "}
+                      </Link>
+                      : <h5>Review posted</h5>
+                    }
+                  </div>}
               </div>
             </div>
           ))}

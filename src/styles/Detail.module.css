@@ -210,6 +210,38 @@
   overflow: hidden;
 }
 
+.rating {
+  /* position: absolute; */
+  right: 30px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 200;
+  bottom: 10px;
+}
+
+.ratingTitle {
+  margin-right: 10px;
+}
+
+.fullStar {
+  font-size: 18px;
+  color: #2bfab7;
+}
+
+.halfStar {
+  font-size: 18px;
+  background-image: linear-gradient(90deg, #2bfab8a9, #ffffff);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.emptyStar {
+  font-size: 18px;
+  color: gray;
+}
+
 .editBtn {
   width: fit-content;
   position: absolute;
