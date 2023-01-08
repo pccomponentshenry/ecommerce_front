@@ -71,7 +71,7 @@
   text-align: center;
   width: 250px;
   position: relative;
-  z-index: 600;
+  z-index: 200;
 }
 .imgCont {
   height: 250px;

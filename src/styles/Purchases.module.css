@@ -23,6 +23,18 @@
   padding-right: 5px;
 }
 
+.noProducts {
+  text-align: center;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  color: #fff;
+}
+
 .dateCompleted {
   font-size: 13px;
   color: rgb(153, 97, 160);

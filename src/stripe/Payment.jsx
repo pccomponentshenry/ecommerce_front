@@ -1,14 +1,16 @@
 import React from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkout, postOrder } from "../redux/actions";
 import P from "../styles/Payment.module.css";
 
 function Payment({ addressId }) {
 
+  const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
   const user = useSelector(state => state.user);
+  const [disable, setDisable] = useState(false);
   const order = [];
-  const dispatch = useDispatch();
 
   const handleCheckout = e => {
     e.preventDefault();
@@ -41,7 +43,7 @@ function Payment({ addressId }) {
 
   return (
     <div className={P.container}>
-      <button role="link" onClick={handleCheckout}>
+      <button disabled={disable || !addressId} className={addressId && !disable ? P.enabled : P.disabled} role="link" onClick={(e) => { setDisable(true); handleCheckout(e) }}>
         Checkout
       </button>
     </div>

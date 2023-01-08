@@ -24,11 +24,12 @@ import {
   GET_REVIEWS,
   GET_PRODUCTS_FOR_SALE,
   PUT_PRODUCT,
-  DELETE_PRODUCT,
+  CHANGE_PRODUCT_STATUS,
   UPDATE_STOCK,
   GET_LOCATIONS,
   GET_USER,
   GET_USERS,
+  PUT_USER,
   SET_FROM_STRIPE,
   GET_PURCHASES,
   POST_REVIEW,
@@ -40,7 +41,8 @@ import {
   CHANGE_DEFAULT_ADDRESS,
   DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  GET_DETAIL_PURCHASES
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -93,8 +95,11 @@ export const setFiltered = payload => {
 
 export function getProductDetail(id) {
   return async dispatch => {
-    const res = await axios.get(`${URL}/products/${id}`);
-    return dispatch({ type: GET_PRODUCT, payload: res.data });
+    const prod = await axios.get(`${URL}/products/${id}`);
+    const rev = await axios.get(`${URL}/review/${id}`);
+    const payload = prod.data;
+    prod.data.avgStars = rev.data.avg;
+    return dispatch({ type: GET_PRODUCT, payload });
   };
 }
 
@@ -139,10 +144,10 @@ export function putProduct(id, payload) {
   };
 }
 
-export function deleteProduct(id) {
+export function changeProductStatus(payload) {
   return async dispatch => {
-    const res = await axios.delete(`${URL}/products/${id}`);
-    return dispatch({ type: DELETE_PRODUCT, payload: res.data });
+    const res = await axios.put(`${URL}/products/status/`, payload);
+    return dispatch({ type: CHANGE_PRODUCT_STATUS, payload });
   };
 }
 
@@ -158,7 +163,9 @@ export const updateProductsStock = userId => async dispatch => {
 //////////CART////////
 export const postCartItem = payload => async dispatch => {
   try {
-    await axios.post(`${URL}/cartItem`, payload);
+    const response = await axios.post(`${URL}/cartItem`, payload);
+    response.data.quantity = payload.quantity;
+    dispatch(getUserCartItem(payload.email));
   } catch (error) {
     console.log(error);
   }
@@ -232,6 +239,7 @@ export const clearCart = email => async dispatch => {
   } else {
     try {
       await axios.put(`${URL}/cartItem/${email}`);
+      dispatch(getUserCartItem(email));
     } catch (error) {
       console.log(error);
     }
@@ -349,6 +357,7 @@ export function getUsers() {
   };
 }
 
+
 export const logoutUser = () => dispatch => {
   return dispatch({ type: LOGOUT_USER });
 };
@@ -430,5 +439,17 @@ export function getAllOrdersOneByOne() {
   return async dispatch => {
     const res = await axios.get(`${URL}/order`);
     return dispatch({ type: GET_ALL_ORDERS, payload: res.data });
+  };
+}
+export function getDetailsOrders(id) {
+  return async dispatch => {
+    const res = await axios.get(`${URL}/order/id/${id}`);
+    return dispatch({ type: GET_DETAIL_PURCHASES, payload: res.data });
+  };
+}
+export function putUser(id, payload) {
+  return async dispatch => {
+    const res = await axios.put(`${URL}/users/${id}`, payload);
+    return dispatch({ type: PUT_USER, payload: res.data });
   };
 }

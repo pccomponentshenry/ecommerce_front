@@ -57,7 +57,7 @@
 
 .imgCont {
   height: 16vh;
-  width: 180px;
+  width: 100px;
   display: flex;
   overflow: hidden;
   float: left;
@@ -73,7 +73,7 @@
 .counterContainer {
   position: absolute;
   margin-top: 60px;
-  left: 225px;
+  left: 145px;
 }
 
 .counter {
@@ -110,4 +110,83 @@
   font-size: 16px;
   margin-top: -70px;
   color: #fff;
+}
+@media screen and (max-width: 500px) {
+  .card {
+    width: 100vw;
+    /* height: 100px; */
+    margin-bottom: -10px;
+  }
+  .container {
+    width: 100vw;
+    height: 15vh;
+    align-items: center;
+    border-bottom: solid 1px rgb(46, 46, 46);
+    position: relative;
+    bottom: 20px;
+    margin-bottom: -20px;
+  }
+
+  .imgCont {
+    height: 60px;
+    width: 60px;
+    align-items: center;
+    top: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 0px;
+    border-radius: 3px;
+  }
+  .container h4 {
+    font-size: 12px;
+    font-weight: 400;
+    left: 80px;
+    top: 0px;
+    margin-top: -50px;
+    width: 220px;
+  }
+  .counterContainer {
+    position: absolute;
+    margin-top: 65px;
+    left: 90px;
+    height: 40px;
+  }
+
+  .counter {
+    border: solid 1px rgb(46, 46, 46);
+    position: relative;
+    height: 20px;
+    overflow: hidden;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 1px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0px;
+  }
+
+  .counter button {
+    font-size: 12px;
+    overflow: hidden;
+    bottom: 0px;
+  }
+  .counter span {
+    font-size: 12px;
+    overflow: hidden;
+  }
+  .price {
+    position: absolute;
+    right: 10px;
+    font-size: 12px;
+    margin-top: -30px;
+    color: #fff;
+  }
+  .btnCont {
+    position: relative;
+    left: 135px;
+    top: 55px;
+    font-size: 26px;
+    z-index: 600;
+  }
 }
