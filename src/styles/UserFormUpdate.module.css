@@ -59,12 +59,28 @@
 
 .name {
   margin: 10px;
+  margin-bottom: 20px;
 }
 .status {
-  margin-bottom: 10px;
+  width: 150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
+  align-items: center;
 }
+select{
+  margin-top: -30px;
+  margin-left: 10px;
+}
+
+.labelName{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .admin {
-  margin: 10px;
+  margin: 20px;
 }
 .buttonSubmit{
   margin: 10px;

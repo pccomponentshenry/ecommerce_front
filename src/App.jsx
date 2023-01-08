@@ -71,15 +71,15 @@ function App() {
           } />
           <Route exact path= "/dashboard/sales/id/:id" element={<DashboardPurchase />} />
           <Route exact path="/dashboard/sales" element={
-            <ProtectedAdmin>
+            <ProtectedRoute>
               <DashBoardSales />
-            </ProtectedAdmin>
+            </ProtectedRoute>
           } />
           
           <Route exact path="/dashboard/users" element={
-            <ProtectedAdmin>
+            <ProtectedRoute>
               <DashBoardUsers />
-            </ProtectedAdmin>
+            </ProtectedRoute>
           } />
           <Route exact path="/dashboard/users/edit/:email" element={
             <ProtectedAdmin>
