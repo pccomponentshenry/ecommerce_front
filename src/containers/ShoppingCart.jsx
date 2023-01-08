@@ -64,8 +64,9 @@ export default function ShoppingCart() {
         <div className={S.startShopping}>
           {guest === "default" ? (
             <>
-              {/* Login to buy */}
-              <LoginButton />{" "}
+              <div className={S.loginBtn}>
+                <LoginButton />
+              </div>
             </>
           ) : (
             <Link to="/order" style={{ textDecoration: "none" }}>

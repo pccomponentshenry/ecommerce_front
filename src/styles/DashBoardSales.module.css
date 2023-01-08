@@ -32,7 +32,9 @@
     border-right: solid 1px #2bfab7;
     border-radius: 23px;
     top: 0px;
+
     display: flex;    
+
     background-color: #FFF;
     height: fit-content;
     text-align: center;
@@ -45,6 +47,7 @@
 }
 
 .tabla {
+
     width: 90%;
     align-items: center;
     margin: 0 auto;

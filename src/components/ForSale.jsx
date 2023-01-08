@@ -5,7 +5,6 @@ import { deleteProduct, getProductsByUser } from "../redux/actions";
 import S from "../styles/ForSale.module.css";
 
 export default function ForSale() {
-
   const productsForSale = useSelector(state => state.productsForSale);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ export default function ForSale() {
   useEffect(() => {
     dispatch(getProductsByUser(user.id));
     setIsLoading(false);
-  }, [user])
+  }, [user]);
 
   function handleDelete(e) {
     dispatch(deleteProduct(e));
@@ -22,29 +21,55 @@ export default function ForSale() {
   }
 
   return (
-    <div>
-      {isLoading ? <div>Loading...</div> : productsForSale.length > 0 ? (
+    <div className={S.forSale}>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : productsForSale.length > 0 ? (
         productsForSale.map((el, i) => (
           <div className={S.cardContainer} key={i}>
             <div className={S.container}>
-              <div className={S.imgCont}>
-                <img src={el.img} alt="" />
-              </div>
-
-              <div className={S.titleCont}>
-                <span>{el.category.name}</span>
-                <h4>{el.title}</h4>
-                <h5>{el.brand.name}</h5>
-                <p>${el.price}</p>
-                <div className={S.stockAndStatus}>
-                  <label>Stock: {el.stock}</label>
-                  <label>{el.status}</label>
+              <div className={S.infoContainer}>
+                <div className={S.imgCont}>
+                  <img src={el.img} alt="" />
                 </div>
-                <div className={S.btnContainer}>
-                  <Link to={"/update/" + el.id}>
-                    <button>Update</button>
-                  </Link>
-                  <button onClick={e => handleDelete(el.id)}>Delete</button>
+
+                <div className={S.titleCont}>
+                  <div className={S.catAndBrand}>
+                    <span>{el.category.name}</span>
+                    <h5>Brand: {el.brand.name}</h5>
+                  </div>
+
+                  <h4 className={el.productTitle}>
+                    {el.title.length < 60
+                      ? el.title
+                      : el.title.substr(0, 60) + "..."}
+                  </h4>
+
+                  <h6>
+                    {el.description.length < 100
+                      ? el.description
+                      : el.description.substr(0, 200) + "..."}
+                  </h6>
+                  <div className={S.btnContainer}>
+                    <Link to={"/update/" + el.id}>
+                      <button>Update</button>
+                    </Link>
+                    <button onClick={e => handleDelete(el.id)}>Delete</button>
+                  </div>
+                </div>
+
+                <div className={S.stockAndStatus}>
+                  <div className={S.stock}>
+                    <label className={S.number}>
+                      {el.status === "active" ? el.stock : el.status}
+                    </label>
+                    <p className={S.units}>
+                      {el.stock === 1 ? "Unit" : "Units"}
+                    </p>
+                  </div>
+                  <div className={S.price}>
+                    <p>Price: ${el.price}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -53,8 +78,8 @@ export default function ForSale() {
       ) : (
         <div className={S.noProductsCont}>
           <h5>You don't have any products for sale yet</h5>
-          <Link to="/sell" style={{ textDecoration: "none" }}>
-            <p>Publish now!</p>{" "}
+          <Link to="/sell" style={{ textDecoration: "none", color: "gray" }}>
+            <span>Publish now!</span>{" "}
           </Link>
         </div>
       )}
