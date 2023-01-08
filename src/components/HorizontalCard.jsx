@@ -23,7 +23,10 @@ function HorizontalCard(props) {
       const post = { id: props.id, quantity: 1, email: user.email, add: true };
       dispatch(postCartItem(post));
     }
-    dispatch(addToCart(props.product, isAuthenticated));
+    else {
+
+      dispatch(addToCart(props.product, isAuthenticated));
+    }
     successAlert();
   };
 

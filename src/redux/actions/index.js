@@ -160,7 +160,9 @@ export const updateProductsStock = userId => async dispatch => {
 //////////CART////////
 export const postCartItem = payload => async dispatch => {
   try {
-    await axios.post(`${URL}/cartItem`, payload);
+    const response = await axios.post(`${URL}/cartItem`, payload);
+    response.data.quantity = payload.quantity;
+    dispatch(getUserCartItem(payload.email));
   } catch (error) {
     console.log(error);
   }
