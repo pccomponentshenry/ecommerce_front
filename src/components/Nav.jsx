@@ -30,6 +30,7 @@ export default function Nav() {
   window.addEventListener("scroll", switchMode);
   return (
     <>
+    {loggedUser.status === "banned" ? <></>:
       <div
         className={`${activeNav === true ? N.container : N.containerSmall} ${
           nav ? N.active : N.container
@@ -55,11 +56,14 @@ export default function Nav() {
           </Link>
           <ul className={N.notResponsiveNav}>
             <Link to="/sell" style={{ textDecoration: "none" }}>
-              {isAuthenticated ? <li>Sell</li> : <></>}
+              {isAuthenticated && loggedUser.status !== "banned"? <li>Sell</li> : <></>}
             </Link>
             <Link to="/favorites" style={{ textDecoration: "none" }}>
               <li>Favorites</li>
-            </Link>          
+            </Link>
+            <Link to="/dashboard" style={{ textDecoration: "none" }}>
+              {loggedUser.isAdmin === "true" ? <li>Dashboard</li> : <></>}
+            </Link>
           </ul>
           {activeNav === true && (
             <ul className={isAuthenticated ? N.navList : N.authNavList}>
@@ -114,7 +118,7 @@ export default function Nav() {
             onClick={() => switchMode()}
           />
         </div>
-      </div>
+      </div>}
 
       {/* </div> */}
     </>
