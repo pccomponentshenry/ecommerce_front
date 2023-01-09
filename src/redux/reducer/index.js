@@ -15,7 +15,7 @@ import {
   REMOVE_ALL_FROM_CART,
   GET_PURCHASES,
   CLEAR_ERROR,
-  ADD_TO_FAV,
+  UPDATE_FAVS,
   POST_USER,
   LOGOUT_USER,
   PUT_PRODUCT,
@@ -50,7 +50,7 @@ const initialState = {
   error: [],
   filtered: [],
   cart: [],
-  fav: [],
+  favs: [],
   locations: [],
   user: {},
   reviews: [],
@@ -67,9 +67,9 @@ const initialState = {
 initialState.cart = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : (initialState.cart = []);
-initialState.fav = localStorage.getItem("fav")
-  ? JSON.parse(localStorage.getItem("fav"))
-  : (initialState.fav = []);
+initialState.favs = localStorage.getItem("favs")
+  ? JSON.parse(localStorage.getItem("favs"))
+  : (initialState.favs = []);
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -340,10 +340,10 @@ function rootReducer(state = initialState, action) {
       return { ...state, fromStripe: false };
     }
 
-    case ADD_TO_FAV:
+    case UPDATE_FAVS:
       return {
         ...state,
-        fav: action.payload,
+        favs: action.payload,
       };
 
     ////// USERS /////
