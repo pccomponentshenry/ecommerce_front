@@ -137,6 +137,11 @@ export default function Form() {
     setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleDeleteImage = e => {
+    //  const imageRef = ref(storage, 'images/desert.jpg');
+    console.log(e);
+  };
+
   const getImages = () => {
     const imageListRef = ref(
       storage,
@@ -146,12 +151,11 @@ export default function Form() {
       response.items.forEach(item => {
         getDownloadURL(item).then(url => {
           const exists = input.img.find(el => el === url);
-          console.log("antes" + input.img);
+
           if (!exists) {
             setInput(input => {
               return { ...input, img: input.img.concat(url) };
             });
-            console.log("después" + input.img);
           }
         });
       });
@@ -402,7 +406,7 @@ export default function Form() {
           {input.img.length > 0 &&
             input.img.map((el, i) => (
               <div className={F.loadedImage}>
-                <img key={i} src={el} />
+                <img key={i} src={el} onClick={e => handleDeleteImage(e)} />
               </div>
             ))}
         </div>

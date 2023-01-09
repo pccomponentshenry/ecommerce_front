@@ -18,11 +18,11 @@ import DashBoard from "./containers/DashBoard";
 import DashBoardStats from "./containers/DashBoardStats";
 import DashBoardSales from "./containers/DashBoardSales";
 import DashBoardUsers from "./containers/DashBoardUsers";
-import DashboardPurchase from "./components/DashboardPurchase"
+import DashboardPurchase from "./components/DashboardPurchase";
 import OrderConfirmed from "./components/OrderConfirmed";
 import AddressUpdate from "./components/AddressUpdate";
 import UserFormUpdate from "./components/UserFormUpdate";
-
+import Banned from "./alerts/Banned";
 
 function App() {
   populateDB();
@@ -59,38 +59,63 @@ function App() {
 
           <Route exact path="/favorites" element={<Favorites />} />
           <Route exact path="/order" element={<OrderForm />} />
-          <Route exact path="/dashboard" element={
-            <ProtectedAdmin>
-              <DashBoard />
-            </ProtectedAdmin>
-          } />
-          <Route exact path="/dashboard/stats" element={
-            <ProtectedAdmin>
-              <DashBoardStats />
-            </ProtectedAdmin>
-          } />
-          <Route exact path= "/dashboard/sales/id/:id" element={<DashboardPurchase />} />
-          <Route exact path="/dashboard/sales" element={
-            <ProtectedRoute>
-              <DashBoardSales />
-            </ProtectedRoute>
-          } />
-          
-          <Route exact path="/dashboard/users" element={
-            <ProtectedRoute>
-              <DashBoardUsers />
-            </ProtectedRoute>
-          } />
-          <Route exact path="/dashboard/users/edit/:email" element={
-            <ProtectedRoute>
-              <UserFormUpdate/>
-            </ProtectedRoute>
-          } />
+          <Route
+            exact
+            path="/dashboard"
+            element={
+              <ProtectedAdmin>
+                <DashBoard />
+              </ProtectedAdmin>
+            }
+          />
+          <Route
+            exact
+            path="/dashboard/stats"
+            element={
+              <ProtectedAdmin>
+                <DashBoardStats />
+              </ProtectedAdmin>
+            }
+          />
+          <Route
+            exact
+            path="/dashboard/sales/id/:id"
+            element={<DashboardPurchase />}
+          />
+          <Route
+            exact
+            path="/dashboard/sales"
+            element={
+              <ProtectedRoute>
+                <DashBoardSales />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            exact
+            path="/dashboard/users"
+            element={
+              <ProtectedRoute>
+                <DashBoardUsers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            exact
+            path="/dashboard/users/edit/:email"
+            element={
+              <ProtectedRoute>
+                <UserFormUpdate />
+              </ProtectedRoute>
+            }
+          />
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />
           <Route exact path="/cart" element={<ShoppingCart />} />
           <Route exact path="/success" element={<OrderConfirmed />} />
           <Route exact path="/addreview/:userId/:id" element={<AddReview />} />
+          <Route exact path="/banned" element={<Banned />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
