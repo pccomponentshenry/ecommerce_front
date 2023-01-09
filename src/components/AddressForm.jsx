@@ -94,7 +94,7 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
     <>
       <div className={A.container}>
         <div className={A.formContainer}>
-          <label onClick={handleExit}>╳</label>
+          <label className={A.exitForm} onClick={handleExit}>╳</label>
           <h4>Add a new address</h4>
           <form onSubmit={() => { handleSubmit(); handleExit() }} autoComplete="off">
             <div className={A.street}>

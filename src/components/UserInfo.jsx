@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import U from "../styles/UserInfo.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
 import { capitalizeEachLetter } from "../utils/functions";
+import { getUsers } from "../redux/actions";
+import { Link } from "react-router-dom";
+
 
 export default function UserInfo({
   form,
@@ -16,6 +19,14 @@ export default function UserInfo({
   const { isLoading, user } = useAuth0();
   const allAddresses = useSelector(state => state.addresses);
   const defaultAddress = allAddresses.find(el => el.isDefault === true);
+  const users = useSelector(state => state.users);
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch( getUsers())
+  }, [dispatch || ""]);
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -36,6 +47,12 @@ export default function UserInfo({
           <div className={U.nameContainer}>
             <h3 className={U.name}>{user.name}</h3>
             <h3 className={U.email}>{user.email}</h3>
+            <h3 className={U.email}>Category: {users[users.findIndex(e => e.email === user.email)].isAdmin === 'true' ? 'Admin' : 'User'}</h3>
+            {users[users.findIndex(e => e.email === user.email)].isAdmin === 'true' ?
+            <Link className={U.Link} to='/dashboard/'><div className={U.DashBoardButton} >
+            <button>Go to Dashboard</button>
+             </div>
+            </Link> : ""}
           </div>
           <hr className={U.profileLine} />
         </div>

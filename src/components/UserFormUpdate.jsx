@@ -16,7 +16,7 @@ export default function UserFormUpdate() {
     userId: "",
     username: "",   
     status: "",
-    isAdmin: false,   
+    isAdmin: "",   
   });
   const initialState = {
     userId: user.id,
@@ -156,40 +156,19 @@ export default function UserFormUpdate() {
             <option value={'DEFAULT'}>Select Role</option>
               <option value={'true'}>Yes</option>
               <option value={'false'}>No</option>
-          
           </select>
 
-{/* 
-          <label className={s.labelName}> 
-           <input 
-            type="radio"
-            name="isAdmin"
-            value={true}
-            defaultChecked={user.isAdmin === true}
-            />  
-
-           Admin</label>
-             <label>
-            <input 
-            type="radio"
-            name="isAdmin"
-            value={false}
-            defaultChecked={user.isAdmin === false}
-            />
-           User</label> */}
-
             </div>
-          
+          <div className={s.buttonsCont}>
+            <Link to='/dashboard/users'><div className={s.buttonCancel} >
+            <button>Cancel </button>
+             </div>
+            </Link>
           <div className={s.buttonSubmit}>
-            <button
-              type="submit"
-              // className={disable === false ? s.activeBtn : s.disabledBtn}
-              // onClick={e => {
-              //   disable && e.preventDefault();
-              // }}
-            >
+            <button type="submit">
               Update User
             </button>
+          </div>
           </div>
         </div>
       </form>
