@@ -32,10 +32,8 @@
     border-right: solid 1px #2bfab7;
     border-radius: 23px;
     top: 0px;
-
     display: flex;    
-
-    background-color: #FFF;
+    background-color: #3e3e3e;
     height: fit-content;
     text-align: center;
     margin: 0 auto;
@@ -47,16 +45,75 @@
 }
 
 .tabla {
-
-    width: 90%;
+    width: 100%;
     align-items: center;
     margin: 0 auto;
     justify-content: center;
-    margin-top: 20px;
-    color: rgb(0, 0, 0);
-    background-color: #2bfab7;
+    color: rgb(255, 255, 255);
+    background-color: #3e3e3e;
+    border: 1px solid #6d6d6d;
+    
 }
-.imageList{
-    max-width: 100px;
-    max-height: 100px;
+.tabla thead{   
+    color: rgb(255, 255, 255);
+    background-color: #3e3e3e;
+    border: 1px solid #6d6d6d;
+    height: 40px;
+}
+
+.tabla td {   
+    border: 1px solid #6d6d6d;
+    padding: 10px ;
+}
+
+.statusCont{
+    width: 60px;
+    display: grid;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    align-items: center;
+}
+.ok{
+  color: rgb(0, 200, 0);
+}
+.bad{
+    color: rgb(170, 0, 0);
+}
+.statusUserOk{
+    width: 10px;
+    height: 10px;
+    background-color: rgb(1, 159, 1);
+    border-radius: 50px;
+    margin: 10px;
+}
+
+.statusUserNo{
+    width: 10px;
+    height: 10px;
+    background-color: rgb(170, 0, 0);
+    border-radius: 50px;
+    margin: 10px;
+}
+
+.buttonDetails{
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 14px;
+    font-weight: 600;
+}
+.buttonDetails:hover{
+    animation: buttonHover;
+    animation-fill-mode: both;
+}
+
+@keyframes buttonHover {
+    from{
+        scale: 1;
+        background-color: #2bfab7;
+    }
+    to{
+        scale: 1.1;
+        background-color: #2bfab7;
+    }
 }
