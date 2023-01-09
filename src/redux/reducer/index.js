@@ -37,7 +37,7 @@ import {
   GET_TOTAL_ORDERS,
   GET_ALL_ORDERS,
   GET_DETAIL_PURCHASES,
-  PUT_USER
+  PUT_USER,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -61,8 +61,7 @@ const initialState = {
   fromStripe: true,
   allOrders: [],
   allOrdersOneByOne: [],
-  detailsOrders: []
-
+  detailsOrders: [],
 };
 
 initialState.cart = localStorage.getItem("cart")
@@ -74,7 +73,6 @@ initialState.fav = localStorage.getItem("fav")
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-
     case ALL_PRODUCTS:
       return {
         ...state,
@@ -110,37 +108,38 @@ function rootReducer(state = initialState, action) {
     case CHANGE_PRODUCT_STATUS: {
       return {
         ...state,
-        productsForSale: state.productsForSale.map(prod => {
-          if (Number(prod.id) === Number(action.payload.id)) {
-            return { ...prod, status: action.payload.status };
-          }
-          else {
-            return { ...prod }
-          }
-        }).sort((a, b) => {
-          let fa = a.status,
-            fb = b.status;
+        productsForSale: state.productsForSale
+          .map(prod => {
+            if (Number(prod.id) === Number(action.payload.id)) {
+              return { ...prod, status: action.payload.status };
+            } else {
+              return { ...prod };
+            }
+          })
+          .sort((a, b) => {
+            let fa = a.status,
+              fb = b.status;
 
-          if (fa === "active" && fb === "inactive") {
-            return -1;
-          }
-          if (fa === "inactive" && fb === "active") {
-            return 1;
-          }
-          if (fa === "active" && fb === "deleted") {
-            return -1;
-          }
-          if (fa === "deleted" && fb === "active") {
-            return 1;
-          }
-          if (fa === "inactive" && fb === "deleted") {
-            return -1;
-          }
-          if (fa === "deleted" && fb === "inactive") {
-            return 1;
-          }
-          return 0;
-        })
+            if (fa === "active" && fb === "inactive") {
+              return -1;
+            }
+            if (fa === "inactive" && fb === "active") {
+              return 1;
+            }
+            if (fa === "active" && fb === "deleted") {
+              return -1;
+            }
+            if (fa === "deleted" && fb === "active") {
+              return 1;
+            }
+            if (fa === "inactive" && fb === "deleted") {
+              return -1;
+            }
+            if (fa === "deleted" && fb === "inactive") {
+              return 1;
+            }
+            return 0;
+          }),
       };
     }
 
@@ -208,11 +207,10 @@ function rootReducer(state = initialState, action) {
         addresses: state.addresses.map(a => {
           if (a.id === action.payload.id) {
             return { ...a, isDefault: true };
-          }
-          else {
+          } else {
             return { ...a, isDefault: false };
           }
-        })
+        }),
       };
 
     case CHANGE_ADDRESS:
@@ -221,9 +219,8 @@ function rootReducer(state = initialState, action) {
         addresses: state.addresses.map(a => {
           if (Number(a.id) === Number(action.payload.id)) {
             return { ...a, ...action.payload };
-          }
-          else {
-            return { ...a }
+          } else {
+            return { ...a };
           }
         }),
       };
@@ -376,18 +373,17 @@ function rootReducer(state = initialState, action) {
       };
     }
 
-
     ////REVIEWS////
     case GET_REVIEWS:
       return {
         ...state,
-        reviews: action.payload
-      }
+        reviews: action.payload,
+      };
     case POST_REVIEW:
       return {
         ...state,
-        reviews: [...state.reviews, action.payload]
-      }
+        reviews: [...state.reviews, action.payload],
+      };
 
     case UPDATE_ADDRESS:
       return {
@@ -417,8 +413,6 @@ function rootReducer(state = initialState, action) {
         user: action.payload,
       };
     }
-
-
 
     default:
       return state;

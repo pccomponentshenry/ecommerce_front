@@ -16,7 +16,9 @@ export default function DetailInfo({ handleAddToCart }) {
 
   // const URL = "https://playexpertback-production.up.railway.app";
 
-  const profilePic = user.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU";
+  const profilePic =
+    user.image ||
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU";
 
   useEffect(() => {
     if (product.id) {
@@ -46,25 +48,44 @@ export default function DetailInfo({ handleAddToCart }) {
           <h3 className={D.price}>$ {product.price}</h3>
           <p className={D.description}>{product.description}</p>
         </div>
-        {stars ?
+        {stars ? (
           <div className={D.rating}>
             <div>
-              <label className={D.ratingTitle}><strong>Product Rating: <span style={{ color: "#2bfab7" }}>{stars}</span></strong></label>
+              <label className={D.ratingTitle}>
+                <strong>
+                  Product Rating:{" "}
+                  <span style={{ color: "#2bfab7" }}>{stars}</span>
+                </strong>
+              </label>
             </div>
             {[...Array(5)].map((_, i) => {
               const ratingValue = i + 1;
               return (
-                <label key={i} className={stars >= ratingValue ? D.fullStar : Math.ceil(stars) >= ratingValue ? D.halfStar : D.emptyStar}>
+                <label
+                  key={i}
+                  className={
+                    stars >= ratingValue
+                      ? D.fullStar
+                      : Math.ceil(stars) >= ratingValue
+                      ? D.halfStar
+                      : D.emptyStar
+                  }
+                >
                   ★
                 </label>
               );
             })}
-          </div> :
+          </div>
+        ) : (
           <div>
-            <label className={D.ratingTitle}><span style={{ color: "#fff", fontSize: "14px" }}>No reviews yet</span></label>
+            <label className={D.ratingTitle}>
+              <span style={{ color: "#fff", fontSize: "14px" }}>
+                No reviews yet
+              </span>
+            </label>
             <label className={D.emptyStar}>★★★★★</label>
           </div>
-        }
+        )}
         <div className={D.btnCont}>
           <button onClick={handleAddToCart}>Add to cart</button>
           <span
@@ -74,7 +95,7 @@ export default function DetailInfo({ handleAddToCart }) {
             ❤
           </span>
         </div>
-        <div className={D.owner}>
+        {/* <div className={D.owner}>
           <div className={D.ProfilePicCont}>
             <img src={profilePic} alt="" className={D.profilePic} />
           </div>
@@ -88,7 +109,7 @@ export default function DetailInfo({ handleAddToCart }) {
               <p>See the seller's profile</p>
             </div>
           </Link> */}
-        </div>
+        {/* </div> */}
         {/* {product.user === user.id ? (
           <div className={D.editBtn}>
             <button>update</button>
@@ -98,7 +119,6 @@ export default function DetailInfo({ handleAddToCart }) {
           <></>
         )} */}
       </div>
-
-    </div >
+    </div>
   );
 }

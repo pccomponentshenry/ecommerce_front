@@ -9,7 +9,16 @@
   align-items: center;
   justify-content: center;
 }
-
+.back {
+  position: absolute;
+  z-index: 900;
+  left: 460px;
+  margin-top: 90px;
+  cursor: pointer;
+}
+.back img {
+  width: 30px;
+}
 .Container {
   height: 100vh;
   width: 600px;
@@ -29,12 +38,12 @@
 .dataContainer {
   height: 50vh;
   padding-left: 50px;
-  padding-top: 30px;
+  padding-top: 60px;
 }
 
 .titleContainer {
   width: 50%;
-  height: 100px;
+  height: 70px;
   display: flex;
 }
 
@@ -467,5 +476,12 @@
     width: 100%;
     overflow: hidden;
     display: inline;
+  }
+  .back {
+    position: absolute;
+    bottom: 60px;
+    left: 300px;
+    width: 100px;
+    position: fixed;
   }
 }
