@@ -23,13 +23,13 @@ export default function DetailInfo({ handleAddToCart }) {
 
   useEffect(() => {
     if (favs && product) {
-      favs.find(fav => fav === product.id) ? setActive(true) : setActive(false);
+      favs.find(fav => fav.id === product.id) ? setActive(true) : setActive(false);
     }
   }, [favs, product])
 
   const handleAddToFav = () => {
-    dispatch(updateFavs(product.id, user.id));
-    favs.find(fav => fav === product.id) ? setActive(true) : setActive(false);
+    dispatch(updateFavs(product, user.id));
+    favs.find(fav => fav.id === product.id) ? setActive(true) : setActive(false);
   };
 
   return (
@@ -64,8 +64,8 @@ export default function DetailInfo({ handleAddToCart }) {
                     stars >= ratingValue
                       ? D.fullStar
                       : Math.ceil(stars) >= ratingValue
-                      ? D.halfStar
-                      : D.emptyStar
+                        ? D.halfStar
+                        : D.emptyStar
                   }
                 >
                   ★

@@ -23,7 +23,6 @@ export default function Home() {
   const products = useSelector(state => state.products);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  console.log(user);
 
   if (user.status === "banned") {
     navigate("/banned");

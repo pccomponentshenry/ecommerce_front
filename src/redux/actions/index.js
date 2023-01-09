@@ -298,11 +298,11 @@ export const setFromStripe = () => dispatch => {
 };
 
 //////////FAVORITES////////
-export const updateFavs = (productId, userId) => async dispatch => {
+export const updateFavs = (product, userId) => async dispatch => {
 
   if (userId) {
     try {
-      await axios.put(`${URL}/favorites/${userId}/${productId}`);
+      await axios.put(`${URL}/favorites/${userId}/${product.id}`);
       dispatch(getFavs(userId));
     } catch (error) {
       console.log(error);
@@ -312,14 +312,14 @@ export const updateFavs = (productId, userId) => async dispatch => {
       ? JSON.parse(localStorage.getItem("favs"))
       : [];
 
-    const existingElementIdx = favs.findIndex(el => el === productId);
+    const existingElementIdx = favs.findIndex(fav => fav.id === product.id);
 
     const newFavs = [...favs];
 
     if (existingElementIdx !== -1) {
-      localStorage.setItem("favs", JSON.stringify(newFavs.filter(f => f !== productId)));
+      localStorage.setItem("favs", JSON.stringify(newFavs.filter(fav => fav.id !== product.id)));
     } else {
-      newFavs.push(productId);
+      newFavs.push(product);
       localStorage.setItem("favs", JSON.stringify(newFavs));
     }
     dispatch({ type: UPDATE_FAVS, payload: JSON.parse(localStorage.getItem("favs")) });
@@ -339,7 +339,7 @@ export const addLSFavsToDB = (userId) => async dispatch => {
   try {
     const favs = JSON.parse(localStorage.getItem("favs"));
     for (let i = 0; i < favs.length; i++) {
-      await axios.post(`${URL}/favorites/${userId}/${favs[i]}`);
+      await axios.post(`${URL}/favorites/${userId}/${favs[i].id}`);
     }
     dispatch(getFavs(userId));
     localStorage.removeItem("favs");

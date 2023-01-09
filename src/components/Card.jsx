@@ -33,13 +33,13 @@ function CardComponent(props) {
 
   useEffect(() => {
     if (favs) {
-      favs.find(fav => fav === props.product.id) ? setActive(true) : setActive(false);
+      favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
     }
   }, [favs])
 
   const handleAddToFav = () => {
-    dispatch(updateFavs(props.product.id, loggedUser.id));
-    favs.find(fav => fav === props.product.id) ? setActive(true) : setActive(false);
+    dispatch(updateFavs(props.product, loggedUser.id));
+    favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
   };
 
   const successAlert = () => {
@@ -83,7 +83,7 @@ function CardComponent(props) {
                 Add to cart
               </button>
               <span
-                className={active === true ? C.active : C.fav}
+                className={active ? C.active : C.fav}
                 onClick={handleAddToFav}
               >
                 ❤

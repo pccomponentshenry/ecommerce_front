@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { addToCart, updateFavs, postCartItem } from "../redux/actions";
 import C from "../styles/HorizontalCard.module.css";
 
 function HorizontalCard(props) {
-  const { isAuthenticated, user } = useAuth0();
-  const fav = localStorage.getItem(props.id)
-    ? JSON.parse(localStorage.getItem(props.id))
-    : [];
 
-  const [active, setActive] = useState(fav);
-  // const [clicked, setClicked] = useState(false);
+  const user = useSelector(state => state.user);
+  const favs = useSelector(state => state.favs);
+  const [active, setActive] = useState(favs);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,14 +25,15 @@ function HorizontalCard(props) {
     successAlert();
   };
 
-  React.useEffect(() => {
-    setActive(fav);
-  }, [props.clicked]);
+  useEffect(() => {
+    if (favs) {
+      favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
+    }
+  }, [favs])
 
   const handleAddToFav = () => {
-    dispatch(updateFavs(props.product.id, user.id));
-    successFavAlert();
-    props.setClicked(!props.clicked);
+    dispatch(updateFavs(props.product, user.id));
+    favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
   };
 
   const successAlert = () => {
@@ -85,7 +83,7 @@ function HorizontalCard(props) {
           Add to cart
         </button>
         <span
-          className={active === true ? C.active : C.fav}
+          className={active ? C.active : C.fav}
           onClick={handleAddToFav}
         >
           ❤
