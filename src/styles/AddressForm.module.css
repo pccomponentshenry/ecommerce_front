@@ -20,11 +20,13 @@
   font-weight: 600;
   font-size: 18px;
 }
-.formContainer label {
-  position: absolute;
+  
+.exitForm{
+  position: relative;
   margin-top: -20px;
-  right: 450px;
+  float:right;
   cursor: pointer;
+  z-index: 50;
 }
 .success label {
   position: absolute;

@@ -18,7 +18,10 @@ export default function CartItem({ item }) {
         const post = { id, quantity: 1, email: user.email, add: true };
         dispatch(postCartItem(post));
       }
-      dispatch(addToCart(item, isAuthenticated));
+      else {
+        dispatch(addToCart(item, isAuthenticated));
+
+      }
     }
   };
 

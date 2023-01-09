@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: column;
   float: left;
-  height: 55vh;
+  height: 60vh;
+  z-index: 1;
   display: inline;
   margin-right: 200px;
   /* border: solid 1px red; */

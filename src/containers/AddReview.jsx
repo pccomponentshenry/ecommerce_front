@@ -32,7 +32,7 @@ export default function AddReview() {
     if (!input.message) {
       errors.message = "*Message is required";
     }
-    if (!input.score || !input.score === 0) {
+    if (!input.score || input.score === 0) {
       errors.score = "*Rating is required";
     }
     if (!error.title && !error.message && !error.score) {
@@ -114,9 +114,6 @@ export default function AddReview() {
             </button>
           </div>
         </form>
-        <Link to="/profile">
-          <p>Back to Profile</p>
-        </Link>
       </div>
 
       <div className={R.imgCont}>

@@ -146,7 +146,30 @@ function rootReducer(state = initialState, action) {
     case GET_PRODUCTS_FOR_SALE: {
       return {
         ...state,
-        productsForSale: action.payload,
+        productsForSale: action.payload.sort((a, b) => {
+          let fa = a.status,
+            fb = b.status;
+
+          if (fa === "active" && fb === "inactive") {
+            return -1;
+          }
+          if (fa === "inactive" && fb === "active") {
+            return 1;
+          }
+          if (fa === "active" && fb === "deleted") {
+            return -1;
+          }
+          if (fa === "deleted" && fb === "active") {
+            return 1;
+          }
+          if (fa === "inactive" && fb === "deleted") {
+            return -1;
+          }
+          if (fa === "deleted" && fb === "inactive") {
+            return 1;
+          }
+          return 0;
+        }),
       };
     }
 

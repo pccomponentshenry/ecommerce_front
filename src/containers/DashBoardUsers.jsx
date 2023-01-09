@@ -4,17 +4,15 @@ import SideDash from "../components/SideDash"
 import s from "../styles/DashBoardUsers.module.css"
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import adminPic from "../Images/admin_pic.png"
 
 
 
 export default function DashBoardUsers() {
   const users = useSelector(state => state.users);
-  const [tableData, setTableData] = useState(() => users);
-  const [validationErrors, setValidationErrors] = useState({});
+  const loggedUser = useSelector(state => state.user)
   const dispatch = useDispatch();
-  const optionsAdmin = [{ id: 0, text: 'Yes', value: true }, { id: 1, text: 'No', value: false }];
-  const optionsStatus = [{ id: 0, text: 'Active', value: 'active' }, { id: 1, text: 'Inactive', value: 'inactive' }];
-
+  
 
   useEffect(() => {
     dispatch(getUsers());
@@ -22,8 +20,10 @@ export default function DashBoardUsers() {
 
 
   return (
-   
-    <div className={s.content}>
+
+   loggedUser && (
+
+   <div className={s.content}>
       <div className={s.sideContainer}><SideDash /></div>
       <div className={s.userContainer}>
 
@@ -34,6 +34,7 @@ export default function DashBoardUsers() {
               <th>USER ID</th>
               <th>USERNAME</th>
               <th>EMAIL</th>
+              <th>IMAGE</th> 
               <th>STATUS</th>             
               <th>ACTIONS</th>
             </tr>
@@ -44,6 +45,7 @@ export default function DashBoardUsers() {
                 <td>{o.id}</td>
                 <td>{o.username}</td>
                 <td>{o.email}</td>
+                <td><img className={s.profilePic} src={o.image === null ? adminPic : o.image}/></td>
                 <td>{o.status === "active" ? (<div className={s.statusCont} ><div className={s.statusUserOk}></div><div>{o.status}</div></div>) : (<div className={s.statusCont} ><div className={s.statusUserNo}></div><div>{o.status}</div></div>)}</td>              
                 <td><Link to={`edit/${o.email}`}><button className={s.buttonEdit}>Edit User</button></Link></td>
               </tr>
@@ -53,6 +55,7 @@ export default function DashBoardUsers() {
 
       </div>
     </div>  
+   )
   );
 };
 

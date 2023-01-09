@@ -28,8 +28,9 @@ export default function Detail() {
         add: true,
       };
       dispatch(postCartItem(post));
+    } else {
+      dispatch(addToCart(product, isAuthenticated));
     }
-    dispatch(addToCart(product, isAuthenticated));
     successAlert();
   };
 
