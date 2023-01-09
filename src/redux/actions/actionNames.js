@@ -24,7 +24,9 @@ export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const CLEAR_ERROR = "CLEAR_ERROR";
-export const ADD_TO_FAV = "ADD_TO_FAV";
+
+export const UPDATE_FAVS = "UPDATE_FAVS";
+
 export const POST_CART_ITEM = "POST_CART_ITEM";
 export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
 export const UPDATE_STOCK = "UPDATE_STOCK";

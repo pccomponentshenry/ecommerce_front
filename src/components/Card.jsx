@@ -1,36 +1,19 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import { addToCart, addToFav, postCartItem } from "../redux/actions";
+import { addToCart, updateFavs, postCartItem } from "../redux/actions";
 import C from "../styles/Card.module.css";
 
 function CardComponent(props) {
-  const fav = localStorage.getItem(props.id)
-    ? JSON.parse(localStorage.getItem(props.id))
-    : [];
+  const favs = useSelector(state => state.favs);
+  const loggedUser = useSelector(state => state.user);
   const { isAuthenticated, user } = useAuth0();
-  const [active, setActive] = useState(fav);
-  const [clicked, setClicked] = useState(false);
-  const favs = JSON.parse(localStorage.getItem("fav"));
+  const [active, setActive] = useState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // const handleAddToCart = () => {
-  //   if (isAuthenticated) {
-  //     const post = {
-  //       id: props.product.id,
-  //       quantity: 1,
-  //       email: user.email,
-  //       add: true,
-  //     };
-  //     dispatch(postCartItem(post));
-  //   }
-  //   dispatch(addToCart(props.product, isAuthenticated));
-  //   successAlert();
-  // };
 
   const handleAddToCart = () => {
     if (isAuthenticated) {
@@ -44,19 +27,19 @@ function CardComponent(props) {
     }
     else {
       dispatch(addToCart(props.product, isAuthenticated));
-
     }
     successAlert();
   };
 
-  React.useEffect(() => {
-    setActive(fav);
-  }, [clicked]);
+  useEffect(() => {
+    if (favs) {
+      favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
+    }
+  }, [favs])
 
   const handleAddToFav = () => {
-    dispatch(addToFav(props.product));
-    successFavAlert();
-    setClicked(!clicked);
+    dispatch(updateFavs(props.product, loggedUser.id));
+    favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
   };
 
   const successAlert = () => {
@@ -80,12 +63,6 @@ function CardComponent(props) {
     });
   };
 
-  const successFavAlert = () => {
-    if (props.clickFromFav === true) {
-      props.setClicked(!clicked);
-    }
-  };
-
   return (
     <>
       <div className={C.cardContainer}>
@@ -106,7 +83,7 @@ function CardComponent(props) {
                 Add to cart
               </button>
               <span
-                className={active === true ? C.active : C.fav}
+                className={active ? C.active : C.fav}
                 onClick={handleAddToFav}
               >
                 ❤

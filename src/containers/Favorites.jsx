@@ -6,31 +6,25 @@ import CardComponent from "../components/Card";
 import { Link } from "react-router-dom";
 
 export default function Favorites() {
-  const favList = useSelector(state => state.fav);
+  const favList = useSelector(state => state.favs);
   const cart = useSelector(state => state.cart);
-  const favs = JSON.parse(localStorage.getItem("fav"));
-  const [favorites, setFavorites] = useState(favs ? favs : favList);
   const [clicked, setClicked] = useState(false);
-
-  React.useEffect(() => {
-    setFavorites(favs ? favs : favList);
-  }, [favs]);
 
   return (
     <>
       <div className={F.container}>
         <h5>
-          {favorites.length === 1
+          {favList.length === 1
             ? `This is your top favorite product`
-            : favorites.length > 1
-              ? `These are your top ${favorites.length} favorite products`
+            : favList.length > 1
+              ? `These are your top ${favList.length} favorite products`
               : null}
         </h5>
       </div>
       <div className={F.itemsContainer}>
         <div className={F.favContainer}>
-          {favorites.length > 0 ? (
-            favorites.map((el, i) => (
+          {favList.length > 0 ? (
+            favList.map((el, i) => (
               <CardComponent
                 key={i}
                 title={el.title.substr(0, 18) + "..."}
@@ -55,21 +49,38 @@ export default function Favorites() {
 
 
       </div>
+      {cart.length !== 0 &&
+        <div className={F.BtnContainer}>
+          <h5>
+            You have {cart.length !== 0 && cart.length}
+            {cart.length === 0
+              ? `no items`
+              : cart.length === 1
+                ? ` item`
+                : ` items`}{" "}
+            in cart
+          </h5>
+          <Link to="/cart" style={{ textDecoration: "none" }}>
+            <button className={F.active}>Go to cart</button>
+          </Link>
+        </div>
+      }
 
-      <div className={F.BtnContainer}>
-        <h5>
-          You have {cart.length !== 0 && cart.length}
-          {cart.length === 0
-            ? `no items`
-            : cart.length === 1
-              ? ` item`
-              : ` items`}{" "}
-          in cart
-        </h5>
-        <Link to="/cart" style={{ textDecoration: "none" }}>
-          <button className={F.active}>Go to cart</button>
-        </Link>
-      </div>
+
+      {/* // <div className={F.BtnContainer}>
+      //   <h5>
+      //     You have {cart.length !== 0 && cart.length}
+      //     {cart.length === 0
+      //       ? `no items`
+      //       : cart.length === 1
+      //         ? ` item`
+      //         : ` items`}{" "}
+      //     in cart
+      //   </h5>
+      //   <Link to="/cart" style={{ textDecoration: "none" }}>
+      //     <button className={F.active}>Go to cart</button>
+      //   </Link>
+      // </div> */}
     </>
   );
 }
