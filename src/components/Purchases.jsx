@@ -5,13 +5,19 @@ import { getOrders, getReviews } from "../redux/actions";
 import P from "../styles/Purchases.module.css";
 
 export default function Purchases() {
-  const nuevo = [];
-  const usuario = [];
+  const nuevo=[];
   const user = useSelector(state => state.user);
   const purchases = useSelector(state => state.purchases);
   const reviews = useSelector(state => state.reviews);
-  reviews.map(i => nuevo.push(i.productId));
-  reviews.map(e => usuario.push(e.username));
+  reviews.map(i => {
+    let arra={};
+    arra.pro=i.productId;
+    arra.us=i.username;
+    nuevo.push(arra)
+  });
+  
+  console.log("reviews",nuevo);
+
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -51,7 +57,7 @@ export default function Purchases() {
                 </h5>
                 {p.status !== "cancelled" &&
                   <div>
-                    {(!nuevo.includes(el.product.id) || !usuario.includes(user.username)) ?
+                    {nuevo.filter(e => e.pro===el.product.id && e.us===user.username).length === 0 ?
                       <Link
                         style={{ textDecoration: "none", color: "#212121" }}
                         to={`/addreview/${user.id}/${el.product.id}`}
