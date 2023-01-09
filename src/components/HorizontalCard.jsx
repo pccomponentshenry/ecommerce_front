@@ -1,11 +1,10 @@
-import C from "../styles/HorizontalCard.module.css";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import { addToCart, addToFav, postCartItem } from "../redux/actions";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
+import { addToCart, updateFavs, postCartItem } from "../redux/actions";
+import C from "../styles/HorizontalCard.module.css";
 
 function HorizontalCard(props) {
   const { isAuthenticated, user } = useAuth0();
@@ -24,7 +23,6 @@ function HorizontalCard(props) {
       dispatch(postCartItem(post));
     }
     else {
-
       dispatch(addToCart(props.product, isAuthenticated));
     }
     successAlert();
@@ -35,7 +33,7 @@ function HorizontalCard(props) {
   }, [props.clicked]);
 
   const handleAddToFav = () => {
-    dispatch(addToFav(props.product));
+    dispatch(updateFavs(props.product.id, user.id));
     successFavAlert();
     props.setClicked(!props.clicked);
   };

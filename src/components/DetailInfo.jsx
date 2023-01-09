@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addToFav } from "../redux/actions";
+import { updateFavs } from "../redux/actions";
 import D from "../styles/Detail.module.css";
 
 export default function DetailInfo({ handleAddToCart }) {
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
   const user = useSelector(state => state.user);
+  const favs = useSelector(state => state.favs);
   const [stars, setStars] = useState(0);
-  const [clicked, setClicked] = useState(false);
-  const fav = localStorage.getItem(product.id)
-    ? JSON.parse(localStorage.getItem(product.id))
-    : [];
-  const [active, setActive] = useState(fav);
-
-  // const URL = "https://playexpertback-production.up.railway.app";
+  const [active, setActive] = useState();
 
   const profilePic =
     user.image ||
@@ -27,12 +22,14 @@ export default function DetailInfo({ handleAddToCart }) {
   }, [product]);
 
   useEffect(() => {
-    setActive(fav);
-  }, [clicked]);
+    if (favs && product) {
+      favs.find(fav => fav === product.id) ? setActive(true) : setActive(false);
+    }
+  }, [favs, product])
 
   const handleAddToFav = () => {
-    dispatch(addToFav(product));
-    setClicked(!clicked);
+    dispatch(updateFavs(product.id, user.id));
+    favs.find(fav => fav === product.id) ? setActive(true) : setActive(false);
   };
 
   return (
