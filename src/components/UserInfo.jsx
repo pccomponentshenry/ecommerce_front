@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
 import { capitalizeEachLetter } from "../utils/functions";
 import { Link } from "react-router-dom";
+import Loader from "../Images/loader.gif"
 
 export default function UserInfo({
   form,
@@ -20,7 +21,13 @@ export default function UserInfo({
   const users = useSelector(state => state.user);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className={U.container}>
+      <div className={U.authContainer}>
+        <div className={U.imgContainer}>
+          <img className={U.loaderGif} src={Loader} />
+        </div>
+      </div>
+    </div>;
   }
   return (
     <>
