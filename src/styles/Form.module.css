@@ -1,13 +1,14 @@
 .container {
   position: relative;
-  top: 160px;
+  top: 100px;
   left: 100px;
   display: flex;
   flex-direction: column;
   float: left;
-  height: 60vh;
+  height: 55vh;
   display: inline;
   margin-right: 200px;
+  /* border: solid 1px red; */
 }
 
 .containerUpdate {
@@ -56,20 +57,33 @@
   font-size: 16px;
   position: relative;
 }
-.inputCont {
+.upload {
+  width: 50px;
+  padding-bottom: 10px;
   cursor: pointer;
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%232BFAB7FF' stroke-width='3' stroke-dasharray='50%25%2c 13%25' stroke-dashoffset='86' stroke-linecap='butt'/%3e%3c/svg%3e");
+}
+
+.uploadContainer {
+  border: dashed 1px #2bfab7;
   border-radius: 10px;
-  height: 250px;
+  width: 30vh;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 25px;
+}
+.inputCont {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  cursor: pointer;
   color: #2bfab7;
-  font-size: 100px;
+  font-size: 14px;
   font-weight: 200;
   text-align: center;
-  width: 250px;
   position: relative;
   z-index: 200;
 }
@@ -94,25 +108,37 @@
 .titleCont {
   color: #fff;
   position: relative;
-  top: 130px;
-  padding-left: 105px;
-  height: 60px;
+  top: 11vh;
+  height: 30px;
+  background-color: #2e2bfa;
 }
 .titleCont h5 {
-  font-weight: 600;
-  font-size: 25px;
+  position: relative;
+  top: 5px;
 }
-
+.title {
+  display: inline;
+  font-weight: 600;
+  margin-left: 100px;
+  font-size: 18px;
+}
+.subtitle {
+  display: inline;
+  font-weight: 200;
+  margin-left: 10px;
+  font-size: 16px;
+}
 .titleCont h6 {
   font-weight: 200;
   font-size: 14px;
   margin-bottom: 20px;
 }
+
 .formContainer {
   padding: 10px;
   border-radius: 10px;
   position: relative;
-  top: 170px;
+  top: 100px;
 }
 
 input::-webkit-outer-spin-button,
@@ -431,6 +457,34 @@ input::-webkit-inner-spin-button {
 .algo {
   position: absolute;
   margin-top: 400px;
+}
+
+.loadedImagesContainer {
+  border: dashed 1px #2bfab7;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 150px;
+  width: 50vw;
+  display: flex;
+  position: absolute;
+  bottom: 80px;
+  left: 100px;
+  padding: 10px;
+}
+.loadedImage {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.loadedImage img {
+  width: 100%;
 }
 
 @media screen and (max-width: 500px) {

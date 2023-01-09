@@ -2,28 +2,26 @@ import React from "react";
 import F from "../styles/Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands, getCategories, postProduct } from "../redux/actions/index";
-import { Link } from "react-router-dom";
-import { FilePond, registerPlugin } from "react-filepond";
-import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import "filepond/dist/filepond.min.css";
-
 import {
-  makeDeleteRequest,
-  makeUploadRequest,
-} from "../cloudinary/cloudinaryHelper";
-
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+  getBrands,
+  getCategories,
+  getProductsByUser,
+  postProduct,
+} from "../redux/actions/index";
+import { Link } from "react-router-dom";
+import { storage } from "../firebase/firebase";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import upload from "../Images/upload.png";
 
 export default function Form() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
+  const productsForSale = useSelector(state => state.productsForSale);
   const [image, setImage] = useState([]);
+  const [imageList, setImageList] = useState([]);
   const [url, setUrl] = useState("");
   const [active, setActive] = useState(false);
   const [event, setEvent] = useState({});
@@ -51,42 +49,6 @@ export default function Form() {
     userId: "",
   };
 
-  const [files, setFiles] = useState([]);
-
-  const revert = (token, successCallback, errorCallback) => {
-    makeDeleteRequest({
-      token,
-      successCallback,
-      errorCallback,
-    });
-  };
-
-  const process = (
-    fieldName,
-    file,
-    metadata,
-    load,
-    error,
-    progress,
-    abort,
-    transfer,
-    options
-  ) => {
-    const abortRequest = makeUploadRequest({
-      file,
-      fieldName,
-      successCallback: load,
-      errorCallback: error,
-      progressCallback: progress,
-    });
-
-    return {
-      abort: () => {
-        abortRequest();
-        abort();
-      },
-    };
-  };
   useEffect(() => {
     dispatch(getBrands());
     dispatch(getCategories());
@@ -171,46 +133,56 @@ export default function Form() {
     );
   };
 
-  // const handleChangeImg = e => {
-  //   e.preventDefault();
-  //   const data = new FormData();
-  //   data.append("file", image);
-
-  //   data.append("upload_preset", "cqws5x8n"); // presets de cloudinary. Si querés entrar a ver la web, se accede desde el gmail del PF, con google.
-  //   data.append("cloud_name", "dbtekd33p"); // presets de Cloudinary
-  //   data.append("api_key", "226142111813437"); // idem
-  //   fetch("  https://api.cloudinary.com/v1_1/cqws5x8n/image/upload", {
-  //     //post a la ruta de cloud. cqws5x8n es el nombre de la nube de la cuenta nuestra
-  //     method: "post",
-  //     body: data,
-  //   })
-  //     .then(resp => resp.json())
-  //     .then(data => {
-  //       setUrl(data.url); //Revisar por qué no se agregan más de una. En algúna llamada de función Onchange en el html habré puesto (e.target.files[0] y por ahí es eso)
-  //       setInput({ ...input, img: data.url }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
-  //     })
-  //     .catch(err => console.log(err));
-  // };
-
   const handleChange = e => {
     setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // const loadImage = e => {
-  //   if (image.name) {
-  //     handleChangeImg(e);
-  //     errorImgSetting(e);
-  //   }
-  // };
+  const getImages = () => {
+    const imageListRef = ref(
+      storage,
+      `${user.id}/${productsForSale.length + 1}`
+    );
+    listAll(imageListRef).then(response => {
+      response.items.forEach(item => {
+        getDownloadURL(item).then(url => {
+          const exists = input.img.find(el => el === url);
+          console.log("antes" + input.img);
+          if (!exists) {
+            setInput(input => {
+              return { ...input, img: input.img.concat(url) };
+            });
+            console.log("después" + input.img);
+          }
+        });
+      });
+    });
+  };
 
-  // useEffect(() => {
-  //   loadImage(event);
-  // }, [image]);
+  const loadImage = async e => {
+    if (image.name && input.img.length < 6) {
+      const imgRef = ref(
+        storage,
+        `${user.id}/${productsForSale.length + 1}/${image.name + v4()}`
+      );
+
+      await uploadBytes(imgRef, image).then(() => {
+        console.log("Todo ok");
+      });
+      getImages();
+    }
+  };
+
+  useEffect(() => {
+    loadImage(event);
+  }, [image]);
 
   useEffect(() => {
     handleValidate(input);
   }, [input]);
 
+  useEffect(() => {
+    dispatch(getProductsByUser(user.id));
+  }, []);
   const handleSubmit = e => {
     if (
       !error.title &&
@@ -263,45 +235,32 @@ export default function Form() {
       <div className={F.form}>
         <form onSubmit={e => handleSubmit(e)} autoComplete="off">
           <div className={F.titleCont}>
-            <h5>New product</h5>
-            <h6>Add images of your product</h6>
+            <h5 className={F.title}>New product</h5>
+            <h5 className={F.subtitle}>
+              | Publish and get your money instantly
+            </h5>
           </div>
 
-          {/* <div className={F.container}>
-            <h5>Upload an image</h5>
-            <input
-              type="file"
-              name="uploadfile"
-              multiple="multiple"
-              id="img"
-              style={{ display: "none" }}
-              onChange={e => {
-                setImage(e.target.files[0]);
-                setEvent(e);
-              }}
-            />
+          <div className={F.container}>
+            <div className={F.uploadContainer}>
+              <img src={upload} alt="" className={F.upload} />
+              <input
+                type="file"
+                name="uploadfile"
+                multiple="multiple"
+                id="img"
+                style={{ display: "none" }}
+                onChange={e => {
+                  setImage(e.target.files[0]);
+                }}
+              />
 
-            {!input.img.length ? (
               <label className={F.inputCont} htmlFor="img">
-                +
+                Upload an image
               </label>
-            ) : (
-              <div className={F.imgCont}>
-                <img src={input.img} alt="" />
-              </div>
-            )}
+            </div>
             {error.img && <span className={F.imgError}>{error.img}</span>}
-          </div> */}
-
-          <FilePond
-            files={files}
-            acceptedFileTypes="image/*"
-            onupdatefiles={setFiles}
-            allowMultiple={true}
-            server={{ process, revert }}
-            name="file"
-            labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
-          />
+          </div>
 
           <div className={F.formContainer}>
             <div>
@@ -439,6 +398,14 @@ export default function Form() {
             </div>
           </div>
         </form>
+        <div className={F.loadedImagesContainer}>
+          {input.img.length > 0 &&
+            input.img.map((el, i) => (
+              <div className={F.loadedImage}>
+                <img key={i} src={el} />
+              </div>
+            ))}
+        </div>
       </div>
     </>
   );
