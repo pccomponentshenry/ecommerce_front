@@ -82,9 +82,9 @@ function App() {
             </ProtectedRoute>
           } />
           <Route exact path="/dashboard/users/edit/:email" element={
-            <ProtectedAdmin>
+            <ProtectedRoute>
               <UserFormUpdate/>
-            </ProtectedAdmin>
+            </ProtectedRoute>
           } />
           <Route exact path="/profile" element={<ProfileDetail />} />
           <Route exact path="/detail/:id" element={<Detail />} />

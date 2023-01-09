@@ -10,7 +10,7 @@ export default function OrderConfirmed() {
   const shouldUpdate = useRef(true);
 
   const updateDataBase = () => {
-    dispatch(updateProductsStock(user.id));
+    // dispatch(updateProductsStock(user.id));
     dispatch(changeOrderStatus(user.id, "completed"));
     dispatch(clearCart(user.email));
   }

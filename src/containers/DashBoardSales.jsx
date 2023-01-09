@@ -1,82 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrdersOneByOne, getUsers } from "../redux/actions";
+import { getAllOrdersOneByOne, getUsers, getAddresses } from "../redux/actions";
 import SideDash from "../components/SideDash"
 import s from "../styles/DashBoardSales.module.css"
-import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import MaterialReactTable from 'material-react-table';
-import {
-  Box,
-  IconButton,
-  Tooltip,
-  Radio,
-  FormControlLabel,
-  MenuItem,
-} from '@mui/material';
-
-import { Edit, Refresh } from '@mui/icons-material';
-
 
 export default function DashBoardSales() {
   const orders = useSelector(state => state.allOrdersOneByOne);
   const user = useSelector(state => state.users);
-  const [tableData, setTableData] = useState(() => orders);
-   const dispatch = useDispatch();
-
+  const addresses = useSelector(state => state.addresses);
+  const dispatch = useDispatch();
+   
   useEffect(() => {
-    dispatch(getAllOrdersOneByOne(), getUsers())
-    
-  }, [dispatch]);
-
-  let index = "";
-
-  // const columns = useMemo(
-  //   () => [
-  //     {
-  //       accessorKey: 'id',
-  //       header: 'Order ID',
-  //       enableColumnOrdering: false,
-  //       enableEditing: false, //disable editing on this column
-  //       enableSorting: false,
-  //       size: 10,
-  //     },
-  //     {
-  //       accessorKey: 'userId',
-  //       header: 'User Email',
-  //       size: 350,
-  //       Cell: ({ cell }) => (
-
-  //         // console.log(cell.getValue())
-  //         user[user.findIndex(users => users.id === cell.getValue())].email
-
-  //       ),
-
-  //     },
-  //     {
-  //       accessorKey: 'status',
-  //       header: 'Status',
-  //     },
-  //     {
-  //       accessorKey: 'purchaseDate',
-  //       header: 'Date',
-  //     },
-  //     {
-  //       accessorKey: 'addressId',
-  //       header: 'Address',
-  //     },
-  //     // {
-  //     //   accessorKey: 'addressId',
-  //     //   header: 'Address',
-  //     //   Cell: ({ cell }) => (
-  //     //     cell.getValue().toLocaleString() === "true" ? <FormControlLabel control={<Radio defaultChecked color="success" />} label="Yes" /> :
-  //     //       <FormControlLabel control={<Radio color="secondary" defaultChecked />} label="No" />
-  //     //   )
-  //     // },
-
-
-  //   ],
-  // );
-
+    dispatch(getAllOrdersOneByOne(), getUsers(),
+    getAddresses())    
+  }, []);
 
   return (
 
@@ -84,30 +22,31 @@ export default function DashBoardSales() {
       <div className={s.sideContainer}><SideDash /></div>
       <div className={s.salesContainer}>
        
-        <table clasName={s.tabla}> 
+        <table className={s.tabla}> 
        
           <thead>
             <tr>
               <th>ORDER ID</th>
-              <th>USER ID</th>
-              <th>PURCHASE DATE</th>
-              <th>STATUS</th>
+              <th>USER EMAIL</th>
               <th>ADDRESS</th>
+              <th>PURCHASE DATE</th>
+              <th>STATUS</th>            
               <th>DETAILS</th>
             </tr>
           </thead> 
           {orders.map((o) => 
           <tbody>
             <tr>
-              <td>{o.id}</td>
-              <td>{o.userId}</td>
-              <td>{o.purchaseDate}</td>
-              <td>{o.status}</td>
-              <td>{o.addressId}</td>
-              <td><Link to={`sales/${o.id}`}><button>Details</button></Link></td>
+              {/* {console.log(addresses.findIndex(e => e.id === o.addressId))} */}
+              <td>{o.id}</td>            
+              <td>{user[user.findIndex(e => e.id === o.userId)].email}</td>
+              <td>{addresses[addresses.findIndex(e => e.id === o.addressId)].streetName} - {addresses[addresses.findIndex(e => e.id === o.addressId)].locationName}</td>
+              <td>{o.purchaseDate.substr(0, 10)} - {o.purchaseDate.substr(11, 5)}</td>
+              <td>{o.status === 'completed' ? <span className={s.ok}>{o.status}</span> : <span className={s.bad}>{o.status}</span>}</td>
+              <td><Link to={`id/${o.id}`}><button className={s.buttonDetails}>Details</button></Link></td>
             </tr>
           </tbody> 
-          ) }
+          ) } 
         </table>
    
 

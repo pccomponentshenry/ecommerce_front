@@ -42,7 +42,10 @@ function CardComponent(props) {
       };
       dispatch(postCartItem(post));
     }
-    dispatch(addToCart(props.product, isAuthenticated));
+    else {
+      dispatch(addToCart(props.product, isAuthenticated));
+
+    }
     successAlert();
   };
 

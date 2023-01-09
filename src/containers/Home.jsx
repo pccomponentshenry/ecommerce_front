@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../components/HomeCarousel";
 import Cards from "../containers/Cards";
 import SideMenu from "../components/SideMenu";
+import Banned from "../alerts/Banned";
 import {
   allProducts,
   setFiltered,
@@ -19,6 +20,8 @@ export default function Home() {
   const [name, setName] = useState("");
   const products = useSelector(state => state.products);
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  console.log(user)
 
   useEffect(() => {
     dispatch(allProducts());
@@ -27,6 +30,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(setFiltered(products));
   }, [dispatch]);
+  
 
   useEffect(() => {
     dispatch(getLocations());
@@ -44,17 +48,19 @@ export default function Home() {
 
   return (
     <>
+    
       {products.length > 0 ? (
         <div>
           <div className={H.carouselContainer}>
-            <Carousel />
+          {user.status === "banned" ? <Banned />:<Carousel /> }
           </div>
           <div className={H.CardsAndMenuContainer}>
-            <SideMenu name={name} setName={setName} />
+          {user.status === "banned" ? <br/>:<SideMenu name={name} setName={setName} />}
+          {user.status === "banned" ? <br/> :
             <div className={H.searchBarCont}>
               <div className={H.searchBar}>
                 <img className={H.searchIcon} src={search} />
-                <input
+                :<input
                   type="text"
                   placeholder="Search"
                   id="name"
@@ -63,8 +69,9 @@ export default function Home() {
                   onChange={handleInputChange}
                 />
               </div>
-            </div>
-            <Cards currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            </div>}
+            {user.status === "banned" ? <br/>: 
+            <Cards currentPage={currentPage} setCurrentPage={setCurrentPage} />}
           </div>
         </div>
       ) : (

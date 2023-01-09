@@ -49,11 +49,15 @@
 }
 
 .noProductsCont {
+  text-align: center;
+  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
   flex-direction: column;
+  position: relative;
+  width: 100%;
+  color: #fff;
 }
 
 .noProductsCont h5 {

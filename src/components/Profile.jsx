@@ -40,7 +40,7 @@ export const Profile = () => {
         dispatch(postCartItem(post));
       }
     }
-    dispatch(getUserCartItem(user.email));
+    // dispatch(getUserCartItem(user.email));
     localStorage.clear();
   };
 
