@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import { deleteAddress, updateAddress } from "../redux/actions";
 import { capitalizeEachLetter } from "../utils/functions";
 import S from "../styles/ProfileAddresses.module.css";
@@ -11,8 +12,23 @@ export default function ProfileAddresses() {
   const dispatch = useDispatch();
 
   const handleDelete = (e) => {
-    dispatch(deleteAddress(e));
-    alert("Address has been removed successfully");
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true,
+      confirmButtonColor: "rgb(55, 172, 135)",
+      denyButtonColor: "#d83dd0",
+      background: "#272727",
+      color: "#fff",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAddress(e));
+      }
+    })
   }
 
   const handleDefault = (e) => {
@@ -50,9 +66,7 @@ export default function ProfileAddresses() {
       ) : (
         <div className={S.noAddresses}>
           <h5>You don't have any addresses yet!</h5>
-          <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
-            <p>Choose your favorites!</p>
-          </Link>
+          <p style={{ textDecoration: "none", color: "gray" }}>Add one to your profile to see it here</p>
         </div>
       )}
     </div>
