@@ -5,6 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { addToCart, updateFavs, postCartItem } from "../redux/actions";
 import C from "../styles/Card.module.css";
+import { MdMode } from "react-icons/md";
+
 
 function CardComponent(props) {
   const favs = useSelector(state => state.favs);
@@ -65,33 +67,59 @@ function CardComponent(props) {
 
   return (
     <>
-      <div className={C.cardContainer}>
-        <div className={C.imgContainer}>
-          <Link to={`/detail/${props.id}`}>
-            <img src={props.img} alt="" className={C.image} />
-          </Link>
-        </div>
-        <div className={C.square}>
-          <div className={C.nameCont}>
-            <h6 className={C.name}>{props.title}</h6>
+      {loggedUser.isAdmin === "true" ? (
+        <div className={C.cardContainer}>
+          <div className={C.imgContainer}>
+            <Link to={`/update/${props.id}`}><div className={C.contEdit}>
+              <MdMode size="2em" />
+            </div></Link>
+            <Link to={`/detail/${props.id}`}>
+              <img src={props.img} alt="" className={C.imageEdit} />
+            </Link>
           </div>
-          <h6 className={C.brand}>{props.brand}</h6>
-          <div className={C.bottomCont}>
-            <h6 className={C.price}>$ {props.price}</h6>
-            <div className={C.btnAndFav}>
-              <button className={C.cardBtn} onClick={handleAddToCart}>
-                Add to cart
-              </button>
-              <span
-                className={active ? C.active : C.fav}
-                onClick={handleAddToFav}
-              >
-                ❤
-              </span>
+          <Link to={`/detail/${props.id}`}>
+            <div className={C.square}>
+              <div className={C.nameCont}>
+                <h6 className={C.name}>{props.title}</h6>
+              </div>
+              <h6 className={C.brand}>{props.brand}</h6>
+              <div className={C.bottomCont}>
+                <h6 className={C.price}>$ {props.price}</h6>
+
+              </div>
+            </div>
+          </Link>
+        </div>) :
+        (
+          <div className={C.cardContainer}>
+            <div className={C.imgContainer}>
+              <Link to={`/detail/${props.id}`}>
+                <img src={props.img} alt="" className={C.image} />
+              </Link>
+            </div>
+            <div className={C.square}>
+              <div className={C.nameCont}>
+                <h6 className={C.name}>{props.title}</h6>
+              </div>
+              <h6 className={C.brand}>{props.brand}</h6>
+              <div className={C.bottomCont}>
+                <h6 className={C.price}>$ {props.price}</h6>
+                <div className={C.btnAndFav}>
+                  <button className={C.cardBtn} onClick={handleAddToCart}>
+                    Add to cart
+                  </button>
+                  <span
+                    className={active ? C.active : C.fav}
+                    onClick={handleAddToFav}
+                  >
+                    ❤
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        )
+      }
     </>
   );
 }

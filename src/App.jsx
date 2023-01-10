@@ -18,6 +18,7 @@ import DashBoard from "./containers/DashBoard";
 import DashBoardStats from "./containers/DashBoardStats";
 import DashBoardSales from "./containers/DashBoardSales";
 import DashBoardUsers from "./containers/DashBoardUsers";
+import DashBoardProducts from "./containers/DashBoardProducts";
 import DashboardPurchase from "./components/DashboardPurchase";
 import OrderConfirmed from "./components/OrderConfirmed";
 import AddressUpdate from "./components/AddressUpdate";
@@ -75,6 +76,15 @@ function App() {
               <ProtectedAdmin>
                 <DashBoardStats />
               </ProtectedAdmin>
+            }
+          />
+          <Route
+            exact
+            path="/dashboard/products"
+            element={
+              <ProtectedRoute>
+                <DashBoardProducts />
+              </ProtectedRoute>
             }
           />
           <Route

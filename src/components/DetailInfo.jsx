@@ -83,15 +83,18 @@ export default function DetailInfo({ handleAddToCart }) {
             <label className={D.emptyStar}>★★★★★</label>
           </div>
         )}
-        <div className={D.btnCont}>
-          <button onClick={handleAddToCart}>Add to cart</button>
-          <span
-            className={active === true ? D.active : D.fav}
-            onClick={handleAddToFav}
-          >
-            ❤
-          </span>
-        </div>
+        {user.isAdmin === "true" ? (
+           ""
+        ) : <div className={D.btnCont}>
+            <button onClick={handleAddToCart}>Add to cart</button>
+            <span
+              className={active === true ? D.active : D.fav}
+              onClick={handleAddToFav}
+            >
+              ❤
+            </span>
+          </div>};
+
         {/* <div className={D.owner}>
           <div className={D.ProfilePicCont}>
             <img src={profilePic} alt="" className={D.profilePic} />

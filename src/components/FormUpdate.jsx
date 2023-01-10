@@ -28,6 +28,7 @@ export default function Form() {
     img: [],
     category: "",
     userId: "",
+    status:"",
   });
   const initialState = {
     title: product.title,
@@ -38,7 +39,10 @@ export default function Form() {
     img: product.img,
     category: product.category,
     userId: user.id,
+    status: product.status,
   };
+
+  const statusProd = ['active', 'inactive', 'banned', 'deleted']
 
   useEffect(() => {
     dispatch(getProductDetail(params.id));
@@ -140,13 +144,13 @@ export default function Form() {
     if (!error.price && !error.stock) {
       e.preventDefault();
       setActive(true);
-      console.log(input);
+      // console.log(input);
       dispatch(putProduct(product.id, input));
       setDisable(true);
       clearForm();
       setError({});
     } else {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -348,7 +352,30 @@ export default function Form() {
                 {error.price && <span>{error.price}</span>}
               </div>
             </div>
+
+            {user.isAdmin === "true" ? (
+          <div>
+                <select className={F.statusSelect}
+                  name="status"
+                  value={input.status}
+                  id="Status"
+                  onBlur={e => {
+                    handleChange(e);
+                  }}
+                  onChange={e => {
+                    handleChange(e);
+                  }}
+                >
+                  <option defaultValue={"DEFAULT"}>Status</option>
+                  {statusProd.map((el, i) => (
+                    <option key={i}>{el}</option>
+                  ))}
+                </select>
+              </div>
+              ) : ""}
+
           </div>
+          
           <div className={F.formBtn}>
             <button
               type="submit"
