@@ -26,7 +26,8 @@ const Banned = () => {
       </div> */}
 
        <div className={s.all} >
-      <div className= {s.container}>
+       <div className= {s.containerBorder} >
+      <div className= {s.container} >
             <div className={s.border}> 
 
             </div>
@@ -45,7 +46,8 @@ const Banned = () => {
             </div>
       
       </div>
-      </div> 
+      </div>
+      </div>
     </>
   );
 };

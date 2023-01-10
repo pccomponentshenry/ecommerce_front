@@ -73,9 +73,9 @@ export default function Purchases() {
       )) :
         (
           <div className={P.noProducts}>
-            <h5>You don't have any purchases yet!</h5>
+            <h5>You don't have any purchases yet</h5>
             <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
-              <p>See our products!</p>
+              <p>Start now!</p>
             </Link>
           </div>)
 
