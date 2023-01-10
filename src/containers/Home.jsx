@@ -15,6 +15,7 @@ import {
 } from "../redux/actions";
 import search from "../Images/Search.png";
 import H from "../styles/Home.module.css";
+import Bot from "../components/Bot";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -85,10 +86,15 @@ export default function Home() {
               {user.status === "banned" ? (
                 <br />
               ) : (
-                <Cards
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                />
+                <div>
+
+                  <Cards
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                  />
+                  <Bot/>
+                  
+                </div>
               )}
             </div>
           </div>
