@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 import { addToCart, updateFavs, postCartItem } from "../redux/actions";
 import C from "../styles/HorizontalCard.module.css";
@@ -15,13 +14,8 @@ function HorizontalCard(props) {
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    if (isAuthenticated) {
-      const post = { id: props.id, quantity: 1, email: user.email, add: true };
-      dispatch(postCartItem(post));
-    }
-    else {
-      dispatch(addToCart(props.product, isAuthenticated));
-    }
+    const post = { id: props.id, quantity: 1, email: user.email, add: true };
+    dispatch(postCartItem(post));
     successAlert();
   };
 
@@ -39,9 +33,9 @@ function HorizontalCard(props) {
   const successAlert = () => {
     Swal.fire({
       title: "Product Added to cart!",
-      confirmButtonText: "Les't buy more products",
+      confirmButtonText: "Back to profile",
       showDenyButton: true,
-      denyButtonText: `No, Go to my Cart`,
+      denyButtonText: `Go to my Cart`,
       icon: "success",
       confirmButtonColor: "rgb(55, 172, 135)",
       denyButtonColor: "#d83dd0",
@@ -50,34 +44,27 @@ function HorizontalCard(props) {
     }).then(result => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        navigate("/");
+        // navigate("/");
       } else if (result.isDenied) {
         navigate("/cart");
       }
     });
   };
 
-  const successFavAlert = () => {
-    if (props.clickFromFav === true) {
-      props.setClicked(!props.clicked);
-    }
-  };
-
   return (
     <>
       <div className={C.cardContainer}>
-        <div className={C.imgContainer}>
-          <Link to={`/detail/${props.id}`}>
+
+        <Link to={`/detail/${props.id}`}>
+          <div className={C.imgContainer}>
             <img src={props.img} alt="" className={C.image} />
-          </Link>
-        </div>
-
-        <div className={C.nameCont}>
-          <h6 className={C.name}>{props.title}</h6>
-          <h6 className={C.brand}>{props.brand}</h6>
-        </div>
-
-        <h6 className={C.price}>$ {props.price}</h6>
+          </div>
+          <div className={C.nameCont}>
+            <h6 className={C.name}>{props.title}</h6>
+            <h6 className={C.brand}>{props.brand}</h6>
+            <h6 className={C.price}>$ {props.price}</h6>
+          </div>
+        </Link>
 
         <button className={C.cardBtn} onClick={handleAddToCart}>
           Add to cart
