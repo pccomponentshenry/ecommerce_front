@@ -10,10 +10,12 @@ export default function DashBoardSales() {
   const user = useSelector(state => state.users);
   const addresses = useSelector(state => state.addresses);
   const dispatch = useDispatch();
-   
+
   useEffect(() => {
     dispatch(getAllOrdersOneByOne(), getUsers(),
-    getAddresses())    
+      getAddresses());
+    console.log('orders', orders);
+
   }, []);
 
   return (
@@ -21,34 +23,33 @@ export default function DashBoardSales() {
     <div className={s.content}>
       <div className={s.sideContainer}><SideDash /></div>
       <div className={s.salesContainer}>
-       
-        <table className={s.tabla}> 
-       
+
+        <table className={s.tabla}>
+
           <thead>
             <tr>
               <th>ORDER ID</th>
               <th>USER EMAIL</th>
               <th>ADDRESS</th>
               <th>PURCHASE DATE</th>
-              <th>STATUS</th>            
+              <th>STATUS</th>
               <th>DETAILS</th>
             </tr>
-          </thead> 
-          {orders.map((o) => 
-          <tbody>
-            <tr>
-              {/* {console.log(addresses.findIndex(e => e.id === o.addressId))} */}
-              <td>{o.id}</td>            
-              <td>{user[user.findIndex(e => e.id === o.userId)].email}</td>
-              <td>{addresses[addresses.findIndex(e => e.id === o.addressId)].streetName} - {addresses[addresses.findIndex(e => e.id === o.addressId)].locationName}</td>
-              <td>{o.purchaseDate.substr(0, 10)} - {o.purchaseDate.substr(11, 5)}</td>
-              <td>{o.status === 'completed' ? <span className={s.ok}>{o.status}</span> : <span className={s.bad}>{o.status}</span>}</td>
-              <td><Link to={`id/${o.id}`}><button className={s.buttonDetails}>Details</button></Link></td>
-            </tr>
-          </tbody> 
-          ) } 
+          </thead>
+          {orders.map((o) =>
+            <tbody>
+              <tr>
+                <td>{o.id}</td>
+                <td>{user[user.findIndex(e => e.id === o.userId)].email}</td>
+                <td>{o.address.streetName} {o.address.streetNumber} - {o.address.location.name}</td>
+                <td>{o.purchaseDate.substr(0, 10)} - {o.purchaseDate.substr(11, 5)}</td>
+                <td>{o.status === 'completed' ? <span className={s.ok}>{o.status}</span> : <span className={s.bad}>{o.status}</span>}</td>
+                <td><Link to={`id/${o.id}`}><button className={s.buttonDetails}>Details</button></Link></td>
+              </tr>
+            </tbody>
+          )}
         </table>
-   
+
 
 
 

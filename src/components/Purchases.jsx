@@ -16,8 +16,6 @@ export default function Purchases() {
     nuevo.push(arra)
   });
 
-  console.log("reviews", nuevo);
-
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
