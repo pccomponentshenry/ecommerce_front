@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
 import { capitalizeEachLetter } from "../utils/functions";
 import { Link } from "react-router-dom";
-import Loader from "../Images/loader.gif";
+import Loader from "../Images/loader.gif"
 import defaultPic from "../Images/admin_pic.png"
 
 export default function UserInfo({
