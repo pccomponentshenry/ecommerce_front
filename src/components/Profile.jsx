@@ -8,6 +8,8 @@ import {
   postUser,
   getUser,
   getAddresses,
+  addLSFavsToDB,
+  getFavs,
 } from "../redux/actions";
 import L from "../styles/LoginContainer.module.css";
 
@@ -15,8 +17,10 @@ export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const loggedUser = useSelector(state => state.user);
   const cart = useSelector(state => state.cart);
+  const favs = useSelector(state => state.favs);
   const dispatch = useDispatch();
-  const shouldUpdate = useRef(true);
+  const shouldUpdateCart = useRef(true);
+  const shouldUpdateFavs = useRef(true);
 
   const dbUser = {
     username: user.nickname,
@@ -40,16 +44,22 @@ export const Profile = () => {
         dispatch(postCartItem(post));
       }
     }
-    // dispatch(getUserCartItem(user.email));
-    localStorage.clear();
+    localStorage.removeItem("cart");
   };
 
   useEffect(() => {
-    if (shouldUpdate.current) {
-      shouldUpdate.current = false;
+    if (shouldUpdateCart.current) {
+      shouldUpdateCart.current = false;
       postUserWithCartToDB();
     }
   }, [user]);
+
+  useEffect(() => {
+    if (shouldUpdateFavs.current && favs.length && loggedUser.id) {
+      dispatch(addLSFavsToDB(loggedUser.id));
+      shouldUpdateFavs.current = false;
+    }
+  }, [loggedUser, favs]);
 
   useEffect(() => {
     dispatch(getUser(user.email));
@@ -61,6 +71,7 @@ export const Profile = () => {
   useEffect(() => {
     if (loggedUser.id) {
       dispatch(getAddresses(loggedUser.id));
+      dispatch(getFavs(loggedUser.id));
     }
   }, [loggedUser]);
 

@@ -10,8 +10,13 @@ import {
 } from "../redux/actions/index";
 import { Link } from "react-router-dom";
 import { storage } from "../firebase/firebase";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-import { v4 } from "uuid";
+import {
+  ref,
+  uploadBytes,
+  listAll,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 import upload from "../Images/upload.png";
 
 export default function Form() {
@@ -21,8 +26,8 @@ export default function Form() {
   const cat = useSelector(state => state.categories);
   const productsForSale = useSelector(state => state.productsForSale);
   const [image, setImage] = useState([]);
-  const [imageList, setImageList] = useState([]);
-  const [url, setUrl] = useState("");
+  const [allImages, setAllImages] = useState([]);
+
   const [active, setActive] = useState(false);
   const [event, setEvent] = useState({});
   const [disable, setDisable] = useState(true);
@@ -138,8 +143,23 @@ export default function Form() {
   };
 
   const handleDeleteImage = e => {
-    //  const imageRef = ref(storage, 'images/desert.jpg');
-    console.log(e);
+    const val = e.target.getAttribute("value");
+    const selected = input.img[val];
+    const removed = input.img.filter(el => el !== selected);
+    const names = allImages.map(el => el.name);
+    const imgRef = ref(
+      storage,
+      `${user.id}/${productsForSale.length + 1}/${names[val]}`
+    );
+
+    deleteObject(imgRef)
+      .then(() => {
+        setInput({ ...input, img: removed });
+        console.log(input.img);
+      })
+      .catch(error => {
+        alert(error);
+      });
   };
 
   const getImages = () => {
@@ -166,7 +186,7 @@ export default function Form() {
     if (image.name && input.img.length < 6) {
       const imgRef = ref(
         storage,
-        `${user.id}/${productsForSale.length + 1}/${image.name + v4()}`
+        `${user.id}/${productsForSale.length + 1}/${image.name}`
       );
 
       await uploadBytes(imgRef, image).then(() => {
@@ -256,6 +276,7 @@ export default function Form() {
                 style={{ display: "none" }}
                 onChange={e => {
                   setImage(e.target.files[0]);
+                  setAllImages(allImages.concat(e.target.files[0]));
                 }}
               />
 
@@ -406,7 +427,12 @@ export default function Form() {
           {input.img.length > 0 &&
             input.img.map((el, i) => (
               <div className={F.loadedImage}>
-                <img key={i} src={el} onClick={e => handleDeleteImage(e)} />
+                <img
+                  key={i}
+                  value={i}
+                  src={el}
+                  onClick={e => handleDeleteImage(e)}
+                />
               </div>
             ))}
         </div>
