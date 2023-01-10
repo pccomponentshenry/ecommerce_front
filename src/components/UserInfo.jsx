@@ -42,7 +42,7 @@ export default function UserInfo({
         <div className={U.container}>
           <div className={U.authContainer}>
             <div className={U.imgContainer}>
-              <img src={user.picture.length > 0 ? user.picture : defaultPic} alt={user.name} />
+              <img className={U.profilePic} src={user.picture.length > 0 ? user.picture : defaultPic} alt={user.name} />
             </div>
             <div className={U.nameContainer}>
               <h3 className={U.name}>{user.name}</h3>

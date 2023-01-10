@@ -11,6 +11,11 @@
   overflow: hidden;
   width: fit-content;
 }
+.profilePic{
+  width: 100px;
+  height: 100px;
+}
+
 .authContainer {
   display: flex;
   align-items: center;
