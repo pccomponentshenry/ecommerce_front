@@ -29,7 +29,7 @@ export default function Purchases() {
     <div>
       {isLoading ? <div>Loading...</div> : purchases.length ? purchases.map(p => (
         <div className={P.orderBox} key={p.id}>
-          <h4>
+          <h4 className={P.orderNumber}>
             Order PE000{p.id}
           </h4>
           <span className={`${p.status === "completed" ? P.completed : {}} ${p.status === "cancelled" ? P.cancelled : {}}`}>

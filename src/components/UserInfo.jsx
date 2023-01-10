@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
 import { capitalizeEachLetter } from "../utils/functions";
 import { Link } from "react-router-dom";
-import Loader from "../Images/loader.gif"
+import Loader from "../Images/loader.gif";
+import defaultPic from "../Images/admin_pic.png"
 
 export default function UserInfo({
   form,
@@ -41,7 +42,7 @@ export default function UserInfo({
         <div className={U.container}>
           <div className={U.authContainer}>
             <div className={U.imgContainer}>
-              <img src={user.picture} alt={user.name} />
+              <img src={user.picture.length > 0 ? user.picture : defaultPic} alt={user.name} />
             </div>
             <div className={U.nameContainer}>
               <h3 className={U.name}>{user.name}</h3>

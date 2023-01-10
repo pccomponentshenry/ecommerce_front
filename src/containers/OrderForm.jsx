@@ -261,7 +261,7 @@ export default function OrderForm() {
               <span className={O.errorZipCode}>{error.zipCode}</span>
             )}
             <div className={O.location}>
-              <select
+              <select className={O.formContainerSelect}
                 name="location"
                 id="location"
                 onChange={e => {

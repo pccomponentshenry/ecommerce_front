@@ -40,13 +40,19 @@
 
 .btnCont {
   position: absolute;
-  right: 60px;
+  right: 40px;
   font-size: 26px;
   z-index: 600;
 }
 
 .btnCont img {
   height: 18px;
+  position: relative;
+  width: 100%;
+  transition: 0.2s;
+}
+.btnCont img:hover {
+  height: 22px;
   position: relative;
   width: 100%;
 }
