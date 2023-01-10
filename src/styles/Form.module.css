@@ -27,7 +27,16 @@
 .prevImage {
   width: 100%;
 }
-
+.closeIcon {
+  height: 20px;
+  position: absolute;
+  background-color: #000522;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 3px;
+  margin-left: 10px;
+  cursor: pointer;
+}
 .containerUpdate h5 {
   color: #fff;
   font-size: 16px;

@@ -18,6 +18,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 import upload from "../Images/upload.png";
+import close from "../Images/cross.png";
 
 export default function Form() {
   const dispatch = useDispatch();
@@ -184,7 +185,6 @@ export default function Form() {
         });
       });
     });
-    console.log(allImages);
   };
 
   const loadImage = async e => {
@@ -199,7 +199,6 @@ export default function Form() {
       });
       getImages();
     }
-    console.log(allImages);
   };
 
   useEffect(() => {
@@ -293,13 +292,20 @@ export default function Form() {
               </div>
               {input.img.length > 0 &&
                 input.img.map((el, i) => (
-                  <div className={F.loadedImage}>
+                  <div key={i}>
                     <img
-                      key={i}
                       value={i}
-                      src={el}
+                      src={close}
+                      alt=""
                       onClick={e => handleDeleteImage(e)}
+                      className={F.closeIcon}
                     />
+                    <div className={F.loadedImage}>
+                      <a href={el} target="_blank" rel="noreferrer">
+                        {" "}
+                        <img src={el} />
+                      </a>
+                    </div>
                   </div>
                 ))}
               {error.img && <span className={F.imgError}>{error.img}</span>}
