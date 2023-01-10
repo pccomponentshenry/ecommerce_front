@@ -23,13 +23,17 @@ export default function DetailInfo({ handleAddToCart }) {
 
   useEffect(() => {
     if (favs && product) {
-      favs.find(fav => fav.id === product.id) ? setActive(true) : setActive(false);
+      favs.find(fav => fav.id === product.id)
+        ? setActive(true)
+        : setActive(false);
     }
-  }, [favs, product])
+  }, [favs, product]);
 
   const handleAddToFav = () => {
     dispatch(updateFavs(product, user.id));
-    favs.find(fav => fav.id === product.id) ? setActive(true) : setActive(false);
+    favs.find(fav => fav.id === product.id)
+      ? setActive(true)
+      : setActive(false);
   };
 
   return (
@@ -64,8 +68,8 @@ export default function DetailInfo({ handleAddToCart }) {
                     stars >= ratingValue
                       ? D.fullStar
                       : Math.ceil(stars) >= ratingValue
-                        ? D.halfStar
-                        : D.emptyStar
+                      ? D.halfStar
+                      : D.emptyStar
                   }
                 >
                   ★
@@ -84,8 +88,9 @@ export default function DetailInfo({ handleAddToCart }) {
           </div>
         )}
         {user.isAdmin === "true" ? (
-           ""
-        ) : <div className={D.btnCont}>
+          ""
+        ) : (
+          <div className={D.btnCont}>
             <button onClick={handleAddToCart}>Add to cart</button>
             <span
               className={active === true ? D.active : D.fav}
@@ -93,31 +98,8 @@ export default function DetailInfo({ handleAddToCart }) {
             >
               ❤
             </span>
-          </div>};
-
-        {/* <div className={D.owner}>
-          <div className={D.ProfilePicCont}>
-            <img src={profilePic} alt="" className={D.profilePic} />
           </div>
-          <div className={D.ownerText}>
-            <h2>Seller</h2>
-            <h3>{product?.user?.username}</h3>
-          </div>
-          {/* <Link to="/user/1" style={{ textDecoration: "none", color: "white" }}>
-            <div className={D.ownerText}>
-              <h3>{product?.user?.username}</h3>
-              <p>See the seller's profile</p>
-            </div>
-          </Link> */}
-        {/* </div> */}
-        {/* {product.user === user.id ? (
-          <div className={D.editBtn}>
-            <button>update</button>
-            <button>delete</button>
-          </div>
-        ) : (
-          <></>
-        )} */}
+        )}
       </div>
     </div>
   );
