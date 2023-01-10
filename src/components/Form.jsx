@@ -155,7 +155,11 @@ export default function Form() {
     deleteObject(imgRef)
       .then(() => {
         setInput({ ...input, img: removed });
-        console.log(input.img);
+        setAllImages(allImages.filter(el => el !== allImages[val]));
+        console.log(allImages);
+        if (input.img === 0) {
+          setAllImages([]);
+        }
       })
       .catch(error => {
         alert(error);
@@ -180,6 +184,7 @@ export default function Form() {
         });
       });
     });
+    console.log(allImages);
   };
 
   const loadImage = async e => {
@@ -194,6 +199,7 @@ export default function Form() {
       });
       getImages();
     }
+    console.log(allImages);
   };
 
   useEffect(() => {
@@ -268,7 +274,6 @@ export default function Form() {
           <div className={F.container}>
             <div className={F.loadedImagesContainer}>
               <div className={F.uploadContainer}>
-                <img src={upload} alt="" className={F.upload} />
                 <input
                   type="file"
                   name="uploadfile"
@@ -282,6 +287,7 @@ export default function Form() {
                 />
 
                 <label className={F.inputCont} htmlFor="img">
+                  <img src={upload} alt="" className={F.upload} />
                   Upload an image
                 </label>
               </div>
