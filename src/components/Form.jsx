@@ -97,7 +97,7 @@ export default function Form() {
     if (!input.description || input.description === "") {
       errors.description = "*A description is required";
     }
-    if (!input.img) {
+    if (!input.img.length > 0) {
       errors.img = "*You must upload at least one image ";
     }
 
@@ -266,25 +266,38 @@ export default function Form() {
           </div>
 
           <div className={F.container}>
-            <div className={F.uploadContainer}>
-              <img src={upload} alt="" className={F.upload} />
-              <input
-                type="file"
-                name="uploadfile"
-                multiple="multiple"
-                id="img"
-                style={{ display: "none" }}
-                onChange={e => {
-                  setImage(e.target.files[0]);
-                  setAllImages(allImages.concat(e.target.files[0]));
-                }}
-              />
+            <div className={F.loadedImagesContainer}>
+              <div className={F.uploadContainer}>
+                <img src={upload} alt="" className={F.upload} />
+                <input
+                  type="file"
+                  name="uploadfile"
+                  multiple="multiple"
+                  id="img"
+                  style={{ display: "none" }}
+                  onChange={e => {
+                    setImage(e.target.files[0]);
+                    setAllImages(allImages.concat(e.target.files[0]));
+                  }}
+                />
 
-              <label className={F.inputCont} htmlFor="img">
-                Upload an image
-              </label>
+                <label className={F.inputCont} htmlFor="img">
+                  Upload an image
+                </label>
+              </div>
+              {input.img.length > 0 &&
+                input.img.map((el, i) => (
+                  <div className={F.loadedImage}>
+                    <img
+                      key={i}
+                      value={i}
+                      src={el}
+                      onClick={e => handleDeleteImage(e)}
+                    />
+                  </div>
+                ))}
+              {error.img && <span className={F.imgError}>{error.img}</span>}
             </div>
-            {error.img && <span className={F.imgError}>{error.img}</span>}
           </div>
 
           <div className={F.formContainer}>
@@ -410,32 +423,19 @@ export default function Form() {
                 </div>
               </div>
             </div>
-            <div className={F.formBtn}>
-              <button
-                type="submit"
-                className={disable === false ? F.activeBtn : F.disabledBtn}
-                onClick={e => {
-                  disable && e.preventDefault();
-                }}
-              >
-                Publish product
-              </button>
-            </div>
+          </div>
+          <div className={F.formBtn}>
+            <button
+              type="submit"
+              className={disable === false ? F.activeBtn : F.disabledBtn}
+              onClick={e => {
+                disable && e.preventDefault();
+              }}
+            >
+              Publish product
+            </button>
           </div>
         </form>
-        <div className={F.loadedImagesContainer}>
-          {input.img.length > 0 &&
-            input.img.map((el, i) => (
-              <div className={F.loadedImage}>
-                <img
-                  key={i}
-                  value={i}
-                  src={el}
-                  onClick={e => handleDeleteImage(e)}
-                />
-              </div>
-            ))}
-        </div>
       </div>
     </>
   );
