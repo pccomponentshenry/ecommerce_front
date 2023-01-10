@@ -7,7 +7,6 @@
 
 .container {
   display: flex;
-  background-color: #2e2e2e;
   height: 30px;
   top: 0px;
   z-index: 300;

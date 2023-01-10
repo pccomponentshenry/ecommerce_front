@@ -263,6 +263,14 @@ input::-webkit-inner-spin-button {
 }
 
 /* PRICE */
+
+/* STATUS ONLY ADMIN */
+.statusSelect{
+  top: 0px;
+  border: solid 1px #2bfab7;
+  border-radius: 10px;
+}
+
 /* CATEGORY */
 
 .category {

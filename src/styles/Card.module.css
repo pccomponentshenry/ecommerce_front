@@ -5,7 +5,9 @@
   display: flex;
   flex-direction: column;
 }
-
+a {
+text-decoration: none;  
+}
 .imgContainer {
   background-color: white;
   width: 230px;
@@ -16,6 +18,36 @@
   border: solid 3px #2bfab7;
   border-radius: 10px 10px 0px 0px;
   overflow: hidden;
+}
+
+.contEdit {
+  position: relative;
+  z-index: 1;
+  top: -60px;
+  right: -170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #bebebe;
+  transition: background-color  0.2s ease-in-out;
+}
+.contEdit:hover {
+    background-color: #ad00b3;
+    color: #fff;
+}
+
+.imageEdit {
+  height: fit-content;
+  width: 120px;
+  cursor: pointer;
+  margin-right: 50px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .image {
