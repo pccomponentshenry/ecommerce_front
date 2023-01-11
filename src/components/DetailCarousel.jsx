@@ -2,6 +2,7 @@ import Carousel from "react-bootstrap/Carousel";
 import D from "../styles/DetailCarousel.module.css";
 
 function UncontrolledExample(props) {
+  console.log(props.img);
   return (
     <div className={D.CarouselCont}>
       <Carousel variant="dark">

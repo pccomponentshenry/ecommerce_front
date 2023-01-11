@@ -351,6 +351,7 @@ select {
   bottom: 30px;
   left: 50px;
 }
+
 .disabledBtn {
   background: #272727;
   border: solid 1px #555;
@@ -501,80 +502,137 @@ select {
 }
 
 @media screen and (max-width: 500px) {
-  .container {
-    position: relative;
-    top: 160px;
-    left: 0px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .container h5 {
-    display: none;
-  }
   .titleCont {
-    position: relative;
-    top: 130px;
-    padding: 0;
-    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    top: 0vh;
+    position: absolute;
+    left: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: hidden;
+  }
+  .title {
+    display: inline;
+    font-weight: 600;
+    margin-left: 0px;
+    font-size: 12px;
+  }
+  .titleCont h5 {
+    font-size: 12px;
   }
   .formContainer {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 10px;
+    border-radius: 10px;
     height: fit-content;
+    width: 100%;
+    left: 0px;
+    top: 20px;
+    overflow: hidden;
+  }
+  .container,
+  .loadedImagesContainer,
+  .uploadContainer,
+  .formContainer,
+  .form {
+    overflow: hidden;
+  }
+  .form {
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 110vh;
+    position: relative;
+    top: 70px;
+    overflow: hidden;
+  }
+  .name {
+    display: flex;
+    flex-direction: column;
+  }
+  .name input {
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+    margin-top: 10px;
+  }
+
+  .loadedImagesContainer {
+    flex-wrap: wrap;
+    height: fit-content;
+    width: 92%;
+    bottom: 0px;
+    margin-top: 20px;
+    left: 0px;
+    left: 15px;
+    margin-top: 60px;
+    position: relative;
+    height: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .uploadContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    top: 170px;
-  }
-  .name {
-    left: 0px;
-  }
-  .name input {
-    margin-top: 10px;
-    margin-left: -3px;
-  }
-  .brandAndCatContainer {
-    width: 100%;
-  }
-  .category {
-    width: 100px;
-    left: 20px;
-    margin-left: 10px;
     height: 100px;
-    overflow: hidden;
-  }
-  .errorStock {
-    height: 100px;
-    overflow: hidden;
-    line-height: 100%;
-    margin-top: 5px;
-  }
-
-  .brand {
     width: 100px;
+    z-index: 1;
+    border: dashed 1px #2bfab87c;
+    background-color: #2bfab80a;
+    padding: 0px;
+    border-radius: 5px;
     margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  .loadedImage {
+    width: 10px;
     height: 100px;
-  }
-
-  .description {
-    margin-bottom: 20px;
-    margin-top: 0px;
-    height: 110px;
-    position: relative;
-  }
-  .description textarea {
-    height: 60px;
-    background-color: transparent;
-    border: solid 1px #2bfab7;
-    border-radius: 10px;
-    color: #fff;
-    padding: 10px;
-    padding-top: 5px;
-    font-weight: 200;
+    width: 100px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .formBtn {
+    position: relative;
+    bottom: 0px;
+    left: 10px;
+    top: 30px;
+    padding-bottom: 30px;
+    width: 90%;
+  }
+  .inputCont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 120px;
+    text-align: center;
+    width: 100%;
+    margin-left: 10px;
+  }
+  .stock,
+  .price {
+    width: 50%;
+  }
+  .stock input,
+  .price input {
+    width: 80%;
+    height: 20px;
+    margin-left: 0px;
+    position: relative;
+    bottom: 5px;
+    border: solid 1px #2bfab87c;
+    background-color: #2bfab80a;
   }
 }

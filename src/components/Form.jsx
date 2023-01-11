@@ -167,6 +167,30 @@ export default function Form() {
       });
   };
 
+  const clearStorage = () => {
+    const imageListRef = ref(
+      storage,
+      `${user.id}/${productsForSale.length + 1}`
+    );
+
+    listAll(imageListRef).then(response => {
+      for (let i = 0; i < response.items.length; i++) {
+        const imgRef = ref(storage, `${response.items[i]._location.path_}`);
+        deleteObject(imgRef)
+          .then(() => {
+            console.log("borrado");
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    });
+  };
+
+  useEffect(() => {
+    clearStorage();
+  }, []);
+
   const getImages = () => {
     const imageListRef = ref(
       storage,
@@ -265,9 +289,7 @@ export default function Form() {
         <form onSubmit={e => handleSubmit(e)} autoComplete="off">
           <div className={F.titleCont}>
             <h5 className={F.title}>New product</h5>
-            <h5 className={F.subtitle}>
-              | Publish and get your money instantly
-            </h5>
+            <h5 className={F.subtitle}>| Publish and get money fast!</h5>
           </div>
 
           <div className={F.container}>

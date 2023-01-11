@@ -68,7 +68,7 @@ export default function Detail() {
         <img src={back} alt="" />
       </div>
       <div className={D.imageContainer}>
-        <Carousel img={imgs} />
+        <Carousel img={product.img} />
       </div>
       <div className={D.infoContainer}>
         <DetailInfo handleAddToCart={handleAddToCart} />
