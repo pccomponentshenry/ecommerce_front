@@ -261,6 +261,13 @@ input::-webkit-inner-spin-button {
 }
 
 /* PRICE */
+
+.statusSelect{
+  top: 0px;
+  border: solid 1px #2bfab7;
+  border-radius: 10px;
+}
+
 /* CATEGORY */
 
 .category {

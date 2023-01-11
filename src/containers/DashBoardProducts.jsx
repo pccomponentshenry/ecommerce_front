@@ -26,8 +26,8 @@ export default function DashBoardProducts() {
               <th>ID</th>
               <th>IMAGE</th>
               <th>NAME</th>
-              <th>CATEGORY</th>
               <th>STOCK</th>
+              <th>CATEGORY</th>
               <th>PRICE</th>    
               <th>STATUS</th>          
               <th>ACTIONS</th>
