@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import U from "../styles/UserInfo.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
 import { capitalizeEachLetter } from "../utils/functions";
-import { getUsers } from "../redux/actions";
 import { Link } from "react-router-dom";
+import Loader from "../Images/loader.gif"
+import defaultPic from "../Images/admin_pic.png"
 
 export default function UserInfo({
   form,
@@ -15,19 +16,19 @@ export default function UserInfo({
   handleShowAddresses,
   handleReset,
 }) {
-
   const { isLoading, user } = useAuth0();
   const allAddresses = useSelector(state => state.addresses);
   const defaultAddress = allAddresses.find(el => el.isDefault === true);
-  const users = useSelector(state => state.users);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch || ""]);
+  const users = useSelector(state => state.user);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className={U.container}>
+      <div className={U.authContainer}>
+        <div className={U.imgContainer}>
+          <img className={U.loaderGif} src={Loader} />
+        </div>
+      </div>
+    </div>;
   }
   return (
     <>
@@ -41,19 +42,19 @@ export default function UserInfo({
         <div className={U.container}>
           <div className={U.authContainer}>
             <div className={U.imgContainer}>
-              <img src={user.picture} alt={user.name} />
+              <img className={U.profilePic} src={user.picture.length > 0 ? user.picture : defaultPic} alt={user.name} />
             </div>
             <div className={U.nameContainer}>
               <h3 className={U.name}>{user.name}</h3>
               <h3 className={U.email}>{user.email}</h3>
               <h3 className={U.email}>
                 Category:{" "}
-                {users[users.findIndex(e => e.email === user.email)].isAdmin ===
+                {users.isAdmin ===
                   "true"
                   ? "Admin"
                   : "User"}
               </h3>
-              {users[users.findIndex(e => e.email === user.email)].isAdmin ===
+              {users.isAdmin ===
                 "true" ? (
                 <Link className={U.Link} to="/dashboard/">
                   <div className={U.DashBoardButton}>
