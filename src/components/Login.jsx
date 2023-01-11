@@ -8,9 +8,9 @@ export const LoginButton = props => {
     <>
     <div className={L.containerLog}>
       <div className={L.inner}>
-      <button className={L.loginBtn} onClick={() => loginWithRedirect()}>
+      <div className={L.loginBtn} onClick={() => loginWithRedirect()}>
         Login
-      </button>
+      </div>
       </div>
       </div>
     </>

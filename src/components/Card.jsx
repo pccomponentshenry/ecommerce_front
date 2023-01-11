@@ -11,6 +11,7 @@ import { MdMode } from "react-icons/md";
 function CardComponent(props) {
   const favs = useSelector(state => state.favs);
   const loggedUser = useSelector(state => state.user);
+  const isDarkMode = useSelector(state => state.isDarkMode);
   const { isAuthenticated, user } = useAuth0();
   const [active, setActive] = useState();
 
@@ -64,11 +65,11 @@ function CardComponent(props) {
       }
     });
   };
-
+  
   return (
     <>
       {loggedUser.isAdmin === "true" ? (
-        <div className={C.cardContainer}>
+          <div className={isDarkMode === true ? C.cardContainer : C.cardContainerLight}>
           <div className={C.imgContainer}>
             <Link to={`/update/${props.id}`}><div className={C.contEdit}>
               <MdMode size="2em" />
@@ -91,7 +92,7 @@ function CardComponent(props) {
           </Link>
         </div>) :
         (
-          <div className={C.cardContainer}>
+          <div className={isDarkMode === true ? C.cardContainer : C.cardContainerLight}>
             <div className={C.imgContainer}>
               <Link to={`/detail/${props.id}`}>
                 <img src={props.img} alt="" className={C.image} />
@@ -105,9 +106,9 @@ function CardComponent(props) {
               <div className={C.bottomCont}>
                 <h6 className={C.price}>$ {props.price}</h6>
                 <div className={C.btnAndFav}>
-                  <button className={C.cardBtn} onClick={handleAddToCart}>
+                  <div className={C.cardBtn} onClick={handleAddToCart}>
                     Add to cart
-                  </button>
+                  </div>
                   <span
                     className={active ? C.active : C.fav}
                     onClick={handleAddToFav}

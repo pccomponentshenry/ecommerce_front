@@ -83,7 +83,7 @@ export default function SideMenu({ name, setName }) {
           <div className={S.filterContainer}>
             <hr />
             <div className={S.selectCont}>
-              <h6 className={S.filterByTitle}>Filter by:</h6>
+              <h5 className={S.filterByTitle}>Filter by:</h5>
               <div className={S.select}>
                 <select
                   className={S.category}
@@ -128,7 +128,7 @@ export default function SideMenu({ name, setName }) {
             </div>
             <div className={S.order}>
               <hr />
-              <h6 className={S.orderPriceTitle}>Order by price</h6>
+              <h5 className={S.orderPriceTitle}>Order by price</h5>
               <button id="desc" onClick={handleSort}>
                 Higher
               </button>
@@ -139,7 +139,7 @@ export default function SideMenu({ name, setName }) {
 
             <div className={S.sharedInput}>
               <hr />
-              <h6 className={S.label}>Price range</h6>
+              <h5 className={S.label}>Price range</h5>
               <input
                 key="min_price"
                 id="min"

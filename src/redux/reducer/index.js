@@ -38,6 +38,7 @@ import {
   GET_ALL_ORDERS,
   GET_DETAIL_PURCHASES,
   PUT_USER,
+  DARK_MODE,
 } from "../actions/actionNames";
 
 const initialState = {
@@ -59,6 +60,7 @@ const initialState = {
   address: [],
   purchases: [],
   fromStripe: true,
+  isDarkMode: true,
   allOrders: [],
   allOrdersOneByOne: [],
   detailsOrders: [],
@@ -412,6 +414,9 @@ function rootReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
+    }
+    case DARK_MODE: {
+      return { ...state, isDarkMode: action.payload };
     }
 
     default:

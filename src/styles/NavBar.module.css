@@ -165,7 +165,7 @@ hr {
   position: relative;
   top: 50px;
   border: none;
-  border: solid 1px #fff;
+  border: solid 1px;
 }
 .logo {
   height: 120px;
