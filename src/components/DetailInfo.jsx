@@ -23,13 +23,17 @@ export default function DetailInfo({ handleAddToCart }) {
 
   useEffect(() => {
     if (favs && product) {
-      favs.find(fav => fav.id === product.id) ? setActive(true) : setActive(false);
+      favs.find(fav => fav.id === product.id)
+        ? setActive(true)
+        : setActive(false);
     }
-  }, [favs, product])
+  }, [favs, product]);
 
   const handleAddToFav = () => {
     dispatch(updateFavs(product, user.id));
-    favs.find(fav => fav.id === product.id) ? setActive(true) : setActive(false);
+    favs.find(fav => fav.id === product.id)
+      ? setActive(true)
+      : setActive(false);
   };
 
   return (
@@ -64,8 +68,8 @@ export default function DetailInfo({ handleAddToCart }) {
                     stars >= ratingValue
                       ? D.fullStar
                       : Math.ceil(stars) >= ratingValue
-                        ? D.halfStar
-                        : D.emptyStar
+                      ? D.halfStar
+                      : D.emptyStar
                   }
                 >
                   ★
@@ -84,16 +88,18 @@ export default function DetailInfo({ handleAddToCart }) {
           </div>
         )}
         {user.isAdmin === "true" ? (
-           ""
-        ) : <div className={D.btnCont}>
+          ""
+        ) : (
+          <div className={D.btnCont}>
             <button onClick={handleAddToCart}>Add to cart</button>
             <span
               className={active === true ? D.active : D.fav}
               onClick={handleAddToFav}
             >
-              ❤
+              ♥
             </span>
-          </div>};
+          </div>
+        )}
 
         {/* <div className={D.owner}>
           <div className={D.ProfilePicCont}>

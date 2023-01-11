@@ -25,6 +25,7 @@
 }
 
 .paginate li {
+  color: white;
   font-weight: 400;
   cursor: pointer;
   border: solid 1px #555;
@@ -42,6 +43,7 @@
 }
 
 .previousNext a {
+  color: white;
   text-decoration: none;
   font-weight: 200;
 }
@@ -86,6 +88,7 @@
 
   .paginate li {
     font-size: 12px;
+    color: white;
     font-weight: 400;
     cursor: pointer;
     border: none;
@@ -103,6 +106,7 @@
   }
 
   .previousNext a {
+    color: white;
     text-decoration: none;
     font-weight: 200;
   }

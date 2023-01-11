@@ -81,12 +81,10 @@ export default function SideMenu({ name, setName }) {
       <div className={S.subContainer}>
         <div className={S.categoryContainer}>
           <div className={S.filterContainer}>
-            <hr />
             <div className={S.selectCont}>
               <h5 className={S.filterByTitle}>Filter by:</h5>
               <div className={S.select}>
                 <select
-                  className={S.category}
                   name="Filter"
                   id="cat"
                   defaultValue={"default"}
@@ -127,18 +125,18 @@ export default function SideMenu({ name, setName }) {
               </div>
             </div>
             <div className={S.order}>
-              <hr />
               <h5 className={S.orderPriceTitle}>Order by price</h5>
-              <button id="desc" onClick={handleSort}>
-                Higher
-              </button>
-              <button id="asc" onClick={handleSort}>
-                Lower
-              </button>
+              <div className={S.btnCont}>
+                <button id="desc" onClick={handleSort}>
+                  Higher
+                </button>
+                <button id="asc" onClick={handleSort}>
+                  Lower
+                </button>
+              </div>
             </div>
 
             <div className={S.sharedInput}>
-              <hr />
               <h5 className={S.label}>Price range</h5>
               <input
                 key="min_price"
@@ -158,9 +156,7 @@ export default function SideMenu({ name, setName }) {
                 onBlur={handlePriceChange}
                 className={`${S.inputSmall} ${S.inputRight}`}
               />
-              <button className={S.button} onClick={handlePriceSubmit}>
-                ➜
-              </button>
+              <button onClick={handlePriceSubmit}>➜</button>
               {priceError && <span>{priceError}</span>}
             </div>
             <div className={S.clearFilters}>

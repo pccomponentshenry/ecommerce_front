@@ -12,7 +12,6 @@ import { setDarkMode } from "../redux/actions";
 
 import N from "../styles/NavBar.module.css";
 
-
 export default function Nav() {
   const [nav, setNav] = useState(false);
   const [activeNav, setActiveNav] = useState(false);
@@ -22,29 +21,28 @@ export default function Nav() {
   const loggedUser = useSelector(state => state.user);
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
   const dispatch = useDispatch();
- 
 
-
-function toggleDarkMode(){
-  if (isDarkMode){
-    //Change to dark
-    document.body.className="lightmode"
-   
-  } else {
-    //Change to light
-    document.body.className="darkmode"
+  function toggleDarkMode() {
+    if (isDarkMode) {
+      //Change to dark
+      document.body.className = "lightmode";
+    } else {
+      //Change to light
+      document.body.className = "darkmode";
+    }
+    dispatch(setDarkMode(!isDarkMode));
   }
-  dispatch(setDarkMode(!isDarkMode))
-
-}
   // buttonDark.addEventListener("click", toggleDarkMode);
 
   return (
     <>
-      {loggedUser.status === "banned" ? <></> :
+      {loggedUser.status === "banned" ? (
+        <></>
+      ) : (
         <div
-          className={`${activeNav === true ? N.container : N.containerSmall} ${nav ? N.active : N.container
-            }`}
+          className={`${activeNav === true ? N.container : N.containerSmall} ${
+            nav ? N.active : N.container
+          }`}
         >
           <div
             className={N.menuCont}
@@ -66,7 +64,11 @@ function toggleDarkMode(){
             </Link>
             <ul className={N.notResponsiveNav}>
               <Link to="/sell" style={{ textDecoration: "none" }}>
-                {isAuthenticated && loggedUser.status !== "banned" ? <li>Sell</li> : <></>}
+                {isAuthenticated && loggedUser.status !== "banned" ? (
+                  <li>Sell</li>
+                ) : (
+                  <></>
+                )}
               </Link>
               <Link to="/favorites" style={{ textDecoration: "none" }}>
                 <li>Favorites</li>
@@ -124,9 +126,9 @@ function toggleDarkMode(){
               alt=""
               className={N.mode}
             />
-
           </div>
-        </div>}
+        </div>
+      )}
 
       {/* </div> */}
     </>

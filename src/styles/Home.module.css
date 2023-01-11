@@ -6,7 +6,7 @@
 
 /* SEARCHBAR */
 .searchBarCont {
-  width: 100%;
+  width: 100vw;
   height: 40px;
   position: relative;
   background-color: rgb(87, 0, 99);
@@ -17,7 +17,7 @@
   border-radius: 20px;
   position: absolute;
   top: 5px;
-  right: 160px;
+  right: 100px;
   height: 30px;
   overflow: hidden;
 }
