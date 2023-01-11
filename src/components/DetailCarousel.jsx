@@ -6,7 +6,7 @@ function UncontrolledExample(props) {
   return (
     <div className={D.CarouselCont}>
       <Carousel variant="dark">
-        {props.img.length > 0 &&
+        {props.img &&
           props.img.map((el, i) => (
             <Carousel.Item key={i}>
               <div className={D.imgCont}>
