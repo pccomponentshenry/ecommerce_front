@@ -40,6 +40,9 @@ export default function Form() {
     userId: user.id,
   };
 
+  const statusProd = ['active', 'inactive', 'banned', 'deleted']
+
+
   useEffect(() => {
     dispatch(getProductDetail(params.id));
   }, [dispatch]);
@@ -348,6 +351,29 @@ export default function Form() {
                 {error.price && <span>{error.price}</span>}
               </div>
             </div>
+
+            {user.isAdmin === "true" ? (
+          <div>
+                <select className={F.statusSelect}
+                  name="status"
+                  value={input.status}
+                  id="Status"
+                  onBlur={e => {
+                    handleChange(e);
+                  }}
+                  onChange={e => {
+                    handleChange(e);
+                  }}
+                >
+                  <option defaultValue={"DEFAULT"}>Status</option>
+                  {statusProd.map((el, i) => (
+                    <option key={i}>{el}</option>
+                  ))}
+                </select>
+              </div>
+              ) : ""}
+
+
           </div>
           <div className={F.formBtn}>
             <button
