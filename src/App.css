@@ -1,9 +1,33 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: rgb(216, 123, 2);
+  background: rgb(39, 39, 39);
+  background: radial-gradient(
+    circle,
+    rgba(39, 39, 39, 1) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  height: 100vh;
 }
+.darkmode {
+  background: rgb(39, 39, 39);
+  background: radial-gradient(
+    circle,
+    rgba(39, 39, 39, 1) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  height: 100vh;
+}
+.lightkmode {
+  background: rgb(202, 202, 202);
+  background: radial-gradient(
+    circle,
+    rgb(226, 226, 226) 0%,
+    rgb(48, 48, 48) 100%
+  );
+  height: 100vh;
+}
+
 * {
   margin: 0;
   padding: 0;
