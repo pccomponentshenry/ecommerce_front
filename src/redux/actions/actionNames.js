@@ -53,4 +53,6 @@ export const POST_REVIEW = "POST_REVIEW";
 export const GET_TOTAL_ORDERS = "GET_TOTAL_ORDERS";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_DETAIL_PURCHASES = "GET_DETAIL_PURCHASES";
-export const PUT_USER = "PUT_USER,";
+export const PUT_USER = "PUT_USER";
+//action Dark/Light Theme
+export const DARK_MODE  = "DARK_MODE"

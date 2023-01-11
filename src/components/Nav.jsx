@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
 import cartImg from "../Images/cart.png";
 import menu from "../Images/menu.png";
 import mode from "../Images/mode.png";
+import { setDarkMode } from "../redux/actions";
+
 import N from "../styles/NavBar.module.css";
 
 
@@ -15,23 +17,25 @@ export default function Nav() {
   const [nav, setNav] = useState(false);
   const [activeNav, setActiveNav] = useState(false);
   const cart = useSelector(state => state.cart);
+  const isDarkMode = useSelector(state => state.isDarkMode);
   const { isAuthenticated } = useAuth0();
   const loggedUser = useSelector(state => state.user);
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const dispatch = useDispatch();
  
 
-let isDarkMode = false;
 
 function toggleDarkMode(){
-  if (!isDarkMode){
+  if (isDarkMode){
     //Change to dark
-    document.body.className="lightkmode"
+    document.body.className="lightmode"
    
   } else {
     //Change to light
-    document.body.className="darkkmode"
+    document.body.className="darkmode"
   }
-  isDarkMode = !isDarkMode;    
+  dispatch(setDarkMode(!isDarkMode))
+
 }
   // buttonDark.addEventListener("click", toggleDarkMode);
 
@@ -113,15 +117,6 @@ function toggleDarkMode(){
             <Link to="/cart">
               <img src={cartImg} className={N.cart} alt="cart icon" />
             </Link>
-
-            {/* <div id="darkmode">
-       
-        <label onClick={toggleDarkMode} htmlFor="checkbox" className="label">
-          <BsMoonStarsFill color="white" />
-          <BsFillSunFill color="yellow" />
-          <div className="ball"></div>
-        </label>
-      </div> */}
 
             <img
               src={mode}

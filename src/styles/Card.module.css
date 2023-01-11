@@ -1,13 +1,33 @@
 .cardContainer {
-  border-radius: 7px;
-  padding: 10px;
-  width: 70%;
+  width: 230px;
+  border: solid 2px #2bfab7;
   display: flex;
+  border-radius: 10px;
   flex-direction: column;
+  overflow: hidden;
 }
+.cardContainerLight {
+  width: 230px;
+  border: solid 2px #b8419e;
+  display: flex;
+  border-radius: 10px;
+  flex-direction: column;
+  overflow: hidden;
+}
+.cardContainerLight:hover {
+  width: 230px;
+  border: solid 2px #b8419e;
+  display: flex;
+  border-radius: 10px;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px -2px;
+}
+
 a {
-text-decoration: none;  
+  text-decoration: none;
 }
+
 .imgContainer {
   background-color: white;
   width: 230px;
@@ -15,7 +35,6 @@ text-decoration: none;
   align-items: center;
   display: flex;
   justify-content: center;
-  border: solid 3px #2bfab7;
   border-radius: 10px 10px 0px 0px;
   overflow: hidden;
 }
@@ -35,11 +54,12 @@ text-decoration: none;
   border-radius: 10px;
   cursor: pointer;
   background-color: #bebebe;
-  transition: background-color  0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 }
+
 .contEdit:hover {
-    background-color: #ad00b3;
-    color: #fff;
+  background-color: #ad00b3;
+  color: #fff;
 }
 
 .imageEdit {
@@ -59,7 +79,6 @@ text-decoration: none;
 
 .square {
   border-radius: 0px 0px 10px 10px;
-  border: solid 1px #2bfab7;
   border-top: none;
   padding-top: 15px;
   padding-left: 10px;
@@ -79,7 +98,6 @@ text-decoration: none;
 }
 
 .name {
-  color: #fff;
   font-weight: 600;
 }
 
@@ -90,7 +108,6 @@ text-decoration: none;
 }
 
 .brand {
-  color: #fff;
   font-weight: 200;
   font-size: 13px;
   position: relative;
@@ -101,7 +118,6 @@ text-decoration: none;
 
 .price {
   font-weight: 600;
-  color: #fff;
   position: relative;
   top: 5px;
   font-size: 14px;
@@ -110,13 +126,12 @@ text-decoration: none;
 
 .cardBtn {
   background-color: transparent;
-  border: solid 1px #fff;
+  border: solid 1px;
   border-radius: 20px;
-  color: #fff;
   width: 95px;
   font-size: 12px;
   font-weight: 600;
-  padding: none;
+  text-align: center;
   position: relative;
   top: 5px;
 }

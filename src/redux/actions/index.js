@@ -40,7 +40,9 @@ import {
   GET_TOTAL_ORDERS,
   GET_ALL_ORDERS,
   GET_DETAIL_PURCHASES,
+  DARK_MODE,
 } from "../actions/actionNames";
+import { actionsSelector } from "react-dedux/src/actions";
 
 const URL = "http://localhost:3001";
 // const URL = "https://playexpertback-production.up.railway.app";
@@ -469,3 +471,6 @@ export function putUser(id, payload) {
     return dispatch({ type: PUT_USER, payload: res.data });
   };
 }
+export const setDarkMode = (payload) => dispatch => {
+  return dispatch({ type: DARK_MODE, payload });
+};
