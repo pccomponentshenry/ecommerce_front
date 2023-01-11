@@ -1,51 +1,41 @@
-import C from "../styles/HorizontalCard.module.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { addToCart, addToFav, postCartItem } from "../redux/actions";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { addToCart, updateFavs, postCartItem } from "../redux/actions";
+import C from "../styles/HorizontalCard.module.css";
 
 function HorizontalCard(props) {
-  const { isAuthenticated, user } = useAuth0();
-  const fav = localStorage.getItem(props.id)
-    ? JSON.parse(localStorage.getItem(props.id))
-    : [];
 
-  const [active, setActive] = useState(fav);
-  // const [clicked, setClicked] = useState(false);
+  const user = useSelector(state => state.user);
+  const favs = useSelector(state => state.favs);
+  const [active, setActive] = useState(favs);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
-    if (isAuthenticated) {
-      const post = { id: props.id, quantity: 1, email: user.email, add: true };
-      dispatch(postCartItem(post));
-    }
-    else {
-
-      dispatch(addToCart(props.product, isAuthenticated));
-    }
+    const post = { id: props.id, quantity: 1, email: user.email, add: true };
+    dispatch(postCartItem(post));
     successAlert();
   };
 
-  React.useEffect(() => {
-    setActive(fav);
-  }, [props.clicked]);
+  useEffect(() => {
+    if (favs) {
+      favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
+    }
+  }, [favs])
 
   const handleAddToFav = () => {
-    dispatch(addToFav(props.product));
-    successFavAlert();
-    props.setClicked(!props.clicked);
+    dispatch(updateFavs(props.product, user.id));
+    favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
   };
 
   const successAlert = () => {
     Swal.fire({
       title: "Product Added to cart!",
-      confirmButtonText: "Les't buy more products",
+      confirmButtonText: "Back to profile",
       showDenyButton: true,
-      denyButtonText: `No, Go to my Cart`,
+      denyButtonText: `Go to my Cart`,
       icon: "success",
       confirmButtonColor: "rgb(55, 172, 135)",
       denyButtonColor: "#d83dd0",
@@ -54,40 +44,33 @@ function HorizontalCard(props) {
     }).then(result => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        navigate("/");
+        // navigate("/");
       } else if (result.isDenied) {
         navigate("/cart");
       }
     });
   };
 
-  const successFavAlert = () => {
-    if (props.clickFromFav === true) {
-      props.setClicked(!props.clicked);
-    }
-  };
-
   return (
     <>
       <div className={C.cardContainer}>
-        <div className={C.imgContainer}>
-          <Link to={`/detail/${props.id}`}>
+
+        <Link to={`/detail/${props.id}`}>
+          <div className={C.imgContainer}>
             <img src={props.img} alt="" className={C.image} />
-          </Link>
-        </div>
-
-        <div className={C.nameCont}>
-          <h6 className={C.name}>{props.title}</h6>
-          <h6 className={C.brand}>{props.brand}</h6>
-        </div>
-
-        <h6 className={C.price}>$ {props.price}</h6>
+          </div>
+          <div className={C.nameCont}>
+            <h6 className={C.name}>{props.title}</h6>
+            <h6 className={C.brand}>{props.brand}</h6>
+            <h6 className={C.price}>$ {props.price}</h6>
+          </div>
+        </Link>
 
         <button className={C.cardBtn} onClick={handleAddToCart}>
           Add to cart
         </button>
         <span
-          className={active === true ? C.active : C.fav}
+          className={active ? C.active : C.fav}
           onClick={handleAddToFav}
         >
           ❤

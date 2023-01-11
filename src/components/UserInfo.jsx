@@ -15,6 +15,7 @@ export default function UserInfo({
   handleShowAddresses,
   handleReset,
 }) {
+
   const { isLoading, user } = useAuth0();
   const allAddresses = useSelector(state => state.addresses);
   const defaultAddress = allAddresses.find(el => el.isDefault === true);
@@ -48,12 +49,12 @@ export default function UserInfo({
               <h3 className={U.email}>
                 Category:{" "}
                 {users[users.findIndex(e => e.email === user.email)].isAdmin ===
-                "true"
+                  "true"
                   ? "Admin"
                   : "User"}
               </h3>
               {users[users.findIndex(e => e.email === user.email)].isAdmin ===
-              "true" ? (
+                "true" ? (
                 <Link className={U.Link} to="/dashboard/">
                   <div className={U.DashBoardButton}>
                     <button>Go to Dashboard</button>
@@ -72,9 +73,8 @@ export default function UserInfo({
             <div className={U.adressCont}>
               {defaultAddress ? (
                 <>
-                  <h3>{`${capitalizeEachLetter(defaultAddress.streetName)} ${
-                    defaultAddress.streetNumber
-                  }, ${capitalizeEachLetter(defaultAddress.apartment)}`}</h3>
+                  <h3>{`${capitalizeEachLetter(defaultAddress.streetName)} ${defaultAddress.streetNumber
+                    }, ${capitalizeEachLetter(defaultAddress.apartment)}`}</h3>
                   <h3>{`Zip Code: ${defaultAddress.zipCode}`}</h3>
                   <h3>{defaultAddress.locationName}, Argentina</h3>
                   <button className={U.addAddress} onClick={handleOpen}>

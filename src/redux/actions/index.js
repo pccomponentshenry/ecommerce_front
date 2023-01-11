@@ -15,12 +15,10 @@ import {
   REMOVE_ONE_FROM_CART,
   REMOVE_ITEM_FROM_CART,
   REMOVE_ALL_FROM_CART,
-  CLEAR_CART,
   CLEAR_ERROR,
-  ADD_TO_FAV,
+  UPDATE_FAVS,
   POST_USER,
   LOGOUT_USER,
-  POST_CART_ITEM,
   GET_REVIEWS,
   GET_PRODUCTS_FOR_SALE,
   PUT_PRODUCT,
@@ -36,13 +34,13 @@ import {
   GET_ADDRESSES,
   GET_ADDRESS,
   POST_ADDRESS,
-  UPDATE_ADDRESS,
   CHANGE_ADDRESS,
   CHANGE_DEFAULT_ADDRESS,
   DELETE_ADDRESS,
   GET_TOTAL_ORDERS,
   GET_ALL_ORDERS,
   GET_DETAIL_PURCHASES,
+  DARK_MODE,
 } from "../actions/actionNames";
 
 const URL = "http://localhost:3001";
@@ -301,33 +299,55 @@ export const setFromStripe = () => dispatch => {
 };
 
 //////////FAVORITES////////
-export const addToFav = item => dispatch => {
-  const fav = localStorage.getItem("fav")
-    ? JSON.parse(localStorage.getItem("fav"))
-    : [];
-  const favId = localStorage.getItem(item.id)
-    ? JSON.parse(localStorage.getItem(item.id))
-    : [];
-  const existingInFav = fav.find(el => el.id === item.id);
+export const updateFavs = (product, userId) => async dispatch => {
 
-  const newFav = [...fav];
-
-  let isFav = false;
-
-  if (!existingInFav) {
-    const addFavElement = { ...item };
-    newFav.push(addFavElement);
-    isFav = true;
-    localStorage.setItem(item.id, JSON.stringify(isFav));
+  if (userId) {
+    try {
+      await axios.put(`${URL}/favorites/${userId}/${product.id}`);
+      dispatch(getFavs(userId));
+    } catch (error) {
+      console.log(error);
+    }
   } else {
-    const elementIdx = fav.findIndex(el => el.id === item.id);
-    newFav.splice(elementIdx, 1);
-    isFav = false;
-    localStorage.setItem(item.id, JSON.stringify(isFav));
+    const favs = localStorage.getItem("favs")
+      ? JSON.parse(localStorage.getItem("favs"))
+      : [];
+
+    const existingElementIdx = favs.findIndex(fav => fav.id === product.id);
+
+    const newFavs = [...favs];
+
+    if (existingElementIdx !== -1) {
+      localStorage.setItem("favs", JSON.stringify(newFavs.filter(fav => fav.id !== product.id)));
+    } else {
+      newFavs.push(product);
+      localStorage.setItem("favs", JSON.stringify(newFavs));
+    }
+    dispatch({ type: UPDATE_FAVS, payload: JSON.parse(localStorage.getItem("favs")) });
   }
-  localStorage.setItem("fav", JSON.stringify(newFav));
-  dispatch({ type: ADD_TO_FAV, payload: newFav });
 };
+
+export const getFavs = userId => async dispatch => {
+  try {
+    const res = await axios.get(`${URL}/favorites/${userId}`);
+    dispatch({ type: UPDATE_FAVS, payload: res.data });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const addLSFavsToDB = (userId) => async dispatch => {
+  try {
+    const favs = JSON.parse(localStorage.getItem("favs"));
+    for (let i = 0; i < favs.length; i++) {
+      await axios.post(`${URL}/favorites/${userId}/${favs[i].id}`);
+    }
+    dispatch(getFavs(userId));
+    localStorage.removeItem("favs");
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const clearError = () => {
   return { type: CLEAR_ERROR };
@@ -450,3 +470,6 @@ export function putUser(id, payload) {
     return dispatch({ type: PUT_USER, payload: res.data });
   };
 }
+export const setDarkMode = (payload) => dispatch => {
+  return dispatch({ type: DARK_MODE, payload });
+};

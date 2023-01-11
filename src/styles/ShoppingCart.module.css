@@ -122,6 +122,7 @@
 }
 .imgCont img {
   width: 132%;
+  height: 100vh;
 }
 
 .imgCont h1 {
@@ -161,6 +162,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 .payment h3 {
   font-size: 16px;

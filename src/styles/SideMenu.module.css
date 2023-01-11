@@ -13,7 +13,6 @@
 }
 
 .Container h6 {
-  color: #2bfab7;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 400;
@@ -22,7 +21,6 @@
 }
 
 .Container span {
-  color: #fff;
   cursor: pointer;
   font-weight: 200;
   font-size: 14px;
@@ -32,36 +30,59 @@
   color: #2bfab7;
   transition: 0.15s ease-in-out;
 }
-
+.selectCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.filterContainer {
+  margin-top: 20px;
+}
+.select {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0px;
+}
 select {
   background-color: transparent;
-  color: #fff;
   border: solid 1px #272727;
   padding: 2px;
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 5px;
   font-size: 14px;
-  width: 150px;
+  width: 100%;
   position: relative;
   top: 15px;
+  margin-left: 0px !important;
 }
 
 option {
   color: #000;
 }
-
+.order {
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  margin-bottom: 15px;
+}
 .order button {
   background-color: transparent;
-  border: solid 1px #272727;
+  border: solid 1px;
   border-radius: 10px;
-  color: #fff;
   font-size: 13px;
   font-weight: 400;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   width: 70px;
 }
-
+.btnCont {
+  width: 100%;
+  justify-content: space-around;
+  display: flex;
+  margin-top: -5px;
+}
 .order button:hover {
   transition: 0.15s ease-in-out;
   border: solid 1px #2bfab7;
@@ -69,36 +90,36 @@ option {
   color: #111;
 }
 
-hr {
-  border: none;
-  border-bottom: 1px solid #fff;
-}
 .order button {
   position: relative;
   top: 10px;
+  padding-bottom: 3px;
 }
+
 .line {
   position: relative;
 }
+
 .clearFilters {
   width: 150px;
   margin-top: 20px;
 }
+
 .clearFilters button {
   background-color: transparent;
-  border: solid 1px #2bfab7;
-  color: #2bfab7;
   border-radius: 10px;
   width: 150px;
   font-size: 14px;
 }
+
 .clearFilters button:hover {
   transition: 0.15s ease-in-out;
   background-color: #2bfab7;
+  border: solid 1px #2bfab7;
   color: #272727;
 }
+
 .sharedInput {
-  color: #2bfab7;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -114,7 +135,6 @@ hr {
 }
 
 .inputSmall {
-  margin-top: 20px;
   display: inline;
   width: 30%;
   height: 25px;
@@ -130,37 +150,53 @@ hr {
   top: 2px;
   left: 15px;
   background-color: transparent;
-  color: #2bfab7;
-  border: solid 1px #2bfab7;
   height: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
+
 .sharedInput button:hover {
-  color: #fff;
   border: solid 1px #fff;
   transition: 0.15s;
 }
+
 .sharedInput input {
   background-color: transparent;
-  color: #fff;
   font-weight: 200;
-  border: solid 1px #272727;
   outline: none;
   font-size: 14px;
 }
+
 .sharedInput input::placeholder {
   font-size: 14px;
   font-weight: 200;
 }
+
 .sharedInput input:hover,
 .sharedInput button:hover {
   border: solid 1px #fff;
   transition: 0.15s ease-in-out;
-  color: #fff;
 }
-.sharedInput input::placeholder {
+
+.filterByTitle {
+  width: 100%;
+  border-bottom: solid 1px gray;
+}
+.category {
+  background-color: transparent;
+  border: solid 1px #272727;
+  padding: 2px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
   position: relative;
-  left: 5px;
 }
+.label,
+.orderPriceTitle {
+  border-bottom: solid 1px gray;
+}
+
 @media screen and (max-width: 500px) {
   .Container {
     width: 100%;
@@ -175,6 +211,7 @@ hr {
     padding-left: 20px;
     overflow: hidden;
   }
+
   .filterContainer {
     width: 90%;
     position: absolute;
@@ -184,12 +221,15 @@ hr {
     overflow: hidden;
     margin-left: -7px;
   }
+
   .filterContainer h6 {
     height: 15px;
   }
+
   .filterContainer hr {
     display: none;
   }
+
   .filterByTitle {
     font-size: 12px !important;
 
@@ -208,23 +248,27 @@ hr {
   .selectCont {
     position: relative;
     margin-top: 0px;
+    margin-bottom: 0px;
     width: 30%;
     overflow: hidden;
     padding-right: 5px;
   }
+
   .category {
     margin-top: 0px;
     font-size: 10px;
     overflow: hidden;
   }
+
   .categoryContainer {
     height: 120px;
     overflow: hidden;
   }
+
   .brand {
     position: relative;
     top: 0px;
-    margin-top: 10px;
+    margin-top: -10px;
     font-size: 10px;
     overflow: hidden;
   }
@@ -241,10 +285,20 @@ hr {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 30%;
   }
+
   .order hr {
     display: none;
+  }
+  .btnCont {
+    height: 70px;
+
+    margin-top: 0px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
   }
   .order button {
     background-color: transparent;
@@ -253,27 +307,28 @@ hr {
     color: #fff;
     font-size: 13px;
     font-weight: 400;
-    height: 20px;
     position: relative;
     display: block;
     top: 0px;
     width: 60px;
-    height: 23px;
-    font-size: 10px;
+    font-size: 14px;
   }
+
   .orderPriceTitle {
-    position: absolute;
     width: 100%;
     overflow: hidden;
-    margin-top: 0px;
+    text-align: center;
+    border: none;
     font-size: 12px !important;
   }
+
   .label {
     position: absolute;
     width: 100%;
     overflow: hidden;
     margin-top: 5px;
     font-size: 12px !important;
+    border: none;
   }
 
   .sharedInput {
@@ -286,29 +341,33 @@ hr {
     /* flex-direction: column; */
     padding-left: 5px;
   }
+
   .sharedInput hr {
     display: none;
   }
+
   .sharedInput input {
     position: absolute;
     top: 40px;
-    width: 40px;
+    width: 50px;
     height: 20px;
-    font-size: 10px;
+    font-size: 14px;
   }
+
   .sharedInput input::placeholder {
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .sharedInput button {
-    position: absolute;
-    top: 40px;
-    right: 0px;
+    /* position: absolute; */
+    /* top: 40px; */
+    /* right: 0px;*/
     margin-left: 50%;
+    margin-top: 40px;
     background-color: transparent;
-    color: #2bfab7;
-    border: solid 1px #2bfab7;
     height: 50px;
+    padding-right: 15px;
+    text-align: center;
     width: 20px;
     font-size: 12px;
   }
@@ -318,6 +377,7 @@ hr {
     margin-top: 30px;
     margin-left: 0px;
   }
+
   .inputLeft {
     margin-top: 0px;
   }
@@ -331,18 +391,20 @@ hr {
     justify-content: center;
     display: none;
   }
+
   .clearFilters button {
     background-color: transparent;
-    border: solid 1px #2bfab7;
-    color: #2bfab7;
     border-radius: 10px;
     width: 100px;
     font-size: 12px;
   }
+
   .filterByTitle {
     margin-top: 5px !important;
     margin-bottom: 3px;
+    border: none;
   }
+
   .subContainer {
     overflow: hidden;
   }

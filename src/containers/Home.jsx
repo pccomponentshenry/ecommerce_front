@@ -23,7 +23,6 @@ export default function Home() {
   const products = useSelector(state => state.products);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  console.log(user);
 
   if (user.status === "banned") {
     navigate("/banned");
@@ -71,7 +70,7 @@ export default function Home() {
                 <div className={H.searchBarCont}>
                   <div className={H.searchBar}>
                     <img className={H.searchIcon} src={search} />
-                    :
+                    
                     <input
                       type="text"
                       placeholder="Search"

@@ -122,6 +122,10 @@
   z-index: 600;
 }
 
+.authLoginText{
+  padding-top: 15px;
+}
+
 .cartNumber {
   color: #2bfab7;
   font-size: 12px;
@@ -161,7 +165,7 @@ hr {
   position: relative;
   top: 50px;
   border: none;
-  border: solid 1px #fff;
+  border: solid 1px;
 }
 .logo {
   height: 120px;

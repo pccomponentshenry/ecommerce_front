@@ -2,26 +2,15 @@ import React from "react";
 import F from "../styles/Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getBrands,
-  getCategories,
-  getProductsByUser,
-  postProduct,
-} from "../redux/actions/index";
+import { getBrands, getCategories, postProduct } from "../redux/actions/index";
 import { Link } from "react-router-dom";
-import { storage } from "../firebase/firebase";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-import { v4 } from "uuid";
-import upload from "../Images/upload.png";
 
 export default function Form() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
-  const productsForSale = useSelector(state => state.productsForSale);
   const [image, setImage] = useState([]);
-  const [imageList, setImageList] = useState([]);
   const [url, setUrl] = useState("");
   const [active, setActive] = useState(false);
   const [event, setEvent] = useState({});
@@ -133,46 +122,35 @@ export default function Form() {
     );
   };
 
+  const handleChangeImg = e => {
+    e.preventDefault();
+    const data = new FormData();
+    data.append("file", image);
+
+    data.append("upload_preset", "cqws5x8n"); // presets de cloudinary. Si querés entrar a ver la web, se accede desde el gmail del PF, con google.
+    data.append("cloud_name", "dbtekd33p"); // presets de Cloudinary
+    data.append("api_key", "226142111813437"); // idem
+    fetch("  https://api.cloudinary.com/v1_1/cqws5x8n/image/upload", {
+      //post a la ruta de cloud. cqws5x8n es el nombre de la nube de la cuenta nuestra
+      method: "post",
+      body: data,
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        setUrl(data.url); //Revisar por qué no se agregan más de una. En algúna llamada de función Onchange en el html habré puesto (e.target.files[0] y por ahí es eso)
+        setInput({ ...input, img: data.url }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
+      })
+      .catch(err => console.log(err));
+  };
+
   const handleChange = e => {
     setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleDeleteImage = e => {
-    //  const imageRef = ref(storage, 'images/desert.jpg');
-    console.log(e);
-  };
-
-  const getImages = () => {
-    const imageListRef = ref(
-      storage,
-      `${user.id}/${productsForSale.length + 1}`
-    );
-    listAll(imageListRef).then(response => {
-      response.items.forEach(item => {
-        getDownloadURL(item).then(url => {
-          const exists = input.img.find(el => el === url);
-
-          if (!exists) {
-            setInput(input => {
-              return { ...input, img: input.img.concat(url) };
-            });
-          }
-        });
-      });
-    });
-  };
-
-  const loadImage = async e => {
-    if (image.name && input.img.length < 6) {
-      const imgRef = ref(
-        storage,
-        `${user.id}/${productsForSale.length + 1}/${image.name + v4()}`
-      );
-
-      await uploadBytes(imgRef, image).then(() => {
-        console.log("Todo ok");
-      });
-      getImages();
+  const loadImage = e => {
+    if (image.name) {
+      handleChangeImg(e);
+      errorImgSetting(e);
     }
   };
 
@@ -184,9 +162,6 @@ export default function Form() {
     handleValidate(input);
   }, [input]);
 
-  useEffect(() => {
-    dispatch(getProductsByUser(user.id));
-  }, []);
   const handleSubmit = e => {
     if (
       !error.title &&
@@ -239,30 +214,33 @@ export default function Form() {
       <div className={F.form}>
         <form onSubmit={e => handleSubmit(e)} autoComplete="off">
           <div className={F.titleCont}>
-            <h5 className={F.title}>New product</h5>
-            <h5 className={F.subtitle}>
-              | Publish and get your money instantly
-            </h5>
+            <h5>New product</h5>
+            <h6>Add images of your product</h6>
           </div>
 
           <div className={F.container}>
-            <div className={F.uploadContainer}>
-              <img src={upload} alt="" className={F.upload} />
-              <input
-                type="file"
-                name="uploadfile"
-                multiple="multiple"
-                id="img"
-                style={{ display: "none" }}
-                onChange={e => {
-                  setImage(e.target.files[0]);
-                }}
-              />
+            <h5>Upload an image</h5>
+            <input
+              type="file"
+              name="uploadfile"
+              multiple="multiple"
+              id="img"
+              style={{ display: "none" }}
+              onChange={e => {
+                setImage(e.target.files[0]);
+                setEvent(e);
+              }}
+            />
 
+            {!input.img.length ? (
               <label className={F.inputCont} htmlFor="img">
-                Upload an image
+                +
               </label>
-            </div>
+            ) : (
+              <div className={F.imgCont}>
+                <img src={input.img} alt="" />
+              </div>
+            )}
             {error.img && <span className={F.imgError}>{error.img}</span>}
           </div>
 
@@ -402,14 +380,6 @@ export default function Form() {
             </div>
           </div>
         </form>
-        <div className={F.loadedImagesContainer}>
-          {input.img.length > 0 &&
-            input.img.map((el, i) => (
-              <div className={F.loadedImage}>
-                <img key={i} src={el} onClick={e => handleDeleteImage(e)} />
-              </div>
-            ))}
-        </div>
       </div>
     </>
   );

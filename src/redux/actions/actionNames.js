@@ -24,7 +24,9 @@ export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART";
 export const REMOVE_ALL_FROM_CART = "REMOVE_ALL_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
 export const CLEAR_ERROR = "CLEAR_ERROR";
-export const ADD_TO_FAV = "ADD_TO_FAV";
+
+export const UPDATE_FAVS = "UPDATE_FAVS";
+
 export const POST_CART_ITEM = "POST_CART_ITEM";
 export const PUT_CART_ITEM = "PUT_CART_ITEM"; //falta hacer esta
 export const UPDATE_STOCK = "UPDATE_STOCK";
@@ -51,4 +53,6 @@ export const POST_REVIEW = "POST_REVIEW";
 export const GET_TOTAL_ORDERS = "GET_TOTAL_ORDERS";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const GET_DETAIL_PURCHASES = "GET_DETAIL_PURCHASES";
-export const PUT_USER = "PUT_USER,";
+export const PUT_USER = "PUT_USER";
+//action Dark/Light Theme
+export const DARK_MODE  = "DARK_MODE"

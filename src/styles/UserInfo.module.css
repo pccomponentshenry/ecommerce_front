@@ -11,10 +11,18 @@
   overflow: hidden;
   width: fit-content;
 }
+.profilePic{
+  width: 100px;
+  height: 100px;
+}
+
 .authContainer {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+.loaderGif{
+  margin-top: 80px;
 }
 .nameContainer {
   justify-content: center;

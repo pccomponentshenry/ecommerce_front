@@ -22,7 +22,7 @@
     color: #FFF;
 }
 
-.userContainer {
+.prodContainer {
     padding: 15px;
     width: 80%;
     height: fit-content;
@@ -74,7 +74,7 @@
     align-items: center;
 }
 
-.statusUserOk{
+.statusProdOk{
     width: 10px;
     height: 10px;
     background-color: rgb(1, 159, 1);
@@ -82,7 +82,7 @@
     margin: 10px;
 }
 
-.statusUserNo{
+.statusProdNo{
     width: 10px;
     height: 10px;
     background-color: rgb(170, 0, 0);
@@ -113,10 +113,10 @@
     }
 }
 
-.profilePic{
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
+.productImg{
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
 }
 
 .loadingCont {

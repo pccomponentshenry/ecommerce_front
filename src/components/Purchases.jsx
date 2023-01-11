@@ -5,18 +5,16 @@ import { getOrders, getReviews } from "../redux/actions";
 import P from "../styles/Purchases.module.css";
 
 export default function Purchases() {
-  const nuevo=[];
+  const nuevo = [];
   const user = useSelector(state => state.user);
   const purchases = useSelector(state => state.purchases);
   const reviews = useSelector(state => state.reviews);
   reviews.map(i => {
-    let arra={};
-    arra.pro=i.productId;
-    arra.us=i.username;
+    let arra = {};
+    arra.pro = i.productId;
+    arra.us = i.username;
     nuevo.push(arra)
   });
-  
-  console.log("reviews",nuevo);
 
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +29,7 @@ export default function Purchases() {
     <div>
       {isLoading ? <div>Loading...</div> : purchases.length ? purchases.map(p => (
         <div className={P.orderBox} key={p.id}>
-          <h4>
+          <h4 className={P.orderNumber}>
             Order PE000{p.id}
           </h4>
           <span className={`${p.status === "completed" ? P.completed : {}} ${p.status === "cancelled" ? P.cancelled : {}}`}>
@@ -57,7 +55,7 @@ export default function Purchases() {
                 </h5>
                 {p.status !== "cancelled" &&
                   <div>
-                    {nuevo.filter(e => e.pro===el.product.id && e.us===user.username).length === 0 ?
+                    {nuevo.filter(e => e.pro === el.product.id && e.us === user.username).length === 0 ?
                       <Link
                         style={{ textDecoration: "none", color: "#212121" }}
                         to={`/addreview/${user.id}/${el.product.id}`}
@@ -75,9 +73,9 @@ export default function Purchases() {
       )) :
         (
           <div className={P.noProducts}>
-            <h5>You don't have any purchases yet!</h5>
+            <h5>You don't have any purchases yet</h5>
             <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
-              <p>Choose your favorites!</p>
+              <p>Start now!</p>
             </Link>
           </div>)
 
