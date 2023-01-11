@@ -2,16 +2,33 @@ import React from "react";
 import F from "../styles/Form.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands, getCategories, postProduct } from "../redux/actions/index";
+import {
+  getBrands,
+  getCategories,
+  getProductsByUser,
+  postProduct,
+} from "../redux/actions/index";
 import { Link } from "react-router-dom";
+import { storage } from "../firebase/firebase";
+import {
+  ref,
+  uploadBytes,
+  listAll,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
+import upload from "../Images/upload.png";
+import close from "../Images/cross.png";
 
 export default function Form() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const brands = useSelector(state => state.brands);
   const cat = useSelector(state => state.categories);
+  const productsForSale = useSelector(state => state.productsForSale);
   const [image, setImage] = useState([]);
-  const [url, setUrl] = useState("");
+  const [allImages, setAllImages] = useState([]);
+
   const [active, setActive] = useState(false);
   const [event, setEvent] = useState({});
   const [disable, setDisable] = useState(true);
@@ -81,7 +98,7 @@ export default function Form() {
     if (!input.description || input.description === "") {
       errors.description = "*A description is required";
     }
-    if (!input.img) {
+    if (!input.img.length > 0) {
       errors.img = "*You must upload at least one image ";
     }
 
@@ -122,35 +139,90 @@ export default function Form() {
     );
   };
 
-  const handleChangeImg = e => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append("file", image);
-
-    data.append("upload_preset", "cqws5x8n"); // presets de cloudinary. Si querés entrar a ver la web, se accede desde el gmail del PF, con google.
-    data.append("cloud_name", "dbtekd33p"); // presets de Cloudinary
-    data.append("api_key", "226142111813437"); // idem
-    fetch("  https://api.cloudinary.com/v1_1/cqws5x8n/image/upload", {
-      //post a la ruta de cloud. cqws5x8n es el nombre de la nube de la cuenta nuestra
-      method: "post",
-      body: data,
-    })
-      .then(resp => resp.json())
-      .then(data => {
-        setUrl(data.url); //Revisar por qué no se agregan más de una. En algúna llamada de función Onchange en el html habré puesto (e.target.files[0] y por ahí es eso)
-        setInput({ ...input, img: data.url }); //ACÁ ESTÁ LA RESPONSE PÚBLICA Y STOREADA EN CLOUDINARY!!!
-      })
-      .catch(err => console.log(err));
-  };
-
   const handleChange = e => {
     setInput(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const loadImage = e => {
-    if (image.name) {
-      handleChangeImg(e);
-      errorImgSetting(e);
+  const handleDeleteImage = e => {
+    const val = e.target.getAttribute("value");
+    const selected = input.img[val];
+    const removed = input.img.filter(el => el !== selected);
+    const names = allImages.map(el => el.name);
+    const imgRef = ref(
+      storage,
+      `${user.id}/${productsForSale.length + 1}/${names[val]}`
+    );
+
+    deleteObject(imgRef)
+      .then(() => {
+        setInput({ ...input, img: removed });
+        setAllImages(allImages.filter(el => el !== allImages[val]));
+        console.log(allImages);
+        if (input.img === 0) {
+          setAllImages([]);
+        }
+      })
+      .catch(error => {
+        alert(error);
+      });
+  };
+
+  const clearStorage = () => {
+    const imageListRef = ref(
+      storage,
+      `${user.id}/${productsForSale.length + 1}`
+    );
+
+    listAll(imageListRef).then(response => {
+      for (let i = 0; i < response.items.length; i++) {
+        const imgRef = ref(storage, `${response.items[i]._location.path_}`);
+        deleteObject(imgRef)
+          .then(() => {
+            console.log("borrado");
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    });
+  };
+
+  useEffect(() => {
+    clearStorage();
+    console.log("Se limpió");
+  }, []);
+
+  const getImages = () => {
+    const imageListRef = ref(
+      storage,
+      `${user.id}/${productsForSale.length + 1}`
+    );
+    listAll(imageListRef).then(response => {
+      response.items.forEach(item => {
+        getDownloadURL(item).then(url => {
+          const exists = input.img.find(el => el === url);
+
+          if (!exists) {
+            setInput(input => {
+              return { ...input, img: input.img.concat(url) };
+            });
+          }
+        });
+      });
+    });
+  };
+
+  const loadImage = async e => {
+    if (image.name && input.img.length < 6) {
+      const imgRef = ref(
+        storage,
+        `${user.id}/${productsForSale.length + 1}/${image.name}`
+      );
+
+      await uploadBytes(imgRef, image).then(() => {
+        console.log("Todo ok");
+      });
+      getImages();
     }
   };
 
@@ -162,6 +234,9 @@ export default function Form() {
     handleValidate(input);
   }, [input]);
 
+  useEffect(() => {
+    dispatch(getProductsByUser(user.id));
+  }, []);
   const handleSubmit = e => {
     if (
       !error.title &&
@@ -214,34 +289,50 @@ export default function Form() {
       <div className={F.form}>
         <form onSubmit={e => handleSubmit(e)} autoComplete="off">
           <div className={F.titleCont}>
-            <h5>New product</h5>
-            <h6>Add images of your product</h6>
+            <h4 className={F.title}>New product</h4>
+            <h4 className={F.subtitle}>| Publish and get money fast!</h4>
           </div>
 
           <div className={F.container}>
-            <h5>Upload an image</h5>
-            <input
-              type="file"
-              name="uploadfile"
-              multiple="multiple"
-              id="img"
-              style={{ display: "none" }}
-              onChange={e => {
-                setImage(e.target.files[0]);
-                setEvent(e);
-              }}
-            />
+            <div className={F.loadedImagesContainer}>
+              <div className={F.uploadContainer}>
+                <input
+                  type="file"
+                  name="uploadfile"
+                  multiple="multiple"
+                  id="img"
+                  style={{ display: "none" }}
+                  onChange={e => {
+                    setImage(e.target.files[0]);
+                    setAllImages(allImages.concat(e.target.files[0]));
+                  }}
+                />
 
-            {!input.img.length ? (
-              <label className={F.inputCont} htmlFor="img">
-                +
-              </label>
-            ) : (
-              <div className={F.imgCont}>
-                <img src={input.img} alt="" />
+                <label className={F.inputCont} htmlFor="img">
+                  <img src={upload} alt="" className={F.upload} />
+                  Upload an image
+                </label>
               </div>
-            )}
-            {error.img && <span className={F.imgError}>{error.img}</span>}
+              {input.img.length > 0 &&
+                input.img.map((el, i) => (
+                  <div key={i}>
+                    <img
+                      value={i}
+                      src={close}
+                      alt=""
+                      onClick={e => handleDeleteImage(e)}
+                      className={F.closeIcon}
+                    />
+                    <div className={F.loadedImage}>
+                      <a href={el} target="_blank" rel="noreferrer">
+                        {" "}
+                        <img src={el} />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              {error.img && <span className={F.imgError}>{error.img}</span>}
+            </div>
           </div>
 
           <div className={F.formContainer}>
@@ -367,17 +458,17 @@ export default function Form() {
                 </div>
               </div>
             </div>
-            <div className={F.formBtn}>
-              <button
-                type="submit"
-                className={disable === false ? F.activeBtn : F.disabledBtn}
-                onClick={e => {
-                  disable && e.preventDefault();
-                }}
-              >
-                Publish product
-              </button>
-            </div>
+          </div>
+          <div className={F.formBtn}>
+            <button
+              type="submit"
+              className={disable === false ? F.activeBtn : F.disabledBtn}
+              onClick={e => {
+                disable && e.preventDefault();
+              }}
+            >
+              Publish product
+            </button>
           </div>
         </form>
       </div>
