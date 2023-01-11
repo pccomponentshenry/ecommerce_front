@@ -40,6 +40,9 @@ export default function Form() {
     userId: user.id,
   };
 
+  const statusProd = ['active', 'inactive', 'banned', 'deleted']
+
+
   useEffect(() => {
     dispatch(getProductDetail(params.id));
   }, [dispatch]);
