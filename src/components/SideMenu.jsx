@@ -81,12 +81,10 @@ export default function SideMenu({ name, setName }) {
       <div className={S.subContainer}>
         <div className={S.categoryContainer}>
           <div className={S.filterContainer}>
-            {/* <hr /> */}
             <div className={S.selectCont}>
               <h5 className={S.filterByTitle}>Filter by:</h5>
               <div className={S.select}>
                 <select
-                  // className={S.category}
                   name="Filter"
                   id="cat"
                   defaultValue={"default"}

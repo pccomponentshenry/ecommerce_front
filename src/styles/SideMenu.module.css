@@ -31,11 +31,9 @@
   transition: 0.15s ease-in-out;
 }
 .selectCont {
-  /* height: 150px; */
   display: flex;
   flex-direction: column;
   align-items: center;
-
   margin-bottom: 15px;
 }
 .filterContainer {
@@ -54,8 +52,6 @@ select {
   padding: 2px;
   border-radius: 10px;
   cursor: pointer;
-  /* margin-top: 5px; */
-  /* margin-bottom: 10px; */
   font-size: 14px;
   width: 100%;
   position: relative;
@@ -252,6 +248,7 @@ option {
   .selectCont {
     position: relative;
     margin-top: 0px;
+    margin-bottom: 0px;
     width: 30%;
     overflow: hidden;
     padding-right: 5px;
@@ -271,7 +268,7 @@ option {
   .brand {
     position: relative;
     top: 0px;
-    margin-top: 10px;
+    margin-top: -10px;
     font-size: 10px;
     overflow: hidden;
   }
@@ -288,13 +285,21 @@ option {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 30%;
   }
 
   .order hr {
     display: none;
   }
+  .btnCont {
+    height: 70px;
 
+    margin-top: 0px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
   .order button {
     background-color: transparent;
     border: solid 1px #272727;
@@ -302,20 +307,18 @@ option {
     color: #fff;
     font-size: 13px;
     font-weight: 400;
-    height: 20px;
     position: relative;
     display: block;
     top: 0px;
     width: 60px;
-    height: 23px;
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .orderPriceTitle {
-    position: absolute;
     width: 100%;
     overflow: hidden;
-    margin-top: 0px;
+    text-align: center;
+    border: none;
     font-size: 12px !important;
   }
 
@@ -325,6 +328,7 @@ option {
     overflow: hidden;
     margin-top: 5px;
     font-size: 12px !important;
+    border: none;
   }
 
   .sharedInput {
@@ -345,22 +349,25 @@ option {
   .sharedInput input {
     position: absolute;
     top: 40px;
-    width: 40px;
+    width: 50px;
     height: 20px;
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .sharedInput input::placeholder {
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .sharedInput button {
-    position: absolute;
-    top: 40px;
-    right: 0px;
+    /* position: absolute; */
+    /* top: 40px; */
+    /* right: 0px;*/
     margin-left: 50%;
+    margin-top: 40px;
     background-color: transparent;
     height: 50px;
+    padding-right: 15px;
+    text-align: center;
     width: 20px;
     font-size: 12px;
   }
@@ -395,6 +402,7 @@ option {
   .filterByTitle {
     margin-top: 5px !important;
     margin-bottom: 3px;
+    border: none;
   }
 
   .subContainer {
