@@ -15,6 +15,7 @@ export default function UserInfo({
   handleShowAddresses,
   handleReset,
 }) {
+
   const { isLoading, user } = useAuth0();
   const allAddresses = useSelector(state => state.addresses);
   const defaultAddress = allAddresses.find(el => el.isDefault === true);
