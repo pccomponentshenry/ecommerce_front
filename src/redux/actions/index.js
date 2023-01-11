@@ -42,7 +42,6 @@ import {
   GET_DETAIL_PURCHASES,
   DARK_MODE,
 } from "../actions/actionNames";
-import { actionsSelector } from "react-dedux/src/actions";
 
 const URL = "http://localhost:3001";
 // const URL = "https://playexpertback-production.up.railway.app";
