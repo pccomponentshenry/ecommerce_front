@@ -10,7 +10,6 @@
     display: grid;
     grid-template-rows: repeat(12, 80px);
     height: 85vh;
-    background-color: rgba(0, 0, 0, 0.1);
     position: relative;
     top: 20px;
     left: 0;

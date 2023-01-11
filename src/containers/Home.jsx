@@ -70,7 +70,7 @@ export default function Home() {
                 <div className={H.searchBarCont}>
                   <div className={H.searchBar}>
                     <img className={H.searchIcon} src={search} />
-                    :
+                    
                     <input
                       type="text"
                       placeholder="Search"

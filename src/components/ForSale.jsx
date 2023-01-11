@@ -43,9 +43,9 @@ export default function ForSale() {
 
   return (
     <>
-      {productsForSale.length > 0 ?
-        productsForSale.map((el, i) => (
-          <div className={S.forSale}>
+      <div className={S.forSale}>
+        {productsForSale.length > 0 ?
+          productsForSale.map((el, i) => (
             <div className={S.cardContainer} key={i}>
               <div className={el.status === "deleted" ? S.productDeleted + " " + S.container : S.container}>
                 <div className={S.infoContainer}>
@@ -101,17 +101,17 @@ export default function ForSale() {
                 </div>
               </div>
             </div>
-          </div>
-        ))
-        :
-        (
-          <div className={S.noProductsCont}>
-            <h5>You don't have any products for sale yet</h5>
-            <Link to="/sell" style={{ textDecoration: "none", color: "gray" }}>
-              <span>Publish now!</span>{" "}
-            </Link>
-          </div>
-        )}
+          ))
+          :
+          (
+            <div className={S.noProductsCont}>
+              <h5>You don't have any products for sale yet</h5>
+              <Link to="/sell" style={{ textDecoration: "none", color: "gray" }}>
+                <span>Publish now!</span>{" "}
+              </Link>
+            </div>
+          )}
+      </div>
     </>
   )
 }

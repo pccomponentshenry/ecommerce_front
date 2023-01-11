@@ -7,10 +7,10 @@ import { addToCart, updateFavs, postCartItem } from "../redux/actions";
 import C from "../styles/Card.module.css";
 import { MdMode } from "react-icons/md";
 
-
 function CardComponent(props) {
   const favs = useSelector(state => state.favs);
   const loggedUser = useSelector(state => state.user);
+  const isDarkMode = useSelector(state => state.isDarkMode);
   const { isAuthenticated, user } = useAuth0();
   const [active, setActive] = useState();
 
@@ -26,8 +26,7 @@ function CardComponent(props) {
         add: true,
       };
       dispatch(postCartItem(post));
-    }
-    else {
+    } else {
       dispatch(addToCart(props.product, isAuthenticated));
     }
     successAlert();
@@ -35,13 +34,17 @@ function CardComponent(props) {
 
   useEffect(() => {
     if (favs) {
-      favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
+      favs.find(fav => fav.id === props.product.id)
+        ? setActive(true)
+        : setActive(false);
     }
-  }, [favs])
+  }, [favs]);
 
   const handleAddToFav = () => {
     dispatch(updateFavs(props.product, loggedUser.id));
-    favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
+    favs.find(fav => fav.id === props.product.id)
+      ? setActive(true)
+      : setActive(false);
   };
 
   const successAlert = () => {
@@ -68,11 +71,17 @@ function CardComponent(props) {
   return (
     <>
       {loggedUser.isAdmin === "true" ? (
-        <div className={C.cardContainer}>
+        <div
+          className={
+            isDarkMode === true ? C.cardContainer : C.cardContainerLight
+          }
+        >
           <div className={C.imgContainer}>
-            <Link to={`/update/${props.id}`}><div className={C.contEdit}>
-              <MdMode size="2em" />
-            </div></Link>
+            <Link to={`/update/${props.id}`}>
+              <div className={C.contEdit}>
+                <MdMode size="2em" />
+              </div>
+            </Link>
             <Link to={`/detail/${props.id}`}>
               <img src={props.img} alt="" className={C.imageEdit} />
             </Link>
@@ -85,41 +94,43 @@ function CardComponent(props) {
               <h6 className={C.brand}>{props.brand}</h6>
               <div className={C.bottomCont}>
                 <h6 className={C.price}>$ {props.price}</h6>
-
               </div>
             </div>
           </Link>
-        </div>) :
-        (
-          <div className={C.cardContainer}>
-            <div className={C.imgContainer}>
-              <Link to={`/detail/${props.id}`}>
-                <img src={props.img} alt="" className={C.image} />
-              </Link>
+        </div>
+      ) : (
+        <div
+          className={
+            isDarkMode === true ? C.cardContainer : C.cardContainerLight
+          }
+        >
+          <div className={C.imgContainer}>
+            <Link to={`/detail/${props.id}`}>
+              <img src={props.img} alt="" className={C.image} />
+            </Link>
+          </div>
+          <div className={C.square}>
+            <div className={C.nameCont}>
+              <h6 className={C.name}>{props.title}</h6>
             </div>
-            <div className={C.square}>
-              <div className={C.nameCont}>
-                <h6 className={C.name}>{props.title}</h6>
-              </div>
-              <h6 className={C.brand}>{props.brand}</h6>
-              <div className={C.bottomCont}>
-                <h6 className={C.price}>$ {props.price}</h6>
-                <div className={C.btnAndFav}>
-                  <button className={C.cardBtn} onClick={handleAddToCart}>
-                    Add to cart
-                  </button>
-                  <span
-                    className={active ? C.active : C.fav}
-                    onClick={handleAddToFav}
-                  >
-                    ❤
-                  </span>
+            <h6 className={C.brand}>{props.brand}</h6>
+            <div className={C.bottomCont}>
+              <h6 className={C.price}>$ {props.price}</h6>
+              <div className={C.btnAndFav}>
+                <div className={C.cardBtn} onClick={handleAddToCart}>
+                  Add to cart
                 </div>
+                <span
+                  className={active ? C.active : C.fav}
+                  onClick={handleAddToFav}
+                >
+                  ♥
+                </span>
               </div>
             </div>
           </div>
-        )
-      }
+        </div>
+      )}
     </>
   );
 }

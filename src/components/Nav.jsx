@@ -1,46 +1,48 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LoginButton } from "./Login";
 import { LogoutButton } from "./Logout";
 import cartImg from "../Images/cart.png";
 import menu from "../Images/menu.png";
 import mode from "../Images/mode.png";
-import N from "../styles/NavBar.module.css";
+import { setDarkMode } from "../redux/actions";
 
+import N from "../styles/NavBar.module.css";
 
 export default function Nav() {
   const [nav, setNav] = useState(false);
   const [activeNav, setActiveNav] = useState(false);
   const cart = useSelector(state => state.cart);
+  const isDarkMode = useSelector(state => state.isDarkMode);
   const { isAuthenticated } = useAuth0();
   const loggedUser = useSelector(state => state.user);
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
- 
+  const dispatch = useDispatch();
 
-let isDarkMode = false;
-
-function toggleDarkMode(){
-  if (!isDarkMode){
-    //Change to dark
-    document.body.className="lightkmode"
-   
-  } else {
-    //Change to light
-    document.body.className="darkkmode"
+  function toggleDarkMode() {
+    if (isDarkMode) {
+      //Change to dark
+      document.body.className = "lightmode";
+    } else {
+      //Change to light
+      document.body.className = "darkmode";
+    }
+    dispatch(setDarkMode(!isDarkMode));
   }
-  isDarkMode = !isDarkMode;    
-}
   // buttonDark.addEventListener("click", toggleDarkMode);
 
   return (
     <>
-      {loggedUser.status === "banned" ? <></> :
+      {loggedUser.status === "banned" ? (
+        <></>
+      ) : (
         <div
-          className={`${activeNav === true ? N.container : N.containerSmall} ${nav ? N.active : N.container
-            }`}
+          className={`${activeNav === true ? N.container : N.containerSmall} ${
+            nav ? N.active : N.container
+          }`}
         >
           <div
             className={N.menuCont}
@@ -62,7 +64,11 @@ function toggleDarkMode(){
             </Link>
             <ul className={N.notResponsiveNav}>
               <Link to="/sell" style={{ textDecoration: "none" }}>
-                {isAuthenticated && loggedUser.status !== "banned" ? <li>Sell</li> : <></>}
+                {isAuthenticated && loggedUser.status !== "banned" ? (
+                  <li>Sell</li>
+                ) : (
+                  <></>
+                )}
               </Link>
               <Link to="/favorites" style={{ textDecoration: "none" }}>
                 <li>Favorites</li>
@@ -114,24 +120,15 @@ function toggleDarkMode(){
               <img src={cartImg} className={N.cart} alt="cart icon" />
             </Link>
 
-            {/* <div id="darkmode">
-       
-        <label onClick={toggleDarkMode} htmlFor="checkbox" className="label">
-          <BsMoonStarsFill color="white" />
-          <BsFillSunFill color="yellow" />
-          <div className="ball"></div>
-        </label>
-      </div> */}
-
             <img
               src={mode}
               onClick={toggleDarkMode}
               alt=""
               className={N.mode}
             />
-
           </div>
-        </div>}
+        </div>
+      )}
 
       {/* </div> */}
     </>
