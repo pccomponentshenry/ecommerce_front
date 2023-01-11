@@ -33,17 +33,55 @@
 }
 
 .loginBtn {
-  background-color: transparent;
+  background: transparent;
   height: 30px;
-  color: #2bfab7;
-  border: none;
-  border-radius: 8px;
+  color: #fff;
   font-size: 16px;
-  margin-left: 300px;
+  padding-top: 2px;
+  font-weight: 500;
+}
+.containerLog{
+  width: 80px;
+  height: 40px;
+  background: red;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg,
+   #d700f3,
+  #00cff3,
+  #1100ff, 
+  #d700f3,
+  #00cff3,
+  #d700f3);
+  background-size: 400%;
+  animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+      background-position: 0%;
+  }
+  100% {
+      background-position: 400%;
+  }
+  }
+  
+.inner {
+  width: 76px;
+  height: 37px;
+  background: black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .loginBtn:hover {
-  color: #fff;
+  color: #2bfab7;
   transition: 0.15s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 480px) {

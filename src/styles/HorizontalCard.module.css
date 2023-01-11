@@ -15,25 +15,34 @@
   height: 100px;
   float: left;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .image {
   width: 100%;
   cursor: pointer;
 }
+
 .nameCont {
   width: 100%;
 }
+
 .name {
   text-align: left;
   color: #fff;
+  font-size: 14px;
+  width: 370px;
   position: relative;
-  top: 20px;
-  left: 10px;
+  top: 10px;
+  left: 15px;
 }
 
 .bottomCont {
   display: flex;
 }
+
 .cardBtn {
   background-color: transparent;
   border: solid 1px #2bfab7;
@@ -41,40 +50,49 @@
   color: #2bfab7;
   font-size: 12px;
   position: relative;
-  left: 10px;
-  top: 10px;
+  float: right;
+  top: 5px;
+  right: 10px;
   padding-left: 5px;
   padding-right: 5px;
+}
+.cardBtn:hover {
+  transition: 0.15s ease-in-out;
+  background-color: #2bfab7;
+  color: #000;
 }
 
 .price {
   font-weight: 200;
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   position: relative;
-  left: 10px;
+  left: 15px;
   top: 15px;
 }
+
 .active {
   color: #2bfab7;
   position: relative;
-  top: 10px;
-  left: 25px;
+  top: 5px;
+  float: right;
+  right: 20px;
   cursor: pointer;
 }
 
 .fav {
   font-size: 15px;
   position: relative;
-  top: 10px;
-  left: 25px;
-  cursor: pointer;
+  top: 5px;
+  float: right;
+  right: 20px;
   text-shadow: 2px 0 #555, -2px 0 #555, 0 2px #555, 0 -2px #555;
 }
+
 @media screen and (max-width: 500px) {
   .cardContainer {
     width: 90%;
-    height: 200px;
+    height: 230px;
   }
 
   .imgContainer {
@@ -84,18 +102,29 @@
     display: flex;
     align-items: center;
   }
+
   .nameCont {
     overflow: hidden;
   }
+
   .name {
     font-size: 14px;
     overflow: hidden;
   }
+
   .cardBtn {
     font-size: 10px;
   }
+
   .active,
   .fav {
-    top: 12px;
+    top: -2px;
+    width: 20px;
+  }
+  .cardBtn {
+    top: 0px;
+  }
+  .price {
+    top: 0px;
   }
 }

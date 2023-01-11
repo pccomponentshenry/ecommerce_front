@@ -13,16 +13,37 @@ import {
   REMOVE_ONE_FROM_CART,
   REMOVE_ITEM_FROM_CART,
   REMOVE_ALL_FROM_CART,
+  GET_PURCHASES,
   CLEAR_ERROR,
-  ADD_TO_FAV,
+  UPDATE_FAVS,
   POST_USER,
   LOGOUT_USER,
   PUT_PRODUCT,
-  DELETE_PRODUCT,
+  CHANGE_PRODUCT_STATUS,
+  GET_REVIEWS,
+  POST_REVIEW,
+  GET_PRODUCTS_FOR_SALE,
+  GET_LOCATIONS,
+  GET_USER,
+  GET_USERS,
+  SET_FROM_STRIPE,
+  GET_ADDRESSES,
+  GET_ADDRESS,
+  POST_ADDRESS,
+  UPDATE_ADDRESS,
+  CHANGE_ADDRESS,
+  CHANGE_DEFAULT_ADDRESS,
+  DELETE_ADDRESS,
+  GET_TOTAL_ORDERS,
+  GET_ALL_ORDERS,
+  GET_DETAIL_PURCHASES,
+  PUT_USER,
+  DARK_MODE,
 } from "../actions/actionNames";
 
 const initialState = {
   products: [],
+  productsForSale: [],
   product: [],
   brands: [],
   categories: [],
@@ -30,17 +51,27 @@ const initialState = {
   error: [],
   filtered: [],
   cart: [],
-  fav: [],
+  favs: [],
+  locations: [],
   user: {},
+  reviews: [],
+  users: [],
+  addresses: [],
+  address: [],
+  purchases: [],
+  fromStripe: true,
+  isDarkMode: true,
+  allOrders: [],
+  allOrdersOneByOne: [],
+  detailsOrders: [],
 };
 
 initialState.cart = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : (initialState.cart = []);
-
-initialState.fav = localStorage.getItem("fav")
-  ? JSON.parse(localStorage.getItem("fav"))
-  : (initialState.cart = []);
+initialState.favs = localStorage.getItem("favs")
+  ? JSON.parse(localStorage.getItem("favs"))
+  : (initialState.favs = []);
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -51,6 +82,12 @@ function rootReducer(state = initialState, action) {
       };
 
     case GET_PRODUCT:
+      return {
+        ...state,
+        product: action.payload,
+      };
+
+    case SEARCH_PRODUCT:
       return {
         ...state,
         product: action.payload,
@@ -70,9 +107,136 @@ function rootReducer(state = initialState, action) {
       };
     }
 
-    case DELETE_PRODUCT: {
+    case CHANGE_PRODUCT_STATUS: {
       return {
         ...state,
+        productsForSale: state.productsForSale
+          .map(prod => {
+            if (Number(prod.id) === Number(action.payload.id)) {
+              return { ...prod, status: action.payload.status };
+            } else {
+              return { ...prod };
+            }
+          })
+          .sort((a, b) => {
+            let fa = a.status,
+              fb = b.status;
+
+            if (fa === "active" && fb === "inactive") {
+              return -1;
+            }
+            if (fa === "inactive" && fb === "active") {
+              return 1;
+            }
+            if (fa === "active" && fb === "deleted") {
+              return -1;
+            }
+            if (fa === "deleted" && fb === "active") {
+              return 1;
+            }
+            if (fa === "inactive" && fb === "deleted") {
+              return -1;
+            }
+            if (fa === "deleted" && fb === "inactive") {
+              return 1;
+            }
+            return 0;
+          }),
+      };
+    }
+
+    case GET_PRODUCTS_FOR_SALE: {
+      return {
+        ...state,
+        productsForSale: action.payload.sort((a, b) => {
+          let fa = a.status,
+            fb = b.status;
+
+          if (fa === "active" && fb === "inactive") {
+            return -1;
+          }
+          if (fa === "inactive" && fb === "active") {
+            return 1;
+          }
+          if (fa === "active" && fb === "deleted") {
+            return -1;
+          }
+          if (fa === "deleted" && fb === "active") {
+            return 1;
+          }
+          if (fa === "inactive" && fb === "deleted") {
+            return -1;
+          }
+          if (fa === "deleted" && fb === "inactive") {
+            return 1;
+          }
+          return 0;
+        }),
+      };
+    }
+
+    //////////ADDRESSES////////
+    case GET_ADDRESSES: {
+      return {
+        ...state,
+        addresses: action.payload,
+      };
+    }
+
+    case GET_ADDRESS: {
+      return {
+        ...state,
+        address: action.payload,
+      };
+    }
+
+    case POST_ADDRESS: {
+      return {
+        ...state,
+        addresses: [...state.addresses, action.payload],
+      };
+    }
+
+    case UPDATE_ADDRESS:
+      return {
+        ...state,
+        address: action.payload,
+      };
+
+    case CHANGE_DEFAULT_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.map(a => {
+          if (a.id === action.payload.id) {
+            return { ...a, isDefault: true };
+          } else {
+            return { ...a, isDefault: false };
+          }
+        }),
+      };
+
+    case CHANGE_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.map(a => {
+          if (Number(a.id) === Number(action.payload.id)) {
+            return { ...a, ...action.payload };
+          } else {
+            return { ...a };
+          }
+        }),
+      };
+
+    case DELETE_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.filter(a => a.id !== action.payload),
+      };
+
+    case GET_LOCATIONS: {
+      return {
+        ...state,
+        locations: action.payload,
       };
     }
 
@@ -87,12 +251,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         filtered: action.payload,
-      };
-
-    case SEARCH_PRODUCT:
-      return {
-        ...state,
-        product: action.payload,
       };
 
     case GET_BRANDS:
@@ -174,10 +332,20 @@ function rootReducer(state = initialState, action) {
         cart: state.cart.filter(item => item.id !== action.payload.id),
       };
 
-    case ADD_TO_FAV:
+    case GET_PURCHASES:
       return {
         ...state,
-        fav: action.payload,
+        purchases: action.payload,
+      };
+
+    case SET_FROM_STRIPE: {
+      return { ...state, fromStripe: false };
+    }
+
+    case UPDATE_FAVS:
+      return {
+        ...state,
+        favs: action.payload,
       };
 
     ////// USERS /////
@@ -188,11 +356,67 @@ function rootReducer(state = initialState, action) {
       };
     }
 
+    case GET_USER: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+    case GET_USERS: {
+      return {
+        ...state,
+        users: action.payload,
+      };
+    }
     case LOGOUT_USER: {
       return {
         ...state,
         user: {},
       };
+    }
+
+    ////REVIEWS////
+    case GET_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case POST_REVIEW:
+      return {
+        ...state,
+        reviews: [...state.reviews, action.payload],
+      };
+
+    case UPDATE_ADDRESS:
+      return {
+        ...state,
+        address: action.payload,
+      };
+
+    ///////////dashboard////////
+    case GET_TOTAL_ORDERS:
+      return {
+        ...state,
+        allOrders: action.payload,
+      };
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        allOrdersOneByOne: action.payload,
+      };
+    case GET_DETAIL_PURCHASES:
+      return {
+        ...state,
+        detailsOrders: action.payload,
+      };
+    case PUT_USER: {
+      return {
+        ...state,
+        user: action.payload,
+      };
+    }
+    case DARK_MODE: {
+      return { ...state, isDarkMode: action.payload };
     }
 
     default:

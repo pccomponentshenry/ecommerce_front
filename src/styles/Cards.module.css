@@ -1,10 +1,11 @@
 .cardContainer {
-  display: flex;
-  width: 80%;
-  position: relative;
-  top: 30px;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+    width: 75%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 50px;
+    position: relative;
+    margin: 0 auto;
+    top: 30px;
 }
 
 .pagination {
@@ -24,7 +25,6 @@
 }
 
 .paginate li {
-  color: white;
   font-weight: 400;
   cursor: pointer;
   border: solid 1px #555;
@@ -42,7 +42,6 @@
 }
 
 .previousNext a {
-  color: white;
   text-decoration: none;
   font-weight: 200;
 }
@@ -87,7 +86,6 @@
 
   .paginate li {
     font-size: 12px;
-    color: white;
     font-weight: 400;
     cursor: pointer;
     border: none;
@@ -105,7 +103,6 @@
   }
 
   .previousNext a {
-    color: white;
     text-decoration: none;
     font-weight: 200;
   }

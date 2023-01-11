@@ -4,6 +4,7 @@
   position: fixed;
   z-index: 999;
   justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.650);
   align-items: center;
   height: 70px;
   border-bottom: solid 1px gray;
@@ -28,7 +29,7 @@
   justify-content: space-around;
   align-items: center;
   height: 70px;
-  background-color: rgb(7, 7, 7);
+  background-color: rgba(0, 0, 0, 0.650);
   padding-bottom: 10px;
 }
 .cross {
@@ -121,6 +122,10 @@
   z-index: 600;
 }
 
+.authLoginText{
+  padding-top: 15px;
+}
+
 .cartNumber {
   color: #2bfab7;
   font-size: 12px;
@@ -160,7 +165,7 @@ hr {
   position: relative;
   top: 50px;
   border: none;
-  border: solid 1px #fff;
+  border: solid 1px;
 }
 .logo {
   height: 120px;

@@ -1,11 +1,56 @@
 .reviews {
-  width: 100%;
+  width: 70%;
   overflow: hidden;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  height: 38vh;
+}
+.noReviews {
+  width: 70%;
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 38vh;
+}
+.noReviews h6 {
+  color: #fff;
 }
 .container {
-  width: 100%;
-  overflow: hidden;
+  width: 90%;
+  height: 44vh;
+  float: right;
+  position: relative;
+  display: inline;
+  overflow-y: scroll;
+}
+
+.titleReviews {
+  color: #fff;
+  position: absolute;
+  left: 460 px;
+  top: 400px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 500px) {
+  .noReviews {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    right: 0px;
+    bottom: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44vh;
+  }
 }

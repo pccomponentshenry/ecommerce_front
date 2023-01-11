@@ -1,138 +1,117 @@
-import React from "react";
-import S from "../styles/ForSale.module.css";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useSelector } from "react-redux";
-import { deleteProduct } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import Swal from "sweetalert2";
+import { changeProductStatus, getProductsByUser } from "../redux/actions";
+import S from "../styles/ForSale.module.css";
 
 export default function ForSale() {
-  const products = useSelector(state => state.products);
-  const { user } = useAuth0();
+  const productsForSale = useSelector(state => state.productsForSale);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const myProducts = products.filter(p => p.creator === user.nickname);
+  useEffect(() => {
+    dispatch(getProductsByUser(user.id));
+    setIsLoading(false);
+  }, [user]);
 
-  function handleDelete(e) {
-    dispatch(deleteProduct(e));
-    alert("Product has been removed succesfully");
+  function changeStatus(id, status) {
+    if (status === "deleted") {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true,
+        confirmButtonColor: "rgb(55, 172, 135)",
+        denyButtonColor: "#d83dd0",
+        background: "#272727",
+        color: "#fff",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(changeProductStatus({ id, status }));
+        }
+      })
+    }
+    else {
+      dispatch(changeProductStatus({ id, status }));
+    }
   }
 
-  const productsForSale = [
-    {
-      id: 52,
-      creator: "admin",
-      title:
-        "Silverstone FT01S-W Aluminum ATX Mid Tower Uni-Body Computer Case With Window Side Panel - Retail (Silver)",
-      img: "https://images-na.ssl-images-amazon.com/images/I/41RQ9NHDUBL._SL600_.jpg",
-      price: 189.99,
-      description: "FT01S-W",
-      stock: 98,
-      categoryId: 1,
-      brandId: 73,
-      status: "Active",
-      category: {
-        name: "Case",
-      },
-      brand: {
-        name: "SilverStone Technology",
-      },
-    },
-    {
-      id: 53,
-      creator: "admin",
-      title: "CORSAIR Carbide AIR 540 ATX Cube Case",
-      img: "https://images-na.ssl-images-amazon.com/images/I/413pnWERvOL._SL600_.jpg",
-      price: 369.99,
-      description: "CC-9011030-WW",
-      stock: 302,
-      categoryId: 1,
-      brandId: 18,
-      status: "Active",
-      category: {
-        name: "Case",
-      },
-      brand: {
-        name: "Corsair",
-      },
-    },
-    {
-      id: 54,
-      creator: "admin",
-      title: "Cooler Master RC-130-KKN1 Elite 130",
-      img: "https://images-na.ssl-images-amazon.com/images/I/51ji1521AYL._SL600_.jpg",
-      price: 64.99,
-      description: "RC-130-KKN1",
-      stock: 119,
-      categoryId: 1,
-      brandId: 17,
-      status: "Active",
-      category: {
-        name: "Case",
-      },
-      brand: {
-        name: "Cooler Master",
-      },
-    },
-    {
-      id: 55,
-      creator: "admin",
-      title:
-        "Silverstone Extended-ATX Tek Aluminum Full Tower Computer Case, Black FT04B-W",
-      img: "https://images-na.ssl-images-amazon.com/images/I/41Mr-WLCpwL._SL600_.jpg",
-      price: 239.99,
-      description: "FT04B-W",
-      stock: 286,
-      categoryId: 1,
-      brandId: 73,
-      status: "Active",
-      category: {
-        name: "Case",
-      },
-      brand: {
-        name: "SilverStone Technology",
-      },
-    },
-  ];
-  // const myProducts = productsForSale;
-
   return (
-    <div>
-      {myProducts.length > 0 ? (
-        myProducts.map((el, i) => (
-          <div className={S.cardContainer} key={i}>
-            <div className={S.container}>
-              <div className={S.imgCont}>
-                <img src={el.img} alt="" />
-              </div>
-
-              <div className={S.titleCont}>
-                <span>{el.category.name}</span>
-                <h4>{el.title}</h4>
-                <h5>{el.brand.name}</h5>
-                <p>${el.price}</p>
-                <div className={S.stockAndStatus}>
-                  <label>Stock: {el.stock}</label>
-                  <label>{el.status}</label>
-                </div>
-                <div className={S.btnContainer}>
-                  <Link to={"/update/" + el.id}>
-                    <button>Update</button>
+    <>
+      <div className={S.forSale}>
+        {productsForSale.length > 0 ?
+          productsForSale.map((el, i) => (
+            <div className={S.cardContainer} key={i}>
+              <div className={el.status === "deleted" ? S.productDeleted + " " + S.container : S.container}>
+                <div className={S.infoContainer}>
+                  <Link to={"/detail/" + el.id}>
+                    <div className={S.imgCont}>
+                      <img src={el.img} alt="" />
+                    </div>
                   </Link>
-                  <button onClick={e => handleDelete(el.id)}>Delete</button>
+                  <div className={S.titleCont}>
+                    <div className={S.catAndBrand}>
+                      <span className={el.status === "deleted" ? S.spanDeleted : null}>{el.category.name}</span>
+                      <h5 className={el.status === "deleted" ? S.h5Deleted : null}>Brand: {el.brand.name}</h5>
+                    </div>
+
+                    <h4 className={el.productTitle}>
+                      {el.title.length < 60
+                        ? el.title
+                        : el.title.substr(0, 60) + "..."}
+                    </h4>
+
+                    <h6>
+                      {el.description.length < 100
+                        ? el.description
+                        : el.description.substr(0, 200) + "..."}
+                    </h6>
+                    {el.status !== "deleted" && <div className={S.btnContainer}>
+                      <Link to={"/update/" + el.id}>
+                        <button>Update</button>
+                      </Link>
+                      <button onClick={e => changeStatus(el.id, "deleted")}>Delete</button>
+                      <button onClick={e => changeStatus(el.id, el.status === "inactive" ? "active" : "inactive")}>{el.status === "active" ? "Pause" : el.status === "inactive" && "Unpause"}</button>
+                    </div>
+                    }
+                  </div>
+                  {el.status !== "deleted" ?
+                    <div className={S.stockAndStatus}>
+                      <div className={el.status === "inactive" ? S.inactive : S.stock}>
+                        <label className={el.status === "inactive" ? S.inactive : S.number}>{el.status === "inactive" ? "Paused" : el.stock}</label>
+                        <p className={S.units}>
+                          {el.status === "active" && (el.stock === 1 ? "Unit" : "Units")}
+                        </p>
+                      </div>
+                      {el.status === "active" &&
+                        <div className={S.price}>
+                          <p>Price: ${el.price}</p>
+                        </div>
+                      }
+                    </div> :
+                    <div className={S.stockAndStatus}>
+                      <label className={S.inactive}>Deleted</label>
+                    </div>
+                  }
                 </div>
               </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <div className={S.noProductsCont}>
-          <h5>You haven't got any products for sale yet</h5>
-          <Link to="/sell" style={{ textDecoration: "none", color: "#fff" }}>
-            <span>Publish now!</span>{" "}
-          </Link>
-        </div>
-      )}
-    </div>
-  );
+          ))
+          :
+          (
+            <div className={S.noProductsCont}>
+              <h5>You don't have any products for sale yet</h5>
+              <Link to="/sell" style={{ textDecoration: "none", color: "gray" }}>
+                <span>Publish now!</span>{" "}
+              </Link>
+            </div>
+          )}
+      </div>
+    </>
+  )
 }

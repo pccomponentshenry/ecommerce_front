@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0
+}
+.all{
+    background: rgb(39, 39, 39);
+  background: radial-gradient(
+    circle,
+    rgba(39, 39, 39, 1) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: Arial;
+}
+.container{
+    width: 420px;
+    height: 420px;
+    background: rgb(236, 201, 4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.containerBorder{
+    width: 440px;
+    height: 440px;
+    background-image: linear-gradient(to bottom right, #ff3cac, #562b7c, #2b86c5);
+    transform: rotate(45deg);
+    display: flex;
+    z-index: 0;
+    align-items: center;
+    justify-content: center;
+}
+.container .border{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 85%;
+    border: 5px solid white;
+}
+.container .content{
+    transform: rotate(-45deg);
+    text-align: center;
+}
+.container .content h1{
+    text-transform: uppercase;
+    font-size: 45px;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+.container .content p{
+    font-size: 17px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+.container .content button{
+    padding: 10px;
+    width: 50%;
+    background: transparent;
+    border: none;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.5s;
+    outline: none;
+}
+.container .content button:hover{
+    cursor: pointer;
+    border-radius: 50px;
+    color: #FFF;
+    background-image: linear-gradient(to bottom right, #ff3cac, #562b7c, #2b86c5);
+
+}
+
+.shapeOuter {
+    display: flex;
+    flex-shrink: 0;
+    height: calc(150px + 4vw);
+    width: calc(150px + 4vw);
+    margin: 25px;
+    background-image: linear-gradient(to bottom right, #ff3cac, #562b7c, #2b86c5);
+}
+
+.rhombus {
+    -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    		clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}

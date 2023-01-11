@@ -2,14 +2,25 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import {
+  getUserCartItem,
+  postCartItem,
+  postUser,
+  getUser,
+  getAddresses,
+  addLSFavsToDB,
+  getFavs,
+} from "../redux/actions";
 import L from "../styles/LoginContainer.module.css";
-import { getUserCartItem, postCartItem, postUser } from "../redux/actions";
 
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const loggedUser = useSelector(state => state.user);
   const cart = useSelector(state => state.cart);
+  const favs = useSelector(state => state.favs);
   const dispatch = useDispatch();
-  const shouldUpdate = useRef(true);
+  const shouldUpdateCart = useRef(true);
+  const shouldUpdateFavs = useRef(true);
 
   const dbUser = {
     username: user.nickname,
@@ -20,9 +31,8 @@ export const Profile = () => {
   const postUserWithCartToDB = () => {
     dispatch(postUser(dbUser)).then(postCartToDB);
   };
-  //EN FAVORITOS, HAY UN ERROR DE PERSISTENCIA DE DATOS EN EL LS QUE CART EN CAMBIO NO TIENE.
+
   const postCartToDB = () => {
-    //ESTO POSTEA A DB AL CART CUANDO SE RENDERIZA ESTANDO LOGGEADO
     if (cart.length && isAuthenticated) {
       for (let i = 0; i < cart.length; i++) {
         const post = {
@@ -34,16 +44,36 @@ export const Profile = () => {
         dispatch(postCartItem(post));
       }
     }
-    dispatch(getUserCartItem(user.email)); //ESTO LLAMA AL STATE CART CUANDO SE RENDERIZA ESTANDO LOGGEADO
-    localStorage.clear();
+    localStorage.removeItem("cart");
   };
 
   useEffect(() => {
-    if (shouldUpdate.current) {
-      shouldUpdate.current = false;
+    if (shouldUpdateCart.current) {
+      shouldUpdateCart.current = false;
       postUserWithCartToDB();
     }
   }, [user]);
+
+  useEffect(() => {
+    if (shouldUpdateFavs.current && favs.length && loggedUser.id) {
+      dispatch(addLSFavsToDB(loggedUser.id));
+      shouldUpdateFavs.current = false;
+    }
+  }, [loggedUser, favs]);
+
+  useEffect(() => {
+    dispatch(getUser(user.email));
+    if (isAuthenticated) {
+      dispatch(getUserCartItem(user.email));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (loggedUser.id) {
+      dispatch(getAddresses(loggedUser.id));
+      dispatch(getFavs(loggedUser.id));
+    }
+  }, [loggedUser]);
 
   if (isLoading) {
     return <div>Loading...</div>;

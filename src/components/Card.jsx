@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import { addToCart, addToFav, postCartItem } from "../redux/actions";
+import { addToCart, updateFavs, postCartItem } from "../redux/actions";
 import C from "../styles/Card.module.css";
+import { MdMode } from "react-icons/md";
+
 
 function CardComponent(props) {
-  const fav = localStorage.getItem(props.id)
-    ? JSON.parse(localStorage.getItem(props.id))
-    : [];
+  const favs = useSelector(state => state.favs);
+  const loggedUser = useSelector(state => state.user);
+  const isDarkMode = useSelector(state => state.isDarkMode);
   const { isAuthenticated, user } = useAuth0();
-  const [active, setActive] = useState(fav);
-  const [clicked, setClicked] = useState(false);
-  const favs = JSON.parse(localStorage.getItem("fav"));
+  const [active, setActive] = useState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,18 +28,21 @@ function CardComponent(props) {
       };
       dispatch(postCartItem(post));
     }
-    dispatch(addToCart(props.product, isAuthenticated));
+    else {
+      dispatch(addToCart(props.product, isAuthenticated));
+    }
     successAlert();
   };
 
-  React.useEffect(() => {
-    setActive(fav);
-  }, [clicked]);
+  useEffect(() => {
+    if (favs) {
+      favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
+    }
+  }, [favs])
 
   const handleAddToFav = () => {
-    dispatch(addToFav(props.product));
-    successFavAlert();
-    setClicked(!clicked);
+    dispatch(updateFavs(props.product, loggedUser.id));
+    favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
   };
 
   const successAlert = () => {
@@ -62,42 +65,62 @@ function CardComponent(props) {
       }
     });
   };
-
-  const successFavAlert = () => {
-    if (props.clickFromFav === true) {
-      props.setClicked(!clicked);
-    }
-  };
-
+  
   return (
     <>
-      <div className={C.cardContainer}>
-        <div className={C.imgContainer}>
-          <Link to={`/detail/${props.id}`}>
-            <img src={props.img} alt="" className={C.image} />
-          </Link>
-        </div>
-        <div className={C.square}>
-          <div className={C.nameCont}>
-            <h6 className={C.name}>{props.title}</h6>
+      {loggedUser.isAdmin === "true" ? (
+          <div className={isDarkMode === true ? C.cardContainer : C.cardContainerLight}>
+          <div className={C.imgContainer}>
+            <Link to={`/update/${props.id}`}><div className={C.contEdit}>
+              <MdMode size="2em" />
+            </div></Link>
+            <Link to={`/detail/${props.id}`}>
+              <img src={props.img} alt="" className={C.imageEdit} />
+            </Link>
           </div>
-          <h6 className={C.brand}>{props.brand}</h6>
-          <div className={C.bottomCont}>
-            <h6 className={C.price}>$ {props.price}</h6>
-            <div className={C.btnAndFav}>
-              <button className={C.cardBtn} onClick={handleAddToCart}>
-                Add to cart
-              </button>
-              <span
-                className={active === true ? C.active : C.fav}
-                onClick={handleAddToFav}
-              >
-                ❤
-              </span>
+          <Link to={`/detail/${props.id}`}>
+            <div className={C.square}>
+              <div className={C.nameCont}>
+                <h6 className={C.name}>{props.title}</h6>
+              </div>
+              <h6 className={C.brand}>{props.brand}</h6>
+              <div className={C.bottomCont}>
+                <h6 className={C.price}>$ {props.price}</h6>
+
+              </div>
+            </div>
+          </Link>
+        </div>) :
+        (
+          <div className={isDarkMode === true ? C.cardContainer : C.cardContainerLight}>
+            <div className={C.imgContainer}>
+              <Link to={`/detail/${props.id}`}>
+                <img src={props.img} alt="" className={C.image} />
+              </Link>
+            </div>
+            <div className={C.square}>
+              <div className={C.nameCont}>
+                <h6 className={C.name}>{props.title}</h6>
+              </div>
+              <h6 className={C.brand}>{props.brand}</h6>
+              <div className={C.bottomCont}>
+                <h6 className={C.price}>$ {props.price}</h6>
+                <div className={C.btnAndFav}>
+                  <div className={C.cardBtn} onClick={handleAddToCart}>
+                    Add to cart
+                  </div>
+                  <span
+                    className={active ? C.active : C.fav}
+                    onClick={handleAddToFav}
+                  >
+                    ❤
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        )
+      }
     </>
   );
 }

@@ -1,26 +1,40 @@
 .imgCont {
   height: 89vh;
+  width: 30vw;
   overflow: hidden;
-  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .image {
-  width: 100%;
-  height: fit-content;
+  height: 60%;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 @media screen and (max-width: 500px) {
   .imgCont {
-    height: 60vh;
+    height: 100vh;
+    width: fit-content;
     background-color: #fff;
     position: relative;
     top: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
   }
+
   .image {
-    width: fit-content;
-    height: 50vh;
+    width: 100vw;
+    height: fit-content;
     overflow: hidden;
+  }
+  .CarouselCont {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

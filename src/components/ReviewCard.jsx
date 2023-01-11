@@ -8,7 +8,8 @@ export default function ReviewCard(props) {
         <img src={props.profilePic} className={R.profilePic} alt="" />
       </div>
       <div className={R.reviewCont}>
-        <span className={R.name}>{props.name}</span>
+        <p className={R.name}>{props.user}</p>
+        <span className={R.title}>{props.name}</span>
         <p className={R.review}>{props.review}</p>
       </div>
       <div className={R.rating}>
@@ -17,7 +18,7 @@ export default function ReviewCard(props) {
           const ratingValue = i + 1;
           return (
             <label
-              className={props.rating >= ratingValue ? R.fullStar : R.emptyStar}
+              className={props.score >= ratingValue ? R.fullStar : R.emptyStar}
             >
               ★
             </label>

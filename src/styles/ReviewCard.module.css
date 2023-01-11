@@ -17,24 +17,30 @@
   margin-bottom: 5px;
   border-radius: 10px;
   display: flex;
-  width: 100%;
+  width: 95%;
   position: relative;
   top: 10px;
   overflow: hidden;
 }
 
 .name {
-  color: #fff;
-  font-size: 14px;
+  color: #2bfab7;
+  font-size: 12px;
   margin-left: 10px;
+  margin-top: 0px;
 }
+
 .review {
   color: #fff;
   font-size: 12px;
   font-weight: 200;
   margin-left: 10px;
+  position: relative;
+  bottom: 15px;
 }
-
+.reviewCont {
+  width: 60%;
+}
 .rating {
   position: absolute;
   right: 30px;
@@ -46,13 +52,24 @@
 .ratingTitle {
   margin-right: 10px;
 }
+
 .fullStar {
   font-size: 18px;
   color: #2bfab7;
+  cursor: pointer;
 }
 .emptyStar {
   font-size: 18px;
   color: gray;
+  cursor: pointer;
+}
+
+.title {
+  color: #fff;
+  font-size: 16px;
+  margin-left: 10px;
+  position: relative;
+  bottom: 16px;
 }
 @media screen and (max-width: 500px) {
   .ProfilePicCont {

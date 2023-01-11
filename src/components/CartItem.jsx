@@ -4,19 +4,25 @@ import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart, postCartItem } from "../redux/actions";
 import C from "../styles/CartItem.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import deleteItem from "../Images/delete.png";
 
 export default function CartItem({ item }) {
-  const { id, title, img, price, quantity } = item;
+  const { id, title, img, price, quantity, stock } = item;
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useAuth0();
 
   const handleAddToCart = () => {
-    if (isAuthenticated) {
-      const post = { id, quantity: 1, email: user.email, add: true };
-      dispatch(postCartItem(post));
+    if (quantity !== stock) {
+      if (isAuthenticated) {
+        const post = { id, quantity: 1, email: user.email, add: true };
+        dispatch(postCartItem(post));
+      }
+      else {
+        dispatch(addToCart(item, isAuthenticated));
+
+      }
     }
-    dispatch(addToCart(item, isAuthenticated));
   };
 
   const handleRemoveItemFromCart = () => {
@@ -56,10 +62,7 @@ export default function CartItem({ item }) {
               setClicked(!clicked);
             }}
           >
-            <img
-              src="https://res.cloudinary.com/dbtekd33p/image/upload/v1670819389/cqws5x8n/iconmonstr-trash-can-27-240_gtmmpc.png"
-              alt=""
-            />
+            <img src={deleteItem} alt="" />
           </button>
         </div>
         <div className={C.container}>
