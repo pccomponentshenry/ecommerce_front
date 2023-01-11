@@ -109,27 +109,22 @@
 }
 
 .fav {
-  font-size: 25px;
+  font-size: 30px;
   position: relative;
-  top: 4px;
+  top: 5px;
   margin-left: 15px;
-  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff;
+  color: #131313;
+  text-shadow: 1px 0 #fff, -1px 0 #fff, 0 1px #fff, 0 -1px #fff;
   cursor: pointer;
-}
-
-.fav:hover {
-  color: #fff;
-  transition: 0.15s ease-in-out;
 }
 
 .active {
   color: #2bfab7;
-  font-size: 29px;
-
+  font-size: 30px;
+  text-shadow: 1px 0 #2bfab7, -1px 0 #2bfab7, 0 1px #2bfab7, 0 -1px #2bfab7;
   margin-left: 15px;
   position: relative;
-  top: 6px;
-  right: 2px;
+  top: 5px;
   cursor: pointer;
 }
 
@@ -225,7 +220,8 @@
   color: #fff;
   font-size: 14px;
   font-weight: 200;
-  bottom: 10px;
+  bottom: 20px;
+  border: solid 1px red;
 }
 
 .ratingTitle {
