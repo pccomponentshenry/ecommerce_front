@@ -34,12 +34,14 @@ export default function UserInfo({
   }
   return (
     <>
-      {form && (
-        <AddressForm
-          handleExit={handleExit}
-          handleShowAddresses={handleShowAddresses}
-        />
-      )}
+      <div className={U.AddressForm}>
+        {form && (
+          <AddressForm
+            handleExit={handleExit}
+            handleShowAddresses={handleShowAddresses}
+          />
+        )}
+      </div>
       {users && (
         <div className={U.container}>
           <div className={U.authContainer}>
