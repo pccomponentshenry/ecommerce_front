@@ -124,6 +124,10 @@
 /* FORM */
 
 @media screen and (max-width: 500px) {
+  .AddressForm {
+    position: relative;
+    top: 100px;
+  }
   .container {
     display: flex;
     flex-direction: column;
@@ -177,6 +181,9 @@
   .addAddress {
     margin-bottom: 30px;
     font-size: 12px;
+    height: 30px;
+    display: flex;
+    align-items: center;
   }
   .title {
     overflow: hidden;

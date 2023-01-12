@@ -6,7 +6,6 @@ import Payment from "../stripe/Payment";
 import O from "../styles/OrderForm.module.css";
 
 export default function OrderForm() {
-
   const dispatch = useDispatch();
   const addresses = useSelector(state => state.addresses);
   const user = useSelector(state => state.user);
@@ -94,7 +93,7 @@ export default function OrderForm() {
 
   const clearForm = () => {
     setInput({ ...initialState });
-    document.querySelectorAll('select')[0].selectedIndex = 0;
+    document.querySelectorAll("select")[0].selectedIndex = 0;
   };
 
   const handleSubmit = e => {
@@ -125,7 +124,7 @@ export default function OrderForm() {
               <img src={el.img} alt="" />
             </div>
             <h4>{el.title}</h4>
-            <h5>Quantity: {el.quantity} unit</h5>
+            <span>Quantity: {el.quantity} unit</span>
             <h6>Total: ${el.price}</h6>
           </div>
         ))}
@@ -135,9 +134,11 @@ export default function OrderForm() {
             cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
           ).toFixed(2)}
         </h3>
-        {<div className={O.payment}>
-          <Payment addressId={address} />
-        </div>}
+        {
+          <div className={O.payment}>
+            <Payment addressId={address} />
+          </div>
+        }
       </div>
 
       {addresses.length > 0 ? (
@@ -155,7 +156,10 @@ export default function OrderForm() {
                     onClick={() => setAddress(el.id)}
                   />
                   <span>{`Address N° ${i + 1}`}</span>
-                  <p>{capitalizeEachLetter(el.streetName)} {el.streetNumber}{el.apartment && `, ${el.apartment.toUpperCase()}`}</p>
+                  <p>
+                    {capitalizeEachLetter(el.streetName)} {el.streetNumber}
+                    {el.apartment && `, ${el.apartment.toUpperCase()}`}
+                  </p>
                   <p>Zip Code: {el.zipCode.toUpperCase()}</p>
                   <p>{`${el.locationName}, Argentina`}</p>
                   <span className={O.default}>
@@ -178,7 +182,9 @@ export default function OrderForm() {
               alt=""
             />
           </div>
-          <h5 className={O.addText}>Please add a shipping address below to continue with your purchase</h5>
+          <h4 className={O.addText}>
+            Please add a shipping address below to continue with your purchase
+          </h4>
         </div>
       )}
 
@@ -261,7 +267,8 @@ export default function OrderForm() {
               <span className={O.errorZipCode}>{error.zipCode}</span>
             )}
             <div className={O.location}>
-              <select className={O.formContainerSelect}
+              <select
+                className={O.formContainerSelect}
                 name="location"
                 id="location"
                 onChange={e => {
@@ -271,7 +278,10 @@ export default function OrderForm() {
                 onBlur={e => errorSetting(e)}
                 defaultValue="default"
               >
-                <option className={O.defaultLocation} value="default" disabled> Location </option>
+                <option className={O.defaultLocation} value="default" disabled>
+                  {" "}
+                  Location{" "}
+                </option>
                 {locations.map((el, i) => (
                   <option key={i} value={el.name}>
                     {el.name}

@@ -3,12 +3,17 @@
   justify-content: center;
   width: 150px;
 }
+.container button {
+  color: #fff;
+  border-radius: 20px;
+  border: none;
+}
 
 .enabled {
-  background-color: #2bfab7;
+  background-color: rgb(128, 39, 155);
   border: none;
-  color: #000;
-  height: 40px;
+  color: #fff;
+  height: 30px;
   width: 140px;
   padding-left: 18px;
   padding-right: 18px;
@@ -16,6 +21,7 @@
   position: relative;
   margin-top: 50px;
   font-size: 16px;
+  border-radius: 20px;
 }
 
 .enabled:hover {
