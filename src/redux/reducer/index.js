@@ -335,7 +335,18 @@ function rootReducer(state = initialState, action) {
     case GET_PURCHASES:
       return {
         ...state,
-        purchases: action.payload,
+        purchases: action.payload.sort((a, b) => {
+          let fa = a.status,
+            fb = b.status;
+
+          if (fa === "completed" && fb === "cancelled") {
+            return -1;
+          }
+          if (fa === "cancelled" && fb === "completed") {
+            return 1;
+          }
+          return 0;
+        }),
       };
 
     case SET_FROM_STRIPE: {
