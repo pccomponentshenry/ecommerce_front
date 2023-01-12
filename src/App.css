@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins");
+/* @import url("https://fonts.googleapis.com/css?family=Poppins"); */
 
 /* DARK MODE*/
 .darkmode {
@@ -13,7 +13,7 @@
   color: #fff;
 }
 .darkmode button {
-  border: solid 1px #3d3d3d;
+  border: solid 1px #272727;
   color: #fff;
   border-radius: 3px;
 }
@@ -31,6 +31,7 @@
   font-weight: 600;
 }
 .darkmode select {
+  /*///// CAPAZ ACÁ PODRÍA FUNCIONAR UN BACKGROUND-COLOR OSCURO ////*/
   color: rgb(255, 255, 255);
   font-size: 14px;
 }
