@@ -51,6 +51,8 @@
   padding-right: 10px;
   margin-right: 10px;
   font-weight: 400;
+  cursor: pointer;
+  font-size: 14px;
 }
 .inactive:hover {
   transition: 0.15s ease-in-out;
@@ -58,14 +60,16 @@
   color: #000;
 }
 .active {
-  background-color: rgb(204, 204, 204);
-  border: solid 1px rgb(204, 204, 204);
+  background-color: rgb(158, 158, 158);
+  border: solid 1px rgb(158, 158, 158);
   border-radius: 5px;
   color: #000;
   padding-left: 10px;
   padding-right: 10px;
   margin-right: 10px;
   font-weight: 400;
+  font-size: 14px;
+  pointer-events: none;
 }
 
 .addProduct {
@@ -83,8 +87,9 @@
   border-radius: 30px;
   color: #fff;
   font-size: 16px;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 3px;
 }
 .addProduct h5 {
   color: #fff;
@@ -117,7 +122,6 @@
     top: 0px;
     display: flex;
     flex-direction: column;
-
     align-items: center;
   }
 
@@ -132,9 +136,7 @@
   .BtnContainer {
     width: 100%;
     height: 60px;
-
     padding-left: 10px;
-
     justify-content: space-around;
   }
   .BtnContainer button {

@@ -16,8 +16,8 @@ export default function UserFav() {
           {favList.length > 0 && favList.length === 1
             ? `This is your top favorite product`
             : favList.length > 1
-              ? `These are your top ${favList.length} favorite products`
-              : null}
+            ? `These are your top ${favList.length} favorite products`
+            : null}
         </h5>
       </div>
       <div className={U.itemsContainer}>
@@ -39,7 +39,7 @@ export default function UserFav() {
           ) : (
             <div className={U.noProducts}>
               <h5>You don't have any favorite products yet!</h5>
-              <Link to="/" style={{ textDecoration: "none", color: "gray" }}>
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                 <p>Choose your favorites!</p>
               </Link>
             </div>

@@ -32,7 +32,10 @@
   width: 100%;
   color: #fff;
 }
-
+.noProducts h5 {
+  color: #fff;
+  font-size: 18px;
+}
 .dateCompleted {
   font-size: 13px;
   color: rgb(153, 97, 160);
@@ -43,7 +46,7 @@
   color: rgb(155, 155, 155);
 }
 
-.orderNumber{
+.orderNumber {
   font-size: 16px;
   font-weight: 600;
   background-color: rgb(132, 47, 143);
@@ -52,8 +55,6 @@
   padding-right: 5px;
   width: fit-content;
 }
-
-
 
 .orderCard {
   display: flex;

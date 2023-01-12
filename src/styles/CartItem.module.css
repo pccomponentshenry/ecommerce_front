@@ -139,22 +139,26 @@
     align-items: center;
     top: 5px;
     margin-right: 10px;
-    margin-left: 10px;
+    margin-left: 0px;
+    margin-bottom: 10px;
     padding: 0px;
     border-radius: 3px;
+    display: flex;
   }
+
   .container h4 {
     font-size: 12px;
     font-weight: 400;
-    left: 80px;
+    left: 0px;
     top: 0px;
-    margin-top: -50px;
-    width: 220px;
+    float: none;
+    margin-top: 10px;
+    width: 140px;
   }
   .counterContainer {
     position: absolute;
     margin-top: 65px;
-    left: 90px;
+    left: 80px;
     height: 40px;
   }
 
@@ -173,9 +177,9 @@
   }
 
   .counter button {
-    font-size: 12px;
+    font-size: 14px;
     overflow: hidden;
-    bottom: 0px;
+    bottom: 3px;
   }
   .counter span {
     font-size: 12px;
@@ -191,7 +195,7 @@
   .btnCont {
     position: relative;
     left: 135px;
-    top: 55px;
+    top: 50px;
     font-size: 26px;
     z-index: 600;
   }

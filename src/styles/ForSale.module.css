@@ -44,7 +44,7 @@
 }
 
 .forSale {
-  background-color: #ebebeb;
+  background-color: transparents;
   height: 100%;
 }
 
@@ -62,8 +62,12 @@
 
 .noProductsCont h5 {
   color: #fff;
+  font-size: 18px;
 }
 
+.noProductsCont span {
+  color: rgb(128, 128, 128);
+}
 .noProductsCont span:hover {
   transition: 0.15s ease-in-out;
   color: #2bfab7;
@@ -330,5 +334,9 @@
     float: left;
     margin-top: 0px;
     justify-content: left;
+  }
+
+  .noProductsCont h5 {
+    font-size: 14px;
   }
 }

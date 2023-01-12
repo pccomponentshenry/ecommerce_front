@@ -53,8 +53,8 @@
   float: right;
   top: 5px;
   right: 10px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .cardBtn:hover {
   transition: 0.15s ease-in-out;
@@ -73,20 +73,13 @@
 
 .active {
   color: #2bfab7;
+  text-shadow: 1px 0 #2bfab7, -1px 0 #2bfab7, 0 1px #2bfab7, 0 -1px #2bfab7;
   position: relative;
-  top: 5px;
   float: right;
   right: 20px;
   cursor: pointer;
-}
-
-.fav {
-  font-size: 15px;
-  position: relative;
-  top: 5px;
-  float: right;
-  right: 20px;
-  text-shadow: 2px 0 #555, -2px 0 #555, 0 2px #555, 0 -2px #555;
+  font-size: 20px;
+  margin-top: -2px;
 }
 
 @media screen and (max-width: 500px) {
@@ -113,13 +106,17 @@
   }
 
   .cardBtn {
-    font-size: 10px;
+    margin-top: 20px;
+    font-size: 14px;
   }
 
   .active,
   .fav {
-    top: -2px;
-    width: 20px;
+    margin-top: 10px;
+    font-size: 25px;
+    width: 30px;
+    display: flex;
+    justify-content: right;
   }
   .cardBtn {
     top: 0px;

@@ -57,6 +57,7 @@ select {
   position: relative;
   top: 15px;
   margin-left: 0px !important;
+  outline: none;
 }
 
 option {
@@ -139,10 +140,12 @@ option {
   width: 30%;
   height: 25px;
   margin-bottom: 1px;
+  outline: none;
 }
 
 .inputRight {
   margin-left: 10%;
+  outline: none;
 }
 
 .sharedInput button {
@@ -170,6 +173,7 @@ option {
 .sharedInput input::placeholder {
   font-size: 14px;
   font-weight: 200;
+  outline: none;
 }
 
 .sharedInput input:hover,

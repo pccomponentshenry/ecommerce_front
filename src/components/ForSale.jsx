@@ -19,24 +19,23 @@ export default function ForSale() {
   function changeStatus(id, status) {
     if (status === "deleted") {
       Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
         reverseButtons: true,
         confirmButtonColor: "rgb(55, 172, 135)",
         denyButtonColor: "#d83dd0",
         background: "#272727",
         color: "#fff",
-      }).then((result) => {
+      }).then(result => {
         if (result.isConfirmed) {
           dispatch(changeProductStatus({ id, status }));
         }
-      })
-    }
-    else {
+      });
+    } else {
       dispatch(changeProductStatus({ id, status }));
     }
   }
@@ -44,10 +43,16 @@ export default function ForSale() {
   return (
     <>
       <div className={S.forSale}>
-        {productsForSale.length > 0 ?
+        {productsForSale.length > 0 ? (
           productsForSale.map((el, i) => (
             <div className={S.cardContainer} key={i}>
-              <div className={el.status === "deleted" ? S.productDeleted + " " + S.container : S.container}>
+              <div
+                className={
+                  el.status === "deleted"
+                    ? S.productDeleted + " " + S.container
+                    : S.container
+                }
+              >
                 <div className={S.infoContainer}>
                   <Link to={"/detail/" + el.id}>
                     <div className={S.imgCont}>
@@ -56,8 +61,18 @@ export default function ForSale() {
                   </Link>
                   <div className={S.titleCont}>
                     <div className={S.catAndBrand}>
-                      <span className={el.status === "deleted" ? S.spanDeleted : null}>{el.category.name}</span>
-                      <h5 className={el.status === "deleted" ? S.h5Deleted : null}>Brand: {el.brand.name}</h5>
+                      <span
+                        className={
+                          el.status === "deleted" ? S.spanDeleted : null
+                        }
+                      >
+                        {el.category.name}
+                      </span>
+                      <h5
+                        className={el.status === "deleted" ? S.h5Deleted : null}
+                      >
+                        Brand: {el.brand.name}
+                      </h5>
                     </div>
 
                     <h4 className={el.productTitle}>
@@ -71,47 +86,72 @@ export default function ForSale() {
                         ? el.description
                         : el.description.substr(0, 200) + "..."}
                     </h6>
-                    {el.status !== "deleted" && <div className={S.btnContainer}>
-                      <Link to={"/update/" + el.id}>
-                        <button>Update</button>
-                      </Link>
-                      <button onClick={e => changeStatus(el.id, "deleted")}>Delete</button>
-                      <button onClick={e => changeStatus(el.id, el.status === "inactive" ? "active" : "inactive")}>{el.status === "active" ? "Pause" : el.status === "inactive" && "Unpause"}</button>
-                    </div>
-                    }
+                    {el.status !== "deleted" && (
+                      <div className={S.btnContainer}>
+                        <Link to={"/update/" + el.id}>
+                          <button>Update</button>
+                        </Link>
+                        <button onClick={e => changeStatus(el.id, "deleted")}>
+                          Delete
+                        </button>
+                        <button
+                          onClick={e =>
+                            changeStatus(
+                              el.id,
+                              el.status === "inactive" ? "active" : "inactive"
+                            )
+                          }
+                        >
+                          {el.status === "active"
+                            ? "Pause"
+                            : el.status === "inactive" && "Unpause"}
+                        </button>
+                      </div>
+                    )}
                   </div>
-                  {el.status !== "deleted" ?
+                  {el.status !== "deleted" ? (
                     <div className={S.stockAndStatus}>
-                      <div className={el.status === "inactive" ? S.inactive : S.stock}>
-                        <label className={el.status === "inactive" ? S.inactive : S.number}>{el.status === "inactive" ? "Paused" : el.stock}</label>
+                      <div
+                        className={
+                          el.status === "inactive" ? S.inactive : S.stock
+                        }
+                      >
+                        <label
+                          className={
+                            el.status === "inactive" ? S.inactive : S.number
+                          }
+                        >
+                          {el.status === "inactive" ? "Paused" : el.stock}
+                        </label>
                         <p className={S.units}>
-                          {el.status === "active" && (el.stock === 1 ? "Unit" : "Units")}
+                          {el.status === "active" &&
+                            (el.stock === 1 ? "Unit" : "Units")}
                         </p>
                       </div>
-                      {el.status === "active" &&
+                      {el.status === "active" && (
                         <div className={S.price}>
                           <p>Price: ${el.price}</p>
                         </div>
-                      }
-                    </div> :
+                      )}
+                    </div>
+                  ) : (
                     <div className={S.stockAndStatus}>
                       <label className={S.inactive}>Deleted</label>
                     </div>
-                  }
+                  )}
                 </div>
               </div>
             </div>
           ))
-          :
-          (
-            <div className={S.noProductsCont}>
-              <h5>You don't have any products for sale yet</h5>
-              <Link to="/sell" style={{ textDecoration: "none", color: "gray" }}>
-                <span>Publish now!</span>{" "}
-              </Link>
-            </div>
-          )}
+        ) : (
+          <div className={S.noProductsCont}>
+            <h5>You don't have any products for sale yet</h5>
+            <Link to="/sell" style={{ textDecoration: "none" }}>
+              <span>Publish now!</span>{" "}
+            </Link>
+          </div>
+        )}
       </div>
     </>
-  )
+  );
 }

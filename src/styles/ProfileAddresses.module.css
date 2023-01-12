@@ -27,7 +27,10 @@
   width: 100%;
   color: #fff;
 }
-
+.noAddresses h5 {
+  color: #fff;
+  font-size: 18px;
+}
 .titleCont {
   position: relative;
   left: 10px;

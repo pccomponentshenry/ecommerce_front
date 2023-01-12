@@ -35,7 +35,11 @@ export default function ShoppingCart() {
         {cart.length > 0 ? (
           <div className={S.cartContainer}>
             <div className={S.clearCont}>
-              <button className={S.clearBtn} onClick={handleClearCart}>
+              <button
+                style={{ backgroundColor: "transparent" }}
+                className={S.clearBtn}
+                onClick={handleClearCart}
+              >
                 Clean Cart
               </button>
             </div>

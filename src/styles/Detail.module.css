@@ -324,12 +324,15 @@
     font-size: 12px;
     overflow: hidden;
   }
-
+  .description {
+    border-bottom: solid 1px gray;
+    padding-bottom: 10px;
+  }
   .btnCont {
     position: relative;
     left: 0px;
     width: 100%;
-    bottom: 15px;
+    bottom: 0px;
     overflow: hidden;
   }
 

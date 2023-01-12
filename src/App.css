@@ -1,45 +1,43 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+/* @import url("https://fonts.googleapis.com/css?family=Poppins"); */
 
 /* DARK MODE*/
 .darkmode {
   background-color: rgb(14, 14, 14);
   height: 100vh;
-  color:#FFF;
+  color: #fff;
   transition-property: background-color, color;
   transition-duration: 2s;
 }
 
-
-.darkmode a{
-  color: #FFF;
+.darkmode a {
+  color: #fff;
 }
-.darkmode button{
-  border: solid 1px #FFF;
-  color: #FFF;
+.darkmode button {
+  border: solid 1px #3d3d3d;
+  color: #fff;
   border-radius: 3px;
 }
-.darkmode input{
-  border: solid 1px #FFF;
-  color: #FFF;
+.darkmode input {
+  border: solid 1px #272727;
+  color: #212121;
 }
-.darkmode h5{
+.darkmode h5 {
   color: #2bfab7;
   font-size: 14px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 600;
 }
-.darkmode li{
+.darkmode li {
   font-weight: 600;
 }
-.darkmode select{
+.darkmode select {
   color: rgb(255, 255, 255);
   font-size: 14px;
 }
 
 /* LIGHT MODE*/
 
-
-.lightmode { 
+.lightmode {
   background-color: rgb(221, 221, 221);
   height: 100vh;
   color: #000;
@@ -47,26 +45,25 @@
   transition-duration: 2s;
 }
 
-
-.lightmode button{
+.lightmode button {
   border: solid 1px #333;
   border-radius: 3px;
-  color: #111
+  color: #111;
 }
-.lightmode input{
+.lightmode input {
   border: solid 1px #111;
   color: #111;
 }
 
-.lightmode h5{
-  color: rgb(138, 5, 131);
+.lightmode h5 {
+  color: rgb(128, 39, 155);
   font-size: 14px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
-.lightmode li{
+.lightmode li {
   font-weight: 600;
 }
-.lightmode select{
+.lightmode select {
   color: rgb(0, 0, 0);
   font-size: 14px;
 }

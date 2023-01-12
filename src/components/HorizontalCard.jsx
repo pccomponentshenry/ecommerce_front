@@ -6,7 +6,6 @@ import { addToCart, updateFavs, postCartItem } from "../redux/actions";
 import C from "../styles/HorizontalCard.module.css";
 
 function HorizontalCard(props) {
-
   const user = useSelector(state => state.user);
   const favs = useSelector(state => state.favs);
   const [active, setActive] = useState(favs);
@@ -21,13 +20,17 @@ function HorizontalCard(props) {
 
   useEffect(() => {
     if (favs) {
-      favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
+      favs.find(fav => fav.id === props.product.id)
+        ? setActive(true)
+        : setActive(false);
     }
-  }, [favs])
+  }, [favs]);
 
   const handleAddToFav = () => {
     dispatch(updateFavs(props.product, user.id));
-    favs.find(fav => fav.id === props.product.id) ? setActive(true) : setActive(false);
+    favs.find(fav => fav.id === props.product.id)
+      ? setActive(true)
+      : setActive(false);
   };
 
   const successAlert = () => {
@@ -54,7 +57,6 @@ function HorizontalCard(props) {
   return (
     <>
       <div className={C.cardContainer}>
-
         <Link to={`/detail/${props.id}`}>
           <div className={C.imgContainer}>
             <img src={props.img} alt="" className={C.image} />
@@ -69,11 +71,8 @@ function HorizontalCard(props) {
         <button className={C.cardBtn} onClick={handleAddToCart}>
           Add to cart
         </button>
-        <span
-          className={active ? C.active : C.fav}
-          onClick={handleAddToFav}
-        >
-          ❤
+        <span className={active ? C.active : C.fav} onClick={handleAddToFav}>
+          ♥
         </span>
       </div>
     </>
