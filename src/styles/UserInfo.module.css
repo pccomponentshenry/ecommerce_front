@@ -11,7 +11,7 @@
   overflow: hidden;
   width: fit-content;
 }
-.profilePic{
+.profilePic {
   width: 100px;
   height: 100px;
 }
@@ -21,7 +21,7 @@
   align-items: center;
   flex-direction: column;
 }
-.loaderGif{
+.loaderGif {
   margin-top: 80px;
 }
 .nameContainer {
@@ -47,21 +47,21 @@
 
 .Link {
   text-decoration: none;
-} 
+}
 
-.DashBoardButton button{
+.DashBoardButton button {
   width: 100%;
   display: flex;
   justify-content: center;
   border-radius: 8px;
   background-color: rgb(128, 39, 155);
-  color: #FFF;
+  color: #fff;
   margin-bottom: 8px;
-} 
+}
 .DashBoardButton button:hover {
-    background-color: rgb(76, 19, 94);
-    transition: 0.15s ease-in-out;
-  }
+  background-color: rgb(76, 19, 94);
+  transition: 0.15s ease-in-out;
+}
 
 .profileLine {
   margin-top: -40px;
@@ -109,6 +109,9 @@
   background-color: rgb(128, 39, 155);
   color: #fff;
   border: none;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
 }
 .addAddress:hover {
   background-color: rgb(76, 19, 94);
@@ -121,6 +124,10 @@
 /* FORM */
 
 @media screen and (max-width: 500px) {
+  .AddressForm {
+    position: relative;
+    top: 100px;
+  }
   .container {
     display: flex;
     flex-direction: column;
@@ -137,8 +144,13 @@
     border-radius: 100px;
     overflow: hidden;
     width: 80px;
+    height: 80px;
     margin-right: 0px;
     margin-top: 10px;
+  }
+  .imgContainer img {
+    width: 80px;
+    height: 80px;
   }
 
   .authContainer {
@@ -169,6 +181,9 @@
   .addAddress {
     margin-bottom: 30px;
     font-size: 12px;
+    height: 30px;
+    display: flex;
+    align-items: center;
   }
   .title {
     overflow: hidden;

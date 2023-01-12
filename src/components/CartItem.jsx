@@ -17,10 +17,8 @@ export default function CartItem({ item }) {
       if (isAuthenticated) {
         const post = { id, quantity: 1, email: user.email, add: true };
         dispatch(postCartItem(post));
-      }
-      else {
+      } else {
         dispatch(addToCart(item, isAuthenticated));
-
       }
     }
   };

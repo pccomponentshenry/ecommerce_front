@@ -1,15 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
 .Container {
-  text-align: center;
- 
+  text-align: left;
 }
-.link{
-  color: #FFF;
+.Container h5 {
+  font-size: 18px;
+  border-bottom: solid 1px #2bfab7;
+  padding-bottom: 5px;
+}
+/* 
+.link {
+  color: #fff;
   text-decoration: none;
 }
-.link:hover{
+.link:hover {
   color: #2bfab7;
 }
 
-.contentLink{
-  margin: 15px;
+.contentLink {
+  /* margin: 15px; 
+} */
+.sideNav {
+  /* border: solid 1px red; */
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 65px;
+  margin-top: 10px;
+}
+
+.sideNav li {
+  text-decoration: none;
+  list-style: none;
+  text-align: left;
+  float: left;
+  font-weight: 100;
+  font-family: "Open Sans", sans-serif;
+}
+.sideNav li:hover {
+  transition: 0.15s ease-in-out;
+  color: #2bfab7;
 }

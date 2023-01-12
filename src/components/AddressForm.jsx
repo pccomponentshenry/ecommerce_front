@@ -5,7 +5,6 @@ import { getLocations, postAddress } from "../redux/actions";
 import { useState, useEffect } from "react";
 
 export default function AddressForm({ handleExit, handleShowAddresses }) {
-
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const locations = useSelector(state => state.locations);
@@ -94,9 +93,17 @@ export default function AddressForm({ handleExit, handleShowAddresses }) {
     <>
       <div className={A.container}>
         <div className={A.formContainer}>
-          <label className={A.exitForm} onClick={handleExit}>╳</label>
+          <label className={A.exitForm} onClick={handleExit}>
+            ╳
+          </label>
           <h4>Add a new address</h4>
-          <form onSubmit={() => { handleSubmit(); handleExit() }} autoComplete="off">
+          <form
+            onSubmit={() => {
+              handleSubmit();
+              handleExit();
+            }}
+            autoComplete="off"
+          >
             <div className={A.street}>
               <input
                 type="text"

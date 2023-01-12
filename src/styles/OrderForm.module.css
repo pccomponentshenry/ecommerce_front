@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
 .container {
   background: #ececec;
   width: 100vw;
@@ -59,13 +60,15 @@
   width: 300px;
   font-weight: 600;
   margin-left: 20px;
+  color: #212121;
 }
 
-.cartContainer h5 {
+.cartContainer span {
   position: absolute;
   top: 55px;
   font-size: 12px;
   left: 120px;
+  color: #212121;
 }
 
 .cartContainer h6 {
@@ -74,6 +77,7 @@
   left: 120px;
   font-size: 12px;
   font-weight: 600;
+  color: #212121;
 }
 
 .cartContainer h1 {
@@ -97,6 +101,7 @@
   left: 50px;
   top: 15vh;
   color: rgb(128, 39, 155);
+  font-family: "Montserrat";
 }
 
 .address {
@@ -109,7 +114,11 @@
   background-color: rgb(247, 247, 247);
   margin-right: 30px;
 }
-
+.address span {
+  color: rgb(128, 39, 155);
+  font-weight: 600;
+  font-family: "Montserrat";
+}
 .addressBox {
   width: 63%;
   display: flex;
@@ -127,6 +136,7 @@
   font-size: 12px;
   margin-top: 5px;
   margin-bottom: 0;
+  color: #161616;
 }
 
 .address input {
@@ -159,6 +169,7 @@
 .newAddressCont h1 {
   font-size: 18px;
   font-weight: 600;
+  color: rgb(128, 39, 155);
 }
 
 .formContainer {
@@ -168,7 +179,7 @@
 }
 
 .noAddresses {
-  height: 241px;
+  height: 251px;
   width: 65%;
   overflow: hidden;
   position: absolute;
@@ -179,8 +190,10 @@
 
 .addText {
   position: absolute;
-  top: 40vh;
+  top: 46vh;
   padding-left: 50px;
+  color: #fff;
+  font-size: 14px;
 }
 
 .headerText {
@@ -273,7 +286,9 @@
   width: fit-content;
   display: inline;
 }
-
+.location select {
+  color: #000;
+}
 .errorName,
 .errorApartment {
   left: 50px;

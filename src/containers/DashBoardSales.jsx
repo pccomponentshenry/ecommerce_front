@@ -4,7 +4,6 @@ import SideDash from "../components/SideDash"
 import s from "../styles/DashBoardSales.module.css"
 import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
-
 export default function DashBoardSales() {
   const orders = useSelector(state => state.allOrdersOneByOne);
   const user = useSelector(state => state.users);
@@ -14,8 +13,6 @@ export default function DashBoardSales() {
   useEffect(() => {
     dispatch(getAllOrdersOneByOne(), getUsers(),
       getAddresses());
-    console.log('orders', orders);
-
   }, []);
 
   return (
@@ -37,7 +34,7 @@ export default function DashBoardSales() {
             </tr>
           </thead>
           {orders.map((o) =>
-            <tbody>
+            <tbody key={o.id}>
               <tr>
                 <td>{o.id}</td>
                 <td>{user[user.findIndex(e => e.id === o.userId)].email}</td>
@@ -49,6 +46,9 @@ export default function DashBoardSales() {
             </tbody>
           )}
         </table>
+
+
+
 
 
 
@@ -86,13 +86,8 @@ export default function DashBoardSales() {
               boxShadow: '0px 0px 3px 0px #000'
             },
           }}
-
         /> */}
-
       </div>
-
     </div>
   );
 };
-
-
