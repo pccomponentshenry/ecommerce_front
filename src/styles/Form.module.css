@@ -1,19 +1,47 @@
+.container {
+  position: relative;
+  top: 160px;
+  left: 100px;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  height: 60vh;
+  z-index: 1;
+  display: inline;
+  margin-right: 200px;
+}
+
+.containerUpdate {
+  position: relative;
+  top: 160px;
+  left: 100px;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  height: 60vh;
+  display: inline;
+  margin-right: 200px;
+}
+
 .container h5 {
   color: #fff;
   font-size: 16px;
   position: relative;
 }
+
 .labelCont {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .labelCont h1 {
   position: absolute;
   z-index: 600;
   font-size: 120px;
   font-weight: 200;
 }
+
 .prevImageCont {
   background-color: #fff;
   height: 250px;
@@ -27,54 +55,31 @@
 .prevImage {
   width: 100%;
 }
-.closeIcon {
-  height: 20px;
-  position: absolute;
-  background-color: #000522;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  padding: 3px;
-  margin-left: 10px;
-  cursor: pointer;
-}
+
 .containerUpdate h5 {
   color: #fff;
   font-size: 16px;
   position: relative;
 }
-.upload {
-  width: 50px;
-  padding-bottom: 10px;
-  cursor: pointer;
-}
 
-.uploadContainer {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 120px;
-  z-index: 1;
-  border: dashed 1px #2bfab87c;
-  background-color: #2bfab80a;
-  padding: 20px;
-  border-radius: 5px;
-  margin-right: 5px;
-}
 .inputCont {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%232BFAB7FF' stroke-width='3' stroke-dasharray='50%25%2c 13%25' stroke-dashoffset='86' stroke-linecap='butt'/%3e%3c/svg%3e");
+  border-radius: 10px;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  cursor: pointer;
-  color: #fff;
-  font-size: 14px;
+  border-radius: 10px;
+  color: #2bfab7;
+  font-size: 100px;
   font-weight: 200;
   text-align: center;
+  width: 250px;
   position: relative;
   z-index: 200;
 }
+
 .imgCont {
   height: 250px;
   width: 250px;
@@ -85,6 +90,7 @@
   align-items: center;
   background-color: #fff;
 }
+
 .imgCont img {
   cursor: pointer;
   height: fit-content;
@@ -96,43 +102,27 @@
 .titleCont {
   color: #fff;
   position: relative;
-  top: 11vh;
-  height: 30px;
-  background-color: #2e2bfa;
+  top: 130px;
+  padding-left: 105px;
+  height: 60px;
 }
-.titleCont h4 {
-  position: relative;
-  top: 5px;
-}
-.title {
-  display: inline;
+
+.titleCont h5 {
   font-weight: 600;
-  margin-left: 60px;
-  font-size: 18px;
+  font-size: 25px;
 }
-.subtitle {
-  display: inline;
+
+.titleCont h6 {
   font-weight: 200;
-  margin-left: 10px;
-  font-size: 16px;
-}
-.titleCont h4 {
+  font-size: 14px;
   margin-bottom: 20px;
 }
-.title {
-  display: inline;
-  font-weight: 600;
-  margin-left: 60px;
-  font-size: 18px;
-}
+
 .formContainer {
   padding: 10px;
   border-radius: 10px;
   position: relative;
-  top: 100px;
-  height: fit-content;
-  width: 60vw;
-  left: 50px;
+  top: 170px;
 }
 
 input::-webkit-outer-spin-button,
@@ -145,8 +135,8 @@ input::-webkit-inner-spin-button {
 .stock input,
 .price input,
 .category input {
-  border: solid 1px #2bfab87c;
-  background-color: #2bfab80a;
+  border: solid 1px #2bfab7;
+  background-color: transparent;
   border-radius: 5px;
   color: #fff;
   font-weight: 200;
@@ -154,16 +144,16 @@ input::-webkit-inner-spin-button {
 
 .brandAndCatContainer {
   display: flex;
-  position: absolute;
+  position: relative;
   width: 50%;
-  top: 90px;
-  left: 400px;
+  top: -10px;
 }
+
 .brandAndCatContainer select {
-  border: solid 1px #2bfab87c;
-  background-color: #2bfab80a;
+  border: solid 1px #2bfab7;
   margin-right: 15px;
 }
+
 .name input::placeholder,
 .brand input::placeholder {
   color: #797979;
@@ -171,6 +161,7 @@ input::-webkit-inner-spin-button {
   position: relative;
   left: 5px;
 }
+
 .stock label,
 .price label,
 .category label {
@@ -187,12 +178,12 @@ input::-webkit-inner-spin-button {
   margin-bottom: 20px;
   margin-top: 10px;
 }
+
 .description textarea {
   height: 60px;
   /* margin-left: 10px; */
   background-color: transparent;
-  border: solid 1px #2bfab87c;
-  background-color: #2bfab80a;
+  border: solid 1px #2bfab7;
   border-radius: 10px;
   color: #fff;
   padding: 10px;
@@ -208,12 +199,15 @@ input::-webkit-inner-spin-button {
   top: 5px;
   overflow: hidden;
 }
+
 .descriptionCont {
   margin-top: 20px;
 }
+
 .descriptionCont label {
   color: #fff;
 }
+
 /* DESCRIPTION */
 
 /* STOCK */
@@ -221,13 +215,13 @@ input::-webkit-inner-spin-button {
 .stock {
   width: 230px;
 }
+
 .stock input {
-  width: 30%;
+  width: 20%;
   height: 20px;
   margin-left: 10px;
-  border: solid 1px #2bfab87c;
-  background-color: #2bfab80a;
 }
+
 .stock span {
   color: #fff;
   font-size: 12px;
@@ -235,6 +229,7 @@ input::-webkit-inner-spin-button {
   position: relative;
   bottom: 5px;
 }
+
 /* STOCK */
 .stockAndPrice {
   display: flex;
@@ -242,16 +237,19 @@ input::-webkit-inner-spin-button {
   left: 20px;
   margin-bottom: 10px;
 }
+
 /* PRICE */
 
 .price {
   width: 230px;
 }
+
 .price input {
-  width: 30%;
+  width: 20%;
   height: 20px;
   margin-left: 10px;
 }
+
 .price span {
   color: #fff;
   font-size: 12px;
@@ -262,7 +260,7 @@ input::-webkit-inner-spin-button {
 
 /* PRICE */
 
-.statusSelect{
+.statusSelect {
   top: 0px;
   border: solid 1px #2bfab7;
   border-radius: 10px;
@@ -274,11 +272,13 @@ input::-webkit-inner-spin-button {
   width: 230px;
   left: 20px;
 }
+
 .category input {
   width: 20%;
   height: 20px;
   margin-left: 10px;
 }
+
 .category span {
   color: #fff;
   font-size: 12px;
@@ -286,16 +286,19 @@ input::-webkit-inner-spin-button {
   position: relative;
   top: 15px;
 }
+
 /* CATEGORY */
 /* NAME */
 .name {
   left: 20px;
 }
+
 .name label {
   float: left;
   color: #fff;
-  font-size: 16px;
+  font-size: 14px;
 }
+
 .name span {
   color: #fff;
   font-size: 12px;
@@ -303,18 +306,17 @@ input::-webkit-inner-spin-button {
   position: relative;
   bottom: 5px;
 }
+
 .name input {
   border: none;
-  border: solid 1px #2bfab87c;
-  background-color: #2bfab80a;
+  border-bottom: solid 1px #2bfab7;
+  background-color: transparent;
   position: relative;
-  bottom: 0px;
-  width: 30vw;
+  bottom: 10px;
   left: 5px;
   color: #fff;
   font-weight: 200;
   font-size: 14px;
-  border-radius: 0px;
 }
 
 /* NAME */
@@ -335,11 +337,7 @@ input::-webkit-inner-spin-button {
 
 /* BRAND */
 /* BUTTON */
-input,
-textarea,
-select {
-  outline: none;
-}
+
 .activeBtn {
   background: transparent;
   border: solid 1px #2bfab7;
@@ -356,11 +354,6 @@ select {
   height: 25px;
   z-index: 600;
 }
-.formBtn {
-  position: absolute;
-  bottom: 30px;
-  left: 50px;
-}
 
 .disabledBtn {
   background: #272727;
@@ -375,6 +368,7 @@ select {
   height: 25px;
   /* margin-top: 40px; */
 }
+
 .disabledBtn:hover {
   cursor: default;
 }
@@ -384,6 +378,7 @@ select {
   color: #272727;
   transition: 0.15s ease-in-out;
 }
+
 .loadBtn {
   background-color: transparent;
   color: #2bfab7;
@@ -398,6 +393,7 @@ select {
   color: #111111;
   transition: 0.15s ease-in-out;
 }
+
 .disabled {
   background: #272727;
   color: #555;
@@ -406,6 +402,7 @@ select {
   padding-right: 10px;
   border: solid 1px #555;
 }
+
 /* BUTTON */
 /* BACKGROUND OSCURO */
 .darkBg {
@@ -431,9 +428,11 @@ select {
   flex-direction: column;
   z-index: 650;
 }
+
 .successPic img {
   width: 50%;
 }
+
 .successPic span {
   position: relative;
   left: 300px;
@@ -442,22 +441,23 @@ select {
   color: #2bfab7;
   cursor: pointer;
 }
+
 .imgError {
   color: #fff;
   font-size: 12px;
   font-weight: 200;
-  position: absolute;
-  right: 0px;
-  top: 155px;
 }
+
 .successPic span:hover {
   transition: 0.15s ease-in-out;
   color: #fff;
 }
+
 .btnCont {
   position: relative;
   bottom: 50px;
 }
+
 .btn {
   margin-left: 30px;
   margin-right: 30px;
@@ -480,169 +480,90 @@ select {
   margin-top: 400px;
 }
 
-.loadedImagesContainer {
-  border: dashed 1px #2bfab7;
-  border-radius: 5px;
-  display: flex;
-  /* justify-content: space-around; */
-  align-items: center;
-  height: 150px;
-  width: 60vw;
-  display: flex;
-  position: absolute;
-  bottom: 70px;
-  left: 50px;
-  padding: 10px;
-}
-.loadedImage {
-  width: 120px;
-  height: 120px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-.loadedImage img {
-  width: 100%;
-  cursor: pointer;
-}
-
 @media screen and (max-width: 500px) {
-  .titleCont {
-    margin-top: 10px;
-    width: 100%;
-    top: 0vh;
-    position: absolute;
+  .container {
+    position: relative;
+    top: 160px;
     left: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    overflow: hidden;
-  }
-  .title {
-    display: inline;
-    font-weight: 600;
-    margin-left: 0px;
-    font-size: 12px;
-  }
-  .titleCont h5 {
-    font-size: 12px;
-  }
-  .formContainer {
-    padding: 10px;
-    border-radius: 10px;
-    height: fit-content;
     width: 100%;
-    left: 0px;
-    top: 20px;
-    overflow: hidden;
-  }
-  .container,
-  .loadedImagesContainer,
-  .uploadContainer,
-  .formContainer,
-  .form {
-    overflow: hidden;
-  }
-  .form {
     display: flex;
     justify-content: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 110vh;
-    position: relative;
-    top: 70px;
-    overflow: hidden;
-  }
-  .name {
-    display: flex;
-    flex-direction: column;
-  }
-  .name input {
-    bottom: 0px;
-    width: 100%;
-    left: 0px;
-    margin-top: 10px;
+    align-items: center;
   }
 
-  .loadedImagesContainer {
-    flex-wrap: wrap;
-    height: fit-content;
-    width: 92%;
-    bottom: 0px;
-    margin-top: 20px;
-    left: 0px;
-    left: 15px;
-    margin-top: 60px;
+  .container h5 {
+    display: none;
+  }
+
+  .titleCont {
     position: relative;
-    height: fit-content;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  .uploadContainer {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    width: 100px;
-    z-index: 1;
-    border: dashed 1px #2bfab87c;
-    background-color: #2bfab80a;
-    padding: 0px;
-    border-radius: 5px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-  }
-  .loadedImage {
-    width: 10px;
-    height: 100px;
-    width: 100px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 5px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-  .formBtn {
-    position: relative;
-    bottom: 0px;
-    left: 10px;
-    top: 30px;
-    padding-bottom: 30px;
-    width: 90%;
-  }
-  .inputCont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 120px;
+    top: 130px;
+    padding: 0;
     text-align: center;
-    width: 100%;
-    margin-left: 10px;
   }
-  .stock,
-  .price {
-    width: 50%;
-  }
-  .stock input,
-  .price input {
-    width: 80%;
-    height: 20px;
-    margin-left: 0px;
+
+  .formContainer {
+    padding-left: 30px;
+    padding-right: 30px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    bottom: 5px;
-    border: solid 1px #2bfab87c;
-    background-color: #2bfab80a;
+    top: 170px;
+  }
+
+  .name {
+    left: 0px;
+  }
+
+  .name input {
+    margin-top: 10px;
+    margin-left: -3px;
+  }
+
+  .brandAndCatContainer {
+    width: 100%;
+  }
+
+  .category {
+    width: 100px;
+    left: 20px;
+    margin-left: 10px;
+    height: 100px;
+    overflow: hidden;
+  }
+
+  .errorStock {
+    height: 100px;
+    overflow: hidden;
+    line-height: 100%;
+    margin-top: 5px;
+  }
+
+  .brand {
+    width: 100px;
+    margin-right: 10px;
+    height: 100px;
+  }
+
+  .description {
+    margin-bottom: 20px;
+    margin-top: 0px;
+    height: 110px;
+    position: relative;
+  }
+
+  .description textarea {
+    height: 60px;
+    background-color: transparent;
+    border: solid 1px #2bfab7;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px;
+    padding-top: 5px;
+    font-weight: 200;
+    overflow: hidden;
   }
 }
