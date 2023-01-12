@@ -105,6 +105,7 @@ a {
 .nameCont {
   width: 90%;
   float: left;
+  flex-direction: column;
   display: flex;
 }
 
@@ -112,7 +113,7 @@ a {
   font-weight: 200;
   font-size: 13px;
   position: relative;
-  bottom: 5px;
+  /* bottom: 5px; */
   height: 25px;
   z-index: 600;
 }

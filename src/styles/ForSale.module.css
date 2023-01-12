@@ -2,7 +2,7 @@
   padding: 10px;
   padding-top: 20px;
   padding-bottom: 0px;
-  background-color: #f1f1f1;
+  background-color: #c2c2c2;
 }
 
 .cardContainer .productDeleted {
@@ -10,7 +10,7 @@
 }
 
 .titleCont .spanDeleted {
-  background-color: rgb(134, 134, 134);
+  background-color: rgb(143, 143, 143);
 }
 
 .titleCont .h5Deleted {
@@ -25,6 +25,9 @@
   background-color: rgb(134, 134, 134);
   float: right;
   margin-left: 50px;
+}
+.productTitle {
+  color: rgb(132, 47, 143);
 }
 
 .container {
@@ -196,6 +199,7 @@
   position: relative;
   float: right;
   justify-content: right;
+  color: gray;
 }
 
 @media screen and (max-width: 500px) {
@@ -246,7 +250,6 @@
 
   .catAndBrand {
     float: left;
-    margin-left: -80px;
   }
 
   .titleCont {
@@ -277,9 +280,9 @@
   }
 
   .btnContainer {
-    width: 140px;
+    width: 100%;
     display: flex;
-    margin-left: -100px;
+    margin-left: 0px;
   }
 
   .btnContainer button {
@@ -288,12 +291,12 @@
 
   .stockAndStatus {
     overflow: hidden;
-
     height: 30px;
     display: block;
     position: relative;
     bottom: 0px;
-    margin-left: -40px;
+    width: 100%;
+    margin-left: 0px;
   }
 
   .stock {
@@ -316,7 +319,7 @@
   .units {
     text-align: left;
     margin-top: 0px;
-    margin-left: 5px;
+    margin-left: 0px;
     font-size: 14px;
     overflow: hidden;
   }

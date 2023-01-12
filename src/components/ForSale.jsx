@@ -75,7 +75,7 @@ export default function ForSale() {
                       </h5>
                     </div>
 
-                    <h4 className={el.productTitle}>
+                    <h4 className={S.productTitle}>
                       {el.title.length < 60
                         ? el.title
                         : el.title.substr(0, 60) + "..."}
