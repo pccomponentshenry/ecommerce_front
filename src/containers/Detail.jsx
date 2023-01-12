@@ -17,6 +17,7 @@ export default function Detail() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
+  const isDarkMode = useSelector(state => state.isDarkMode);
   const { user, isAuthenticated } = useAuth0();
 
   const handleAddToCart = () => {
@@ -65,7 +66,7 @@ export default function Detail() {
   return (
     <div className={D.Container}>
       <div className={D.back} onClick={() => navigate(-1)}>
-        <img src={back} alt="" />
+        <img className={ isDarkMode === true ? D.backImgDark : D.backimg} src={back} alt="" />
       </div>
       <div className={D.imageContainer}>
         <Carousel img={imgs} />

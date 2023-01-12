@@ -1,7 +1,7 @@
 .cardContainer {
   padding: 10px;
   padding-top: 20px;
-  padding-bottom: 0px;
+  padding-bottom: 20px;
   background-color: #c2c2c2;
 }
 
@@ -68,9 +68,7 @@
   font-size: 18px;
 }
 
-.noProductsCont span {
-  color: rgb(128, 128, 128);
-}
+
 .noProductsCont span:hover {
   transition: 0.15s ease-in-out;
   color: #2bfab7;

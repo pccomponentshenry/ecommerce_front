@@ -69,13 +69,14 @@
 }
 .lightmode li {
   font-weight: 600;
+  color: #000;
 }
 .lightmode select {
   color: rgb(0, 0, 0);
   font-size: 14px;
 }
 .lightmode a {
-  color: #222;
+  color: #000;
 }
 
 * {

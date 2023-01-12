@@ -29,7 +29,7 @@
   border-radius: 10px;
   margin-top: 60px;
   overflow-y: scroll;
-  background-color: rgb(15, 15, 15);
+  background-color: rgb(48, 48, 48);
 }
 
 .BtnContainer {
@@ -85,24 +85,24 @@
   margin-right: 5px;
   border: solid 1px #fff;
   border-radius: 30px;
-  color: #fff;
+  /* color: #fff; */
   font-size: 16px;
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 3px;
 }
 .addProduct h5 {
-  color: #fff;
+  /* color: #fff; */
   font-size: 14px;
 }
 .addProduct:hover > h4 {
   transition: 0.15s ease-in-out;
-  color: #2bfab7;
-  border: solid 1px #2bfab7;
+  /* color: #2bfab7; */
+  /* border: solid 1px #2bfab7; */
 }
 .addProduct:hover > h5 {
   transition: 0.15s ease-in-out;
-  color: #2bfab7;
+  /* color: #2bfab7; */
 }
 
 @media screen and (max-width: 500px) {
