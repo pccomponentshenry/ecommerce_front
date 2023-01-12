@@ -11,6 +11,8 @@
   top: 0px;
   z-index: 300;
   padding-left: 30px;
+  background-color: rgb(128, 39, 155);
+  justify-content: center;
 }
 
 .container h5 {
@@ -31,6 +33,13 @@
   position: relative;
   width: 100%;
   color: #fff;
+}
+.noProducts h5 {
+  color: #fff;
+  font-size: 18px;
+}
+.noProducts p {
+  color: rgb(128, 128, 128);
 }
 
 /* .noProducts p:hover {

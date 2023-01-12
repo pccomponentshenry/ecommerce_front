@@ -9,12 +9,11 @@ import ProfileAddresses from "../components/ProfileAddresses";
 import U from "../styles/ProfileInfo.module.css";
 
 export default function ProfileDetail(props) {
-
   const [active, setActive] = useState({
     fav: true,
     sales: false,
     purchases: false,
-    addresses: false
+    addresses: false,
   });
   const [popUp, setPopUp] = useState({
     form: false,
@@ -23,16 +22,36 @@ export default function ProfileDetail(props) {
 
   const handleClick = e => {
     if (e.target.id === "sales") {
-      return setActive({ fav: false, sales: true, purchases: false, addresses: false });
+      return setActive({
+        fav: false,
+        sales: true,
+        purchases: false,
+        addresses: false,
+      });
     }
     if (e.target.id === "purchases") {
-      return setActive({ fav: false, sales: false, purchases: true, addresses: false });
+      return setActive({
+        fav: false,
+        sales: false,
+        purchases: true,
+        addresses: false,
+      });
     }
     if (e.target.id === "fav") {
-      return setActive({ fav: true, sales: false, purchases: false, addresses: false });
+      return setActive({
+        fav: true,
+        sales: false,
+        purchases: false,
+        addresses: false,
+      });
     }
     if (e.target.id === "addresses") {
-      return setActive({ fav: false, sales: false, purchases: false, addresses: true });
+      return setActive({
+        fav: false,
+        sales: false,
+        purchases: false,
+        addresses: true,
+      });
     }
   };
   const handleReset = () => {
@@ -65,9 +84,14 @@ export default function ProfileDetail(props) {
 
   useEffect(() => {
     if (props.purchases) {
-      setActive({ fav: false, sales: false, purchases: true, addresses: false });
+      setActive({
+        fav: false,
+        sales: false,
+        purchases: true,
+        addresses: false,
+      });
       Swal.fire({
-        title: 'Successful Purchase!',
+        title: "Successful Purchase!",
         html: `Thank you for your purchase <br><br> Redirecting to your orders...`,
         background: "#272727",
         color: "#fff",
@@ -77,10 +101,10 @@ export default function ProfileDetail(props) {
           rgba(130,130,130,0.4)
           left top
           no-repeat
-        `
-      })
+        `,
+      });
     }
-  }, [])
+  }, []);
 
   return (
     <div>
@@ -122,30 +146,33 @@ export default function ProfileDetail(props) {
           <button
             onClick={handleClick}
             id="purchases"
-            className={`${active.purchases ? U.active : U.inactive} ${U.purchasesBtn}`}
+            className={`${active.purchases ? U.active : U.inactive} ${
+              U.purchasesBtn
+            }`}
           >
             Purchases
           </button>
           <button
             onClick={handleClick}
             id="addresses"
-            className={`${active.addresses ? U.active : U.inactive} ${U.addressesBtn}`}
+            className={`${active.addresses ? U.active : U.inactive} ${
+              U.addressesBtn
+            }`}
           >
             Addresses
           </button>
         </div>
 
-        <div
-          className={U.cardsContainerWhite}
-        >
+        <div className={U.cardsContainerWhite}>
           {active.fav ? (
             <UserFav />
           ) : active.sales ? (
             <ForSale />
           ) : active.purchases ? (
             <Purchases />
-          ) :
-            <ProfileAddresses />}
+          ) : (
+            <ProfileAddresses />
+          )}
         </div>
       </div>
     </div>

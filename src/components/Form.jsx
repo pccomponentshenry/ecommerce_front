@@ -214,12 +214,12 @@ export default function Form() {
       <div className={F.form}>
         <form onSubmit={e => handleSubmit(e)} autoComplete="off">
           <div className={F.titleCont}>
-            <h5>New product</h5>
-            <h6>Add images of your product</h6>
+            <h3>New product</h3>
+            <h6>Upload an image</h6>
           </div>
 
           <div className={F.container}>
-            <h5>Upload an image</h5>
+            {/* <h6>Upload an image</h6> */}
             <input
               type="file"
               name="uploadfile"

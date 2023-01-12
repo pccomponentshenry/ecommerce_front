@@ -166,7 +166,7 @@
 }
 .payment h3 {
   font-size: 16px;
-  margin-top: 10px;
+  /* margin-top: 0px; */
 }
 .loginBtn {
   background-color: #212121;
@@ -223,13 +223,14 @@
     background-color: #2bfab7;
     border: none;
     height: 25px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 20px;
     color: #000;
     position: relative;
     margin-bottom: 10px;
     font-size: 14px;
+    float: right;
   }
   .total {
     font-size: 14px;
@@ -257,5 +258,8 @@
     position: relative;
     top: 30px;
     font-size: 14px;
+  }
+  .payment {
+    height: 40px;
   }
 }

@@ -1,11 +1,12 @@
 .cardContainer {
   display: grid;
-    width: 75%;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    row-gap: 50px;
-    position: relative;
-    margin: 0 auto;
-    top: 30px;
+  width: 75%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 25px;
+  position: relative;
+  margin: 0 auto;
+  top: 30px;
+  padding-bottom: 30px;
 }
 
 .pagination {
@@ -55,12 +56,10 @@
 }
 @media screen and (max-width: 500px) {
   .cardContainer {
-    width: 100%;
     margin-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     align-items: center;
   }
 
@@ -115,5 +114,8 @@
     color: #111;
     background-color: #2bfab7;
     overflow: hidden;
+  }
+  .name {
+    border: solid 1px red;
   }
 }

@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import AddressForm from "./AddressForm";
 import { capitalizeEachLetter } from "../utils/functions";
 import { Link } from "react-router-dom";
-import Loader from "../Images/loader.gif"
-import defaultPic from "../Images/admin_pic.png"
+import Loader from "../Images/loader.gif";
+import defaultPic from "../Images/admin_pic.png";
 
 export default function UserInfo({
   form,
@@ -22,13 +22,15 @@ export default function UserInfo({
   const users = useSelector(state => state.user);
 
   if (isLoading) {
-    return <div className={U.container}>
-      <div className={U.authContainer}>
-        <div className={U.imgContainer}>
-          <img className={U.loaderGif} src={Loader} />
+    return (
+      <div className={U.container}>
+        <div className={U.authContainer}>
+          <div className={U.imgContainer}>
+            <img className={U.loaderGif} src={Loader} />
+          </div>
         </div>
       </div>
-    </div>;
+    );
   }
   return (
     <>
@@ -42,20 +44,19 @@ export default function UserInfo({
         <div className={U.container}>
           <div className={U.authContainer}>
             <div className={U.imgContainer}>
-              <img className={U.profilePic} src={user.picture.length > 0 ? user.picture : defaultPic} alt={user.name} />
+              <img
+                className={U.profilePic}
+                src={user.picture.length > 0 ? user.picture : defaultPic}
+                alt={user.name}
+              />
             </div>
             <div className={U.nameContainer}>
               <h3 className={U.name}>{user.name}</h3>
               <h3 className={U.email}>{user.email}</h3>
               <h3 className={U.email}>
-                Category:{" "}
-                {users.isAdmin ===
-                  "true"
-                  ? "Admin"
-                  : "User"}
+                Category: {users.isAdmin === "true" ? "Admin" : "User"}
               </h3>
-              {users.isAdmin ===
-                "true" ? (
+              {users.isAdmin === "true" ? (
                 <Link className={U.Link} to="/dashboard/">
                   <div className={U.DashBoardButton}>
                     <button>Go to Dashboard</button>
@@ -74,20 +75,21 @@ export default function UserInfo({
             <div className={U.adressCont}>
               {defaultAddress ? (
                 <>
-                  <h3>{`${capitalizeEachLetter(defaultAddress.streetName)} ${defaultAddress.streetNumber
-                    }, ${capitalizeEachLetter(defaultAddress.apartment)}`}</h3>
+                  <h3>{`${capitalizeEachLetter(defaultAddress.streetName)} ${
+                    defaultAddress.streetNumber
+                  }, ${capitalizeEachLetter(defaultAddress.apartment)}`}</h3>
                   <h3>{`Zip Code: ${defaultAddress.zipCode}`}</h3>
                   <h3>{defaultAddress.locationName}, Argentina</h3>
-                  <button className={U.addAddress} onClick={handleOpen}>
+                  <div className={U.addAddress} onClick={handleOpen}>
                     Add a new address
-                  </button>
+                  </div>
                 </>
               ) : (
                 <>
                   <h3>You don't have any addresses yet</h3>
-                  <button className={U.addAddress} onClick={handleOpen}>
+                  <div className={U.addAddress} onClick={handleOpen}>
                     Add a new address
-                  </button>
+                  </div>
                 </>
               )}
             </div>
