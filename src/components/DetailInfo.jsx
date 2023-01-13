@@ -43,7 +43,7 @@ export default function DetailInfo({ handleAddToCart }) {
       <div className={D.dataContainer}>
         <span className={D.category}>{product.category}</span>
         <div className={D.titleContainer}>
-          <h3 className={D.name}>{product.title}</h3>
+          <h3 className={D.name}>{product.name}</h3>
         </div>
         <h3 className={D.brand}>Brand: {product.brand} </h3>
         <span className={D.stock}>{product.stock} units</span>
