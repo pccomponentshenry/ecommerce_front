@@ -33,19 +33,19 @@ export default class Bot extends Component {
                 steps={[
                         {
                         id: '1',
-                        message: '¡Hola! Encantado de conocerte. Soy el chatbot de Play Expert. Si tienes cualquier duda, aquí estoy para resolver tus preguntas',
+                        message: 'Hi! Nice to meet you. I am Play Expert chatbot. If you have any questions, I am here to help you',
                         trigger:'1A'
                         },
                         {
                         id: '1A',
-                        message: 'Cual es tu nombre?',
+                        message: `What's your name?`,
                         trigger: '2',
                         },
                         {
                         id: '2',
                         user: true,
                         validator: (value) => {
-                            if (/^[A-Z]{1}[a-z]{2,15}$/.test(value)) {
+                            if (/^[a-zA-Z]{1}[a-z]{2,15}$/.test(value)) {
                                 return true;
                             }
                             else {
@@ -56,93 +56,93 @@ export default class Bot extends Component {
                         },
                         {
                         id: '3',
-                        message: '{previousValue}, encantado de conocerte!. ¿Cómo puedo ayudarte?',
+                        message: '{previousValue}, Nice to meet you!. ¿How can I help you?',
                         trigger:'4'  
                         },
                         {
                             id: "4",
                             options: [
-                                {value: "a", label: "Quiero comprar", trigger: "5"},
-                                {value: "b", label: "Quiero verder", trigger: "6"},
-                                {value: "c", label: "Quiero registrarme", trigger: "7"},
+                                {value: "a", label: "I want to buy", trigger: "5"},
+                                {value: "b", label: "I want to sell", trigger: "6"},
+                                {value: "c", label: "I want to register", trigger: "7"},
                             ]
                         },
                         {
                             id: "5",
-                            message: "Si tu deseas comprar, te invitamos a registrate para que puedas acceder a todas las opciones de Play Expert",
+                            message: "If you want to buy, we invite you to register so you can access all Play Expert options",
                             trigger: "5A"
                         },
                         {
                             id: "5A",
-                            message: "Una vez que estes registrado(a) puedes recorrer los productos de tu interes usado los diferentes filltros que encontraras a tu disposición",
+                            message: "Once you are registered you can browse the products of your interest using the different filters that you will find at your disposal",
                             trigger: "5B"
                         },
                         {
                             id: "5B",
-                            message: "Puedes agregar a tu carrito de compra tantos productos como desees",
+                            message: "You can add as many products as you want to your shopping cart",
                             trigger: "5C"
                         },
                         {
                             id: "5C",
-                            message: "Registra una dirección de envío y confirma tu compra ingresando tus datos de tarjeta o medio de pago ",
+                            message: "Register a shipping address and confirm your purchase by entering your card details or payment method",
                             trigger: "5D"
                         },
                         {
                             id: "5D",
-                            message: "A tu email llegará tu confirmacion de compra, al finalizar el proceso tendras la opción de posterar reviews sobre tus productos adquiridos y seras parte de la familia Play Expert",
+                            message: "Your purchase confirmation will arrive to your email, at the end of the process you will have the option to post reviews about your purchased products and you will be part of the Play Expert family",
                             trigger: "8"
                         },
                         {
                             id: "6",
-                            message: "Si tu deseas vender, te invitamos a registrate para que puedas acceder a todas las opciones de Play Expert",
+                            message: "If you want to sell, we invite you to register so you can access all Play Expert options",
                             trigger: "6A"
                         },
                         {
                             id: "6A",
-                            message: "Una vez que estes registrado(a) puedes ingresar a la opcion seller, donde ingresaras tus productos a vender" ,
+                            message: "Once you are registered you can enter the seller option, where you will enter your products to sell" ,
                             trigger: "6B"
                         },
                         {
                             id: "6B",
-                            message: "Registra todos los datos solicitados de tus productos para que queden registrados en el catalogo y disponibles para ser adquiridos por otros usuarios" ,
+                            message: "Register all the requested data of your products so that they are registered in the catalog and available to be acquired by other users" ,
                             trigger: "8"
                         },
                         {
                             id: "7",
-                            message: "Para registrarte solo tienes que hacer click en loggin e ingresar tus datos de email y contraseña",
+                            message: "To register you just have to click on login and enter your email and password information",
                             trigger: "7A"
                         },
                         {
                             id: "7A",
-                            message: "Una vez ingresados los datos, se te informara via email de tu registro exitoso y podras hacer uso de las opciones de compra y venta de productos",
+                            message: "Once the data is entered, you will be informed via email of your successful registration and you will be able to make use of the options to buy and sell products.",
                             trigger: "7B"
                         },
                         {
                             id: "7B",
-                            message: "Al hacer click en tu usuario accederas a tu perfil donde tendras datos de tus compras realizadas, de tus productos a vender, de tus productos favoritos y tendras la opcion de postear tus reviews",
+                            message: "By clicking on your user you will access your profile where you will have data on your purchases, your products to sell, your favorite products and you will have the option to post your reviews",
                             trigger: "8"
                         },
                         {
                             id:'8',
-                            message: "¿Resolviste tus dudas?",
+                            message: "¿You solved your doubts?",
                             trigger: "8A"
                         },
                         {
                             id:'8A',
                             options: [
-                                {value: "y", label: "Si", trigger: "9"},
+                                {value: "y", label: "Yes", trigger: "9"},
                                 {value: "n", label: "No", trigger: "4"},
                             ]
                         },
                         {
                             id:'9',
-                            message: '¿Te gustaria registrarte en Play Expert?',
+                            message: '¿Would you like to sign up for Play Expert?',
                             trigger:'9A'
                         },
                         {
                             id:'9A',
                             options: [
-                                {value: "y", label: "Si", trigger: "9B"},
+                                {value: "y", label: "Yes", trigger: "9B"},
                                 {value: "n", label: "No", trigger: "10"},
                             ]
                         },
@@ -153,7 +153,7 @@ export default class Bot extends Component {
                         },
                         {
                             id:'10',
-                            message: 'Te entendemos, esperamos que vuelvas pronto',
+                            message: 'We understand you, we hope you come back soon',
                             end:true
                         },
 
