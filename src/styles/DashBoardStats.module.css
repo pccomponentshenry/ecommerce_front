@@ -94,7 +94,7 @@ th {
   width: 100%;
   top: 11vh;
   background-color: rgb(128, 39, 155);
-  padding-left: 100px;
+  padding-left: 95px;
   z-index: 100;
 }
 .statusCont {
@@ -106,17 +106,17 @@ th {
 }
 
 .ok {
-  color: rgb(0, 200, 0);
+  color: #4caf50;
 }
 
 .bad {
-  color: rgb(170, 0, 0);
+  color: #d32f2f;
 }
 
 .statusUserOk {
   width: 10px;
   height: 10px;
-  background-color: rgb(1, 159, 1);
+  background-color: #4caf50;
   border-radius: 50px;
   margin: 10px;
 }
@@ -124,7 +124,7 @@ th {
 .statusUserNo {
   width: 10px;
   height: 10px;
-  background-color: rgb(170, 0, 0);
+  background-color: #d32f2f;
   border-radius: 50px;
   margin: 10px;
 }

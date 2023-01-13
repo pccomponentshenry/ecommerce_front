@@ -70,7 +70,7 @@
 }
 
 .statusCont {
-  width: 60px;
+  width: fit-content;
   display: grid;
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -80,7 +80,7 @@
 .statusProdOk {
   width: 10px;
   height: 10px;
-  background-color: rgb(1, 159, 1);
+  background-color: #4caf50;
   border-radius: 50px;
   margin: 10px;
 }
@@ -88,7 +88,7 @@
 .statusProdNo {
   width: 10px;
   height: 10px;
-  background-color: rgb(170, 0, 0);
+  background-color: #d32f2f;
   border-radius: 50px;
   margin: 10px;
 }
@@ -99,10 +99,15 @@
   font-size: 14px;
   border-radius: 14px;
   font-weight: 600;
+  background-color: transparent;
+
+  border: solid 1px rgb(77, 77, 77);
 }
 .buttonEdit:hover {
-  animation: buttonHover;
-  animation-fill-mode: both;
+  /* animation: buttonHover;
+    animation-fill-mode: both; */
+  transition: 0.15s ease-in-out;
+  background-color: rgb(77, 77, 77);
 }
 
 .header {
@@ -112,16 +117,6 @@
   background-color: rgb(128, 39, 155);
   padding-left: 95px;
   z-index: 100;
-}
-@keyframes buttonHover {
-  from {
-    scale: 1;
-    background-color: #2bfab7;
-  }
-  to {
-    scale: 1.1;
-    background-color: #2bfab7;
-  }
 }
 
 .productImg {
