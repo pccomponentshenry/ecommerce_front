@@ -18,12 +18,11 @@
 }
 .backimg {
   width: 30px;
-  filter:invert() ;
+  filter: invert();
 }
 
 .backImgDark {
   width: 30px;
-  
 }
 
 .Container {
@@ -95,7 +94,7 @@
 
 .btnCont {
   position: absolute;
-  left: 50px;
+  right: 100px;
   width: 30%;
   bottom: 10px;
 }
@@ -234,7 +233,7 @@
 .ratingTitle {
   margin-right: 10px;
 }
-.ratingText{
+.ratingText {
   font-size: 14px;
 }
 

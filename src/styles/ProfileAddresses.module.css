@@ -48,23 +48,24 @@
   font-size: 16px;
   margin-bottom: 0.3rem;
   font-weight: 600;
+  color: #555 !important;
 }
 
 .titleCont h6 {
   font-size: 14px;
   margin-bottom: 0.3rem;
-  color: #212121;
+  color: #555;
 }
 
 .titleCont h4 {
   font-size: 16px;
-  color: #212121;
+  color: #555 !important;
 }
 .details {
   font-size: 12px;
   margin-top: 10px;
   margin-bottom: 5px;
-  color: #212121;
+  color: #555 !important;
 }
 
 .titleCont span {
