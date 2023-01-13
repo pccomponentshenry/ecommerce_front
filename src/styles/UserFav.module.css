@@ -32,7 +32,7 @@
   flex-direction: column;
   position: relative;
   width: 100%;
-  color: #fff;
+  /* color: #fff; */
 }
 .noProducts h5 {
   color: #fff;

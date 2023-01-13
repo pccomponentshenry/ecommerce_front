@@ -6,6 +6,7 @@ import D from "../styles/Detail.module.css";
 export default function DetailInfo({ handleAddToCart }) {
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
+  const brand = useSelector(state => state.brands);
   const user = useSelector(state => state.user);
   const favs = useSelector(state => state.favs);
   const [stars, setStars] = useState(0);
@@ -21,6 +22,7 @@ export default function DetailInfo({ handleAddToCart }) {
     }
   }, [product]);
 
+  
   useEffect(() => {
     if (favs && product) {
       favs.find(fav => fav.id === product.id)
@@ -43,7 +45,7 @@ export default function DetailInfo({ handleAddToCart }) {
         <div className={D.titleContainer}>
           <h3 className={D.name}>{product.title}</h3>
         </div>
-        <h3 className={D.brand}>Brand: {product.brand}</h3>
+        <h3 className={D.brand}>Brand: {product.brand} </h3>
         <span className={D.stock}>{product.stock} units</span>
         <div className={D.priceAndDescription}>
           <h3 className={D.price}>$ {product.price}</h3>
@@ -80,7 +82,7 @@ export default function DetailInfo({ handleAddToCart }) {
         ) : (
           <div>
             <label className={D.ratingTitle}>
-              <span style={{ color: "#fff", fontSize: "14px" }}>
+              <span className={D.ratingText}>
                 No reviews yet
               </span>
             </label>
