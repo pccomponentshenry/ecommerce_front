@@ -1,12 +1,14 @@
 .cardContainer {
   width: 47%;
-  border: solid 1px #555;
+  /* border: solid 1px #555; */
   border-radius: 8px;
   height: 100px;
   margin-bottom: 10px;
   margin-left: 10px;
   margin-right: 10px;
   overflow: hidden;
+  background-color: #fff;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.05);
 }
 
 .imgContainer {
@@ -31,7 +33,7 @@
 
 .name {
   text-align: left;
-  color: #fff;
+  color: #555;
   font-size: 14px;
   width: 370px;
   position: relative;
@@ -45,9 +47,9 @@
 
 .cardBtn {
   background-color: transparent;
-  border: solid 1px #2bfab7;
+  /* border: solid 1px #2bfab7; */
   border-radius: 5px;
-  color: #2bfab7;
+  color: #555 !important;
   font-size: 12px;
   position: relative;
   float: right;
@@ -56,10 +58,14 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+.cardBtn button {
+  color: #555;
+}
 .cardBtn:hover {
   transition: 0.15s ease-in-out;
-  background-color: #2bfab7;
-  color: #000;
+  background-color: #555;
+  border: solid 1px #555;
+  color: #fff !important;
 }
 
 .price {
@@ -69,11 +75,12 @@
   position: relative;
   left: 15px;
   top: 15px;
+  color: #555;
 }
 
 .active {
-  color: #2bfab7;
-  text-shadow: 1px 0 #2bfab7, -1px 0 #2bfab7, 0 1px #2bfab7, 0 -1px #2bfab7;
+  color: #555;
+  text-shadow: 1px 0 #555, -1px 0 #555, 0 1px #555, 0 -1px #555;
   position: relative;
   float: right;
   right: 20px;

@@ -5,7 +5,7 @@ import { postReview } from "../redux/actions/";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import Swal from "sweetalert2";
 
 export default function AddReview() {
   const dispatch = useDispatch();
@@ -18,7 +18,9 @@ export default function AddReview() {
     title: "",
     message: "",
     score: null,
-    picprofile: user ? user.picture : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
+    picprofile: user
+      ? user.picture
+      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU",
     username: user ? user.nickname : "Anónimo",
   });
   const [error, setError] = useState({});
@@ -54,9 +56,19 @@ export default function AddReview() {
   const handleChange = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
+
+  const successAlert = () => {
+    Swal.fire({
+      title: "Review succesfully posted!",
+      icon: "success",
+      background: "#272727",
+      color: "#fff",
+    });
+  };
+
   const handleSubmit = () => {
     dispatch(postReview(input));
-    alert("Review succesfully posted");
+    successAlert();
     navigate("/profile");
   };
 

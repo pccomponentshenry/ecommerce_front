@@ -1,11 +1,16 @@
+.cardContainer {
+  background-color: #c2c2c2;
+  padding: 20px;
+}
 .container {
   width: 100%;
   background-color: #fff;
-  border-bottom: 1px solid rgb(161, 161, 161);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.05);
   margin-right: 10px;
   padding: 10px;
   overflow: hidden;
   height: fit-content;
+  border-radius: 10px;
 }
 
 .noProductsCont {
