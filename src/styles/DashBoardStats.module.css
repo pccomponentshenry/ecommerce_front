@@ -1,67 +1,47 @@
-/* .content {
-  display: grid;
-  grid-template-columns: 1fr 9fr;
-  justify-content: center;
-  padding-top: 100px;
-} */
-
 .content {
   justify-content: center;
   align-items: center;
   display: flex;
   height: 100vh;
 }
-/* .sideContainer {
-  width: 200px;
-  display: grid;
-  grid-template-rows: repeat(12, 80px);
-  height: 85vh;
+.Container {
+  height: 100vh;
+}
+.content h1 {
+  font-size: 20px;
   position: relative;
-  top: 20px;
-  left: 0;
-  padding-top: 70px;
-  border-right: solid 2px #fdfdfd;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  z-index: 999;
-  color: #FFF;
-} */
+  text-transform: uppercase;
+}
 .sideContainer {
   width: 250px;
   height: 50vh;
-  position: relative;
-  top: 20px;
+  top: 125px;
   left: 0;
   display: flex;
-  margin-top: -100px;
-  border-right: solid 1px #383838;
+  /* margin-top: -100px; */
   justify-content: center;
   z-index: 999;
   color: #fff;
+  position: absolute;
 }
 .statsContainer {
   padding: 15px;
-  width: 80%;
-  height: fit-content;
-  border-top: solid 1px #0097676f;
-  border-left: solid 1px #0097676f;
-  border-bottom: solid 1px #0097676f;
-  border-right: solid 1px #0097676f;
+  width: 90%;
   border-radius: 15px;
-  top: 0px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 30px;
   background-color: transparent;
-  height: fit-content;
+  height: 60vh;
+  overflow-y: scroll;
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: 60px;
   color: #fff;
   align-content: center;
   flex-direction: column;
   text-align: center;
   justify-content: flex-start;
+  background-color: #0a0a0a;
 }
 
 .tabla {
@@ -70,13 +50,23 @@
   margin: 0 auto;
   justify-content: center;
   color: rgb(255, 255, 255);
-  background-color: #181818;
+  background-color: rgb(52, 13, 65);
   border: 1px solid #222222;
 }
-
+.dashBlock {
+  position: absolute;
+  bottom: 0px;
+  border-left: solid 1px #222222;
+  height: 86vh;
+  margin-left: 20px;
+  /* position: relative; */
+  /* top: 46px; */
+  background-color: #222222;
+  width: 80%;
+  right: 0px;
+}
 .tabla thead {
   color: rgb(255, 255, 255);
-  /* background-color: transparent; */
   border: 1px solid #222222;
   height: 40px;
 }
@@ -91,11 +81,21 @@
 th {
   color: #dfdfdf;
   font-weight: 400;
-  border: solid 1px #00e29b6f;
+  border: solid 1px rgb(128, 39, 155);
   padding: 10px;
 }
 .chartTitle {
-  font-size: 20px;
+  font-size: 16px;
+  position: absolute;
+  top: 4svh;
+}
+.header {
+  position: absolute;
+  width: 100%;
+  top: 11vh;
+  background-color: rgb(128, 39, 155);
+  padding-left: 95px;
+  z-index: 100;
 }
 .statusCont {
   width: 60px;
@@ -106,17 +106,17 @@ th {
 }
 
 .ok {
-  color: rgb(0, 200, 0);
+  color: #4caf50;
 }
 
 .bad {
-  color: rgb(170, 0, 0);
+  color: #d32f2f;
 }
 
 .statusUserOk {
   width: 10px;
   height: 10px;
-  background-color: rgb(1, 159, 1);
+  background-color: #4caf50;
   border-radius: 50px;
   margin: 10px;
 }
@@ -124,7 +124,7 @@ th {
 .statusUserNo {
   width: 10px;
   height: 10px;
-  background-color: rgb(170, 0, 0);
+  background-color: #d32f2f;
   border-radius: 50px;
   margin: 10px;
 }

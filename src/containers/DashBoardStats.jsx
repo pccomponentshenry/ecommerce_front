@@ -61,11 +61,12 @@ export default function DashBoardStats() {
 
   return (
     <div className={s.content}>
+      <div className={s.header}>Sales statistics</div>
       <div className={s.sideContainer}>
         <SideDash />
       </div>
-      <div className={s.statsContainer}>
-        <div>
+      <div className={s.dashBlock}>
+        <div className={s.statsContainer}>
           <h2 className={s.chartTitle}>Best Sales</h2>
           <table className={s.tabla}>
             <thead>
@@ -87,31 +88,31 @@ export default function DashBoardStats() {
               </tbody>
             ))}
           </table>
-        </div>
 
-        <div>
-          <h2 className={s.chartTitle}>Latest Sales</h2>
-          <table className={s.tabla}>
-            <thead>
-              <tr>
-                <th>IMAGE</th>
-                <th>PRODUCT</th>
-                <th>DATE</th>
-              </tr>
-            </thead>
-
-            {latestSales.map(p => (
-              <tbody key={p.productId}>
+          <div>
+            <h2 className={s.chartTitle}>Latest Sales</h2>
+            <table className={s.tabla}>
+              <thead>
                 <tr>
-                  <td>
-                    <img className={s.image} src={p.img} />
-                  </td>
-                  <td>{p.title}</td>
-                  <td>{p.purchaseDate.substr(0, 10)}</td>
+                  <th>IMAGE</th>
+                  <th>PRODUCT</th>
+                  <th>DATE</th>
                 </tr>
-              </tbody>
-            ))}
-          </table>
+              </thead>
+
+              {latestSales.map(p => (
+                <tbody key={p.productId}>
+                  <tr>
+                    <td>
+                      <img className={s.image} src={p.img} />
+                    </td>
+                    <td>{p.title}</td>
+                    <td>{p.purchaseDate.substr(0, 10)}</td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+          </div>
         </div>
       </div>
     </div>
