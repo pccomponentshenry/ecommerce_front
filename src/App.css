@@ -39,7 +39,7 @@
 /* LIGHT MODE*/
 
 .lightmode {
-  background-color: rgb(221, 221, 221);
+  background-color: rgb(216, 216, 216);
   height: 100vh;
   color: #000;
   transition-property: background-color, color;

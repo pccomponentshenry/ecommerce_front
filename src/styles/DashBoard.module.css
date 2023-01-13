@@ -30,10 +30,7 @@
 .dashContainer {
   width: 60%;
   height: fit-content;
-  border-top: solid 1px #0097676f;
-  border-left: solid 1px #0097676f;
-  border-bottom: solid 1px #0097676f;
-  border-right: solid 1px #0097676f;
+  border: solid 1px rgb(52, 13, 65);
   border-radius: 10px;
   /* top: 50px; */
   /* display: grid; */
@@ -54,29 +51,8 @@
   flex-direction: column;
   width: fit-content;
 }
-.div1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.div2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.div3 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.div4 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+.iconBlock h5 {
+  color: #fff;
 }
 
 .link {
@@ -86,7 +62,13 @@
 }
 
 .link:hover {
-  color: #2bfab7;
+  color: rgb(153, 153, 153);
+  transition: 0.15s ease-in-out;
+}
+
+.link:hover > h5 {
+  color: rgb(153, 153, 153);
+  transition: 0.15s ease-in-out;
 }
 
 .loadingCont {

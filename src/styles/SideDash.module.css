@@ -4,8 +4,10 @@
 }
 .Container h5 {
   font-size: 18px;
-  border-bottom: solid 1px #2bfab7;
+  border-bottom: solid 1px rgb(128, 39, 155);
+  color: #fff;
   padding-bottom: 5px;
+  width: 100px;
 }
 /* 
 .link {
@@ -20,7 +22,6 @@
   /* margin: 15px; 
 } */
 .sideNav {
-  /* border: solid 1px red; */
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -38,5 +39,5 @@
 }
 .sideNav li:hover {
   transition: 0.15s ease-in-out;
-  color: #2bfab7;
+  color: rgb(153, 153, 153);
 }

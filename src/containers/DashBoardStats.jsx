@@ -61,36 +61,33 @@ export default function DashBoardStats() {
 
   return (
     <div className={s.content}>
+      <div className={s.header}>Sales statistics</div>
       <div className={s.sideContainer}>
         <SideDash />
       </div>
-      <div className={s.Container}>
-        <h1>Sales statistics</h1>
-
+      <div className={s.dashBlock}>
         <div className={s.statsContainer}>
-          <div>
-            <h2 className={s.chartTitle}>Best Sales</h2>
-            <table className={s.tabla}>
-              <thead>
+          <h2 className={s.chartTitle}>Best Sales</h2>
+          <table className={s.tabla}>
+            <thead>
+              <tr>
+                <th>IMAGE</th>
+                <th>PRODUCT</th>
+                <th>SALES</th>
+              </tr>
+            </thead>
+            {bestSales.map(p => (
+              <tbody key={p.productId}>
                 <tr>
-                  <th>IMAGE</th>
-                  <th>PRODUCT</th>
-                  <th>SALES</th>
+                  <td>
+                    <img className={s.image} src={p.img} />
+                  </td>
+                  <td>{p.title}</td>
+                  <td>{p.quantity}</td>
                 </tr>
-              </thead>
-              {bestSales.map(p => (
-                <tbody key={p.productId}>
-                  <tr>
-                    <td>
-                      <img className={s.image} src={p.img} />
-                    </td>
-                    <td>{p.title}</td>
-                    <td>{p.quantity}</td>
-                  </tr>
-                </tbody>
-              ))}
-            </table>
-          </div>
+              </tbody>
+            ))}
+          </table>
 
           <div>
             <h2 className={s.chartTitle}>Latest Sales</h2>
