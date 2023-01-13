@@ -6,7 +6,7 @@
   height: 100vh;
   color: #fff;
   transition-property: background-color, color;
-  transition-duration: 2s;
+  transition-duration: 0.15s;
 }
 
 .darkmode a {
@@ -43,7 +43,7 @@
   height: 100vh;
   color: #000;
   transition-property: background-color, color;
-  transition-duration: 2s;
+  transition-duration: 0.15s;
 }
 
 .lightmode button {

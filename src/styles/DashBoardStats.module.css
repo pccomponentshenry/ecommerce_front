@@ -27,6 +27,12 @@
   z-index: 999;
   color: #FFF;
 } */
+.Container {
+  border: solid 1px red;
+  height: 100vh;
+  /* padding: 30px; */
+  /* background-color: #9b9b9b; */
+}
 .sideContainer {
   width: 250px;
   height: 50vh;
@@ -42,19 +48,16 @@
 }
 .statsContainer {
   padding: 15px;
-  width: 80%;
-  height: fit-content;
-  border-top: solid 1px #0097676f;
-  border-left: solid 1px #0097676f;
-  border-bottom: solid 1px #0097676f;
-  border-right: solid 1px #0097676f;
+  width: 70%;
+  border: solid 1px #0097676f;
   border-radius: 15px;
   top: 0px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 30px;
   background-color: transparent;
-  height: fit-content;
+  height: 50vh;
+  overflow-y: scroll;
   margin: 0 auto;
   margin-top: 30px;
   color: #fff;
@@ -62,6 +65,7 @@
   flex-direction: column;
   text-align: center;
   justify-content: flex-start;
+  background-color: #181818;
 }
 
 .tabla {

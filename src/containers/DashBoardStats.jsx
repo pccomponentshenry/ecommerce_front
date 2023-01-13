@@ -64,54 +64,58 @@ export default function DashBoardStats() {
       <div className={s.sideContainer}>
         <SideDash />
       </div>
-      <div className={s.statsContainer}>
-        <div>
-          <h2 className={s.chartTitle}>Best Sales</h2>
-          <table className={s.tabla}>
-            <thead>
-              <tr>
-                <th>IMAGE</th>
-                <th>PRODUCT</th>
-                <th>SALES</th>
-              </tr>
-            </thead>
-            {bestSales.map(p => (
-              <tbody key={p.productId}>
-                <tr>
-                  <td>
-                    <img className={s.image} src={p.img} />
-                  </td>
-                  <td>{p.title}</td>
-                  <td>{p.quantity}</td>
-                </tr>
-              </tbody>
-            ))}
-          </table>
-        </div>
+      <div className={s.Container}>
+        <h1>Sales statistics</h1>
 
-        <div>
-          <h2 className={s.chartTitle}>Latest Sales</h2>
-          <table className={s.tabla}>
-            <thead>
-              <tr>
-                <th>IMAGE</th>
-                <th>PRODUCT</th>
-                <th>DATE</th>
-              </tr>
-            </thead>
-
-            {latestSales.map(p => (
-              <tbody key={p.productId}>
+        <div className={s.statsContainer}>
+          <div>
+            <h2 className={s.chartTitle}>Best Sales</h2>
+            <table className={s.tabla}>
+              <thead>
                 <tr>
-                  <td>
-                    <img className={s.image} src={p.img} />
-                  </td>
-                  <td>{p.title}</td>
-                  <td>{p.purchaseDate.substr(0, 10)}</td>
+                  <th>IMAGE</th>
+                  <th>PRODUCT</th>
+                  <th>SALES</th>
                 </tr>
-              </tbody>
-            ))}
-          </table>
+              </thead>
+              {bestSales.map(p => (
+                <tbody key={p.productId}>
+                  <tr>
+                    <td>
+                      <img className={s.image} src={p.img} />
+                    </td>
+                    <td>{p.title}</td>
+                    <td>{p.quantity}</td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+          </div>
+
+          <div>
+            <h2 className={s.chartTitle}>Latest Sales</h2>
+            <table className={s.tabla}>
+              <thead>
+                <tr>
+                  <th>IMAGE</th>
+                  <th>PRODUCT</th>
+                  <th>DATE</th>
+                </tr>
+              </thead>
+
+              {latestSales.map(p => (
+                <tbody key={p.productId}>
+                  <tr>
+                    <td>
+                      <img className={s.image} src={p.img} />
+                    </td>
+                    <td>{p.title}</td>
+                    <td>{p.purchaseDate.substr(0, 10)}</td>
+                  </tr>
+                </tbody>
+              ))}
+            </table>
+          </div>
         </div>
       </div>
     </div>
