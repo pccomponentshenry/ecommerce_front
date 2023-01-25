@@ -16,9 +16,15 @@
   margin-top: 90px;
   cursor: pointer;
 }
-.back img {
+.backimg {
+  width: 30px;
+  filter: invert();
+}
+
+.backImgDark {
   width: 30px;
 }
+
 .Container {
   height: 100vh;
   width: 600px;
@@ -56,7 +62,7 @@
   font-weight: 600;
   padding-bottom: 10px;
   padding-top: 5px;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .category,
@@ -64,12 +70,12 @@
 .description {
   font-weight: 200;
   font-size: 14px;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .brand {
   font-size: 16px;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .stock {
@@ -83,12 +89,12 @@
 
 .price {
   font-size: 16px;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .btnCont {
   position: absolute;
-  left: 50px;
+  right: 100px;
   width: 30%;
   bottom: 10px;
 }
@@ -96,7 +102,7 @@
 .btnCont button {
   background-color: transparent;
   border: solid 1px #2bfab7;
-  color: #2bfab7;
+  /* color: #2bfab7; */
   border-radius: 20px;
   padding-left: 10px;
   padding-right: 10px;
@@ -208,7 +214,7 @@
 }
 
 .reviewsContainer h3 {
-  color: #fff;
+  /* color: #fff; */
   font-size: 16px;
   font-weight: 600;
   overflow: hidden;
@@ -217,7 +223,7 @@
 .rating {
   /* position: absolute; */
   right: 30px;
-  color: #fff;
+  /* color: #fff; */
   font-size: 14px;
   font-weight: 200;
   bottom: 20px;
@@ -225,6 +231,9 @@
 
 .ratingTitle {
   margin-right: 10px;
+}
+.ratingText {
+  font-size: 14px;
 }
 
 .fullStar {

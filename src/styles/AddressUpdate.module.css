@@ -1,6 +1,6 @@
 .formContainer {
   z-index: 900;
-  background-color: #fafafa;
+  background-color: #dddddd;
   width: 40%;
   padding: 40px;
   border-radius: 20px;
@@ -47,8 +47,11 @@
   margin-bottom: 25px;
   margin-right: 10px;
   padding-left: 5px;
+  color: #212121;
 }
-
+.formContainer input::placeholder {
+  color: #212121;
+}
 .formContainer select {
   color: #212121;
   position: relative;
@@ -167,7 +170,7 @@
 }
 .exit {
   position: relative;
-  left: 430px;
+  left: 450px;
   bottom: 20px;
   cursor: pointer;
 }

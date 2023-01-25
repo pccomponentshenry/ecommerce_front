@@ -1,11 +1,15 @@
 .pageBtn {
   background-color: transparent;
-  color: #fff;
+  /* color: #fff; */
   border: none;
   font-size: 18px;
   position: relative;
   bottom: 2px;
   cursor: pointer;
+}
+
+.a{
+  text-decoration: none;
 }
 
 .numberList {

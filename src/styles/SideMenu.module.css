@@ -121,13 +121,13 @@ option {
 }
 
 .sharedInput {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 600;
 }
 
 .sharedInput span {
   color: #fff;
-  text-transform: none;
+  /* text-transform: uppercase; */
   font-size: 10px;
   font-weight: 200;
   position: relative;
@@ -141,6 +141,7 @@ option {
   height: 25px;
   margin-bottom: 1px;
   outline: none;
+  color: #fff;
 }
 
 .inputRight {
@@ -199,6 +200,9 @@ option {
 .label,
 .orderPriceTitle {
   border-bottom: solid 1px gray;
+}
+.sharedInput input {
+  border: solid 1px #272727;
 }
 
 @media screen and (max-width: 500px) {

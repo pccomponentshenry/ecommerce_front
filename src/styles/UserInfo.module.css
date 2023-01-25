@@ -32,13 +32,13 @@
   flex-direction: column;
 }
 .name {
-  color: #fff;
+  /* color: #fff; */
   font-size: 18px;
   text-align: center;
 }
 
 .email {
-  color: #fff;
+  /* color: #fff; */
   font-weight: 200;
   font-size: 14px;
   text-align: center;
@@ -55,7 +55,7 @@
   justify-content: center;
   border-radius: 8px;
   background-color: rgb(128, 39, 155);
-  color: #fff;
+  /* color: #fff; */
   margin-bottom: 8px;
 }
 .DashBoardButton button:hover {
@@ -74,7 +74,7 @@
   flex-direction: column;
 }
 .title {
-  color: #fff;
+  /* color: #fff; */
   font-size: 14px;
   text-align: center;
 }
@@ -84,13 +84,13 @@
   flex-direction: column;
 }
 .adressCont h3 {
-  color: #fff;
+  /* color: #fff; */
   font-size: 12px;
   font-weight: 200;
   text-align: center;
 }
 .defaultTag {
-  color: #fff;
+  /* color: #fff; */
   font-size: 12px;
   padding-left: 5px;
   padding-right: 5px;
@@ -164,7 +164,7 @@
     display: none;
   }
   .name {
-    color: #fff;
+    /* color: #fff; */
     font-size: 18px;
     overflow: hidden;
   }

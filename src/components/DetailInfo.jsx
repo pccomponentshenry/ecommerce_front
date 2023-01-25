@@ -6,6 +6,7 @@ import D from "../styles/Detail.module.css";
 export default function DetailInfo({ handleAddToCart }) {
   const dispatch = useDispatch();
   const product = useSelector(state => state.product);
+  const brand = useSelector(state => state.brands);
   const user = useSelector(state => state.user);
   const favs = useSelector(state => state.favs);
   const [stars, setStars] = useState(0);
@@ -16,7 +17,7 @@ export default function DetailInfo({ handleAddToCart }) {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVuLDgkPGHh_tQ6VHyxmEpIA81Q0qMwdCUvQ&usqp=CAU";
 
   useEffect(() => {
-    if (product.id) {
+    if (product.name) {
       setStars(product.avgStars);
     }
   }, [product]);
@@ -41,9 +42,9 @@ export default function DetailInfo({ handleAddToCart }) {
       <div className={D.dataContainer}>
         <span className={D.category}>{product.category}</span>
         <div className={D.titleContainer}>
-          <h3 className={D.name}>{product.title}</h3>
+          <h3 className={D.name}>{product.name}</h3>
         </div>
-        <h3 className={D.brand}>Brand: {product.brand}</h3>
+        <h3 className={D.brand}>Brand: {product.brand} </h3>
         <span className={D.stock}>{product.stock} units</span>
         <div className={D.priceAndDescription}>
           <h3 className={D.price}>$ {product.price}</h3>
@@ -80,9 +81,7 @@ export default function DetailInfo({ handleAddToCart }) {
         ) : (
           <div>
             <label className={D.ratingTitle}>
-              <span style={{ color: "#fff", fontSize: "14px" }}>
-                No reviews yet
-              </span>
+              <span className={D.ratingText}>No reviews yet</span>
             </label>
             <label className={D.emptyStar}>★★★★★</label>
           </div>
