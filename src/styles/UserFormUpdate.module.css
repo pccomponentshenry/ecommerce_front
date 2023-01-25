@@ -81,7 +81,9 @@ input {
   padding-left: 8px;
   border-radius: 8px;
   /* color: #131313 !important; */
-  background-color: #131313;
+  background-color: transparent;
+  border: solid 1px #555;
+  color: #fff;
 }
 .status {
   width: 150px;

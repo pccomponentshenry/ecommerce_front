@@ -51,10 +51,10 @@
   border-radius: 3px;
   color: #111;
 }
-/* .lightmode input {
+.lightmode input {
   border: solid 1px #111;
   color: #111;
-} */
+}
 
 .lightmode h5 {
   color: rgb(128, 39, 155);
