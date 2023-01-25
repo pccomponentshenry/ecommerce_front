@@ -17,10 +17,12 @@
   color: #fff;
   border-radius: 3px;
 }
+
 /* .darkmode input {
   border: solid 1px #272727;
   color: #212121;
 } */
+
 .darkmode h5 {
   color: #2bfab7;
   font-size: 14px;
@@ -63,13 +65,14 @@
 }
 .lightmode li {
   font-weight: 600;
+  color: #000;
 }
 .lightmode select {
   color: rgb(0, 0, 0);
   font-size: 14px;
 }
 .lightmode a {
-  color: #222;
+  color: #000;
 }
 
 * {

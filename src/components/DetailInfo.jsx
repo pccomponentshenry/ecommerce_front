@@ -22,6 +22,7 @@ export default function DetailInfo({ handleAddToCart }) {
     }
   }, [product]);
 
+  
   useEffect(() => {
     if (favs && product) {
       favs.find(fav => fav.id === product.id)
@@ -81,7 +82,9 @@ export default function DetailInfo({ handleAddToCart }) {
         ) : (
           <div>
             <label className={D.ratingTitle}>
+
               <span className={D.ratingText}>No reviews yet</span>
+
             </label>
             <label className={D.emptyStar}>★★★★★</label>
           </div>
