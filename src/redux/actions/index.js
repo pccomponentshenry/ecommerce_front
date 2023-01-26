@@ -300,7 +300,6 @@ export const setFromStripe = () => dispatch => {
 
 //////////FAVORITES////////
 export const updateFavs = (product, userId) => async dispatch => {
-
   if (userId) {
     try {
       await axios.put(`${URL}/favorites/${userId}/${product.id}`);
@@ -318,12 +317,18 @@ export const updateFavs = (product, userId) => async dispatch => {
     const newFavs = [...favs];
 
     if (existingElementIdx !== -1) {
-      localStorage.setItem("favs", JSON.stringify(newFavs.filter(fav => fav.id !== product.id)));
+      localStorage.setItem(
+        "favs",
+        JSON.stringify(newFavs.filter(fav => fav.id !== product.id))
+      );
     } else {
       newFavs.push(product);
       localStorage.setItem("favs", JSON.stringify(newFavs));
     }
-    dispatch({ type: UPDATE_FAVS, payload: JSON.parse(localStorage.getItem("favs")) });
+    dispatch({
+      type: UPDATE_FAVS,
+      payload: JSON.parse(localStorage.getItem("favs")),
+    });
   }
 };
 
@@ -334,9 +339,9 @@ export const getFavs = userId => async dispatch => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-export const addLSFavsToDB = (userId) => async dispatch => {
+export const addLSFavsToDB = userId => async dispatch => {
   try {
     const favs = JSON.parse(localStorage.getItem("favs"));
     for (let i = 0; i < favs.length; i++) {
@@ -347,7 +352,7 @@ export const addLSFavsToDB = (userId) => async dispatch => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const clearError = () => {
   return { type: CLEAR_ERROR };
@@ -470,6 +475,6 @@ export function putUser(id, payload) {
     return dispatch({ type: PUT_USER, payload: res.data });
   };
 }
-export const setDarkMode = (payload) => dispatch => {
+export const setDarkMode = payload => dispatch => {
   return dispatch({ type: DARK_MODE, payload });
 };

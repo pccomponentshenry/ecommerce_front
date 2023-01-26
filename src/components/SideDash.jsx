@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 export default function SideDash() {
   return (
     <div className={s.Container}>
-      <h5>Admin</h5>
       <ul className={s.sideNav}>
+        <h5>Admin</h5>
         <Link style={{ textDecoration: "none" }} to="/dashboard">
           <li>
             <h6>Home</h6>

@@ -1,5 +1,5 @@
 import React from "react";
-import s from "../styles/Banned.module.css"
+import s from "../styles/Banned.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -10,12 +10,10 @@ const Banned = () => {
 
   return (
     <>
-
-
       {/* <div className={S.backgroundBanned}>
         {/* <div className={S.imageBackground}>
           <div className={S.homeBtn}> */}
-        {/* <Link to="/" style={{ textDecoration: "none" }}>
+      {/* <Link to="/" style={{ textDecoration: "none" }}>
               
             </Link> 
          <LogoutButton /> 
@@ -25,28 +23,25 @@ const Banned = () => {
         />
       </div> */}
 
-       <div className={s.all} >
-       <div className= {s.containerBorder} >
-      <div className= {s.container} >
-            <div className={s.border}> 
-
-            </div>
-            <div className={s.content}> 
+      <div className={s.all}>
+        <div className={s.containerBorder}>
+          <div className={s.container}>
+            <div className={s.border}></div>
+            <div className={s.content}>
               <h1> Warning </h1>
               <p>Your user has been banned </p>
               <p> Please contact us at pcconmponentshenry@gmail.com</p>
-        <button
-          onClick={() => {
-            dispatch(logoutUser());
-            logout({ returnTo: window.location.origin });
-          }}
-        >
-          Logout
-        </button>
+              <button
+                onClick={() => {
+                  dispatch(logoutUser());
+                  logout({ returnTo: window.location.origin });
+                }}
+              >
+                Logout
+              </button>
             </div>
-      
-      </div>
-      </div>
+          </div>
+        </div>
       </div>
     </>
   );

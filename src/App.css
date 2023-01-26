@@ -6,7 +6,7 @@
   height: 100vh;
   color: #fff;
   transition-property: background-color, color;
-  transition-duration: 2s;
+  transition-duration: 0.15s;
 }
 
 .darkmode a {
@@ -17,16 +17,12 @@
   color: #fff;
   border-radius: 3px;
 }
-.darkmode input {
-  border: solid 1px #ffffff;
-  color: #f0f0f0;
-}
-.darkmode input::placeholder {
-  color: #f0f0f0;
-}
-.darkmode placeholder {
-  color: #FFF;
-}
+
+/* .darkmode input {
+  border: solid 1px #272727;
+  color: #212121;
+} */
+
 .darkmode h5 {
   color: #2bfab7;
   font-size: 14px;
@@ -45,11 +41,11 @@
 /* LIGHT MODE*/
 
 .lightmode {
-  background-color: rgb(221, 221, 221);
+  background-color: rgb(216, 216, 216);
   height: 100vh;
   color: #000;
   transition-property: background-color, color;
-  transition-duration: 2s;
+  transition-duration: 0.15s;
 }
 
 .lightmode button {
